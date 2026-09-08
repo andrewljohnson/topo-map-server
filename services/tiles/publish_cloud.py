@@ -44,7 +44,14 @@ class Publisher:
     def performance(self):
         with self.timing_lock:
             return {'elapsedSeconds':round(time.monotonic()-self.started,2),'stages':{k:{**v,'seconds':round(v['seconds'],3),'maxSeconds':round(v['maxSeconds'],3)} for k,v in self.timings.items()}}
-    def db(self):return sqlite3.connect(self.dbpath,timeout=60)
+    @contextmanager
+    def db(self):
+        # sqlite's transaction context commits/rolls back but does not close.
+        # Close explicitly so sustained publication cannot exhaust file handles.
+        db=sqlite3.connect(self.dbpath,timeout=60)
+        try:
+            with db:yield db
+        finally:db.close()
     def put(self,key,blob,content_type):
         checksum=hashlib.sha256(blob).hexdigest()
         with self.db() as db:

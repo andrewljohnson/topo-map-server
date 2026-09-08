@@ -31,3 +31,23 @@ For subsequent comparisons, use differences in completed upload-ledger counts
 over several minutes. Status `performance` counters reset on publisher restart.
 Compare similar source/zoom runs, exclude startup, note cache and terrain changes,
 and investigate errors or CPU/memory pressure before increasing concurrency.
+
+## September 8 follow-up: connection lifetime
+
+The heartbeat found repeated SQLite `unable to open database file` failures during
+OSM zoom-13 publication. The transaction context did not close connections. With
+garbage collection disabled, 120 sequential ledger reads grew the process's open
+file count from 4 to 124, reproducing the resource leak independently of R2.
+
+`Publisher.db()` now commits/rolls back and always closes in `finally`. A regression
+performs 1,200 reads with garbage collection disabled and checks that file handles
+stay bounded; another verifies commit, rollback, and closure on both exit paths.
+Six publication tests and nine cloud storage tests passed.
+
+After restart, a live 80.7-second sample completed 8,425 OSM tiles (104.4/sec),
+kept the same process with zero automatic restarts, and held open handles at 37.
+Memory was about 250 MB and CPU well below the existing six-core cap. This OSM
+section has small payloads and is not comparable to terrain throughput; do not
+extrapolate its rate to dense base-map tiles or DEM. California DEM zoom 12 has
+reached its planned 12,989 tiles; zoom 13 DEM and the remaining base-map/enrichment
+passes still need publication.
