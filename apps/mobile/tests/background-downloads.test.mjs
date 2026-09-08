@@ -18,7 +18,7 @@ globalThis.__tileFS={documentDirectory:'memory://',EncodingType:{Base64:'base64'
  }
 };
 globalThis.fetch=async url=>{assert.ok(url.endsWith('/metadata'),'offline transfers must not use fetch');return{ok:true,json:async()=>meta}};
-const source=ts.transpileModule(fs.readFileSync(new URL('../src/storage.ts',import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("import * as FS from 'expo-file-system/legacy';",'const FS=globalThis.__tileFS;').replace("'./tiles.mjs'",JSON.stringify(new URL('../src/tiles.mjs',import.meta.url).href));
+const source=ts.transpileModule(fs.readFileSync(new URL('../src/storage.ts',import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("'./abortable.mjs'",JSON.stringify(new URL('../src/abortable.mjs',import.meta.url).href)).replace("import * as FS from 'expo-file-system/legacy';",'const FS=globalThis.__tileFS;').replace("'./tiles.mjs'",JSON.stringify(new URL('../src/tiles.mjs',import.meta.url).href));
 const {TileStore}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const wait=async predicate=>{for(let i=0;i<300&&!predicate();i++)await new Promise(r=>setTimeout(r,5));assert.ok(predicate())};
 test('all selected regions reach native queue before any completion; suspend-time JS timeout cannot cancel them',async()=>{

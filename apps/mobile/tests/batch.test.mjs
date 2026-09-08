@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';import fs f
 const memory=new Map();let activeDisk=0,maxDisk=0;
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 globalThis.__tileFS={documentDirectory:'memory://',EncodingType:{Base64:'base64'},makeDirectoryAsync:async()=>{},readAsStringAsync:async p=>{if(!memory.has(p))throw Error('missing');return memory.get(p)},writeAsStringAsync:async(p,t)=>{activeDisk++;maxDisk=Math.max(maxDisk,activeDisk);await delay(1);memory.set(p,t);activeDisk--},moveAsync:async({from,to})=>{memory.set(to,memory.get(from));memory.delete(from)},getInfoAsync:async p=>({exists:memory.has(p),size:memory.has(p)?Buffer.from(memory.get(p),'base64').length:0}),deleteAsync:async p=>{memory.delete(p)},downloadAsync:async()=>{throw Error('Expected batch API')}};
-let source=ts.transpileModule(fs.readFileSync(new URL('../src/storage.ts',import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("import * as FS from 'expo-file-system/legacy';",'const FS=globalThis.__tileFS;').replace("'./tiles.mjs'",JSON.stringify(new URL('../src/tiles.mjs',import.meta.url).href));const {TileStore}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+let source=ts.transpileModule(fs.readFileSync(new URL('../src/storage.ts',import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText.replace("'./abortable.mjs'",JSON.stringify(new URL('../src/abortable.mjs',import.meta.url).href)).replace("import * as FS from 'expo-file-system/legacy';",'const FS=globalThis.__tileFS;').replace("'./tiles.mjs'",JSON.stringify(new URL('../src/tiles.mjs',import.meta.url).href));const {TileStore}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const meta={name:'Maryland',datasetId:'md-batch',bounds:[-79.49,37.88,-75.03,39.73],center:[-76.6122,39.2904],gridZoom:12,minZoom:6,maxZoom:14,tileUrl:'/tiles/{z}/{x}/{y}.pbf',batchUrl:'/tile-batch',batchSize:8};const cell='1176/1561',keys=cellTiles(cell,meta);
 function network({partial=false}={}){let active=0,max=0,aborted=0;const calls=[],counts=new Map();globalThis.fetch=async(url,options)=>{if(url.endsWith('/metadata'))return{ok:true,json:async()=>meta};const requested=new URL(url).searchParams.get('tiles').split(',');calls.push(requested);active++;max=Math.max(max,active);try{await new Promise((resolve,reject)=>{const timer=setTimeout(resolve,25);options.signal.addEventListener('abort',()=>{aborted++;clearTimeout(timer);reject(Error('aborted'))},{once:true})});const tiles=[];for(const key of requested){counts.set(key,(counts.get(key)||0)+1);if(partial&&key===keys[0]&&counts.get(key)===1)continue;tiles.push({key,data:'dmVjdG9y'})}return{ok:true,json:async()=>({datasetId:meta.datasetId,tiles,errors:[]})}}finally{active--}};return{calls,counts,get max(){return max},get aborted(){return aborted}}}
 async function idle(store){for(let i=0;i<1000&&(store.running||store.requests.size||store.workers||store.interactiveWorkers);i++)await delay(5);assert.equal(store.running,false);assert.equal(store.requests.size,0);assert.equal(store.workers,0);assert.equal(store.interactiveWorkers,0)}
@@ -89,14 +89,14 @@ test('stalled overlays cannot consume terrain slots and viewport cancellation ab
  const store=new TileStore('http://overlay-stall',()=>{});await store.init();
  const overlays=['amenities','boundaries'].map(name=>store.source(name+'/14/4800/6200',()=>alive).catch(e=>e.message));await delay(20);
  assert.equal(started.length,2);assert.deepEqual(await Promise.all(['osm','contours'].map(name=>store.source(name+'/14/4800/6200'))),['dmVjdG9y','dmVjdG9y']);
- alive=false;store.cancelUnused();assert.deepEqual(await Promise.all(overlays),['aborted','aborted']);await idle(store);assert.equal(aborted,2);
+ alive=false;store.cancelUnused();assert.deepEqual(await Promise.all(overlays),['Cancelled','Cancelled']);await idle(store);assert.equal(aborted,2);
 });
 
 test('direct request timeout aborts the transport and releases slots for later tiles',async()=>{
  memory.clear();let aborted=0;
  globalThis.fetch=async(url,{signal}={})=>{if(url.endsWith('/metadata'))return{ok:true,json:async()=>meta};if(url.includes('/4800/'))return new Promise((resolve,reject)=>signal.addEventListener('abort',()=>{aborted++;reject(Error('aborted'))},{once:true}));return{ok:true,arrayBuffer:async()=>new Uint8Array([0,255,127,2]).buffer}};
  const store=new TileStore('http://timeout',()=>{},{requestTimeoutMs:30});await store.init();
- const stuck=store.source('14/4800/6200').catch(e=>e.message);assert.equal(await stuck,'aborted');assert.equal(aborted,1);assert.equal(await store.source('14/4801/6200'),Buffer.from([0,255,127,2]).toString('base64'));await idle(store);
+ const stuck=store.source('14/4800/6200').catch(e=>e.message);assert.equal(await stuck,'Cancelled');assert.equal(aborted,1);assert.equal(await store.source('14/4801/6200'),Buffer.from([0,255,127,2]).toString('base64'));await idle(store);
 });
 
 test('viewport promotes a queued offline tile and keeps shared owners alive',async()=>{
@@ -241,3 +241,14 @@ test('DEM and basemap start before overlays while visible terrain is pending',as
 test('servers with matching dataset IDs cannot reuse each other’s cached tiles',async()=>{memory.clear();const local=new TileStore('http://local',()=>{}),cloud=new TileStore('https://cloud',()=>{});local.meta=meta;cloud.meta=meta;memory.set(local.file(keys[0]),'bG9jYWw=');assert.notEqual(local.file(keys[0]),cloud.file(keys[0]));assert.equal(memory.has(cloud.file(keys[0])),false);});
 
 test('unpublished visible tile fails once and releases its slot for published detail',async()=>{memory.clear();const calls=[];globalThis.fetch=async url=>{if(url.endsWith('/metadata'))return{ok:true,json:async()=>meta};calls.push(url);return url.includes('/12/1/1.')?{ok:false,status:404}:{ok:true,arrayBuffer:async()=>new TextEncoder().encode('detail').buffer}};const store=new TileStore('https://missing',()=>{},{retryDelayMs:1});await store.init();await assert.rejects(store.source('12/1/1'),/404/);assert.equal(calls.length,1);assert.equal(await store.source('12/2/2'),'ZGV0YWls');});
+
+for(const stage of ['headers','body'])test('cancelled native '+stage+' promise cannot block new foreground detail',async()=>{
+ memory.clear();let oldAlive=true;const started=[];let settleOld;const stuck=new Promise(resolve=>{settleOld=resolve});
+ globalThis.fetch=async url=>{if(url.endsWith('/metadata'))return{ok:true,json:async()=>meta};started.push(url);if(url.includes('/3/'))return stage==='headers'?stuck:{ok:true,arrayBuffer:()=>stuck};return{ok:true,arrayBuffer:async()=>new TextEncoder().encode('detail').buffer}};
+ const store=new TileStore('https://abort-'+stage,()=>{},{retryDelayMs:1});await store.init();
+ const old=[store.source('3/1/2',()=>oldAlive),store.source('3/2/2',()=>oldAlive)];const settled=Promise.allSettled(old);
+ for(let i=0;i<100&&started.length<2;i++)await delay(2);assert.equal(started.length,2);
+ oldAlive=false;store.cancelUnused();
+ const detail=await Promise.race([store.source('13/1364/3132'),delay(500).then(()=>{throw Error('Cancelled requests retained both foreground slots')})]);assert.equal(detail,'ZGV0YWls');assert.ok((await settled).every(r=>r.status==='rejected'));
+ settleOld(stage==='headers'?{ok:true,arrayBuffer:async()=>new TextEncoder().encode('stale').buffer}:new TextEncoder().encode('stale').buffer);await delay(20);assert.equal(memory.has(store.file('3/1/2')),false);await idle(store);
+});
