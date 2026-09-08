@@ -1,0 +1,58 @@
+{
+  "name": "topo-map",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "../../apps/web/dist/client",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/metadata",
+      "/usage",
+      "/publication",
+      "/tiles/*",
+      "/dem/*",
+      "/amenities/*",
+      "/boundaries/*",
+      "/waterways/*",
+      "/landcover/*",
+      "/trails/*",
+      "/recreation/*",
+      "/*-batch",
+      "/operator/*"
+    ]
+  },
+  "r2_buckets": [
+    {
+      "binding": "TILES",
+      "bucket_name": "topo-map-tiles"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "USAGE",
+        "class_name": "Usage"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "Usage"
+      ]
+    }
+  ],
+  "vars": {
+    "DOWNLOAD_BYTES": "100000000000",
+    "REQUEST_LIMIT": "1000000",
+    "ACCESS_DISABLED": "0"
+  },
+  "limits": {
+    "cpu_ms": 100
+  },
+  "observability": {
+    "enabled": false
+  }
+}

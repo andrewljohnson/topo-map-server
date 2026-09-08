@@ -5,16 +5,24 @@ services:
     build:
       context: ../services/tiles
     restart: unless-stopped
+    env_file: ${SECRETS_DIR:?set SECRETS_DIR}/storage.env
     environment:
+      TOPO_ACCESS_FILE: /secrets/access.json
+      TILE_COVERAGE: world-conus
+      S3_TILE_BUCKET: ${S3_TILE_BUCKET:?set S3_TILE_BUCKET}
+      S3_MAX_BYTES: ${S3_MAX_BYTES:-1000000000000}
+      TILE_LOCAL_CACHE_BYTES: "10000000000"
+      TILE_SCRATCH_BYTES: "60000000000"
       TILE_MODE: national
       OSM_REQUIRE_BULK: "1"
       TILE_DATA_DIR: /data
       TILE_RENDER_WORKERS: "2"
       TILE_RENDER_CONCURRENCY: "2"
       TILE_MIN_FREE_GB: "50"
-      VIEWPORT_WARMING: "1"
+      VIEWPORT_WARMING: "0"
     volumes:
       - ${DATA_DIR:?set DATA_DIR}:/data
+      - ${SECRETS_DIR:?set SECRETS_DIR}:/secrets:ro
     healthcheck:
       test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:3001/health', timeout=5)"]
       interval: 15s
@@ -55,11 +63,13 @@ services:
     profiles: [warm]
     command: [python, prepare_us.py, --api, "http://tiles:3001", --data, /data]
     environment:
+      TOPO_WARM_TOKEN_FILE: /secrets/warm.token
       TILE_MIN_FREE_GB: "50"
     restart: unless-stopped
     stop_grace_period: 30s
     volumes:
       - ${DATA_DIR:?set DATA_DIR}:/data
+      - ${SECRETS_DIR:?set SECRETS_DIR}:/secrets:ro
     depends_on:
       tiles:
         condition: service_healthy

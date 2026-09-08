@@ -27,6 +27,8 @@ export default function Home() {
   const [locationError, setLocationError] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [retry, setRetry] = useState(0);
+  const [accessOpen,setAccessOpen]=useState(false),[accessKey,setAccessKey]=useState('');
+
   useEffect(() => {
     let disposed = false;
     let resizeObserver: ResizeObserver | undefined;
@@ -35,14 +37,19 @@ export default function Home() {
       try {
         setError(''); setLoaded(false);
         const api = import.meta.env.VITE_TILE_API_URL || (import.meta.env.PROD ? location.origin : `${location.protocol}//${location.hostname}:3001`);
-        const response = await fetch(`${api}/metadata`, {signal: controller.signal});
+        const token=sessionStorage.getItem('topo-access-key')||'';
+        const headers:Record<string,string>=token?{Authorization:'Bearer '+token}:{};
+        const response = await fetch(`${api}/metadata`, {headers,signal: controller.signal});
+        if(response.status===401){setAccessOpen(true);throw new Error('Enter your map access key to connect.');}
+        if(response.status===429)throw new Error('Map allowance reached. Check the server usage limits.');
+
         if (!response.ok) throw new Error('Tile service is unavailable.');
         const info: Metadata = await response.json();
         const L = await import('maplibre-gl');
         if (disposed || !root.current) return;
         const mapStyle=createStyle(info, tileTemplateUrl(info.tileUrl,api), info.tilesets?.dem ? 'topocontour://{z}/{x}/{y}' : info.tilesets?.contours ? tileTemplateUrl(info.tilesets.contours.tileUrl,api) : undefined, info.tilesets?.amenities ? tileTemplateUrl(info.tilesets.amenities.tileUrl,api) : undefined, info.tilesets?.boundaries ? tileTemplateUrl(info.tilesets.boundaries.tileUrl,api) : undefined, info.tilesets?.waterways ? tileTemplateUrl(info.tilesets.waterways.tileUrl,api) : undefined, info.tilesets?.landcover ? tileTemplateUrl(info.tilesets.landcover.tileUrl,api) : undefined, info.tilesets?.trails ? tileTemplateUrl(info.tilesets.trails.tileUrl,api) : undefined, info.tilesets?.recreation ? tileTemplateUrl(info.tilesets.recreation.tileUrl,api) : undefined);
-        const terrain=installDeviceTerrain(L,mapStyle,info.tilesets?.dem,async(key,c)=>{const [z,x,y]=key.split('/');const template=tileTemplateUrl(info.tilesets!.dem!.tileUrl,api);const response=await fetch(template.replace('{z}',z).replace('{x}',x).replace('{y}',y),{signal:c.signal});if(!response.ok)throw Error('DEM '+response.status);return response.arrayBuffer()},terrainWorkerSource);
-        const instance = new L.Map({container:root.current, style:mapStyle, center:info.center,zoom:info.initialZoom??3,minZoom:info.minZoom,maxZoom:18,renderWorldCopies:true,attributionControl:false});
+        const terrain=installDeviceTerrain(L,mapStyle,info.tilesets?.dem,async(key,c)=>{const [z,x,y]=key.split('/');const template=tileTemplateUrl(info.tilesets!.dem!.tileUrl,api);const response=await fetch(template.replace('{z}',z).replace('{x}',x).replace('{y}',y),{headers,signal:c.signal});if(!response.ok)throw Error('DEM '+response.status);return response.arrayBuffer()},terrainWorkerSource);
+        const instance = new L.Map({container:root.current, transformRequest:(url)=>({url,headers:url.startsWith(api+'/')?headers:{}}), style:mapStyle, center:info.center,zoom:info.initialZoom??3,minZoom:info.minZoom,maxZoom:18,renderWorldCopies:true,attributionControl:false});
         map.current = instance;
         if(import.meta.env.DEV)(window as any).__topoMap=instance;
         if(terrain){terrain.attach(instance);(instance as any).__topoTerrainStats=terrain.stats;instance.on('remove',terrain.dispose);}
@@ -50,7 +57,7 @@ export default function Home() {
         resizeObserver = new ResizeObserver(() => instance.resize());
         resizeObserver.observe(root.current);
         instance.on('load',()=>{if(areas.current)updateAreas(areas.current);});
-        fetch(`${api}/areas.geojson`,{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Areas unavailable');return r.json()}).then(data=>{if(!disposed){areas.current=parseAreaData(data);if(instance.isStyleLoaded())updateAreas(areas.current)}}).catch(()=>{});
+        fetch(`${api}/areas.geojson`,{headers,signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Areas unavailable');return r.json()}).then(data=>{if(!disposed){areas.current=parseAreaData(data);if(instance.isStyleLoaded())updateAreas(areas.current)}}).catch(()=>{});
         installShieldImages(instance);
         installPoiImages(instance);
         installAmenityImages(instance);
@@ -83,7 +90,8 @@ export default function Home() {
   },[retry]);
   return <main className="explorer">
     <div ref={root} className="map" aria-label="Interactive OpenStreetMap map" />
-    <div className="map-tools"><DownloadStatus/></div>
+    <div className="map-tools"><DownloadStatus/><button className="downloads-toggle" aria-label="Map access key" onClick={()=>setAccessOpen(true)}>⚿</button></div>
+    {accessOpen&&<div style={{position:'absolute',inset:0,background:'#17392a55',display:'grid',placeItems:'center',zIndex:20}}><form aria-label="Map access" onSubmit={e=>{e.preventDefault();sessionStorage.setItem('topo-access-key',accessKey.trim());setAccessKey('');setAccessOpen(false);setRetry(x=>x+1)}} style={{background:'#fafbf5',padding:24,borderRadius:16,width:'min(90vw,360px)',boxSizing:'border-box'}}><h2>Map access</h2><p>Paste your private map key. It stays in this browser tab for this session.</p><input aria-label="Map access key" type="password" autoComplete="off" value={accessKey} onChange={e=>setAccessKey(e.target.value)} required style={{width:'100%',boxSizing:'border-box',padding:12}}/><div style={{display:'flex',gap:12,marginTop:16}}><button type="submit">Connect</button><button type="button" onClick={()=>setAccessOpen(false)}>Close</button><button type="button" onClick={()=>{sessionStorage.removeItem('topo-access-key');setAccessOpen(false);setRetry(x=>x+1)}}>Sign out</button></div></form></div>}
     {error || locationError ? <div className="notice" role="alert"><span>{error || locationError}</span>{error ? <button onClick={()=>setRetry(x=>x+1)}><RefreshCw size={16}/>Retry</button> : <button onClick={()=>setLocationError('')}>Dismiss</button>}</div> : !loaded ? <div className="notice" role="status">Loading map tiles…</div> : null}
   </main>
 }

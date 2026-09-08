@@ -15,3 +15,8 @@ services/tiles/regions/raw/
 /deploy/deploy.env
 /deploy/server.env
 **/*.tsbuildinfo
+
+# Runtime credentials belong outside the repository.
+**/storage.env
+**/access.json
+*.token

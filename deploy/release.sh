@@ -12,6 +12,14 @@ source "$root/server.env"
 set +a
 [[ ${DATA_DIR:-} == /* && -d $DATA_DIR ]] || { echo 'DATA_DIR must be an existing mounted directory.' >&2; exit 1; }
 : "${SITE_ADDRESS:?Set SITE_ADDRESS in server.env}"
+: "${SECRETS_DIR:?Set SECRETS_DIR in server.env}"
+for file in storage.env access.json client.token warm.token; do
+  test -s "$SECRETS_DIR/$file" || { echo "Missing $SECRETS_DIR/$file" >&2; exit 1; }
+done
+header=$(mktemp)
+chmod 600 "$header"
+trap 'rm -f "$header"' EXIT
+printf 'Authorization: Bearer %s\n' "$(cat "$SECRETS_DIR/client.token")" > "$header"
 compose() { docker compose -p topo-map -f "$1/deploy/compose.yaml" "${@:2}"; }
 previous=$(readlink -f "$root/current" || true)
 # Building leaves the current site and warmer running.
@@ -34,9 +42,9 @@ if ! compose "$release" up -d --no-build --wait --wait-timeout 180 tiles web; th
 fi
 # Verify actual page and API through the public HTTPS listener, not just a process.
 if ! curl --fail --silent --show-error --retry 8 --retry-all-errors --retry-delay 5 --max-time 20 "https://$SITE_ADDRESS/" -o /dev/null ||
-   ! curl --fail --silent --show-error --max-time 20 "https://$SITE_ADDRESS/metadata" -o /dev/null ||
-   ! curl --fail --silent --show-error --max-time 120 "https://$SITE_ADDRESS/tiles/0/0/0.pbf" -o /dev/null ||
-   ! curl --fail --silent --show-error --max-time 120 "https://$SITE_ADDRESS/dem/3/1/3.png" -o /dev/null; then
+   ! curl --fail --silent --show-error --header "@$header" --max-time 20 "https://$SITE_ADDRESS/metadata" -o /dev/null ||
+   ! curl --fail --silent --show-error --header "@$header" --max-time 120 "https://$SITE_ADDRESS/tiles/0/0/0.pbf" -o /dev/null ||
+   ! curl --fail --silent --show-error --header "@$header" --max-time 120 "https://$SITE_ADDRESS/dem/3/1/3.png" -o /dev/null; then
   rollback; exit 1
 fi
 printf '%s\n' "$RELEASE_SHA" > "$release/.release-sha"

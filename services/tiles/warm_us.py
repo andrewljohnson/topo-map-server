@@ -15,7 +15,10 @@ import shutil
 import sqlite3
 import time
 from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
+import os
+import coverage_policy
 
 from shapely.geometry import box, shape
 from shapely.ops import transform
@@ -58,7 +61,9 @@ def tile_count(geometry,target):
     return visit(0,0,0)
 
 def read_json(url):
-    with urlopen(url,timeout=300) as response:
+    token_file=os.environ.get('TOPO_WARM_TOKEN_FILE')
+    headers={'Authorization':'Bearer '+Path(token_file).read_text().strip()} if token_file else {}
+    with urlopen(Request(url,headers=headers),timeout=300) as response:
         return json.load(response)
 
 class Journal:
@@ -137,10 +142,10 @@ def main():
     if args.min_free_gb<0:parser.error('--min-free-gb must be nonnegative')
     api=args.api.rstrip('/')
     specs=read_json(api+'/metadata')['tilesets']
-    geometries={s:coverage(specs[s]) for s in args.sources}
+    geometries={s:prep(coverage_policy.conus()) for s in args.sources}
     # Contour stencils need neighbors just outside the land mask as well.
     terrain={z:prep(geometries['dem'].context.buffer(2**-z)) for z in range(3,min(13,args.max_zoom)+1)} if 'dem' in geometries else {}
-    def geometry_for(s,z):return terrain[z] if s=='dem' else geometries[s]
+    def geometry_for(s,z):return prep(box(0,0,1,1)) if s=='osm' and z<=7 else terrain[z] if s=='dem' else geometries[s]
     plans=[(s,z) for group in (('osm','dem'),tuple(s for s in SOURCES if s not in ('osm','dem'))) for z in range(args.max_zoom+1) for s in group if s in args.sources and specs[s]['minZoom']<=z<=specs[s]['maxZoom']]
     if args.plan:
         total=0
@@ -152,7 +157,7 @@ def main():
     lock=(jobs/'us-warming.lock').open('a+')
     fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     journal=Journal(jobs/'us-warming.sqlite')
-    mask_hash=hashlib.sha256(MASK.read_bytes()).hexdigest()
+    mask_hash='world7-conus14-v1-'+hashlib.sha256(MASK.read_bytes()).hexdigest()
     active=[(journal.ensure(s,specs[s],z,mask_hash),s,z) for s,z in plans]
     def status(state,current=None,error=None):
         rows=[dict(journal.row(k),failed=journal.failed(k)) for k,_,_ in active]
@@ -163,13 +168,21 @@ def main():
     def batch(key,s,z,items,retry=False):
         while True:
             try:blocked=can_warm(api,args.data,args.min_free_gb)
+            except HTTPError as exc:blocked='paused-allowance' if exc.code==429 else 'waiting-for-server'
             except Exception as exc:blocked='waiting-for-server'
             if not blocked:break
             status(blocked,{'source':s,'zoom':z});time.sleep(5)
         status('warming',{'source':s,'zoom':z,'tiles':len(items)})
-        try:ok,errors=request_batch(api,specs[s],z,items)
-        except Exception as exc:
-            ok=set();errors={f'{z}/{x}/{y}':str(exc)[:300] for _,x,y in items}
+        while True:
+            try:ok,errors=request_batch(api,specs[s],z,items)
+            except HTTPError as exc:
+                if exc.code in (401,403,429):
+                    status('paused-allowance-or-credentials',{'source':s,'zoom':z});time.sleep(60)
+                    continue
+                ok=set();errors={f'{z}/{x}/{y}':str(exc)[:300] for _,x,y in items}
+            except Exception as exc:
+                ok=set();errors={f'{z}/{x}/{y}':str(exc)[:300] for _,x,y in items}
+            break
         journal.record(key,items,ok,errors,retry=retry)
         # One sequential request stream and a pause leave resources for browsing.
         time.sleep(.25 if not errors else 5)

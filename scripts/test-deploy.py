@@ -12,8 +12,8 @@ class DeployTests(unittest.TestCase):
             root=Path(tmp)/'repo';root.mkdir()
             def git(*args):return subprocess.check_output(['git',*args],cwd=root,stderr=subprocess.DEVNULL,text=True).strip()
             git('init','-b','main');git('config','user.name','Release test');git('config','user.email','test@example.invalid')
-            for name in ('scripts/deploy.sh','deploy/release.sh'):
-                target=root/name;target.parent.mkdir(exist_ok=True);shutil.copyfile(ROOT/name,target)
+            for name in ('scripts/deploy.sh','scripts/deploy-cloud.py','scripts/env.sh','services/tiles/cloud_config.py'):
+                target=root/name;target.parent.mkdir(exist_ok=True,parents=True);shutil.copyfile(ROOT/name,target)
             git('add','.');git('commit','-m','main')
             original=git('rev-parse','HEAD')
             git('checkout','-b','unreleased');(root/'unreleased.txt').write_text('unreleased')

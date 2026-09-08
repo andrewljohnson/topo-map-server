@@ -16,6 +16,7 @@
     "expo-constants": "*",
     "expo-file-system": "*",
     "expo-location": "~57.0.16",
+    "expo-secure-store": "~57.0.3",
     "expo-task-manager": "~57.0.16",
     "maplibre-contour": "0.1.0",
     "maplibre-gl": "^5.0.0",

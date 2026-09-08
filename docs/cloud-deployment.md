@@ -1,3 +1,6 @@
+> Superseded by [local generation + Cloudflare delivery](local-generation-cloudflare.md).
+> The server deployment below is an earlier alternative, not the current rollout plan.
+
 # Public map v1 deployment
 
 ## Hosting decision (researched 2026-09-07; not purchased)

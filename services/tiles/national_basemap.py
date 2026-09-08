@@ -92,8 +92,8 @@ class RangeSource:
     def _read_block(self,index):
         path=self.cache_dir/f'{index:012x}.bin'
         with self.locks[index%len(self.locks)]:
-            if path.exists():
-                return path.read_bytes()
+            try:return path.read_bytes()
+            except FileNotFoundError:pass
             blob=self._fetch(index*self.block_size)
             if not blob:
                 raise IOError('Empty archive range')

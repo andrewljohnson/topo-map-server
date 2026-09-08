@@ -2,7 +2,7 @@
     encode zstd gzip
     header X-Content-Type-Options nosniff
     header Referrer-Policy strict-origin-when-cross-origin
-    @tiles path /health /metadata /tiles/* /dem/* /amenities/* /boundaries/* /waterways/* /landcover/* /trails/* /recreation/* /tile-batch /dem-batch /amenity-batch /boundary-batch /waterway-batch /landcover-batch /trails-batch /recreation-batch
+    @tiles path /health /metadata /usage /areas.geojson /tiles/* /dem/* /amenities/* /boundaries/* /waterways/* /landcover/* /trails/* /recreation/* /tile-batch /dem-batch /amenity-batch /boundary-batch /waterway-batch /landcover-batch /trails-batch /recreation-batch
     handle @tiles {
         reverse_proxy tiles:3001
     }

@@ -16,6 +16,9 @@ import re
 import sqlite3
 import signal
 import shutil
+import access_control
+import object_cache
+import coverage_policy
 import weakref
 import tempfile
 import threading
@@ -63,6 +66,7 @@ def extra_module(name):
     return importlib.import_module(EXTRA_TILE_MODULES[name])
 
 def valid_tile(z, x, y, tileset='osm'):
+    if coverage_policy.enforced() and tileset!='osm' and not coverage_policy.allowed(tileset,z,x,y):return False
     if tileset not in ('osm', 'contours', 'amenities', 'boundaries', 'waterways', 'dem', *EXTRA_TILE_MODULES):
         return False
     if tileset=='dem':return MODE=='national' and 3<=z<=13 and 0<=x<2**z and 0<=y<2**z
@@ -110,6 +114,12 @@ def metadata():
         for name in EXTRA_TILE_MODULES:
             module=extra_module(name)
             result['tilesets'][name]={'datasetId':module.DATASET_ID,'tileUrl':f'/{name}/{{z}}/{{x}}/{{y}}.pbf?datasetId='+module.DATASET_ID,'batchUrl':f'/{name}-batch','batchSize':8,'minZoom':module.MIN_ZOOM,'maxZoom':module.MAX_ZOOM,'bounds':list(module.BOUNDS)}
+        if coverage_policy.enforced():
+            result['name']='World overview · CONUS detail'
+            result['coveragePolicy']={'worldMaxZoom':7,'detailBounds':[-125,24,-66,50],'detailRegion':'CONUS','demMaxZoom':13}
+            for source,spec in result['tilesets'].items():
+                if source!='osm':spec['bounds']=[-125,24,-66,50]
+
         result['contours']={'status':'on-device','intervalFt':20,'indexIntervalFt':100,'source':'USGS 3DEP','sourceResolution':'Approximately 10 m where available, with coarser DEM fallback recorded in provenance'}
         return result
     result = dict(META)
@@ -408,6 +418,9 @@ def tile_lock(key):
 def tile_bytes(z,x,y, *, batch=False, dataset_id=None, tileset='osm', background=False):
     if not valid_tile(z,x,y,tileset):
         raise ValueError('Tile outside Maryland coverage or tileset zoom range')
+    if coverage_policy.enforced() and tileset=='osm' and not coverage_policy.allowed('osm',z,x,y):
+        parent=tile_bytes(7,x>>(z-7),y>>(z-7),batch=batch,dataset_id=dataset_id,background=background)
+        return coverage_policy.overzoom(parent,z,x,y)
     spec = metadata()['tilesets'].get(tileset)
     if spec is None:
         raise RuntimeError('Requested tileset is not ready')
@@ -419,14 +432,26 @@ def tile_bytes(z,x,y, *, batch=False, dataset_id=None, tileset='osm', background
     path = DATA / 'cache' / (dataset_id or spec['datasetId']) / str(z) / str(x) / f'{y}.pbf'
     # Cache reads bypass scheduling. A queued download must never hold a tile
     # lock while waiting for its lower-priority render slot.
-    if path.exists():return path.read_bytes()
+    remote=object_cache.current()
+    key=remote.key(spec['datasetId'],z,x,y,tileset) if remote else None
+    if remote is None and path.exists():return path.read_bytes()
+    if remote:
+        cached=remote.local_get(key,path)
+        if cached is not None:return cached
     gate = _extra_gates.get(tileset) or {'dem':_dem_gate,'waterways':_waterway_gate,'boundaries':_boundary_gate,'amenities':_amenity_gate}.get(tileset,_render_gate)
     with gate.slot(batch=batch,background=background), tile_lock(str(path)):
-        if path.exists():return path.read_bytes()
+        if remote:
+            cached=remote.get(key,path)
+            if cached is not None:return cached
+        elif path.exists():return path.read_bytes()
+        access_control.generation()
         minimum = float(os.environ.get('TILE_MIN_FREE_GB', '0')) * 10**9
         if minimum and shutil.disk_usage(DATA).free < minimum:
             raise RuntimeError('Tile cache disk reserve reached')
         blob = _render_pool.submit(renderer,z,x,y).result() if tileset in ('osm','contours') and _render_pool is not None else renderer(z,x,y)
+        if remote:
+            remote.put(key,path,blob,tileset)
+            return blob
         path.parent.mkdir(parents=True,exist_ok=True)
         with tempfile.NamedTemporaryFile(dir=path.parent,delete=False) as temp:
             temp.write(blob)
@@ -455,7 +480,16 @@ class Handler(BaseHTTPRequestHandler):
         compressed = len(body) > 256 and accepts_gzip(self.headers.get('Accept-Encoding', ''))
         if compressed:
             body = gzip.compress(body, compresslevel=4, mtime=0)
+        access=access_control.current()
+        if access and getattr(self,'authorized',False):
+            try:access.charge('download_bytes',len(body)+1024)
+            except access_control.Denied as exc:
+                status=exc.status;body=json.dumps({'error':str(exc)}).encode();compressed=False
+                content_type='application/json'
+            cache='private, no-store'
         self.send_response(status)
+        if status==429:self.send_header('Retry-After','60')
+        if status==401:self.send_header('WWW-Authenticate','Bearer')
         if compressed:
             self.send_header('Content-Encoding', 'gzip')
         self.send_header('Vary', 'Accept-Encoding')
@@ -470,7 +504,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(204)
         self.send_header('Access-Control-Allow-Origin','*')
         self.send_header('Content-Length', '0')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         self.send_header('Access-Control-Allow-Methods','GET, HEAD, OPTIONS')
         self.end_headers()
     def do_HEAD(self):
@@ -506,13 +540,34 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 blob = tile_bytes(*coords, batch=True, dataset_id=dataset_id, tileset=tileset)
                 result['tiles'].append({'key': key, 'data': base64.b64encode(blob).decode('ascii')})
+            except access_control.Denied:raise
             except Exception as exc:
                 print('Batch tile error:', key, exc, flush=True)
                 result['errors'].append({'key': key, 'error': 'Tile generation failed; retry this key'})
         return self.respond(200, json.dumps(result, separators=(',', ':')).encode(), cache='no-store')
 
     def do_GET(self):
+        self.authorized=False
+        access=access_control.current()
+        if access is None or self.path.split('?')[0]=='/health':return self.route_get()
+        try:
+            with access.request(self.headers.get('Authorization','')) as role:
+                self.authorized=True
+                if self.path.startswith('/jobs/') and role!='warm':
+                    return self.respond(403,b'{"error":"Operator access required"}')
+                return self.route_get()
+        except access_control.Denied as exc:
+            self.authorized=False
+            return self.respond(exc.status,json.dumps({'error':str(exc)}).encode(),cache='private, no-store')
+        except Exception as exc:
+            print('Protected request failed:',type(exc).__name__,flush=True)
+            self.authorized=False
+            return self.respond(503,b'{"error":"Map service unavailable"}',cache='private, no-store')
+    def route_get(self):
         path = self.path.split('?')[0]
+        if path=='/usage':
+            access=access_control.current()
+            return self.respond(200,json.dumps(access.status() if access else {'status':'unrestricted-local'}).encode())
         if path=='/dem-batch':return self.do_batch('dem')
         if path in {f'/{name}-batch' for name in EXTRA_TILE_MODULES}:
             return self.do_batch(path[1:-6])
@@ -555,6 +610,7 @@ class Handler(BaseHTTPRequestHandler):
                     body = tile_bytes(*coords, tileset=tileset)
                 if _viewport_warmer:
                     _viewport_warmer.observe(*coords)
+            except access_control.Denied:raise
             except ValueError as exc:
                 return self.respond(404,json.dumps({'error':str(exc)}).encode())
             except Exception as exc:
@@ -603,6 +659,11 @@ if __name__ == '__main__':
                 tile_bytes(z,x,y,tileset=source,batch=True,background=True)
             _viewport_warmer = ViewportWarmer(warm_render,warm_cached,valid_tile)
             _viewport_warmer.start()
+        access_control.current()
+        if access_control.current():access_control.current().config()
+        object_cache.current()
+        import scratch_cache
+        scratch_cache.start(DATA)
         server = ThreadingHTTPServer(('0.0.0.0',args.port),Handler)
         print(f'OSM vector tile service: http://0.0.0.0:{server.server_port} (render workers: {workers})',flush=True)
         def stop_server(_signum, _frame):

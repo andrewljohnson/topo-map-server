@@ -28,7 +28,8 @@
           "isAndroidForegroundServiceEnabled": true,
           "locationAlwaysAndWhenInUsePermission": "Continue recording your GPS route when the screen is locked or the app is in the background, only when you enable background recording."
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }
