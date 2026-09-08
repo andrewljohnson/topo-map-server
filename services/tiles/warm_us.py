@@ -21,7 +21,7 @@ from shapely.geometry import box, shape
 from shapely.ops import transform
 from shapely.prepared import prep
 
-SOURCES = ('osm', 'dem', 'boundaries', 'landcover', 'trails', 'recreation', 'waterways', 'amenities')
+SOURCES = ('osm', 'dem', 'boundaries', 'landcover', 'trails', 'amenities', 'waterways', 'recreation')
 MASK = Path(__file__).parent / 'regions/us-warming.geojson'
 
 def project(x, y, z=None):
@@ -138,11 +138,14 @@ def main():
     api=args.api.rstrip('/')
     specs=read_json(api+'/metadata')['tilesets']
     geometries={s:coverage(specs[s]) for s in args.sources}
+    # Contour stencils need neighbors just outside the land mask as well.
+    terrain={z:prep(geometries['dem'].context.buffer(2**-z)) for z in range(3,min(13,args.max_zoom)+1)} if 'dem' in geometries else {}
+    def geometry_for(s,z):return terrain[z] if s=='dem' else geometries[s]
     plans=[(s,z) for group in (('osm','dem'),tuple(s for s in SOURCES if s not in ('osm','dem'))) for z in range(args.max_zoom+1) for s in group if s in args.sources and specs[s]['minZoom']<=z<=specs[s]['maxZoom']]
     if args.plan:
         total=0
         for s,z in plans:
-            count=tile_count(geometries[s],z);total+=count
+            count=tile_count(geometry_for(s,z),z);total+=count
             print(json.dumps({'source':s,'zoom':z,'tiles':count}),flush=True)
         print(json.dumps({'total':total}),flush=True);return
     jobs=args.data/'jobs';jobs.mkdir(parents=True,exist_ok=True)
@@ -175,7 +178,7 @@ def main():
             row=journal.row(key)
             if not row['exhausted']:
                 items=[]
-                for item in coordinates(geometries[s],z,row['cursor']):
+                for item in coordinates(geometry_for(s,z),z,row['cursor']):
                     items.append(item)
                     if len(items)==args.batch_size:
                         batch(key,s,z,items);items=[]

@@ -72,6 +72,8 @@ when another branch is checked out locally. Without a remote it uses committed
 local `main`. Uncommitted files are never deployed. It refuses a main revision
 that does not contain the deployment implementation.
 
+The initial deployment also transfers the three existing GNIS/GeoNames, ranked-POI and RIDB SQLite indexes, verified against `deploy/seed-data.sha256` from the selected main revision. These keep the current peak/destination ranking and campground details available immediately. They are data artifacts outside Git; by default the script reads `services/tiles/data` locally, or `SEED_DATA_DIR` when specified. Subsequent releases reuse matching server copies. It refuses to overwrite a differently versioned production index. Keep a copy of these seed artifacts for deploying from another computer.
+
 Each deployment uploads a git archive into a new release directory, builds
 images tagged by the resolved main SHA, then replaces the running containers.
 The old service stays up during the build. Cutover can briefly interrupt cold
@@ -106,7 +108,7 @@ on-demand fallback until a bulk index is installed.
 Then `warm_us.py` runs through basemap z0–14 and raw DEM z3–13 first, followed by
 boundaries, land cover, official trails, recreation, waterways and amenities at
 their advertised zooms. A Natural Earth 10m US mask includes Alaska and Hawaii
-and avoids warming an enormous rectangular ocean area. Each dataset is clipped
+and avoids warming an enormous rectangular ocean area. DEM coverage includes a one-tile coastal halo for on-device contour stencils. Amenities warm before detailed recreation tiles so server deduplication can use their source cells. Each dataset is clipped
 to its actual advertised extent: notably the current NLCD service is CONUS, not
 all 50 states. This mask is a warming aid, not a legal boundary. Tiles beyond
 the mask remain available on demand.

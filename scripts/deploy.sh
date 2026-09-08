@@ -28,5 +28,17 @@ root=${DEPLOY_ROOT:-/srv/topo-map}
 release="$root/releases/$sha-$(date -u +%Y%m%dT%H%M%S)-$$"
 ssh "$DEPLOY_HOST" "test -f '$root/server.env' && command -v docker >/dev/null && mkdir -p '$root/releases' && mkdir '$release'"
 git archive "$sha" | ssh "$DEPLOY_HOST" "tar -xf - -C '$release'"
+# Small, versioned source indexes are release inputs; the huge tile cache is not.
+if ! ssh "$DEPLOY_HOST" "bash '$release/deploy/seed.sh' '$root' check"; then
+  manifest=$(mktemp)
+  trap 'rm -f "$manifest"' EXIT
+  git show "$sha:deploy/seed-data.sha256" > "$manifest"
+  seed_source=${SEED_DATA_DIR:-$PWD/services/tiles/data}
+  (cd "$seed_source" && sha256sum -c "$manifest")
+  mapfile -t seed_names < <(awk '{print $2}' "$manifest")
+  ssh "$DEPLOY_HOST" "mkdir '$release/.seed-staging'"
+  tar -czf - -C "$seed_source" "${seed_names[@]}" | ssh "$DEPLOY_HOST" "tar -xzf - -C '$release/.seed-staging'"
+  ssh "$DEPLOY_HOST" "bash '$release/deploy/seed.sh' '$root' install"
+fi
 ssh "$DEPLOY_HOST" "bash '$release/deploy/release.sh' '$root' '$sha'"
 echo "Released $sha. The nationwide job continues independently of this terminal."
