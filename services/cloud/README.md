@@ -87,7 +87,7 @@ usage ledgers or deleting Durable Objects resets accounting and must be delibera
 
 ## Validation
 
-`node --test services/cloud/worker.test.mjs` tests auth, revocation, byte/request
+`node --test services/cloud/worker.test.mjs` tests bounded priority queuing, auth, revocation, byte/request
 limits, concurrent reservations, batch bounds and missing tile responses.
 Python service tests and `scripts/test-deploy.py` cover local storage/coverage and
 committed-main release selection. Live smoke tests verify the actual Cloudflare path.

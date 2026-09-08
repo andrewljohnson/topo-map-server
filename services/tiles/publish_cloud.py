@@ -11,14 +11,14 @@ DATA=ROOT/'data'
 SOURCES=('osm','dem','boundaries','landcover','trails','amenities','waterways','recreation')
 MODULES={'osm':'national_basemap','dem':'national_dem','boundaries':'national_boundaries','landcover':'national_landcover','trails':'national_trails','amenities':'national_amenities','waterways':'national_waterways','recreation':'national_recreation'}
 
-def validate(blob,source):
+def validate(blob,source,z=None):
     if len(blob)>4000000:raise ValueError('Tile exceeds cloud delivery limit')
     if source=='dem':
         from PIL import Image
         import io
         with Image.open(io.BytesIO(blob)) as image:
             image.load()
-            if image.size!=(512,512):raise ValueError('DEM must be 512px')
+            if image.size not in ((256,256),(512,512)) or z is not None and z>=12 and image.size!=(512,512):raise ValueError('DEM must be 256px overview or 512px detail')
     else:
         import mapbox_vector_tile
         mapbox_vector_tile.decode(blob)
@@ -59,10 +59,10 @@ class Publisher:
         path=self.data/'cache'/spec['datasetId']/str(z)/str(x)/f'{y}.pbf'
         if path.exists():
             blob=path.read_bytes()
-            try:validate(blob,source)
+            try:validate(blob,source,z)
             except ValueError:blob=importlib.import_module(MODULES[source]).render_tile(z,x,y)
         else:blob=importlib.import_module(MODULES[source]).render_tile(z,x,y)
-        validate(blob,source)
+        validate(blob,source,z)
         self.put(key,blob,'image/png' if source=='dem' else 'application/vnd.mapbox-vector-tile')
     def document(self,name,value):
         blob=json.dumps(value,separators=(',',':')).encode()

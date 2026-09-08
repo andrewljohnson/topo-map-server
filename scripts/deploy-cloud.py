@@ -39,10 +39,10 @@ with tempfile.TemporaryDirectory(prefix='topo-release-') as tmp:
     if not urls:raise RuntimeError('No deployment URL returned')
     url=urls[-1]
     for path in ('/','/metadata','/tiles/0/0/0.pbf'):
-        with urlopen(Request(url+path,headers={'Authorization':'Bearer '+token}),timeout=60) as response:
+        with urlopen(Request(url+path,headers={'Authorization':'Bearer '+token,'User-Agent':'topo-map-release/1.0'}),timeout=60) as response:
             if response.status!=200:raise RuntimeError('Release smoke check failed')
             response.read()
-    try:urlopen(url+'/metadata',timeout=30)
+    try:urlopen(Request(url+'/metadata',headers={'User-Agent':'topo-map-release/1.0'}),timeout=30)
     except HTTPError as exc:
         if exc.code!=401:raise
     else:raise RuntimeError('Unauthenticated tile access was not denied')
