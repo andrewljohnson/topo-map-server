@@ -42,10 +42,15 @@ with tempfile.TemporaryDirectory(prefix='topo-release-') as tmp:
         with urlopen(Request(url+path,headers={'Authorization':'Bearer '+token,'User-Agent':'topo-map-release/1.0'}),timeout=60) as response:
             if response.status!=200:raise RuntimeError('Release smoke check failed')
             response.read()
-    try:urlopen(Request(url+'/metadata',headers={'User-Agent':'topo-map-release/1.0'}),timeout=30)
+    expected=200 if cfg['vars'].get('PUBLIC_MAP')=='1' else 401
+    try:
+        with urlopen(Request(url+'/metadata',headers={'User-Agent':'topo-map-release/1.0'}),timeout=30) as response:actual=response.status
+    except HTTPError as exc:actual=exc.code
+    if actual!=expected:raise RuntimeError('Anonymous map access does not match the configured mode')
+    try:urlopen(Request(url+'/operator/jobs',headers={'User-Agent':'topo-map-release/1.0'}),timeout=30)
     except HTTPError as exc:
         if exc.code!=401:raise
-    else:raise RuntimeError('Unauthenticated tile access was not denied')
+    else:raise RuntimeError('Operator endpoint was not protected')
     (private/'deployment.json').write_text(json.dumps({'url':url,'sha':sha},indent=2))
     print('Live:',url)
     print('Map access key file:',private/'client.token')

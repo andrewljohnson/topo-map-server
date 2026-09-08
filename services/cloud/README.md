@@ -1,5 +1,9 @@
 # Cloudflare map delivery
 
+Current access: `PUBLIC_MAP=1`. Anyone with the site link can browse without a key.
+R2 stays private; the shared quotas still apply. Operator jobs require the publisher
+key. Set `PUBLIC_MAP=0` and redeploy to require client keys again.
+
 The Worker serves the existing static web app and private XYZ/batch API from R2.
 It never runs DEM processing or downloads geographic sources. The local publisher
 renders data and verifies immutable R2 uploads before checkpointing progress.

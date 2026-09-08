@@ -55,14 +55,14 @@ export async function api(request,env,ctx){
  if(request.method==='OPTIONS')return new Response(null,{status:204});
  if(!['GET','HEAD'].includes(request.method))return json({error:'Method not allowed'},405);
  const auth=request.headers.get('Authorization')||'';
- if(auth.length>512||!auth.startsWith('Bearer ')||!env.ACCESS_SHA256||!same(await digest(auth.slice(7)),env.ACCESS_SHA256))return json({error:'Map access key required'},401);
+ if(env.PUBLIC_MAP!=='1'&&(auth.length>512||!auth.startsWith('Bearer ')||!env.ACCESS_SHA256||!same(await digest(auth.slice(7)),env.ACCESS_SHA256)))return json({error:'Map access key required'},401);
  let allowed=await meter(env,{requests:1,bytes:1});if(!allowed.ok)return allowed;
  if(path==='usage')return meter(env,{status:true});
  const manifest=await object(env,'publication/metadata.json',ctx,30);
  if(!manifest)return json({error:'Map publication is preparing'},503);
  const info=await manifest.json();
  let result;
- if(path==='metadata')result=json(info);
+ if(path==='metadata')result=json({...info,publicAccess:env.PUBLIC_MAP==='1'});
  else if(path==='publication'){
   result=await object(env,'publication/status.json',ctx,30)||json({status:'preparing'});
  }else{

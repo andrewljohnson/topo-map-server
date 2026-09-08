@@ -47,7 +47,8 @@
   "vars": {
     "DOWNLOAD_BYTES": "100000000000",
     "REQUEST_LIMIT": "1000000",
-    "ACCESS_DISABLED": "0"
+    "ACCESS_DISABLED": "0",
+    "PUBLIC_MAP": "1"
   },
   "limits": {
     "cpu_ms": 100

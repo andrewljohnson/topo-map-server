@@ -17,3 +17,5 @@ test('concurrent reservations cannot exceed quota',async()=>{const s=setup();s.e
 test('bounded batches and missing details are explicit',async()=>{const s=setup();assert.equal((await s.run('/tile-batch?tiles='+Array(9).fill('0/0/0').join(','))).status,400);assert.equal((await s.run('/tiles/2/0/0.pbf')).status,404)});
 
 test('missing requests deduplicate and operator queue cannot be read with a client key',async()=>{const s=setup();await s.run('/tiles/2/0/0.pbf');await s.run('/tiles/2/0/0.pbf');const pending=await(await s.quota.fetch(new Request('https://quota/',{method:'POST',body:JSON.stringify({pending:true})}))).json();assert.equal(pending.jobs.length,1);assert.equal((await s.run('/operator/jobs')).status,401)});
+
+test('public map allows anonymous metadata and tiles but keeps quotas and operator auth',async()=>{const s=setup();s.env.PUBLIC_MAP='1';assert.equal((await(await s.run('/metadata',null)).json()).publicAccess,true);assert.equal(await(await s.run('/tiles/0/0/0.pbf',null)).text(),'vector-test');assert.equal((await s.run('/operator/jobs',null)).status,401);s.env.REQUEST_LIMIT='2';assert.equal((await s.run('/metadata',null)).status,429)});
