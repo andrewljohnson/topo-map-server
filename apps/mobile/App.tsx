@@ -1,6 +1,4 @@
 import {TileRecovery} from './src/tileRecovery.mjs';
-import {MapConnection} from './src/MapConnection';
-import * as SecureStore from 'expo-secure-store';
 import * as Clipboard from 'expo-clipboard';
 import * as FS from 'expo-file-system/legacy';
 import React,{useEffect,useRef,useState} from 'react';
@@ -21,7 +19,6 @@ const api=(process.env.EXPO_PUBLIC_TILE_SERVER||'https://topo-map.andrewljohnson
 const html=mapHtml();
 export default function App(){return <SafeAreaProvider initialMetrics={initialWindowMetrics}><MapApp/></SafeAreaProvider>}
 function MapApp(){
- const [connectionOpen,setConnectionOpen]=useState(false);const credential=useRef('');
  const insets=useSafeAreaInsets();
  const {recording,record,backgroundEnabled,backgroundMessage,backgroundBusy,toggleBackground}=useGPSRecording();const [statsOpen,setStatsOpen]=useState(false);
  const web=useRef<WebView>(null),ready=useRef(false),lastLocation=useRef<UserLocation|null>(null),areas=useRef<AreaData|null>(null);
@@ -29,13 +26,13 @@ function MapApp(){
  const viewportRequests=useRef(new Map<string,{alive:boolean}>());
  const [,render]=useState(0),[mode,setMode]=useState(false),[downloadsOpen,setDownloadsOpen]=useState(false),[gridVisible,setGridVisible]=useState(false),[isReady,setIsReady]=useState(false),[infoOpen,setInfoOpen]=useState(false),[noteOpen,setNoteOpen]=useState(false),[error,setError]=useState(''),[loading,setLoading]=useState(true),[rendererFailed,setRendererFailed]=useState(false),[rendererKey,setRendererKey]=useState(0);
  const noteWrites=useRef(Promise.resolve()),noteRestored=useRef(false);
- const storeRef=useRef<TileStore|null>(null);if(!storeRef.current)storeRef.current=new TileStore(api,()=>render(n=>n+1),{headers:():Record<string,string>=>credential.current?{Authorization:'Bearer '+credential.current}:{}});const store=storeRef.current;
+ const storeRef=useRef<TileStore|null>(null);if(!storeRef.current)storeRef.current=new TileStore(api,()=>render(n=>n+1));const store=storeRef.current;
  const send=(m:unknown)=>web.current?.injectJavaScript(rendererScript(m));
  useAreaBoundaries(api,data=>{areas.current=data;if(ready.current)send({type:'areas',data})});
  const location=useUserLocation(point=>{lastLocation.current={...point,center:false};if(ready.current)send({type:'location',...point})},record);
  const sync=()=>{if(ready.current){send({type:'safeArea',insets});if(store.meta){send(rendererInit(store.meta));if(!noteRestored.current){noteRestored.current=true;Promise.all(['map-note-draft.json','map-notes.json'].map(name=>FS.readAsStringAsync(FS.documentDirectory+name).then(text=>JSON.parse(text)).catch(()=>null))).then(([draft,notes])=>{send({type:'restoreMapNote',draft});send({type:'restoreMapNotes',notes:Array.isArray(notes)?notes:[]})});}send({type:'state',mode,regions:store.regions})}}};
  useEffect(()=>{const recoveryTimer=setInterval(()=>{if(AppState.currentState!=='active'||!ready.current)return;const keys=tileRecovery.current.due();if(keys.length)send({type:'retryTiles',keys})},5000);store.setForeground(AppState.currentState==='active');const subscription=AppState.addEventListener('change',state=>store.setForeground(state==='active'));return ()=>{clearInterval(recoveryTimer);subscription.remove()}},[]);
- useEffect(()=>{(async()=>{if(__DEV__)await resetDevelopmentMapCache();const saved=await SecureStore.getItemAsync('topo-connection');if(saved&&!__DEV__){const c=JSON.parse(saved);store.api=c.api;credential.current=c.token}await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
+ useEffect(()=>{(async()=>{if(__DEV__)await resetDevelopmentMapCache();await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
  useEffect(sync,[mode,store.meta,JSON.stringify(store.regions),insets.top,insets.right,insets.bottom,insets.left]);
  const onMessage=async(event:WebViewMessageEvent)=>{try{
   const m=JSON.parse(event.nativeEvent.data);
@@ -65,8 +62,6 @@ function MapApp(){
   </View>
   {!infoOpen&&!noteOpen&&<Pressable accessibilityRole="button" accessibilityLabel="Center map on my location" accessibilityState={{busy:location.locating,disabled:location.locating||!isReady}} disabled={location.locating||!isReady} onPress={location.locate} style={[styles.locate,{left:insets.left+16,bottom:insets.bottom+16}]}>{location.locating?<ActivityIndicator color="#2778bd"/>:<View style={styles.crosshair}><View style={styles.centerDot}/></View>}</Pressable>}
   {!infoOpen&&!noteOpen&&<Pressable accessibilityRole="button" accessibilityLabel="View recording stats" onPress={()=>setStatsOpen(true)} style={[styles.locate,{right:insets.right+16,bottom:insets.bottom+60}]}><View style={{flexDirection:'row',alignItems:'flex-end',gap:3,height:22}}>{[10,20,15].map((height,i)=><View key={i} style={{width:4,height,backgroundColor:'#287259',borderRadius:1}}/>)}</View></Pressable>}
-  {!infoOpen&&!noteOpen&&<Pressable accessibilityLabel="Map server connection" onPress={()=>setConnectionOpen(true)} style={[styles.locate,{right:insets.right+16,top:insets.top+16}]}><Text style={{fontSize:24,color:'#287259'}}>⚿</Text></Pressable>}
-  <MapConnection open={connectionOpen} api={store.api} onClose={()=>setConnectionOpen(false)} onSave={async(next,token)=>{if(store.running)throw Error('Remove active download cells before changing servers.');await SecureStore.setItemAsync('topo-connection',JSON.stringify({api:next,token}));credential.current=token;store.api=next;setConnectionOpen(false);retry()}}/>
   <RecordingStats backgroundEnabled={backgroundEnabled} backgroundBusy={backgroundBusy} backgroundMessage={backgroundMessage} onBackgroundChange={toggleBackground} gpsStatus={location.error||(backgroundEnabled?'Foreground + background GPS recording':location.tracking?'Recording while this app is in the foreground':'Waiting for foreground GPS…')} open={statsOpen} onClose={()=>setStatsOpen(false)} recording={recording}/>
  </View>
 }
