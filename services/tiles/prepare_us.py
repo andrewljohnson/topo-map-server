@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import sys
 import time
+import traceback
 from urllib.request import Request,urlopen
 from urllib.error import HTTPError
 
@@ -57,7 +58,14 @@ def prepare(data):
     target.with_suffix('.building').unlink(missing_ok=True)
     target.with_suffix('.building-journal').unlink(missing_ok=True)
     target.with_suffix('.nodes').unlink(missing_ok=True)
-    import_pbf(source,target)
+    try:
+        import_pbf(source,target)
+    except Exception as exc:
+        # Preserve diagnostics across the next retry, which replaces staging files.
+        failure={'failedAt':time.time(),'type':type(exc).__name__,'message':str(exc),'traceback':traceback.format_exc()}
+        (folder/'import-error.json').write_text(json.dumps(failure))
+        traceback.print_exc()
+        raise
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)

@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from contextlib import closing
 import re
 import sqlite3
 import shutil
@@ -21,7 +22,7 @@ def query_local(query,path=None):
         if os.environ.get('OSM_REQUIRE_BULK')=='1':
             raise RuntimeError('Import the US OSM enrichment index before warming amenities and waterways')
         return None
-    with sqlite3.connect('file:'+quote(str(path.resolve()))+'?mode=ro',uri=True) as db:
+    with closing(sqlite3.connect('file:'+quote(str(path.resolve()))+'?mode=ro',uri=True)) as db:
         meta=dict(db.execute('SELECT key,value FROM metadata'))
         if meta.get('complete')!='1':raise RuntimeError('OSM enrichment import is incomplete')
         match=re.search(r'way\(id:([0-9,]+)\)',query)
@@ -37,7 +38,7 @@ def query_local(query,path=None):
     return {'elements':elements,'_endpoint':'local-osm-pbf:'+meta['sha256'],
             'osm3s':{'timestamp_osm_base':meta.get('timestamp','')}}
 
-def import_pbf(source,target):
+def import_pbf(source,target,filter_empty=True):
     import osmium
     target.parent.mkdir(parents=True,exist_ok=True)
     # O_EXCL avoids simultaneous imports. A failed .building file is inspectable;
@@ -92,7 +93,10 @@ def import_pbf(source,target):
     index=target.with_suffix('.nodes')
     handler=Importer()
     try:
-        handler.apply_file(str(source),locations=True,idx='sparse_file_array,'+str(index))
+        # Location and area-assembly handlers run before callback filters.
+        # Untagged nodes still supply way geometry, without Python callbacks.
+        handler.apply_file(str(source),locations=True,idx='sparse_file_array,'+str(index),
+                           filters=[osmium.filter.EmptyTagFilter()] if filter_empty else [])
         db.executemany('INSERT INTO metadata VALUES(?,?)',[
             ('complete','1'),('sha256',digest.hexdigest()),('source',source.name),
             ('timestamp',timestamp)])

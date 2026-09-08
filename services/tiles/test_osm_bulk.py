@@ -35,3 +35,19 @@ class BulkTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'OSM_REQUIRE_BULK':'0'}):
             self.assertIsNone(query_local('anything',Path(tmp)/'absent'))
 if __name__=='__main__':unittest.main()
+
+class FilterEquivalenceTests(unittest.TestCase):
+    def test_native_empty_tag_filter_preserves_nodes_ways_and_multipolygons(self):
+        import sqlite3
+        # Relation geometry must retain its untagged outer way and node members.
+        extra='''<way id="30" version="1"><nd ref="1"/><nd ref="2"/><nd ref="3"/><nd ref="4"/><nd ref="1"/></way>
+<relation id="40" version="1"><member type="way" ref="30" role="outer"/><tag k="type" v="multipolygon"/><tag k="tourism" v="camp_site"/></relation>'''
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);source=root/'source.osm';source.write_text(OSM.replace('</osm>',extra+'</osm>'))
+            results=[]
+            for filtered in [False,True]:
+                target=root/f'{filtered}.sqlite';import_pbf(source,target,filter_empty=filtered)
+                with sqlite3.connect(target) as db:
+                    results.append({table:db.execute(f'SELECT * FROM {table} ORDER BY 1').fetchall() for table in ['features','extents','waterways','metadata']})
+            self.assertEqual(results[0],results[1])
+            self.assertTrue(any(row[0]=='relation/40' for row in results[1]['features']))
