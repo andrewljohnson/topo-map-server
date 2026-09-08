@@ -27,7 +27,7 @@ test('all selected regions reach native queue before any completion; suspend-tim
  const expected=new Set([...store.regionTiles('1176/1561'),...store.regionTiles('1178/1561')]).size;
  await wait(()=>tasks.reduce((n,t)=>n+t.keys.length,0)===expected);
  assert.ok(tasks.length>2);assert.ok(tasks.every(t=>!t.cancelled));
- const journal=JSON.parse(memory.get('memory://topo-vectors-v2/state.json')).nativePending;
+ const journal=JSON.parse(memory.get('memory://topo-vectors-v2/http%3A%2F%2Fnative/state.json')).nativePending;
  assert.equal(Object.keys(journal).length,tasks.length,'persisted before native starts');
  for(const task of tasks)task.finish();
  await wait(()=>!store.running);
@@ -39,9 +39,9 @@ test('removing a region cancels its native transfers and does not install tiles'
 });
 test('relaunch imports completed native envelopes, rejects stale datasets and unrequested tiles',async()=>{
  memory.clear();tasks.length=0;
- const path='memory://topo-vectors-v2/batch-recovery.json',key='osm/12/1176/1561';
+ const path='memory://topo-vectors-v2/http%3A%2F%2Frecover/batch-recovery.json',key='osm/12/1176/1561';
  memory.set(path,JSON.stringify({datasetId:meta.datasetId,tiles:[{key:'12/1176/1561',data:'cGJm'},{key:'12/1/1',data:'YmFk'}]}));
- memory.set('memory://topo-vectors-v2/state.json',JSON.stringify({api:'http://recover',meta,regions:{'1176/1561':{status:'downloading',done:0,total:27}},nativePending:{[path]:{datasetId:meta.datasetId,keys:[key]}}}));
+ memory.set('memory://topo-vectors-v2/http%3A%2F%2Frecover/state.json',JSON.stringify({api:'http://recover',meta,regions:{'1176/1561':{status:'downloading',done:0,total:27}},nativePending:{[path]:{datasetId:meta.datasetId,keys:[key]}}}));
  const store=new TileStore('http://recover',()=>{});store.setForeground(false);await store.init();assert.ok(memory.has(store.file(key)));assert.ok(!memory.has(store.file('osm/12/1/1')));
  await wait(()=>tasks.reduce((n,t)=>n+t.keys.length,0)===26);
  for(const task of tasks)task.finish();await wait(()=>!store.running);assert.equal(store.regions['1176/1561'].status,'complete');

@@ -4,7 +4,6 @@ import * as Clipboard from 'expo-clipboard';
 import * as FS from 'expo-file-system/legacy';
 import React,{useEffect,useRef,useState} from 'react';
 import {ActivityIndicator,AppState,Alert,Linking,Pressable,StatusBar,StyleSheet,Text,View} from 'react-native';
-import Constants from 'expo-constants';
 import {SafeAreaProvider,initialWindowMetrics,useSafeAreaInsets} from 'react-native-safe-area-context';
 import {WebView,WebViewMessageEvent} from 'react-native-webview';
 import {useGPSRecording} from './src/useGPSRecording';
@@ -17,8 +16,7 @@ import {TileStore} from './src/storage';
 import {rendererInit,rendererScript} from './src/rendererBridge';
 import {useUserLocation,UserLocation} from './src/useUserLocation';
 declare const process:{env:{EXPO_PUBLIC_TILE_SERVER?:string}};
-const host=Constants.expoConfig?.hostUri?.split(':')[0]||'localhost';
-const api=(process.env.EXPO_PUBLIC_TILE_SERVER||(__DEV__?`http://${host}:3001`:'https://topo-map.andrewljohnson.workers.dev')).replace(/\/$/,'');
+const api=(process.env.EXPO_PUBLIC_TILE_SERVER||'https://topo-map.andrewljohnson.workers.dev').replace(/\/$/,'');
 const html=mapHtml();
 export default function App(){return <SafeAreaProvider initialMetrics={initialWindowMetrics}><MapApp/></SafeAreaProvider>}
 function MapApp(){
@@ -35,7 +33,7 @@ function MapApp(){
  const location=useUserLocation(point=>{lastLocation.current={...point,center:false};if(ready.current)send({type:'location',...point})},record);
  const sync=()=>{if(ready.current){send({type:'safeArea',insets});if(store.meta){send(rendererInit(store.meta));if(!noteRestored.current){noteRestored.current=true;Promise.all(['map-note-draft.json','map-notes.json'].map(name=>FS.readAsStringAsync(FS.documentDirectory+name).then(text=>JSON.parse(text)).catch(()=>null))).then(([draft,notes])=>{send({type:'restoreMapNote',draft});send({type:'restoreMapNotes',notes:Array.isArray(notes)?notes:[]})});}send({type:'state',mode,regions:store.regions})}}};
  useEffect(()=>{store.setForeground(AppState.currentState==='active');const subscription=AppState.addEventListener('change',state=>store.setForeground(state==='active'));return ()=>subscription.remove()},[]);
- useEffect(()=>{(async()=>{const saved=await SecureStore.getItemAsync('topo-connection');if(saved){const c=JSON.parse(saved);store.api=c.api;credential.current=c.token}await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
+ useEffect(()=>{(async()=>{const saved=await SecureStore.getItemAsync('topo-connection');if(saved&&!__DEV__){const c=JSON.parse(saved);store.api=c.api;credential.current=c.token}await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
  useEffect(sync,[mode,store.meta,JSON.stringify(store.regions),insets.top,insets.right,insets.bottom,insets.left]);
  const onMessage=async(event:WebViewMessageEvent)=>{try{
   const m=JSON.parse(event.nativeEvent.data);

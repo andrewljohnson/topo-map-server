@@ -7,7 +7,6 @@ export type Regions=Record<string,Region>;
 type Job={key:string;tileset:string;path:string;datasetId:string;owners:(()=>boolean)[];viewportOwners:(()=>boolean)[];promise:Promise<string>;resolve:(path:string)=>void;reject:(error:Error)=>void;started:boolean;interactive:boolean};
 const base64=(bytes:Uint8Array)=>{const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";const chunks:string[]=[];for(let start=0;start<bytes.length;start+=12288){let text="";for(let i=start;i<Math.min(start+12288,bytes.length);i+=3){const a=bytes[i],b=bytes[i+1],c=bytes[i+2];text+=alphabet[a>>2]+alphabet[((a&3)<<4)|((b||0)>>4)]+(i+1<bytes.length?alphabet[((b&15)<<2)|((c||0)>>6)]:"=")+(i+2<bytes.length?alphabet[c&63]:"=")}chunks.push(text)}return chunks.join("")};
 const root=FS.documentDirectory+'topo-vectors-v2/';
-const statePath=root+'state.json';
 const validKey=(key:string)=>/^(?:(?:osm|dem|contours|amenities|boundaries|waterways|landcover|trails|recreation)\/)?\d+\/\d+\/\d+$/.test(key);
 const composition=(meta:Metadata|null)=>meta?JSON.stringify(meta.tilesets?Object.entries(meta.tilesets).map(([name,set])=>[name,set?.datasetId]).sort():[['osm',meta.datasetId]]):'';
 // Added sources and trail/recreation processing revisions retain saved regions and other binaries.
@@ -20,6 +19,8 @@ const isCompatibleUpgrade=(previous:Metadata|null,latest:Metadata)=>{
  });
 };
 export class TileStore{
+ private get cacheRoot(){return root+encodeURIComponent(this.api.replace(/\/$/,''))+'/'}
+ private get statePath(){return this.cacheRoot+'state.json'}
  regions:Regions={};meta:Metadata|null=null;running=false;
  private nativePending:Record<string,{datasetId:string;keys:string[]}>={};private activeRegions=0;
  private writes=Promise.resolve();private requests=new Map<string,Job>();private workers=0;private interactiveWorkers=0;private lanes=new Map<string,number>();private scheduled=false;private progressTimer:ReturnType<typeof setTimeout>|null=null;
@@ -33,16 +34,16 @@ export class TileStore{
  private notify(){if(this.progressTimer)return;this.progressTimer=setTimeout(()=>{this.progressTimer=null;this.changed()},this.options.progressMs??150)}
  private parse(key:string){const parts=key.split('/');return parts.length===4?{tileset:parts[0],key:parts.slice(1).join('/')}:{tileset:'osm',key}}
  private set(name:string):Tileset|undefined{return this.meta?.tilesets?.[name as 'osm'|'dem'|'contours'|'amenities'|'boundaries'|'waterways'|'landcover'|'trails'|'recreation']||(name==='osm'?this.meta||undefined:undefined)}
- file(key:string){const parsed=this.parse(key);const dataset=encodeURIComponent(this.set(parsed.tileset)?.datasetId||'unknown');return root+(parsed.tileset==='osm'?'':parsed.tileset+'_')+dataset+'_'+parsed.key.replaceAll('/','_')+(parsed.tileset==='dem'?'.png':'.pbf')}
+ file(key:string){const parsed=this.parse(key);const dataset=encodeURIComponent(this.set(parsed.tileset)?.datasetId||'unknown');return this.cacheRoot+(parsed.tileset==='osm'?'':parsed.tileset+'_')+dataset+'_'+parsed.key.replaceAll('/','_')+(parsed.tileset==='dem'?'.png':'.pbf')}
  regionTiles(id:string){if(!this.meta)return [];const sets=this.meta.tilesets||{osm:this.meta};return Object.entries(sets).flatMap(([name,set])=>set?cellTiles(id,{...set,gridZoom:this.meta!.gridZoom}).map(key=>name+'/'+key):[])}
- async init(){await FS.makeDirectoryAsync(root,{intermediates:true});try{const data=JSON.parse(await FS.readAsStringAsync(statePath));if(data.api===this.api){this.meta=data.meta;this.regions=data.regions||{};this.nativePending=data.nativePending||{};for(const r of Object.values(this.regions))if(r.status==='downloading')r.status='queued';}}catch{};try{const response=await fetch(this.api+'/metadata',{headers:this.headers(this.api+'/metadata'),signal:AbortSignal.timeout(8000)});if(!response.ok)throw Error('Metadata '+response.status);const latest:Metadata=await response.json();if(!latest.datasetId)throw Error('Vector metadata needs datasetId');if(composition(latest)!==composition(this.meta)){
+ async init(){await FS.makeDirectoryAsync(this.cacheRoot,{intermediates:true});try{const data=JSON.parse(await FS.readAsStringAsync(this.statePath));if(data.api===this.api){this.meta=data.meta;this.regions=data.regions||{};this.nativePending=data.nativePending||{};for(const r of Object.values(this.regions))if(r.status==='downloading')r.status='queued';}}catch{};try{const response=await fetch(this.api+'/metadata',{headers:this.headers(this.api+'/metadata'),signal:AbortSignal.timeout(8000)});if(!response.ok)throw Error('Metadata '+response.status);const latest:Metadata=await response.json();if(!latest.datasetId)throw Error('Vector metadata needs datasetId');if(composition(latest)!==composition(this.meta)){
  const compatible=isCompatibleUpgrade(this.meta,latest);this.meta=latest;
  if(compatible){for(const [id,region] of Object.entries(this.regions)){region.status='queued';region.done=0;region.total=this.regionTiles(id).length;delete region.error;delete region.bytes}}
  else this.regions={};
  }else this.meta=latest;await this.save()}catch(e){if(!this.meta)throw e}await this.recoverNative();await this.restoreSizes();this.changed();this.kick();this.pump();}
  private async tileSize(path:string){const info=await FS.getInfoAsync(path);return info.exists?info.size:0}
  private async restoreSizes(){for(const [id,region] of Object.entries(this.regions)){if(region.bytes!==undefined)continue;const sizes=await Promise.all(this.regionTiles(id).map(key=>this.tileSize(this.file(key)).catch(()=>0)));region.bytes=sizes.reduce((sum,size)=>sum+size,0)}await this.save()}
- save(){const text=JSON.stringify({api:this.api,meta:this.meta,regions:this.regions,nativePending:this.nativePending});this.writes=this.writes.catch(()=>{}).then(async()=>{await FS.writeAsStringAsync(statePath+'.tmp',text);await FS.moveAsync({from:statePath+'.tmp',to:statePath})});return this.writes;}
+ save(){const text=JSON.stringify({api:this.api,meta:this.meta,regions:this.regions,nativePending:this.nativePending});this.writes=this.writes.catch(()=>{}).then(async()=>{await FS.writeAsStringAsync(this.statePath+'.tmp',text);await FS.moveAsync({from:this.statePath+'.tmp',to:this.statePath})});return this.writes;}
  private alive(job:Job){return this.set(job.tileset)?.datasetId===job.datasetId&&job.owners.some(owner=>owner())}
  private finish(job:Job,error?:Error){if(this.requests.get(job.path)!==job)return;this.requests.delete(job.path);if(error)job.reject(error);else job.resolve(job.path)}
  async ensure(key:string,owner:()=>boolean=()=>true,interactive=false){if(!validKey(key)||!this.meta)throw Error('Invalid tile request');const parsed=this.parse(key),set=this.set(parsed.tileset);if(!set)throw Error('Unknown tileset');const path=this.file(key),datasetId=set.datasetId;if((await FS.getInfoAsync(path)).exists)return path;if(!owner())throw Error('Cancelled');const previous=this.requests.get(path);if(previous){previous.owners.push(owner);if(interactive){previous.viewportOwners.push(owner);previous.interactive=true;if(this.foreground)this.yieldOffline();this.kick()}return previous.promise}let resolve!:(path:string)=>void,reject!:(error:Error)=>void;const promise=new Promise<string>((yes,no)=>{resolve=yes;reject=no});const job:Job={key:parsed.key,tileset:parsed.tileset,path,datasetId,owners:[owner],viewportOwners:interactive?[owner]:[],promise,resolve,reject,started:false,interactive};this.requests.set(path,job);if(interactive&&this.foreground)this.yieldOffline();this.kick();return promise;}
@@ -60,7 +61,7 @@ export class TileStore{
  // Only hand the entire queue to native sessions when the app leaves the foreground.
  // The OS schedules network concurrency while JS is suspended. Never use a JS timeout here.
  private async nativeBatch(url:string,jobs:Job[],signal:AbortSignal){
-  const path=root+'batch-'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.json';
+  const path=this.cacheRoot+'batch-'+Date.now()+'-'+Math.random().toString(36).slice(2)+'.json';
   this.nativePending[path]={datasetId:jobs[0].datasetId,keys:jobs.map(j=>j.tileset+'/'+j.key)};
   await this.save();
   const task=FS.createDownloadResumable(url,path,{sessionType:FS.FileSystemSessionType.BACKGROUND,headers:this.headers(url)});
@@ -83,7 +84,7 @@ export class TileStore{
   // requested keys for the current dataset and still-selected cells; never trust the envelope.
   const wanted=new Set(Object.keys(this.regions).flatMap(id=>this.regionTiles(id)));
   for(const [path,entry] of Object.entries(this.nativePending)){
-   if(!path.startsWith(root+'batch-')||!path.endsWith('.json'))continue;
+   if(!path.startsWith(this.cacheRoot+'batch-')||!path.endsWith('.json'))continue;
    try{
     const data=JSON.parse(await FS.readAsStringAsync(path));
     if(data.datasetId===entry.datasetId){
@@ -118,5 +119,5 @@ export class TileStore{
   }finally{this.activeRegions--;this.running=this.activeRegions>0}
  }));
  }
- async clear(){if(this.running||this.requests.size||this.workers||this.interactiveWorkers)throw Error('Wait for map loading and remove queued cells before clearing storage.');this.regions={};await FS.deleteAsync(root,{idempotent:true});await FS.makeDirectoryAsync(root,{intermediates:true});await this.save();this.changed()}
+ async clear(){if(this.running||this.requests.size||this.workers||this.interactiveWorkers)throw Error('Wait for map loading and remove queued cells before clearing storage.');this.regions={};await FS.deleteAsync(this.cacheRoot,{idempotent:true});await FS.makeDirectoryAsync(this.cacheRoot,{intermediates:true});await this.save();this.changed()}
 }
