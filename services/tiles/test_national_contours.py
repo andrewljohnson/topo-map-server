@@ -8,6 +8,18 @@ from rasterio.transform import Affine
 import national_contours as nc
 
 class NationalContoursTests(unittest.TestCase):
+ def test_memory_cache_reuses_immutable_blocks_and_separates_namespaces(self):
+  nc._memory_chunk.cache_clear()
+  with patch.object(nc,'_load_chunk',side_effect=lambda x,y:(np.ones((4,4),dtype='float32'),{'chunk':[x,y]})) as read:
+   with patch.object(nc,'CACHE',Path('/tmp/dem-cache-test-a')):
+    first,_=nc.load_chunk(3,4);second,_=nc.load_chunk(3,4)
+    self.assertIs(first,second);self.assertEqual(read.call_count,1)
+    with self.assertRaises(ValueError):first[0,0]=2
+   with patch.object(nc,'CACHE',Path('/tmp/dem-cache-test-b')):nc.load_chunk(3,4)
+   self.assertEqual(read.call_count,2)
+   for x in range(80):nc.load_chunk(x,4)
+   self.assertLessEqual(nc._memory_chunk.cache_info().currsize,64)
+  nc._memory_chunk.cache_clear()
  def test_latest_dated_sources(self):
   items=[{'title':f'USGS 1/3 Arc Second n38w123 {date}','downloadURL':f'https://example.gov/n38w123/{date}.tif','sourceId':date} for date in ['20210301','20260324']]
   selected=nc.select_sources(items,10)

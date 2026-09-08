@@ -170,6 +170,19 @@ def chunk_spec(cx, cy):
 
 
 def load_chunk(cx, cy):
+    # Namespace and grid size are part of the key, including when tests or a new
+    # source epoch select another cache. At most 64 native blocks (~256 MiB).
+    return _memory_chunk(str(CACHE), CHUNK, cx, cy)
+
+
+@lru_cache(maxsize=64)
+def _memory_chunk(namespace, chunk_size, cx, cy):
+    data, info = _load_chunk(cx, cy)
+    data.flags.writeable = False
+    return data, info
+
+
+def _load_chunk(cx, cy):
     """Return reusable native-grid DEM data plus explicit acquisition provenance."""
     path = CACHE / 'windows' / f'{cx}_{cy}.npz'
     provenance_path = path.with_suffix('.json')

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate locally and publish verified immutable tiles to private R2; resumable."""
-import argparse,base64,fcntl,hashlib,importlib,json,os,shutil,sqlite3,sys,time
+import argparse,base64,fcntl,hashlib,importlib,json,os,shutil,sqlite3,sys,time,threading
+from contextlib import contextmanager
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor,wait
 from collections import deque
@@ -27,9 +28,22 @@ def validate(blob,source,z=None):
 class Publisher:
     def __init__(self,config,data,limit=1000000000000):
         self.config=config;self.client=client(config);self.data=data;self.limit=limit
+        self.timings={};self.timing_lock=threading.Lock();self.started=time.monotonic()
         self.folder=data/'publication';self.folder.mkdir(exist_ok=True,parents=True)
         self.dbpath=self.folder/'uploads.sqlite'
         with self.db() as db:db.executescript('PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS uploads(key TEXT PRIMARY KEY,size INTEGER,sha TEXT,done INTEGER DEFAULT 0); CREATE TABLE IF NOT EXISTS cursors(plan TEXT PRIMARY KEY,code INTEGER); CREATE TABLE IF NOT EXISTS totals(id INTEGER PRIMARY KEY,bytes INTEGER); INSERT OR IGNORE INTO totals SELECT 1,COALESCE(SUM(size),0) FROM uploads;')
+    @contextmanager
+    def timed(self,stage):
+        start=time.monotonic()
+        try:yield
+        finally:
+            elapsed=time.monotonic()-start
+            with self.timing_lock:
+                record=self.timings.setdefault(stage,{'count':0,'seconds':0,'maxSeconds':0})
+                record['count']+=1;record['seconds']+=elapsed;record['maxSeconds']=max(record['maxSeconds'],elapsed)
+    def performance(self):
+        with self.timing_lock:
+            return {'elapsedSeconds':round(time.monotonic()-self.started,2),'stages':{k:{**v,'seconds':round(v['seconds'],3),'maxSeconds':round(v['maxSeconds'],3)} for k,v in self.timings.items()}}
     def db(self):return sqlite3.connect(self.dbpath,timeout=60)
     def put(self,key,blob,content_type):
         checksum=hashlib.sha256(blob).hexdigest()
@@ -43,14 +57,15 @@ class Publisher:
             db.execute('INSERT OR IGNORE INTO uploads(key,size,sha) VALUES(?,?,?)',(key,len(blob),checksum))
             if not row:db.execute('UPDATE totals SET bytes=bytes+? WHERE id=1',(len(blob),))
         # Verify a prior upload after a crash before writing it again.
-        try:head=self.client.head_object(Bucket=self.config['R2_BUCKET'],Key=key)
+        try:
+            with self.timed('remoteLookup'):head=self.client.head_object(Bucket=self.config['R2_BUCKET'],Key=key)
         except Exception as exc:
             if getattr(exc,'response',{}).get('Error',{}).get('Code') not in ('404','NoSuchKey','NotFound'):raise
             head=None
         if head and (head['ContentLength']!=len(blob) or head.get('Metadata',{}).get('sha256')!=checksum):raise ValueError('Cloud object differs from this dataset')
         if not head:
-            self.client.put_object(Bucket=self.config['R2_BUCKET'],Key=key,Body=blob,ContentType=content_type,Metadata={'sha256':checksum})
-            head=self.client.head_object(Bucket=self.config['R2_BUCKET'],Key=key)
+            with self.timed('upload'):self.client.put_object(Bucket=self.config['R2_BUCKET'],Key=key,Body=blob,ContentType=content_type,Metadata={'sha256':checksum})
+            with self.timed('verify'):head=self.client.head_object(Bucket=self.config['R2_BUCKET'],Key=key)
         if head['ContentLength']!=len(blob) or head.get('Metadata',{}).get('sha256')!=checksum:raise ValueError('Upload verification failed')
         with self.db() as db:db.execute('UPDATE uploads SET done=1 WHERE key=?',(key,))
     def tile(self,source,z,x,y,spec):
@@ -59,20 +74,21 @@ class Publisher:
         if row and row[0]:return
         if shutil.disk_usage(self.data).free<50*10**9:raise RuntimeError('Local 50 GB disk reserve reached')
         path=self.data/'cache'/spec['datasetId']/str(z)/str(x)/f'{y}.pbf'
-        if path.exists():
-            blob=path.read_bytes()
-            try:validate(blob,source,z)
-            except ValueError:blob=importlib.import_module(MODULES[source]).render_tile(z,x,y)
-        else:blob=importlib.import_module(MODULES[source]).render_tile(z,x,y)
-        validate(blob,source,z)
-        self.put(key,blob,'image/png' if source=='dem' else 'application/vnd.mapbox-vector-tile')
+        with self.timed('render.'+source):
+            if path.exists():
+                blob=path.read_bytes()
+                try:validate(blob,source,z)
+                except ValueError:blob=importlib.import_module(MODULES[source]).render_tile(z,x,y)
+            else:blob=importlib.import_module(MODULES[source]).render_tile(z,x,y)
+            validate(blob,source,z)
+        with self.timed('publish.'+source):self.put(key,blob,'image/png' if source=='dem' else 'application/vnd.mapbox-vector-tile')
     def document(self,name,value):
         blob=json.dumps(value,separators=(',',':')).encode()
         self.client.put_object(Bucket=self.config['R2_BUCKET'],Key='publication/'+name,Body=blob,ContentType='application/json',CacheControl='no-cache')
         path=self.folder/name;tmp=path.with_suffix('.tmp');tmp.write_bytes(blob);tmp.replace(path)
     def status(self,state,current=None,error=None):
         with self.db() as db:count,size=db.execute('SELECT COUNT(*),COALESCE(SUM(size),0) FROM uploads WHERE done=1').fetchone()
-        self.document('status.json',{'status':state,'updatedAt':time.time(),'uploadedTiles':count,'uploadedBytes':size,'storageLimitBytes':self.limit,'current':current,'error':error})
+        self.document('status.json',{'status':state,'updatedAt':time.time(),'uploadedTiles':count,'uploadedBytes':size,'storageLimitBytes':self.limit,'current':current,'error':error,'performance':self.performance()})
 
 def buffered_tiles(pool,task,items,window):
     """Bounded lookahead; yield only the contiguous successfully published prefix.
@@ -104,7 +120,7 @@ def ordered_plans(plans,regions):
     return sorted(enumerate(plans),key=lambda item:rank[regions[item[0]]])
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--sample',action='store_true');p.add_argument('--plan',action='store_true');p.add_argument('--data',type=Path,default=DATA);p.add_argument('--max-bytes',type=int,default=1000000000000);p.add_argument('--workers',type=int,default=2);p.add_argument('--batch-size',type=int,default=0);a=p.parse_args();a.workers=max(1,min(16,a.workers));a.batch_size=max(a.workers,min(64,a.batch_size or a.workers*2))
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--sample',action='store_true');p.add_argument('--plan',action='store_true');p.add_argument('--data',type=Path,default=DATA);p.add_argument('--max-bytes',type=int,default=1000000000000);p.add_argument('--workers',type=int,default=2);p.add_argument('--batch-size',type=int,default=0);a=p.parse_args();a.workers=max(1,min(32,a.workers));a.batch_size=max(a.workers,min(128,a.batch_size or a.workers*2))
     os.environ.update(TILE_MODE='national',TILE_COVERAGE='world-conus',TILE_DATA_DIR=str(a.data),OSM_REQUIRE_BULK='1')
     import tile_service,coverage_policy
     from warm_us import coordinates,tile_count

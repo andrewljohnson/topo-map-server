@@ -104,12 +104,12 @@ original plan indices for checkpoint hashes, so changing priority does not disca
 existing cursor progress or re-upload completed tiles. California uses the existing
 coverage rectangle intersected with each source's coverage mask.
 
-`publish_cloud.py --workers 16 --batch-size 64` allows sixteen concurrent generation/
+`publish_cloud.py --workers 32 --batch-size 128` allows thirty-two concurrent generation/
 upload tasks with bounded batches. The R2 client retains up to 32 connections so
-these workers can reuse HTTPS connections. The publisher keeps a rolling bounded lookahead of 64 tiles instead of waiting
+these workers can reuse HTTPS connections. The publisher keeps a rolling bounded lookahead of 128 tiles instead of waiting
 for an entire batch before scheduling more work. Checkpoints advance only through
 contiguous successful tiles; failed attempts drain before retrying. Defaults remain two workers; worker count is
-clamped to 1–16 and batch size to at most 64. Failed batches resume through the
+clamped to 1–32 and batch size to at most 128. Failed batches resume through the
 verified per-object ledger. The 1 TB publication ceiling and 50 GB local free-space
 reserve remain in force; checksum verification and dataset versions are unchanged.
 
@@ -120,3 +120,16 @@ another host, start with a smaller worker count, observe actual generation/uploa
 throughput and memory, and increase only while throughput improves. Initial local
 measurements are short samples; high-resolution DEM and enrichment costs vary by
 location. They should not be treated as a nationwide completion guarantee.
+
+
+Publication status includes aggregate `performance` stage timings (rendering,
+remote lookup, upload, verification), measured since the current process started.
+Stage seconds are summed across workers, so they can exceed elapsed wall time;
+nested publish/request stages must not be added together. Use differences between
+snapshots to compare steady intervals; restart resets these metrics but not the
+upload ledger or publication checkpoints.
+
+Native DEM blocks are reused in a process-local LRU capped at 64 blocks (about
+256 MiB of elevation arrays). Arrays are read-only, keys include the source-cache
+namespace and grid size, and persisted source/provenance files remain authoritative.
+This avoids repeatedly decompressing shared terrain blocks for neighboring tiles.
