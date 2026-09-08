@@ -1,3 +1,42 @@
+# Standalone app distribution
+
+EAS profiles in `eas.json` build a real app with embedded JavaScript and MapLibre.
+`preview` produces an iOS ad hoc install or Android APK; `production` produces an
+App Store/TestFlight or Play Store binary. Both default to the public cloud map and
+need neither Metro nor Expo Go. Local development still defaults to the LAN server.
+
+Run from this directory after sourcing `../../scripts/env.sh`:
+
+```
+pnpm dlx eas-cli device:create
+pnpm dlx eas-cli build --platform ios --profile preview
+```
+
+For iOS, first use an active Apple Developer Program membership and register both
+phones through the device-registration link. EAS can manage signing credentials;
+complete Apple sign-in yourself when prompted. Adding a phone later requires a new
+provisioning profile and a rebuilt/re-signed install. Keep Apple passwords and signing
+keys out of Git and chat. A family member need not buy a developer membership.
+
+For TestFlight, build with `--profile production`, then submit with
+`pnpm dlx eas-cli submit --platform ios --profile production`. External testers need
+Apple beta review; TestFlight builds expire after 90 days. App Store publication is
+not required to use TestFlight. App Store Connect app setup/signing remain required.
+
+Android can use `pnpm dlx eas-cli build --platform android --profile preview` to
+produce an APK. No Play Store listing is needed for direct APK installs.
+
+Build status: profiles and asset generation are configured, and the project is linked
+to https://expo.dev/accounts/andrewljohnson/projects/topo-map-server. A signed install
+is not available until platform credentials and a native build succeed. Native builds require separate device acceptance for offline maps, background
+location, background downloads and rotation; a JS export is not a signed native build.
+
+Cloud builds regenerate the ignored MapLibre asset module after dependency install.
+Other generated map modules are tracked in Git and should be regenerated locally
+with `pnpm bundle:map` before committing a release.
+
+---
+
 # Topo mobile
 
 Expo Go app for iOS and Android. Opens straight to your local map, with a bottom-right Download button. Download mode overlays a zoom-12 grid. Tap cells to enqueue, tap again to cancel/deselect. Amber is queued/downloading, green is saved. Failed cells remain selectable for retry. Downloads use two concurrent requests of up to eight tiles each, retry missing tiles up to three times, save queue metadata after each batch, and resume when the app opens.

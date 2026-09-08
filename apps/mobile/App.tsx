@@ -18,7 +18,7 @@ import {rendererInit,rendererScript} from './src/rendererBridge';
 import {useUserLocation,UserLocation} from './src/useUserLocation';
 declare const process:{env:{EXPO_PUBLIC_TILE_SERVER?:string}};
 const host=Constants.expoConfig?.hostUri?.split(':')[0]||'localhost';
-const api=(process.env.EXPO_PUBLIC_TILE_SERVER||`http://${host}:3001`).replace(/\/$/,'');
+const api=(process.env.EXPO_PUBLIC_TILE_SERVER||(__DEV__?`http://${host}:3001`:'https://topo-map.andrewljohnson.workers.dev')).replace(/\/$/,'');
 const html=mapHtml();
 export default function App(){return <SafeAreaProvider initialMetrics={initialWindowMetrics}><MapApp/></SafeAreaProvider>}
 function MapApp(){
@@ -59,7 +59,7 @@ function MapApp(){
   <WebView key={rendererKey} ref={web} source={{html}} contentInsetAdjustmentBehavior="never" originWhitelist={['*']} javaScriptEnabled onMessage={onMessage} style={styles.map} onShouldStartLoadWithRequest={r=>{if(r.url.startsWith('https://')){Linking.openURL(r.url);return false}return true}}/>
   <View pointerEvents="box-none" style={[styles.overlay,{display:noteOpen?'none':'flex',top:insets.top,left:insets.left,right:insets.right}]}>
    <DownloadStatus open={downloadsOpen} setOpen={setDownloadsOpen} regions={store.regions} selecting={mode} gridVisible={gridVisible} onSelectingChange={setMode} onClear={clear} onToggleRegion={id=>store.toggle(id)}/>
-   {loading&&<View style={styles.notice}><ActivityIndicator color="#1e6655"/><Text style={styles.noticeText}>Connecting to your local maps…</Text></View>}
+   {loading&&<View style={styles.notice}><ActivityIndicator color="#1e6655"/><Text style={styles.noticeText}>Connecting to maps…</Text></View>}
    {!!error&&<Pressable style={styles.notice} onPress={retry}><Text style={styles.noticeText}>{error}{'\n'}{rendererFailed?'Tap to restart the map.':'Tap to retry.'}</Text></Pressable>}
    {!!location.error&&<Pressable accessibilityRole="button" accessibilityLabel="Dismiss location message" style={styles.notice} onPress={location.clearError}><Text style={styles.noticeText}>{location.error}{'\n'}Tap to dismiss.</Text></Pressable>}
   </View>

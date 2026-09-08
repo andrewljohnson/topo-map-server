@@ -12,11 +12,22 @@
           "NSAllowsArbitraryLoads": true
         },
         "NSLocalNetworkUsageDescription": "Connect to your local map tile server."
+      },
+      "bundleIdentifier": "dev.topomap.app",
+      "config": {
+        "usesNonExemptEncryption": false
       }
     },
     "android": {
       "package": "dev.topomap.app",
-      "usesCleartextTraffic": true
+      "usesCleartextTraffic": true,
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_LOCATION"
+      ]
     },
     "plugins": [
       [
@@ -30,6 +41,12 @@
         }
       ],
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e8ec422e-d434-4d24-ad3a-c9ad6b1d86f7"
+      }
+    },
+    "owner": "andrewljohnson"
   }
 }

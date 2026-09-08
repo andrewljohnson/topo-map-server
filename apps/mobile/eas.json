@@ -1,0 +1,33 @@
+{
+  "cli": {
+    "version": ">=16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "developmentClient": false,
+      "environment": "preview",
+      "env": {
+        "EXPO_PUBLIC_TILE_SERVER": "https://topo-map.andrewljohnson.workers.dev"
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "buildConfiguration": "Release"
+      }
+    },
+    "production": {
+      "distribution": "store",
+      "environment": "production",
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_TILE_SERVER": "https://topo-map.andrewljohnson.workers.dev"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

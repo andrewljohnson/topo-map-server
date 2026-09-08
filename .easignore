@@ -27,3 +27,14 @@ credentials.json
 *.mobileprovision
 *.jks
 *.keystore
+
+# EAS only needs the mobile app and shared build scripts, never map datasets.
+/services/
+/deploy/
+/docs/
+/apps/web/
+/.agents/
+/.codex/
+**/.env*
+**/*.token
+/apps/mobile/src/mapAssets.ts
