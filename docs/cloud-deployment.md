@@ -79,7 +79,7 @@ images tagged by the resolved main SHA, then replaces the running containers.
 The old service stays up during the build. Cutover can briefly interrupt cold
 requests; this is not a zero-downtime cluster. A single deployment lock prevents
 concurrent cutovers. Health checks cover containers and the actual HTTPS page
-and metadata endpoint. Failure attempts to restore the previous images.
+and metadata endpoint plus real overview basemap and DEM tile requests. Failure attempts to restore the previous images.
 `current` is changed only after checks pass. Old images/checkouts are retained
 for rollback, so periodically remove old **release artifacts** after checking
 which ones are live; never run `docker compose down -v` or wipe the data volume.

@@ -34,7 +34,9 @@ if ! compose "$release" up -d --no-build --wait --wait-timeout 180 tiles web; th
 fi
 # Verify actual page and API through the public HTTPS listener, not just a process.
 if ! curl --fail --silent --show-error --retry 8 --retry-all-errors --retry-delay 5 --max-time 20 "https://$SITE_ADDRESS/" -o /dev/null ||
-   ! curl --fail --silent --show-error --max-time 20 "https://$SITE_ADDRESS/metadata" -o /dev/null; then
+   ! curl --fail --silent --show-error --max-time 20 "https://$SITE_ADDRESS/metadata" -o /dev/null ||
+   ! curl --fail --silent --show-error --max-time 120 "https://$SITE_ADDRESS/tiles/0/0/0.pbf" -o /dev/null ||
+   ! curl --fail --silent --show-error --max-time 120 "https://$SITE_ADDRESS/dem/3/1/3.png" -o /dev/null; then
   rollback; exit 1
 fi
 printf '%s\n' "$RELEASE_SHA" > "$release/.release-sha"
