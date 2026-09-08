@@ -280,3 +280,15 @@ while portions of the forest outlines differ by tens to hundreds of metres.
 `prepare_us.py` freezes the official [Geofabrik US PBF](https://download.geofabrik.de/north-america/us.html), verifies its publisher MD5, and retains it under `data/osm-source`. `osm_bulk.py` creates a SQLite/R-tree index of amenity geometries and waterway tags. Its manifest records SHA-256 and replication timestamp. Multipolygon amenity areas retain full geometry; OSM IDs remain the deduplication identity. This replaces public Overpass queries in production, while development still supports its existing fallback. Public deployments set `OSM_REQUIRE_BULK=1`. This source enriches the pinned Protomaps basemap; it does not change its geometry vintage.
 
 `regions/us-warming.geojson` is the USA feature from Natural Earth's public-domain 1:10m country dataset, used only to enumerate warming coverage. Its source URL is recorded in its properties. `warm_us.py` intersects this mask with each tile source's published extent, resumes checkpoints, and retains failed keys. See [deployment](cloud-deployment.md) for operation and limitations.
+
+## Country borders (2026-09-07)
+
+Natural Earth v5.1.2 `ne_50m_admin_0_boundary_lines_land` provides international
+land borders worldwide. Public-domain GeoJSON is bundled in web/mobile styles,
+so borders work offline and require no R2 tile regeneration. Geometry is simplified
+by 0.003 degrees and rounded to four decimal places for overview display.
+Country lines have a light casing and greater weight than state lines. Features
+tagged disputed, indefinite or line of control retain distinct dashed styling.
+The generalized lines fade out by zoom 11 rather than imply survey precision.
+Source: https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_admin_0_boundary_lines_land.geojson
+Reference: https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-boundary-lines-2/
