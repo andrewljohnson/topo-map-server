@@ -1,5 +1,19 @@
 # topo-map-server
 
+Open-source outdoor maps: a Python vector-tile pipeline, MapLibre web viewer, and
+cross-platform Expo app with offline downloads and on-device DEM contours and shading.
+
+**Code: [MIT](LICENSE).** Map data and bundled third-party material retain their
+[own licenses and attribution](THIRD_PARTY_NOTICES.md).
+
+[Live map](https://topo-map.andrewljohnson.workers.dev/) ·
+[Mobile setup](apps/mobile/README.md) · [Data sources](docs/data-sources.md)
+
+The cloud publication is still warming: a worldwide overview is available, while
+detailed CONUS coverage is incomplete. Run the local tile service for on-demand
+generation. Cloud deployment uses local generation plus Cloudflare Workers/R2; see
+[the current cloud setup](services/cloud/README.md).
+
 Cloud v1: [deployment and hosting](docs/cloud-deployment.md), [product roadmap](docs/product-roadmap.md). Release committed main with `./scripts/deploy.sh` after configuring a server.
 
 ## Current terrain pipeline
@@ -29,7 +43,7 @@ Requirements: Python 3.11+, Node 22.13+ and pnpm. Scripts recognize this machine
 ./scripts/mobile.sh # Expo LAN server :8081
 ```
 
-Open http://localhost:3000. Open the Expo QR code in Expo Go SDK 57 on the same Wi-Fi. Expo CLI and Expo Go must use the same signed-in account. The app discovers the API from Expo's LAN hostname; `EXPO_PUBLIC_TILE_SERVER` overrides it. The top title/text panel has been removed from both maps.
+Open http://localhost:3000. Open the Expo QR code in Expo Go SDK 57 on the same Wi-Fi. Expo CLI and Expo Go must use the same signed-in account. The app defaults to the live cloud API. Use `EXPO_PUBLIC_TILE_SERVER=http://YOUR_LAN_IP:3001 ./scripts/mobile.sh` to test your local service. Full Expo reloads clear development map downloads; installed builds preserve offline maps. The top title/text panel has been removed from both maps.
 
 The bottom-right Download button opens the selection grid. Tap a square to download both vector sources, and tap again to remove it from the queue. Saved tiles and locally generated labels work offline. Downloads use native background transfers; see [background behavior and platform limits](docs/background-downloads.md).
 

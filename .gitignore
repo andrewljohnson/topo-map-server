@@ -27,3 +27,12 @@ credentials.json
 *.mobileprovision
 *.jks
 *.keystore
+
+# Local agent state and machine-only credentials
+/.agents/
+/.codex/
+**/.env.*
+!**/.env.example
+*.ipa
+*.apk
+*.aab
