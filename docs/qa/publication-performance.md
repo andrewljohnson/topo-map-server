@@ -74,3 +74,18 @@ and retain failure evidence rather than silently repeating another long pass.
 The service now explicitly sets TILE_MIN_FREE_GB=50 for import, matching the
 existing publisher free-space reserve. Bulk query connections now close explicitly,
 preventing the same file-handle accumulation previously fixed in the publisher.
+
+## September 8: confirmed import failure
+
+The optimized pass reached the original failing stage in about 57 minutes
+(previous unfiltered attempt took roughly 3 hours 40 minutes). Retained diagnostics
+identified `RuntimeError: invalid area (area_id=250220764)` from libosmium's
+multipolygon factory. The importer now records only this recognized invalid-area
+failure and continues, preserving the earlier way geometry if available. Other
+factory failures still propagate and prevent an incomplete index being published.
+Six bulk-import tests and the preparation-diagnostics test pass. Existing valid
+feature processing and published tile bytes are unchanged. The next full pass
+must still confirm that no other source error prevents completion.
+
+Restarting after the fix released resources retained by failed imports; free disk
+space recovered from 63 GiB to 111 GiB. The 50 GB reserve remains enforced.

@@ -292,3 +292,13 @@ tagged disputed, indefinite or line of control retain distinct dashed styling.
 The generalized lines fade out by zoom 11 rather than imply survey precision.
 Source: https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_50m_admin_0_boundary_lines_land.geojson
 Reference: https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-boundary-lines-2/
+
+### Invalid areas in the bulk OSM import
+
+Libosmium may emit a selected area whose rings cannot form a multipolygon. The
+import records these specific `invalid area (area_id=...)` failures in the local
+index's `rejected_geometries` table, including OSM identity and reason. It preserves
+any geometry already imported from the corresponding way, rather than replacing
+it with fabricated geometry or aborting the entire US import. A rejected relation
+without another usable geometry does not become a map feature. Other runtime
+errors still abort the import and are retained in `osm-source/import-error.json`.

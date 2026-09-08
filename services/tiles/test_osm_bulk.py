@@ -51,3 +51,30 @@ class FilterEquivalenceTests(unittest.TestCase):
                     results.append({table:db.execute(f'SELECT * FROM {table} ORDER BY 1').fetchall() for table in ['features','extents','waterways','metadata']})
             self.assertEqual(results[0],results[1])
             self.assertTrue(any(row[0]=='relation/40' for row in results[1]['features']))
+
+class InvalidAreaTests(unittest.TestCase):
+    def test_invalid_area_preserves_way_and_records_rejection(self):
+        import osmium
+        import sqlite3
+        real=osmium.geom.GeoJSONFactory()
+        class Factory:
+            def create_multipolygon(self,area):
+                if area.orig_id()==20:raise RuntimeError('invalid area (area_id=40)')
+                return real.create_multipolygon(area)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);source=root/'source.osm';source.write_text(OSM)
+            target=root/'index.sqlite'
+            with patch('osmium.geom.GeoJSONFactory',return_value=Factory()):import_pbf(source,target)
+            with sqlite3.connect(target) as db:
+                self.assertEqual(db.execute('SELECT osm_key FROM features ORDER BY osm_key').fetchall(),[('node/1',),('way/20',)])
+                self.assertEqual(db.execute('SELECT osm_key,stage FROM rejected_geometries').fetchall(),[('way/20','area')])
+                self.assertEqual(db.execute("SELECT value FROM metadata WHERE key='complete'").fetchone(),('1',))
+    def test_unrelated_geometry_failure_is_not_silenced(self):
+        class Factory:
+            def create_multipolygon(self,area):raise RuntimeError('unexpected factory failure')
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);source=root/'source.osm';source.write_text(OSM)
+            target=root/'index.sqlite'
+            with patch('osmium.geom.GeoJSONFactory',return_value=Factory()):
+                with self.assertRaisesRegex(RuntimeError,'unexpected factory failure'):import_pbf(source,target)
+            self.assertFalse(target.exists())

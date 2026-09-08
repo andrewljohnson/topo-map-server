@@ -51,6 +51,7 @@ def import_pbf(source,target,filter_empty=True):
       CREATE TABLE features(osm_key TEXT UNIQUE,element TEXT);
       CREATE VIRTUAL TABLE extents USING rtree(id,west,east,south,north);
       CREATE TABLE waterways(id INTEGER PRIMARY KEY,tags TEXT);
+      CREATE TABLE rejected_geometries(osm_key TEXT,stage TEXT,reason TEXT);
     """)
     factory=osmium.geom.GeoJSONFactory()
     class Importer(osmium.SimpleHandler):
@@ -83,7 +84,18 @@ def import_pbf(source,target,filter_empty=True):
                     self.feature('way',way.id,tags,geom)
         def area(self,area):
             tags=dict(area.tags)
-            if categories(tags):self.feature('way' if area.from_way() else 'relation',area.orig_id(),tags,json.loads(factory.create_multipolygon(area)))
+            if not categories(tags):return
+            kind='way' if area.from_way() else 'relation'
+            try:geometry=json.loads(factory.create_multipolygon(area))
+            except RuntimeError as exc:
+                # Libosmium can emit an area with no usable rings. Preserve any
+                # earlier way feature; never discard a whole-country import for it.
+                if not str(exc).startswith('invalid area (area_id='):raise
+                db.execute('INSERT INTO rejected_geometries VALUES(?,?,?)',
+                           (f'{kind}/{area.orig_id()}','area',str(exc)))
+                print('Skipped invalid OSM area',kind,area.orig_id(),flush=True)
+                return
+            self.feature(kind,area.orig_id(),tags,geometry)
     digest=hashlib.sha256()
     with source.open('rb') as stream:
         while chunk:=stream.read(8*1024*1024):digest.update(chunk)
