@@ -82,9 +82,20 @@ def dedupe_outline(line,previous,park_lines,units_per_metre,kind):
   if not prior.is_empty:line=line.difference(prior.simplify(.5*units_per_metre).buffer(5*units_per_metre,quad_segs=2))
  return line
 
+def area_geometry(raw):
+ """Keep valid area components; collapsed repair lines have no land footprint."""
+ geometry=make_valid(shape(raw))
+ if geometry.geom_type in ('Polygon','MultiPolygon'):return geometry
+ def polygons(g):
+  if g.geom_type=='Polygon':yield g
+  else:
+   for child in getattr(g,'geoms',[]):yield from polygons(child)
+ return unary_union(list(polygons(geometry)))
+
 def outline_features(feature,kind,z,x,y,outline=None):
  n=2**z;pad=8/512/n
- geometry=make_valid(shape(feature['geometry']))
+ geometry=area_geometry(feature['geometry'])
+ if geometry.is_empty:return []
  # Boundary first prevents fabricated lines on tile edges.
  clip=box(x/n-pad,y/n-pad,(x+1)/n+pad,(y+1)/n+pad)
  clipped=(transform(project,geometry.boundary) if outline is None else outline).intersection(clip).simplify(.35/512/n,preserve_topology=True)
@@ -110,8 +121,9 @@ def prepared_cell(cx,cy):
    groups.setdefault(key,[]).append(feature)
   for parts in groups.values():
    feature=parts[0]
-   if len(parts)>1:feature={**feature,'geometry':mapping(unary_union([make_valid(shape(p['geometry'])) for p in parts]))}
-   geometry=make_valid(shape(feature['geometry']))
+   if len(parts)>1:feature={**feature,'geometry':mapping(unary_union([area_geometry(p['geometry']) for p in parts]))}
+   geometry=area_geometry(feature['geometry'])
+   if geometry.is_empty:continue
    line=transform(project,geometry.boundary).intersection(work_clip)
    latitude=geometry.centroid.y
    units_per_metre=1/(40075016.686*math.cos(math.radians(latitude)))

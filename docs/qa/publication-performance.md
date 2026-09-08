@@ -89,3 +89,22 @@ must still confirm that no other source error prevents completion.
 
 Restarting after the fix released resources retained by failed imports; free disk
 space recovered from 63 GiB to 111 GiB. The 50 GB reserve remains enforced.
+
+## Boundary publication blocker
+
+The boundary renderer crashed at zoom 8 when `make_valid` returned a
+GeometryCollection containing polygons plus collapsed line fragments. Shapely
+returns no boundary for that collection, so projection raised an AttributeError.
+The actual South Sierra Wilderness record reproduced the failure at tile 8/44/100.
+
+The renderer now extracts repaired polygon components before grouping, outline
+matching and fill clipping. Collapsed line/point remnants have no designation area
+and are excluded. Valid Polygon/MultiPolygon geometry takes the unchanged path;
+empty repaired areas produce no features. Dataset versions and published objects
+are unchanged.
+
+Validation: 15 boundary tests, 6 publisher tests and 9 cloud storage tests pass.
+The real South Sierra, Santa Lucia, Oregon Islands, Palen/McCoy and Olympic source
+records render after the repair. Tile 8/44/100 now encodes 44 features. Three
+previously published boundary tiles (8/43/99, 8/44/99, 8/45/100) were downloaded
+from R2 and compared with new output: byte-for-byte identical.

@@ -75,3 +75,37 @@ class BoundaryTests(unittest.TestCase):
    b.render_tile(12,641,1440)
    self.assertEqual(ids.call_count,3)
   b.prepared_cell.cache_clear()
+
+class RepairedAreaTests(unittest.TestCase):
+ def test_polygon_with_collapsed_spike_retains_area_without_crashing(self):
+  from shapely.geometry import Polygon
+  from shapely import make_valid
+  z,x,y=8,44,100;w,s,e,n=b.bounds(z,x,y);dx=(e-w)/4;dy=(n-s)/4
+  polygon=Polygon([(w,s),(w+2*dx,s),(w+2*dx,s+2*dy),(w+dx,s+2*dy),(w+dx,s+3*dy),(w+dx,s+2*dy),(w,s+2*dy),(w,s)])
+  self.assertEqual(make_valid(polygon).geom_type,'GeometryCollection')
+  feature={'geometry':mapping(polygon),'properties':{'UNIT_CODE':'repair','UNIT_NAME':'Repair'}}
+  repaired=b.area_geometry(feature['geometry'])
+  self.assertTrue(repaired.equals(box(w,s,w+2*dx,s+2*dy)))
+  expected={**feature,'geometry':mapping(repaired)}
+  actual=b.outline_features(feature,'park',z,x,y)
+  normal=b.outline_features(expected,'park',z,x,y)
+  self.assertEqual([f['properties'] for f in actual],[f['properties'] for f in normal])
+  self.assertEqual([f['geometry'].wkb for f in actual],[f['geometry'].wkb for f in normal])
+  b.prepared_cell.cache_clear()
+  try:
+   with patch.object(b,'cell_ids',side_effect=lambda kind,*args:[1] if kind=='park' else []),patch.object(b,'object_data',return_value=feature):
+    decoded=mapbox_vector_tile.decode(b.render_tile(z,x,y))
+    self.assertTrue(decoded['areas']['features'])
+  finally:b.prepared_cell.cache_clear()
+ def test_nested_collection_retains_all_polygons_and_ignores_collapsed_parts(self):
+  first=box(0,0,1,1);second=box(2,0,3,1)
+  raw=mapping(GeometryCollection([first,GeometryCollection([second,LineString([(4,0),(5,0)])])]))
+  self.assertAlmostEqual(b.area_geometry(raw).area,2)
+ def test_no_remaining_area_is_empty_without_centroid_or_boundary_error(self):
+  feature={'geometry':mapping(LineString([(0,0),(1,1)])),'properties':{'UNIT_CODE':'empty'}}
+  self.assertEqual(b.outline_features(feature,'park',8,128,128),[])
+  b.prepared_cell.cache_clear()
+  try:
+   with patch.object(b,'cell_ids',side_effect=lambda kind,*args:[1] if kind=='park' else []),patch.object(b,'object_data',return_value=feature):
+    self.assertEqual(b.prepared_cell(128,128),[])
+  finally:b.prepared_cell.cache_clear()
