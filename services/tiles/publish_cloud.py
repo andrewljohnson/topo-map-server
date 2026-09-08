@@ -28,7 +28,7 @@ class Publisher:
         self.config=config;self.client=client(config);self.data=data;self.limit=limit
         self.folder=data/'publication';self.folder.mkdir(exist_ok=True,parents=True)
         self.dbpath=self.folder/'uploads.sqlite'
-        with self.db() as db:db.executescript('PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS uploads(key TEXT PRIMARY KEY,size INTEGER,sha TEXT,done INTEGER DEFAULT 0); CREATE TABLE IF NOT EXISTS cursors(plan TEXT PRIMARY KEY,code INTEGER);')
+        with self.db() as db:db.executescript('PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS uploads(key TEXT PRIMARY KEY,size INTEGER,sha TEXT,done INTEGER DEFAULT 0); CREATE TABLE IF NOT EXISTS cursors(plan TEXT PRIMARY KEY,code INTEGER); CREATE TABLE IF NOT EXISTS totals(id INTEGER PRIMARY KEY,bytes INTEGER); INSERT OR IGNORE INTO totals SELECT 1,COALESCE(SUM(size),0) FROM uploads;')
     def db(self):return sqlite3.connect(self.dbpath,timeout=60)
     def put(self,key,blob,content_type):
         checksum=hashlib.sha256(blob).hexdigest()
@@ -37,9 +37,10 @@ class Publisher:
             row=db.execute('SELECT size,sha,done FROM uploads WHERE key=?',(key,)).fetchone()
             if row and row[:2]!=(len(blob),checksum):raise ValueError('Immutable dataset changed; bump its version')
             if row and row[2]:return
-            total=db.execute('SELECT COALESCE(SUM(size),0) FROM uploads').fetchone()[0]
+            total=db.execute('SELECT bytes FROM totals WHERE id=1').fetchone()[0]
             if not row and total+len(blob)>self.limit:raise RuntimeError('Publication storage ceiling reached')
             db.execute('INSERT OR IGNORE INTO uploads(key,size,sha) VALUES(?,?,?)',(key,len(blob),checksum))
+            if not row:db.execute('UPDATE totals SET bytes=bytes+? WHERE id=1',(len(blob),))
         # Verify a prior upload after a crash before writing it again.
         try:head=self.client.head_object(Bucket=self.config['R2_BUCKET'],Key=key)
         except Exception as exc:
