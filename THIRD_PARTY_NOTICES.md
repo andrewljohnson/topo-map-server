@@ -12,8 +12,13 @@ features. Retain their notices when redistributing this project or its outputs.
 - OpenStreetMap data and derived databases, including bundled OSM fixtures, remain
   subject to ODbL and OpenStreetMap attribution requirements. The MIT code license
   does not replace these obligations.
-- Natural Earth data is public domain. Agency datasets and the bundled PCTA
-  centerline retain their respective source terms and attribution. Do not assume
+- The bundled January 2026 PCT centerline is by the Pacific Crest Trail Association,
+  licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  [Source and terms](https://www.pcta.org/discover-the-trail/maps/pct-data/).
+  This project repackages the source as compressed GeoJSON and derives rendered
+  tile geometry and overview routes from it.
+- Natural Earth data is public domain. Agency datasets retain their respective
+  source terms and attribution. Do not assume
   every third-party dataset is MIT licensed or that federal sourcing grants rights
   in third-party contributions.
 - Trail badges are original project designs, not official trail emblems. Names and
