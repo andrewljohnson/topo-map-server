@@ -119,29 +119,38 @@ def mark_osm_duplicates(features,x,y):
 
  return features
 
-def render_tile(z,x,y):
- if not MIN_ZOOM<=z<=MAX_ZOOM or not 0<=x<2**z or not 0<=y<2**z:raise ValueError('Invalid recreation tile')
+def prepare_cell(detail_zoom,cx,cy):
+ """Prepare one source cell once for a bounded offline build; caller owns caching.
+
+Returned records are read-only to tile encoders. No process-wide cache is used:
+agency/ranking/amenity inputs may change between independent builds.
+ """
+ if not CELL_ZOOM<=detail_zoom<=MAX_ZOOM:raise ValueError('Invalid recreation detail zoom')
  features=[]
+ for agency in SOURCES:
+  for raw in cell_data(agency,cx,cy)['features']:
+   f=normalize(raw,agency)
+   if f:features.append(f)
+ w,s,e,n=bounds(CELL_ZOOM,cx,cy);extent=(w-.005,s-.005,e+.005,n+.005)
+ ranked=[f for f in ranked_features(extent,14) if f['properties']['rank_family'] in ('destination','detail') or f['properties']['label_minzoom']<=detail_zoom]
+ return mark_osm_duplicates(dedupe(features+ridb_features(extent)+ranked),cx,cy)
+
+def render_tile(z,x,y,*,detail_zoom=None,extent=4096,prepared=None):
+ if not MIN_ZOOM<=z<=MAX_ZOOM or not 0<=x<2**z or not 0<=y<2**z:raise ValueError('Invalid recreation tile')
+ detail_zoom=z if detail_zoom is None else detail_zoom
+ if not z<=detail_zoom<=MAX_ZOOM or extent not in (4096,16384):raise ValueError('Invalid recreation detail encoding')
  if z>=CELL_ZOOM:
   factor=2**(z-CELL_ZOOM)
-  for agency in SOURCES:
-   for raw in cell_data(agency,x//factor,y//factor)['features']:
-    f=normalize(raw,agency)
-    if f:features.append(f)
-  w,s,e,n=bounds(CELL_ZOOM,x//factor,y//factor);extent=(w-.005,s-.005,e+.005,n+.005)
-  # Facility ranks travel with their existing points even before their labels
-  # become eligible; this also lets the phone rank matched OSM site groups.
-  ranked=[f for f in ranked_features(extent,14) if f['properties']['rank_family'] in ('destination','detail') or f['properties']['label_minzoom']<=z]
-  features=mark_osm_duplicates(dedupe(features+ridb_features(extent)+ranked),x//factor,y//factor)
+  features=prepare_cell(detail_zoom,x//factor,y//factor) if prepared is None else prepared
  else:
-  # Overview requests use the nationwide local hierarchy; no giant agency query.
+  if prepared is not None or detail_zoom!=z:raise ValueError('Detailed parents must be within a source cell')
   features=ranked_features(bounds(z,x,y),z)
  result=[]
  for f in features:
   lon,lat=f['geometry']['coordinates']; wx=(lon+180)/360*2**z;wy=(1-math.asinh(math.tan(math.radians(lat)))/math.pi)/2*2**z
   if not(x<=wx<x+1 and y<=wy<y+1):continue
-  p=f['properties'];result.append({'geometry':Point((wx-x)*4096,(wy-y)*4096),'properties':p,'id':int.from_bytes(hashlib.sha256(p['id'].encode()).digest()[:6],'big')})
- return mapbox_vector_tile.encode([{'name':'recreation','features':result}],default_options={'extents':4096,'y_coord_down':True})
+  p=f['properties'];result.append({'geometry':Point((wx-x)*extent,(wy-y)*extent),'properties':p,'id':int.from_bytes(hashlib.sha256(p['id'].encode()).digest()[:6],'big')})
+ return mapbox_vector_tile.encode([{'name':'recreation','features':result}],default_options={'extents':extent,'y_coord_down':True})
 
 def import_ridb(archive, destination=None):
  """Import only facilities with actual coordinates, never permit sales centroids.

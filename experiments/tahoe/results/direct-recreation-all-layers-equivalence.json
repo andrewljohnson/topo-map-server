@@ -1,0 +1,95 @@
+[
+  {
+    "tile": "12/681/1566",
+    "identicalFeatures": {
+      "amenities__amenities": 56,
+      "boundaries__areas": 5,
+      "landcover__landcover": 10,
+      "osm__building": 1,
+      "osm__forest": 77,
+      "osm__grass": 41,
+      "osm__label": 1,
+      "osm__land": 1,
+      "osm__poi": 12,
+      "osm__residential": 7,
+      "osm__road": 134,
+      "osm__rock": 20,
+      "osm__water": 2,
+      "osm__water_label": 4,
+      "osm__waterline": 13,
+      "recreation__recreation": 10,
+      "trails__network": 186,
+      "trails__routes": 1,
+      "waterways__waterline": 21
+    }
+  },
+  {
+    "tile": "12/682/1566",
+    "identicalFeatures": {
+      "amenities__amenities": 262,
+      "boundaries__areas": 1,
+      "landcover__landcover": 11,
+      "osm__building": 7,
+      "osm__forest": 109,
+      "osm__grass": 170,
+      "osm__label": 28,
+      "osm__land": 1,
+      "osm__poi": 61,
+      "osm__residential": 161,
+      "osm__road": 643,
+      "osm__rock": 10,
+      "osm__water": 6,
+      "osm__waterline": 18,
+      "recreation__recreation": 9,
+      "trails__network": 736,
+      "waterways__waterline": 17
+    }
+  },
+  {
+    "tile": "12/681/1567",
+    "identicalFeatures": {
+      "amenities__amenities": 24,
+      "boundaries__areas": 9,
+      "landcover__landcover": 9,
+      "osm__building": 3,
+      "osm__forest": 19,
+      "osm__grass": 30,
+      "osm__label": 2,
+      "osm__land": 1,
+      "osm__poi": 14,
+      "osm__residential": 16,
+      "osm__road": 112,
+      "osm__rock": 7,
+      "osm__water": 4,
+      "osm__water_label": 4,
+      "osm__waterline": 9,
+      "recreation__recreation": 13,
+      "trails__network": 156,
+      "trails__routes": 1,
+      "waterways__waterline": 16
+    }
+  },
+  {
+    "tile": "12/682/1567",
+    "identicalFeatures": {
+      "amenities__amenities": 58,
+      "boundaries__areas": 2,
+      "landcover__landcover": 11,
+      "osm__building": 3,
+      "osm__forest": 227,
+      "osm__grass": 117,
+      "osm__label": 13,
+      "osm__land": 1,
+      "osm__poi": 15,
+      "osm__residential": 159,
+      "osm__road": 499,
+      "osm__rock": 5,
+      "osm__water": 4,
+      "osm__waterline": 13,
+      "recreation__recreation": 5,
+      "trails__network": 572,
+      "trails__routes": 2,
+      "waterways__waterline": 15
+    }
+  }
+]

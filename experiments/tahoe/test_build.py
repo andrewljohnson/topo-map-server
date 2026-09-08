@@ -19,6 +19,25 @@ class PackingTests(unittest.TestCase):
   result,_=merge_tiles([('osm',0,0,self.tile(Point(20,30))),('osm',1,0,self.tile(Point(20,30)))])
   features=mvt.decode(result)['osm__test']['features']
   self.assertEqual(len(features),2);self.assertTrue(all(f['geometry']['type']=='Point' for f in features))
+ def test_direct_recreation_preserves_fine_coordinates_and_later_zoom_details(self):
+  import math,copy
+  import national_recreation as recreation
+  from unittest.mock import patch
+  def point(u,v,ident):
+   lon=u/16384*360-180;lat=math.degrees(math.atan(math.sinh(math.pi*(1-2*v/16384))))
+   return {'geometry':{'type':'Point','coordinates':[lon,lat]},'properties':{'id':ident,'name':ident,'min_zoom':15,'label_minzoom':14,'rank_family':'natural'}}
+  # Include points on internal child seams and a point outside this parent.
+  features=[point(2724.25,6264.75,'inside'),point(2725,6265,'seam'),point(2727.9,6267.9,'edge'),point(2728.2,6264.5,'outside')]
+  before=copy.deepcopy(features)
+  with patch.object(recreation,'prepare_cell',return_value=features) as prepare:
+   child_tiles=[('recreation',dx,dy,recreation.render_tile(14,2724+dx,6264+dy)) for dy in range(4) for dx in range(4)]
+   legacy,_=merge_tiles(child_tiles)
+   parent=recreation.render_tile(12,681,1566,detail_zoom=14,extent=16384,prepared=features)
+   direct,_=merge_tiles([('recreation',None,None,parent)])
+  import json
+  canonical=lambda b:sorted(json.dumps(f,sort_keys=True) for f in mvt.decode(b)['recreation__recreation']['features'])
+  self.assertEqual(canonical(legacy),canonical(direct));self.assertEqual(len(canonical(direct)),3)
+  self.assertEqual(features,before)
  def test_source_namespaces(self):
   result,_=merge_tiles([(source,0,0,self.tile(Point(20,30))) for source in ('osm','recreation')])
   self.assertEqual(set(mvt.decode(result)),{'osm__test','recreation__test'})

@@ -25,12 +25,12 @@ def merge_tiles(children):
  for source,dx,dy,blob in children:
   for name,layer in mvt.decode(blob,default_options={'y_coord_down':True}).items():
    target=source+'__'+name;counts[target]=counts.get(target,0)+len(layer['features'])
-   extent=layer['extent'];scale=4096/extent
-   clip=box(-64 if dx==0 else 0,-64 if dy==0 else 0,4160 if dx==3 else 4096,4160 if dy==3 else 4096)
+   extent=layer['extent'];direct=dx is None;scale=(EXTENT if direct else 4096)/extent
+   clip=box(0,0,EXTENT,EXTENT) if direct else box(-64 if dx==0 else 0,-64 if dy==0 else 0,4160 if dx==3 else 4096,4160 if dy==3 else 4096)
    for f in layer['features']:
     g=affine_transform(make_valid(shape(f['geometry'])),[scale,0,0,scale,0,0]).intersection(clip)
     if g.is_empty:continue
-    g=affine_transform(g,[1,0,0,1,dx*4096,dy*4096])
+    if not direct:g=affine_transform(g,[1,0,0,1,dx*4096,dy*4096])
     props=f['properties'];key=(target,f.get('id',0),json.dumps(props,sort_keys=True,separators=(',',':')))
     groups.setdefault(key,[]).append(g)
  layers={}
@@ -44,12 +44,12 @@ def merge_tiles(children):
  return mvt.encode([{'name':name,'features':features} for name,features in sorted(layers.items())],default_options={'extents':EXTENT,'y_coord_down':True}),counts
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');a=p.parse_args()
  if a.clean_derived and OUT.exists():shutil.rmtree(OUT)
- OUT.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(4,a.workers)),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time()}
+ OUT.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(4,a.workers)),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time()}
  def acquire(task):
   source,z,x,y=task;path=OUT/'derived'/source/str(z)/str(x)/f'{y}.pbf';t=time.monotonic()
-  hit=path.exists()
+  hit=path.exists() and not a.regenerate_vectors
   if hit:blob=path.read_bytes()
   else:
    blob=importlib.import_module(SOURCES[source]).render_tile(z,x,y);atomic(path,blob)
@@ -57,6 +57,16 @@ def main():
  parent_children={xy:[] for xy in PARENTS}
  with ThreadPoolExecutor(max_workers=max(1,min(4,a.workers))) as pool:
   for source in SOURCES:
+   if source=='recreation' and not a.legacy_recreation:
+    t=time.monotonic();module=importlib.import_module(SOURCES[source]);cells={};prepare_seconds=0
+    for x,y in PARENTS:
+     key=(x//4,y//4)
+     if key not in cells:
+      prepared_start=time.monotonic();cells[key]=module.prepare_cell(14,*key);prepare_seconds+=time.monotonic()-prepared_start
+     blob=module.render_tile(12,x,y,detail_zoom=14,extent=EXTENT,prepared=cells[key])
+     parent_children[(x,y)].append((source,None,None,blob))
+    report['sources'][source]={'seconds':time.monotonic()-t,'preparedCells':len(cells),'prepareSeconds':prepare_seconds,'parentTiles':len(PARENTS),'childTiles':0,'derivedCacheHits':0}
+    atomic(OUT/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True);continue
    t=time.monotonic();hits=0;tasks=[(source,14,x*4+dx,y*4+dy) for x,y in PARENTS for dy in range(4) for dx in range(4)]
    for task,result in zip(tasks,pool.map(acquire,tasks)):
     dx,dy,blob,seconds,hit=result;hits+=int(hit);parent_children[(task[2]//4,task[3]//4)].append((source,dx,dy,blob))

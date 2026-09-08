@@ -26,7 +26,10 @@ existing datasets. No experiment tiles have been uploaded to R2.
 
 Outputs are ignored under `services/tiles/data/experiments/tahoe-z12-v1`.
 `--clean-derived` deletes **only this experiment directory**, retaining original
-source inputs. Without it, derived child tiles are reused. Reports distinguish
+source inputs. Without it, derived child tiles are reused.
+Use `--regenerate-vectors` to ignore derived child files while retaining raw inputs
+and served outputs, and `--legacy-recreation` to benchmark the original recreation
+path. Direct recreation preparation always runs; it has no persistent derived cache. Reports distinguish
 those hits from regeneration and retain per-source, packing, and DEM timings.
 `results/` holds checked-in baseline measurements; raw output tiles stay local.
 
@@ -34,11 +37,13 @@ those hits from regeneration and retain per-source, packing, and DEM timings.
 
 Seven logical vector sources are combined with namespaced MVT layer names:
 OSM, protected boundaries, land cover, trails, amenities, waterways, recreation.
-The first implementation generates 16 z14 children per source per z12 tile and
-merges them into an extent-16384 MVT. It clips child buffers, unions feature
+The correctness baseline generates 16 z14 children per source per z12 tile and
+merges them into an extent-16384 MVT. The current default directly encodes full-detail
+recreation points into each parent, preparing its z10 source cell once per build;
+the other six vector sources still use fine children. It clips child buffers, unions feature
 fragments with matching IDs/properties, and joins lines where possible. This
 retains the children's coordinate precision and source detail, but does **not**
-yet eliminate internal z14 cutting. Existing zoom-based style rules still apply.
+yet eliminate internal z14 cutting for the remaining sources. Existing zoom-based style rules still apply.
 Differing per-child properties can prevent a merge; visual seam and POI tests
 remain essential before replacing the production format.
 
@@ -68,6 +73,8 @@ Terrarium elevations, not baked contours. Do not replace them with ordinary
 
 ```sh
 services/tiles/.venv/bin/python experiments/tahoe/test_build.py
+# After a reference build has populated every source child:
+services/tiles/.venv/bin/python experiments/tahoe/verify_reference.py
 source scripts/env.sh
 node --test apps/mobile/tests/terrain-worker.test.mjs
 cd apps/web
@@ -102,3 +109,42 @@ Type checking, web build, four packing/DEM unit tests, and two actual contour
 worker tests pass. The sample API served all four basemap files and 16 DEM files
 successfully to the browser. Browser-control timeouts prevented screenshot/zoom
 proofing in this session; visual readiness and iPhone speed remain unverified.
+
+
+## Iteration 2 — prepare recreation once, encode direct parents
+
+Profiling a recreation child spent 1.28 of 1.30 instrumented seconds in OSM
+matching, including roughly 440,000 candidate comparisons. Repeating this for
+64 children in the same source cell was wasted work. The experiment now prepares
+that cell once at **detail zoom 14**, then emits four extent-16384 parent tiles at
+z12. Feature display thresholds (including z15 amenities) remain unchanged.
+Production calls keep their existing default zoom/detail behavior and do not gain
+a stale global preparation cache.
+
+Two clean vector-generation runs with retained inputs and two threads took
+**40.52 s and 39.07 s** total. Recreation took **0.51 s and 0.49 s**, compared with
+32.96 s in the earlier two-thread baseline. No derived vector cache hits were
+used. The current vector output is 649,443 bytes compressed; DEM remains
+24,131,754 bytes including the halo. This is about a 45% total-time reduction in
+this fixture under the observed load, not a national throughput projection.
+
+`verify_reference.py` compared all **5,022** output features in all four parents
+with retained fine-child input tiles: layer set, extent, geometry, identity and
+properties all match exactly. Encoded byte order can differ, explaining the
+nine-byte compressed-size change. Five packing/direct-detail/DEM tests and the
+16 recreation/matching tests pass; web type checking and production build pass.
+
+Browser proofing now succeeded for the overview (z12.5) and Fallen Leaf detail
+(z14): shape-following lake label at overview, horizontal label on the larger
+lake, shoreline, detailed trails, contours and terrain relief are visible.
+The browser reported 24.8 s to full initial vector/terrain readiness, not first
+useful paint; no physical iPhone timing has been measured. Controls now provide
+fixed z12/14/16/18 views, a campground shortcut, and received-file/payload counts.
+Browser-control timeouts resumed during further checks, so z16/18 campground
+breakup and phone performance still need proofing. No renderer errors were
+reported in the inspected browser error log.
+
+Next: measure trail work after one-time PCT initialization separately, reduce
+repeated route matching with equivalence checks, and measure DEM overfetch/first
+useful paint. Keep nationwide publication disabled and avoid widening coverage
+until these local tests justify it.
