@@ -3,6 +3,7 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  if(!spec)return null;
  const blob=URL.createObjectURL(new Blob([workerSource],{type:'text/javascript'})),worker=new Worker(blob);URL.revokeObjectURL(blob);
  const cache=new Map<string,any>(),requests=new Map<number,any>(),demRequests=new Map<number,AbortController>();let sequence=0,disposed=false;
+ worker.postMessage({type:'configure',maxZoom:spec.maxZoom??13,minZoom:spec.minZoom??3});
  const stats={generated:0,cancelled:0,failed:0,demRequests:0,demBytes:0,totalMs:0,maxMs:0,worker:true};
  function raw(key:string,signal:AbortSignal):Promise<ArrayBuffer>{
   if(signal.aborted)return Promise.reject(Error('Cancelled'));
@@ -28,8 +29,8 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  const key=(url:string)=>url.split('://')[1].split('?')[0].replace(/\.(png|pbf)$/,'');
  gl.addProtocol('topodem',(p:any,c:AbortController)=>raw(key(p.url),c.signal).then(data=>({data})));
  gl.addProtocol('topocontour',(p:any,c:AbortController)=>new Promise((resolve,reject)=>{if(c.signal.aborted){reject(Error('Cancelled'));return}const id=++sequence,[z,x,y]=key(p.url).split('/').map(Number);const cancel=()=>{requests.delete(id);worker.postMessage({type:'cancel',id});stats.cancelled++;reject(Error('Cancelled'))};requests.set(id,{resolve,reject,signal:c.signal,cancel});c.signal.addEventListener('abort',cancel,{once:true});worker.postMessage({type:'contour',id,z,x,y})}));
- style.sources.dem={type:'raster-dem',tiles:['topodem://{z}/{x}/{y}'],encoding:'terrarium',tileSize:512,minzoom:3,maxzoom:13,bounds:spec.bounds,attribution:spec.attribution};
- style.sources.contours={type:'vector',tiles:['topocontour://{z}/{x}/{y}'],minzoom:11,maxzoom:15,bounds:spec.bounds};
+ style.sources.dem={type:'raster-dem',tiles:['topodem://{z}/{x}/{y}'],encoding:'terrarium',tileSize:spec.tileSize??512,minzoom:spec.minZoom??3,maxzoom:spec.maxZoom??13,bounds:spec.bounds,attribution:spec.attribution};
+ style.sources.contours={type:'vector',tiles:['topocontour://{z}/{x}/{y}'],minzoom:Math.max(11,spec.minZoom??3),maxzoom:15,bounds:spec.bounds};
  const insert=style.layers.findIndex((l:any)=>l.id==='contours'||l.id==='waterways-perennial');
  style.layers.splice(insert,0,{id:'terrain-tint',type:'color-relief',source:'dem',minzoom:3,paint:{'color-relief-opacity':['interpolate',['linear'],['zoom'],3,.16,8,.12,13,.06],'color-relief-color':['interpolate',['linear'],['elevation'],-100,'#f4eedc',0,'#f4eedc',800,'#e8e2c9',1800,'#ded3bf',3000,'#e9e4df',4500,'#f7f6f3']}},{id:'terrain-shading',type:'hillshade',source:'dem',minzoom:3,paint:{'hillshade-method':'igor','hillshade-illumination-direction':315,'hillshade-illumination-anchor':'map','hillshade-exaggeration':['interpolate',['linear'],['zoom'],3,.3,8,.38,12,.3,16,.23],'hillshade-shadow-color':'#6f776b','hillshade-highlight-color':'#fffdf5','hillshade-accent-color':'#777d6e'}});
  for(const layer of style.layers){if(layer.source!=='contours')continue;layer.filter=[layer.id==='contours'?'==':'>=',['get','level'],layer.id==='contours'?0:1];

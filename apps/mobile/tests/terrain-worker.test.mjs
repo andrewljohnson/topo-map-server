@@ -15,3 +15,21 @@ test('offline worker contours use feet, stitch across tile edges, and survive tr
   const edgeA=crossings(a,4096),edgeB=crossings(b,0);assert.ok(edgeA.size>3);for(const [height,y]of edgeA){assert.ok(edgeB.has(height));assert.ok(Math.abs(y-edgeB.get(height))<=2,'neighbor contours align within two MVT units')}
  }finally{await worker.terminate()}
 });
+test('1024 pixel z12 DEM generates detailed contours without requesting z13 DEM',async()=>{
+ const worker=new Worker(`const {parentPort}=require('node:worker_threads');globalThis.self=globalThis;globalThis.postMessage=(m,t)=>parentPort.postMessage(m,t);parentPort.on('message',data=>globalThis.onmessage({data}));${source}`,{eval:true});
+ const keys=[];let resolve,reject;
+ worker.on('error',e=>reject?.(e));
+ worker.on('message',m=>{if(m.type==='dem'){
+  keys.push(m.key);const [z,x,y]=m.key.split('/').map(Number),data=new Float32Array(1024*1024);
+  for(let row=0;row<1024;row++)for(let col=0;col<1024;col++)data[row*1024+col]=1000+((x-681)*1024+col)*.15+((y-1566)*1024+row)*.1;
+  worker.postMessage({type:'demResult',id:m.id,tile:{width:1024,height:1024,data}},[data.buffer]);
+ }else if(m.type==='contourResult'){m.error?reject(Error(m.error)):resolve(m.buffer)}});
+ worker.postMessage({type:'configure',maxZoom:12,minZoom:12});
+ try{for(const z of [12,14,15]){
+  const data=await new Promise((yes,no)=>{resolve=yes;reject=no;worker.postMessage({type:'contour',id:z,z,x:681*2**(z-12),y:1566*2**(z-12)})});
+  const layer=new VectorTile(new Pbf(new Uint8Array(data))).layers.contour;assert.ok(layer?.length>0);
+  if(z>=14)for(let i=0;i<layer.length;i++)assert.equal(layer.feature(i).properties.ele_ft%20,0);
+ }
+ assert.ok(keys.length>0);assert.ok(keys.every(key=>key.startsWith('12/')),keys.join(','));
+ }finally{await worker.terminate()}
+});

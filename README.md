@@ -9,8 +9,9 @@ cross-platform Expo app with offline downloads and on-device DEM contours and sh
 [Live map](https://topo-map.andrewljohnson.workers.dev/) ·
 [Mobile setup](apps/mobile/README.md) · [Data sources](docs/data-sources.md)
 
-The cloud publication is still warming: a worldwide overview is available, while
-detailed CONUS coverage is incomplete. Run the local tile service for on-demand
+Nationwide publication is paused while we optimize a [Tahoe-only zoom-12
+experiment](experiments/tahoe/README.md). The existing cloud map remains available,
+but detailed CONUS coverage is incomplete. Run the local tile service for on-demand
 generation. Cloud deployment uses local generation plus Cloudflare Workers/R2; see
 [the current cloud setup](services/cloud/README.md).
 
