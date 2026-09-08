@@ -29,6 +29,7 @@ class Publisher:
     def __init__(self,config,data,limit=1000000000000):
         self.config=config;self.client=client(config);self.data=data;self.limit=limit
         self.timings={};self.timing_lock=threading.Lock();self.started=time.monotonic()
+        self.boundary_slots=threading.BoundedSemaphore(2)
         self.folder=data/'publication';self.folder.mkdir(exist_ok=True,parents=True)
         self.dbpath=self.folder/'uploads.sqlite'
         with self.db() as db:db.executescript('PRAGMA journal_mode=WAL; CREATE TABLE IF NOT EXISTS uploads(key TEXT PRIMARY KEY,size INTEGER,sha TEXT,done INTEGER DEFAULT 0); CREATE TABLE IF NOT EXISTS cursors(plan TEXT PRIMARY KEY,code INTEGER); CREATE TABLE IF NOT EXISTS totals(id INTEGER PRIMARY KEY,bytes INTEGER); INSERT OR IGNORE INTO totals SELECT 1,COALESCE(SUM(size),0) FROM uploads;')
@@ -76,6 +77,11 @@ class Publisher:
         if head['ContentLength']!=len(blob) or head.get('Metadata',{}).get('sha256')!=checksum:raise ValueError('Upload verification failed')
         with self.db() as db:db.execute('UPDATE uploads SET done=1 WHERE key=?',(key,))
     def tile(self,source,z,x,y,spec):
+        # Detailed agency polygons need much more RAM than raster/upload work.
+        if source=='boundaries':
+            with self.boundary_slots:return self._tile(source,z,x,y,spec)
+        return self._tile(source,z,x,y,spec)
+    def _tile(self,source,z,x,y,spec):
         key='tiles/v1/'+spec['datasetId']+f'/{z}/{x}/{y}'+('.png' if source=='dem' else '.pbf')
         with self.db() as db:row=db.execute('SELECT done FROM uploads WHERE key=?',(key,)).fetchone()
         if row and row[0]:return

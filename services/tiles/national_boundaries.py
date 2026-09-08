@@ -1,5 +1,5 @@
 """Detailed agency outlines. Extract true boundaries before tile clipping."""
-import fcntl, hashlib, json, math, os, tempfile, time
+import fcntl, hashlib, json, math, os, tempfile, time, threading
 from pathlib import Path
 from functools import lru_cache
 from urllib.request import Request, urlopen
@@ -15,6 +15,7 @@ SOURCES={
 'forest':('https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_ForestSystemBoundaries_01/MapServer/0','adminforestid','forestname'),
 'wilderness':('https://services1.arcgis.com/ERdCHt0sNM6dENSD/arcgis/rest/services/Wilderness_Areas_in_the_United_States/FeatureServer/0','WID','NAME')}
 CELL_ZOOM=8
+PREPARE_LOCK=threading.Lock()
 
 def bounds(z,x,y):
  n=2**z;lat=lambda v:math.degrees(math.atan(math.sinh(math.pi*(1-2*v/n))))
@@ -106,7 +107,7 @@ def outline_features(feature,kind,z,x,y,outline=None):
  pieces.extend(list(fill.geoms) if fill.geom_type=='GeometryCollection' else [fill])
  return [{'geometry':p,'id':int.from_bytes(hashlib.sha256(ident.encode()).digest()[:6],'big'),'properties':{'id':ident,'kind':kind,'name':str(props.get(namefield) or '')}} for p in pieces if not p.is_empty and p.geom_type in ('LineString','MultiLineString','Polygon','MultiPolygon')]
 
-@lru_cache(maxsize=8)
+@lru_cache(maxsize=4)
 def prepared_cell(cx,cy):
  prepared=[];previous=[];parks=[]
  # Bound expensive buffer operations to the source cell plus a generous halo.
@@ -136,7 +137,10 @@ def prepared_cell(cx,cy):
 def render_tile(z,x,y):
  if not 8<=z<=14 or not 0<=x<2**z or not 0<=y<2**z:raise ValueError('Invalid boundary tile')
  factor=2**(z-CELL_ZOOM);features=[]
- for feature,kind,outline in prepared_cell(x//factor,y//factor):
+ # Cache lookup must occur under the lock: lru_cache alone allows concurrent
+ # misses to build duplicate copies of the same large agency polygons.
+ with PREPARE_LOCK:prepared=prepared_cell(x//factor,y//factor)
+ for feature,kind,outline in prepared:
   features.extend(outline_features(feature,kind,z,x,y,outline))
  n=2**z
  return mapbox_vector_tile.encode([{'name':'areas','features':features}],default_options={'extents':4096,'y_coord_down':True,'quantize_bounds':(x/n,y/n,(x+1)/n,(y+1)/n)})

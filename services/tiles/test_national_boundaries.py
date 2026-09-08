@@ -109,3 +109,16 @@ class RepairedAreaTests(unittest.TestCase):
    with patch.object(b,'cell_ids',side_effect=lambda kind,*args:[1] if kind=='park' else []),patch.object(b,'object_data',return_value=feature):
     self.assertEqual(b.prepared_cell(128,128),[])
   finally:b.prepared_cell.cache_clear()
+
+class PreparationConcurrencyTests(unittest.TestCase):
+ def test_simultaneous_tiles_prepare_one_copy_of_cell(self):
+  import time
+  from concurrent.futures import ThreadPoolExecutor
+  def ids(*args):time.sleep(.01);return []
+  b.prepared_cell.cache_clear()
+  try:
+   with patch.object(b,'cell_ids',side_effect=ids) as calls,ThreadPoolExecutor(max_workers=8) as pool:
+    results=list(pool.map(lambda i:b.render_tile(10,176,400),range(16)))
+    self.assertEqual(calls.call_count,3)
+    self.assertTrue(all(blob==results[0] for blob in results))
+  finally:b.prepared_cell.cache_clear()

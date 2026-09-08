@@ -133,3 +133,8 @@ Native DEM blocks are reused in a process-local LRU capped at 64 blocks (about
 256 MiB of elevation arrays). Arrays are read-only, keys include the source-cache
 namespace and grid size, and persisted source/provenance files remain authoritative.
 This avoids repeatedly decompressing shared terrain blocks for neighboring tiles.
+
+Boundary rendering has a separate two-job concurrency limit, as large agency
+polygons require more memory than ordinary tile uploads. Source-cell preparation
+is serialized to prevent duplicate concurrent cache builds, with four retained
+cells. The general worker pool remains available to the other tile sources.

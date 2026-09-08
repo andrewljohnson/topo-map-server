@@ -108,3 +108,19 @@ The real South Sierra, Santa Lucia, Oregon Islands, Palen/McCoy and Olympic sour
 records render after the repair. Tile 8/44/100 now encodes 44 features. Three
 previously published boundary tiles (8/43/99, 8/44/99, 8/45/100) were downloaded
 from R2 and compared with new output: byte-for-byte identical.
+
+## Boundary concurrency and memory pressure
+
+At the September 8 14:15 hourly check, publication had advanced only 12 tiles
+since the preceding report. The 32-worker pool held about 11.1 GB of anonymous
+memory; cgroup memory pressure was about 66%, with no overall CPU contention.
+Concurrent requests could duplicate expensive preparation of the same source
+cell because lru_cache does not coalesce simultaneous misses.
+
+Boundary generation is now limited to two concurrent jobs, including priority
+requests. Cell cache lookup/preparation is serialized and retains at most four
+cells. Other sources retain their existing worker pool. Storage, memory and CPU
+caps are unchanged. After restart, memory fell to about 1.3 GB and 95 tiles were
+verified in the first 68 seconds. This is an early recovery measurement, not a
+forecast for all zoom levels. Regression tests verify the two-job bound and that
+16 simultaneous requests prepare one copy of the cell, producing identical bytes.

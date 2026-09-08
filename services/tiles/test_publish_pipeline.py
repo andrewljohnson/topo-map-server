@@ -39,3 +39,22 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(len(submitted),5)
 
 if __name__=='__main__':unittest.main()
+
+class BoundaryConcurrencyTests(unittest.TestCase):
+    def test_boundary_work_is_bounded_under_a_large_upload_pool(self):
+        import tempfile,time
+        from pathlib import Path
+        from unittest.mock import patch
+        from publish_cloud import Publisher
+        active=peak=0;lock=threading.Lock()
+        def work(*args):
+            nonlocal active,peak
+            with lock:active+=1;peak=max(peak,active)
+            try:time.sleep(.02)
+            finally:
+                with lock:active-=1
+        with tempfile.TemporaryDirectory() as d,patch('publish_cloud.client',return_value=None):
+            p=Publisher({},Path(d))
+            with patch.object(p,'_tile',side_effect=work),ThreadPoolExecutor(max_workers=16) as pool:
+                list(pool.map(lambda i:p.tile('boundaries',10,i,0,{}),range(32)))
+        self.assertEqual(peak,2)
