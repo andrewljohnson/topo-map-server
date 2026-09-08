@@ -13,7 +13,7 @@ import {mapHtml} from './src/map';
 import {DownloadStatus} from './src/DownloadStatus';
 import {useAreaBoundaries} from './src/useAreaBoundaries';
 import type {AreaData} from './src/areas';
-import {TileStore} from './src/storage';
+import {TileStore,resetDevelopmentMapCache} from './src/storage';
 import {rendererInit,rendererScript} from './src/rendererBridge';
 import {useUserLocation,UserLocation} from './src/useUserLocation';
 declare const process:{env:{EXPO_PUBLIC_TILE_SERVER?:string}};
@@ -35,7 +35,7 @@ function MapApp(){
  const location=useUserLocation(point=>{lastLocation.current={...point,center:false};if(ready.current)send({type:'location',...point})},record);
  const sync=()=>{if(ready.current){send({type:'safeArea',insets});if(store.meta){send(rendererInit(store.meta));if(!noteRestored.current){noteRestored.current=true;Promise.all(['map-note-draft.json','map-notes.json'].map(name=>FS.readAsStringAsync(FS.documentDirectory+name).then(text=>JSON.parse(text)).catch(()=>null))).then(([draft,notes])=>{send({type:'restoreMapNote',draft});send({type:'restoreMapNotes',notes:Array.isArray(notes)?notes:[]})});}send({type:'state',mode,regions:store.regions})}}};
  useEffect(()=>{const recoveryTimer=setInterval(()=>{if(AppState.currentState!=='active'||!ready.current)return;const keys=tileRecovery.current.due();if(keys.length)send({type:'retryTiles',keys})},5000);store.setForeground(AppState.currentState==='active');const subscription=AppState.addEventListener('change',state=>store.setForeground(state==='active'));return ()=>{clearInterval(recoveryTimer);subscription.remove()}},[]);
- useEffect(()=>{(async()=>{const saved=await SecureStore.getItemAsync('topo-connection');if(saved&&!__DEV__){const c=JSON.parse(saved);store.api=c.api;credential.current=c.token}await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
+ useEffect(()=>{(async()=>{if(__DEV__)await resetDevelopmentMapCache();const saved=await SecureStore.getItemAsync('topo-connection');if(saved&&!__DEV__){const c=JSON.parse(saved);store.api=c.api;credential.current=c.token}await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
  useEffect(sync,[mode,store.meta,JSON.stringify(store.regions),insets.top,insets.right,insets.bottom,insets.left]);
  const onMessage=async(event:WebViewMessageEvent)=>{try{
   const m=JSON.parse(event.nativeEvent.data);

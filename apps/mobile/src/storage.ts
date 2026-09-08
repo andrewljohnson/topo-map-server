@@ -8,6 +8,7 @@ type Job={key:string;tileset:string;path:string;datasetId:string;owners:(()=>boo
 const base64=(bytes:Uint8Array)=>{const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";const chunks:string[]=[];for(let start=0;start<bytes.length;start+=12288){let text="";for(let i=start;i<Math.min(start+12288,bytes.length);i+=3){const a=bytes[i],b=bytes[i+1],c=bytes[i+2];text+=alphabet[a>>2]+alphabet[((a&3)<<4)|((b||0)>>4)]+(i+1<bytes.length?alphabet[((b&15)<<2)|((c||0)>>6)]:"=")+(i+2<bytes.length?alphabet[c&63]:"=")}chunks.push(text)}return chunks.join("")};
 class TileResponseError extends Error{constructor(public status:number){super('Tile server returned '+status)}}
 const root=FS.documentDirectory+'topo-vectors-v2/';
+export function resetDevelopmentMapCache(){const runtime=globalThis as typeof globalThis&{__topoMapCacheReset?:Promise<void>};return runtime.__topoMapCacheReset??=FS.deleteAsync(root,{idempotent:true})}
 const validKey=(key:string)=>/^(?:(?:osm|dem|contours|amenities|boundaries|waterways|landcover|trails|recreation)\/)?\d+\/\d+\/\d+$/.test(key);
 const composition=(meta:Metadata|null)=>meta?JSON.stringify(meta.tilesets?Object.entries(meta.tilesets).map(([name,set])=>[name,set?.datasetId]).sort():[['osm',meta.datasetId]]):'';
 // Added sources and trail/recreation processing revisions retain saved regions and other binaries.

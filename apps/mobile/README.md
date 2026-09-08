@@ -3,7 +3,7 @@
 EAS profiles in `eas.json` build a real app with embedded JavaScript and MapLibre.
 `preview` produces an iOS ad hoc install or Android APK; `production` produces an
 App Store/TestFlight or Play Store binary. Both default to the public cloud map and
-need neither Metro nor Expo Go. Expo development also defaults to the cloud server and ignores saved connection overrides on launch. Tile caches are separated by server origin, so LAN tiles cannot mask missing cloud coverage. Set EXPO_PUBLIC_TILE_SERVER explicitly to test a local server.
+need neither Metro nor Expo Go. Expo development also defaults to the cloud server and ignores saved connection overrides on launch. Tile caches are separated by server origin, so LAN tiles cannot mask missing cloud coverage. Each full Expo reload clears the complete map cache and download selections before loading cloud metadata. Fast Refresh does not repeatedly erase an active session. Notes and GPS recordings are retained; installed release builds retain offline maps. Set EXPO_PUBLIC_TILE_SERVER explicitly to test a local server.
 
 Run from this directory after sourcing `../../scripts/env.sh`:
 
