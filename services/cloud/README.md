@@ -104,8 +104,11 @@ original plan indices for checkpoint hashes, so changing priority does not disca
 existing cursor progress or re-upload completed tiles. California uses the existing
 coverage rectangle intersected with each source's coverage mask.
 
-`publish_cloud.py --workers 6 --batch-size 12` allows six concurrent generation/
-upload tasks with bounded batches. Defaults remain two workers; worker count is
+`publish_cloud.py --workers 16 --batch-size 64` allows sixteen concurrent generation/
+upload tasks with bounded batches. The R2 client retains up to 32 connections so
+these workers can reuse HTTPS connections. The publisher keeps a rolling bounded lookahead of 64 tiles instead of waiting
+for an entire batch before scheduling more work. Checkpoints advance only through
+contiguous successful tiles; failed attempts drain before retrying. Defaults remain two workers; worker count is
 clamped to 1–16 and batch size to at most 64. Failed batches resume through the
 verified per-object ledger. The 1 TB publication ceiling and 50 GB local free-space
 reserve remain in force; checksum verification and dataset versions are unchanged.

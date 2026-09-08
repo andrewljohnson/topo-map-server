@@ -20,4 +20,4 @@ def load(path=None):
 def client(config):
     import boto3
     from botocore.config import Config
-    return boto3.client('s3',endpoint_url=config['R2_ENDPOINT_URL'],region_name='auto',aws_access_key_id=config['R2_ACCESS_KEY_ID'],aws_secret_access_key=config['R2_SECRET_ACCESS_KEY'],config=Config(connect_timeout=10,read_timeout=60,retries={'max_attempts':3},request_checksum_calculation='when_required',response_checksum_validation='when_required'))
+    return boto3.client('s3',endpoint_url=config['R2_ENDPOINT_URL'],region_name='auto',aws_access_key_id=config['R2_ACCESS_KEY_ID'],aws_secret_access_key=config['R2_SECRET_ACCESS_KEY'],config=Config(max_pool_connections=32,connect_timeout=10,read_timeout=60,retries={'max_attempts':3},request_checksum_calculation='when_required',response_checksum_validation='when_required'))

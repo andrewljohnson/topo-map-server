@@ -2,7 +2,8 @@
 """Generate locally and publish verified immutable tiles to private R2; resumable."""
 import argparse,base64,fcntl,hashlib,importlib,json,os,shutil,sqlite3,sys,time
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor,wait
+from collections import deque
 from urllib.request import Request,urlopen
 from cloud_config import load,client
 
@@ -72,6 +73,30 @@ class Publisher:
     def status(self,state,current=None,error=None):
         with self.db() as db:count,size=db.execute('SELECT COUNT(*),COALESCE(SUM(size),0) FROM uploads WHERE done=1').fetchone()
         self.document('status.json',{'status':state,'updatedAt':time.time(),'uploadedTiles':count,'uploadedBytes':size,'storageLimitBytes':self.limit,'current':current,'error':error})
+
+def buffered_tiles(pool,task,items,window):
+    """Bounded lookahead; yield only the contiguous successfully published prefix.
+
+    A checkpoint must never skip an unfinished tile, including after an exception.
+    Drain in-flight writes before retrying so two attempts cannot race each other.
+    """
+    items=iter(items);pending=deque()
+    def submit():
+        try:item=next(items)
+        except StopIteration:return False
+        pending.append((item,pool.submit(task,item)));return True
+    try:
+        for _ in range(window):
+            if not submit():break
+        while pending:
+            item,future=pending[0]
+            future.result()
+            pending.popleft()
+            submit()
+            yield item
+    finally:
+        for _,future in pending:future.cancel()
+        wait([future for _,future in pending])
 
 def ordered_plans(plans,regions):
     # Keep original indices: persisted cursor hashes predate California-first ordering.
@@ -157,25 +182,25 @@ def main():
                 except Exception as exc:
                     publisher.status('paused-source-import',error=type(exc).__name__);time.sleep(60)
         plan=hashlib.sha256((str(index)+specs[source]['datasetId']+geom.context.wkb_hex).encode()).hexdigest()
-        with publisher.db() as db:row=db.execute('SELECT code FROM cursors WHERE plan=?',(plan,)).fetchone()
-        pending=[]
-        for item in coordinates(geom,z,row[0] if row else -1):
-            pending.append(item)
-            if len(pending)<a.batch_size:continue
-            while True:
-                try:run(source,z,pending);break
-                except Exception as exc:
-                    publisher.status('paused-retrying',{'source':source,'zoom':z},type(exc).__name__);time.sleep(60)
-            with publisher.db() as db:db.execute('INSERT OR REPLACE INTO cursors VALUES(?,?)',(plan,pending[-1][0]))
-            pending=[]
-            # Keep replaceable source caches bounded, without touching dev tiles.
-            if time.monotonic()-last_prune>300:
-                import scratch_cache
-                scratch_cache.prune(a.data,30000000000);last_prune=time.monotonic()
-        if pending:
-            while True:
-                try:run(source,z,pending);break
-                except Exception as exc:publisher.status('paused-retrying',error=type(exc).__name__);time.sleep(60)
-            with publisher.db() as db:db.execute('INSERT OR REPLACE INTO cursors VALUES(?,?)',(plan,pending[-1][0]))
+        while True:
+            with publisher.db() as db:row=db.execute('SELECT code FROM cursors WHERE plan=?',(plan,)).fetchone()
+            completed=0;last_item=None
+            try:
+                items=coordinates(geom,z,row[0] if row else -1)
+                for item in buffered_tiles(pool,lambda item:publisher.tile(source,z,item[1],item[2],specs[source]),items,a.batch_size):
+                    completed+=1;last_item=item
+                    if completed%a.batch_size==0:
+                        with publisher.db() as db:db.execute('INSERT OR REPLACE INTO cursors VALUES(?,?)',(plan,item[0]))
+                    if time.monotonic()-last_status>30:
+                        publisher.status('warming',{'source':source,'zoom':z,'workers':a.workers,'batchSize':a.batch_size});last_status=time.monotonic()
+                    priorities()
+                    if time.monotonic()-last_prune>300:
+                        import scratch_cache
+                        scratch_cache.prune(a.data,30000000000);last_prune=time.monotonic()
+                if last_item is not None:
+                    with publisher.db() as db:db.execute('INSERT OR REPLACE INTO cursors VALUES(?,?)',(plan,last_item[0]))
+                break
+            except Exception as exc:
+                publisher.status('paused-retrying',{'source':source,'zoom':z},type(exc).__name__);time.sleep(60)
     info['publication']['status']='complete';publisher.document('metadata.json',info);publisher.status('complete')
 if __name__=='__main__':main()
