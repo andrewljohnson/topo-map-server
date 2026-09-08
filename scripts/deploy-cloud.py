@@ -38,19 +38,17 @@ with tempfile.TemporaryDirectory(prefix='topo-release-') as tmp:
     urls=re.findall(r'https://[a-zA-Z0-9.-]+\.workers\.dev',result.stdout)
     if not urls:raise RuntimeError('No deployment URL returned')
     url=urls[-1]
-    for path in ('/','/metadata','/tiles/0/0/0.pbf'):
-        with urlopen(Request(url+path,headers={'Authorization':'Bearer '+token,'User-Agent':'topo-map-release/1.0'}),timeout=60) as response:
-            if response.status!=200:raise RuntimeError('Release smoke check failed')
-            response.read()
-    expected=200 if cfg['vars'].get('PUBLIC_MAP')=='1' else 401
-    try:
-        with urlopen(Request(url+'/metadata',headers={'User-Agent':'topo-map-release/1.0'}),timeout=30) as response:actual=response.status
-    except HTTPError as exc:actual=exc.code
-    if actual!=expected:raise RuntimeError('Anonymous map access does not match the configured mode')
-    try:urlopen(Request(url+'/operator/jobs',headers={'User-Agent':'topo-map-release/1.0'}),timeout=30)
-    except HTTPError as exc:
-        if exc.code!=401:raise
-    else:raise RuntimeError('Operator endpoint was not protected')
+    def check(path,expected,authenticated=False):
+        import time
+        options='header = "Authorization: Bearer '+token+'"\n' if authenticated else ''
+        for attempt in range(4):
+            result=subprocess.run(['curl','--silent','--show-error','--max-time','60','--output',os.devnull,'--write-out','%{http_code}','--config','-',url+path],input=options,text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            if result.returncode==0 and result.stdout==str(expected):return
+            if attempt<3:time.sleep(3)
+        raise RuntimeError('Live smoke check failed for '+path+'; HTTP '+result.stdout)
+    for path in ('/','/metadata','/tiles/0/0/0.pbf'):check(path,200,True)
+    check('/metadata',200 if cfg['vars'].get('PUBLIC_MAP')=='1' else 401)
+    check('/operator/jobs',401)
     (private/'deployment.json').write_text(json.dumps({'url':url,'sha':sha},indent=2))
     print('Live:',url)
     print('Map access key file:',private/'client.token')
