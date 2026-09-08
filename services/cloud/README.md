@@ -95,3 +95,25 @@ usage ledgers or deleting Durable Objects resets accounting and must be delibera
 limits, concurrent reservations, batch bounds and missing tile responses.
 Python service tests and `scripts/test-deploy.py` cover local storage/coverage and
 committed-main release selection. Live smoke tests verify the actual Cloudflare path.
+
+## California priority and local throughput
+
+The publisher completes the global overview, then **all California layers**
+(basemap/DEM followed by enrichment), before the remaining CONUS passes. It keeps
+original plan indices for checkpoint hashes, so changing priority does not discard
+existing cursor progress or re-upload completed tiles. California uses the existing
+coverage rectangle intersected with each source's coverage mask.
+
+`publish_cloud.py --workers 6 --batch-size 12` allows six concurrent generation/
+upload tasks with bounded batches. Defaults remain two workers; worker count is
+clamped to 1–16 and batch size to at most 64. Failed batches resume through the
+verified per-object ledger. The 1 TB publication ceiling and 50 GB local free-space
+reserve remain in force; checksum verification and dataset versions are unchanged.
+
+On the current 32-logical-CPU / 64 GB workstation, the user service is configured
+with `CPUQuota=600%`, `MemoryHigh=10G`, `MemoryMax=12G`, `Nice=10`, and `IOWeight=25`.
+This leaves CPU capacity for interactive work and bounds publisher memory. To tune
+another host, start with a smaller worker count, observe actual generation/upload
+throughput and memory, and increase only while throughput improves. Initial local
+measurements are short samples; high-resolution DEM and enrichment costs vary by
+location. They should not be treated as a nationwide completion guarantee.

@@ -73,8 +73,13 @@ class Publisher:
         with self.db() as db:count,size=db.execute('SELECT COUNT(*),COALESCE(SUM(size),0) FROM uploads WHERE done=1').fetchone()
         self.document('status.json',{'status':state,'updatedAt':time.time(),'uploadedTiles':count,'uploadedBytes':size,'storageLimitBytes':self.limit,'current':current,'error':error})
 
+def ordered_plans(plans,regions):
+    # Keep original indices: persisted cursor hashes predate California-first ordering.
+    rank={'world':0,'california':1,'conus':2}
+    return sorted(enumerate(plans),key=lambda item:rank[regions[item[0]]])
+
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--sample',action='store_true');p.add_argument('--plan',action='store_true');p.add_argument('--data',type=Path,default=DATA);p.add_argument('--max-bytes',type=int,default=1000000000000);a=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--sample',action='store_true');p.add_argument('--plan',action='store_true');p.add_argument('--data',type=Path,default=DATA);p.add_argument('--max-bytes',type=int,default=1000000000000);p.add_argument('--workers',type=int,default=2);p.add_argument('--batch-size',type=int,default=0);a=p.parse_args();a.workers=max(1,min(16,a.workers));a.batch_size=max(a.workers,min(64,a.batch_size or a.workers*2))
     os.environ.update(TILE_MODE='national',TILE_COVERAGE='world-conus',TILE_DATA_DIR=str(a.data),OSM_REQUIRE_BULK='1')
     import tile_service,coverage_policy
     from warm_us import coordinates,tile_count
@@ -82,7 +87,7 @@ def main():
     from shapely.prepared import prep
     info=tile_service.metadata();specs=info['tilesets']
     info['publication']={'status':'warming','worldMaxZoom':7,'detailRegion':'CONUS'}
-    plans=[('osm',z,prep(box(0,0,1,1))) for z in range(8)]
+    plans=[('osm',z,prep(box(0,0,1,1))) for z in range(8)];plan_regions=['world']*8
     # Spatially prioritize California before the complete CONUS detail pass.
     west,north=coverage_policy.project(-124.5,42.1);east,south=coverage_policy.project(-114,32.4)
     ca=box(west,north,east,south)
@@ -92,9 +97,9 @@ def main():
                 for source in group:
                     if not specs[source]['minZoom']<=z<=specs[source]['maxZoom'] or source=='osm' and z<=7:continue
                     geom=coverage_policy.geometry(z,source=='dem').context
-                    plans.append((source,z,prep(geom.intersection(region) if region is not None else geom)))
+                    plans.append((source,z,prep(geom.intersection(region) if region is not None else geom)));plan_regions.append('california' if region is not None else 'conus')
     if a.plan:
-        print(json.dumps({'worldOverviewTiles':21845,'plans':[{'source':s,'zoom':z,'tiles':tile_count(g,z)} for s,z,g in plans]}));return
+        print(json.dumps({'worldOverviewTiles':21845,'plans':[{'source':s,'zoom':z,'tiles':tile_count(g,z),'region':plan_regions[index]} for index,(s,z,g) in ordered_plans(plans,plan_regions)]}));return
     config=load();publisher=Publisher(config,a.data,a.max_bytes)
     lock=(publisher.folder/'publisher.lock').open('a+');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     # Refuse an unrelated populated bucket when there is no local upload ledger.
@@ -104,7 +109,7 @@ def main():
         if existing.get('Contents'):raise RuntimeError('Restore the publication ledger before using a populated bucket')
     publisher.document('metadata.json',info)
     last_status=0;last_prune=0;last_priority=0
-    pool=ThreadPoolExecutor(max_workers=2)
+    pool=ThreadPoolExecutor(max_workers=a.workers)
     def priorities():
         nonlocal last_priority
         if time.monotonic()-last_priority<60:return
@@ -129,7 +134,7 @@ def main():
         if not a.sample:priorities()
         list(pool.map(lambda item:publisher.tile(source,z,item[1],item[2],specs[source]),items))
         if time.monotonic()-last_status>30:
-            publisher.status('warming',{'source':source,'zoom':z});last_status=time.monotonic()
+            publisher.status('warming',{'source':source,'zoom':z,'workers':a.workers,'batchSize':a.batch_size});last_status=time.monotonic()
     if a.sample:
         for z in range(4):run('osm',z,list(coordinates(prep(box(0,0,1,1)),z)))
         for source in SOURCES:
@@ -143,7 +148,7 @@ def main():
                     except Exception as exc:print('Sample tile pending:',source,z,type(exc).__name__,flush=True)
         publisher.status('sample-published');return
     imported=False
-    for index,(source,z,geom) in enumerate(plans):
+    for index,(source,z,geom) in ordered_plans(plans,plan_regions):
         if source not in ('osm','dem') and not imported:
             from prepare_us import prepare
             while True:
@@ -156,7 +161,7 @@ def main():
         pending=[]
         for item in coordinates(geom,z,row[0] if row else -1):
             pending.append(item)
-            if len(pending)<4:continue
+            if len(pending)<a.batch_size:continue
             while True:
                 try:run(source,z,pending);break
                 except Exception as exc:
