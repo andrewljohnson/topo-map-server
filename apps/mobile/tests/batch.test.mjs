@@ -239,3 +239,5 @@ test('DEM and basemap start before overlays while visible terrain is pending',as
 });
 
 test('servers with matching dataset IDs cannot reuse each other’s cached tiles',async()=>{memory.clear();const local=new TileStore('http://local',()=>{}),cloud=new TileStore('https://cloud',()=>{});local.meta=meta;cloud.meta=meta;memory.set(local.file(keys[0]),'bG9jYWw=');assert.notEqual(local.file(keys[0]),cloud.file(keys[0]));assert.equal(memory.has(cloud.file(keys[0])),false);});
+
+test('unpublished visible tile fails once and releases its slot for published detail',async()=>{memory.clear();const calls=[];globalThis.fetch=async url=>{if(url.endsWith('/metadata'))return{ok:true,json:async()=>meta};calls.push(url);return url.includes('/12/1/1.')?{ok:false,status:404}:{ok:true,arrayBuffer:async()=>new TextEncoder().encode('detail').buffer}};const store=new TileStore('https://missing',()=>{},{retryDelayMs:1});await store.init();await assert.rejects(store.source('12/1/1'),/404/);assert.equal(calls.length,1);assert.equal(await store.source('12/2/2'),'ZGV0YWls');});

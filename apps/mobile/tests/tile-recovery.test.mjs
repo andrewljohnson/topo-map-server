@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {TileRecovery} from '../src/tileRecovery.mjs';
+test('failed tiles retry without app lifecycle changes and back off while unpublished',()=>{const r=new TileRecovery();r.fail('osm/14/2728/6265',0);assert.deepEqual(r.due(29999),[]);assert.deepEqual(r.due(30000),['osm/14/2728/6265']);r.fail('osm/14/2728/6265',31000);assert.deepEqual(r.due(89999),[]);assert.equal(r.due(90000).length,1);r.success('osm/14/2728/6265');assert.deepEqual(r.due(1000000),[])});
+test('retry work and retained failures stay bounded',()=>{const r=new TileRecovery();for(let i=0;i<400;i++)r.fail('osm/14/'+i+'/1',0);assert.equal(r.failed.size,256);assert.equal(r.due(30000).length,32)});

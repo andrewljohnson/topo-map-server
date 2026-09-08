@@ -1,3 +1,4 @@
+import {TileRecovery} from './src/tileRecovery.mjs';
 import {MapConnection} from './src/MapConnection';
 import * as SecureStore from 'expo-secure-store';
 import * as Clipboard from 'expo-clipboard';
@@ -24,6 +25,7 @@ function MapApp(){
  const insets=useSafeAreaInsets();
  const {recording,record,backgroundEnabled,backgroundMessage,backgroundBusy,toggleBackground}=useGPSRecording();const [statsOpen,setStatsOpen]=useState(false);
  const web=useRef<WebView>(null),ready=useRef(false),lastLocation=useRef<UserLocation|null>(null),areas=useRef<AreaData|null>(null);
+ const tileRecovery=useRef(new TileRecovery());
  const viewportRequests=useRef(new Map<string,{alive:boolean}>());
  const [,render]=useState(0),[mode,setMode]=useState(false),[downloadsOpen,setDownloadsOpen]=useState(false),[gridVisible,setGridVisible]=useState(false),[isReady,setIsReady]=useState(false),[infoOpen,setInfoOpen]=useState(false),[noteOpen,setNoteOpen]=useState(false),[error,setError]=useState(''),[loading,setLoading]=useState(true),[rendererFailed,setRendererFailed]=useState(false),[rendererKey,setRendererKey]=useState(0);
  const noteWrites=useRef(Promise.resolve()),noteRestored=useRef(false);
@@ -32,13 +34,13 @@ function MapApp(){
  useAreaBoundaries(api,data=>{areas.current=data;if(ready.current)send({type:'areas',data})});
  const location=useUserLocation(point=>{lastLocation.current={...point,center:false};if(ready.current)send({type:'location',...point})},record);
  const sync=()=>{if(ready.current){send({type:'safeArea',insets});if(store.meta){send(rendererInit(store.meta));if(!noteRestored.current){noteRestored.current=true;Promise.all(['map-note-draft.json','map-notes.json'].map(name=>FS.readAsStringAsync(FS.documentDirectory+name).then(text=>JSON.parse(text)).catch(()=>null))).then(([draft,notes])=>{send({type:'restoreMapNote',draft});send({type:'restoreMapNotes',notes:Array.isArray(notes)?notes:[]})});}send({type:'state',mode,regions:store.regions})}}};
- useEffect(()=>{store.setForeground(AppState.currentState==='active');const subscription=AppState.addEventListener('change',state=>store.setForeground(state==='active'));return ()=>subscription.remove()},[]);
+ useEffect(()=>{const recoveryTimer=setInterval(()=>{if(AppState.currentState!=='active'||!ready.current)return;const keys=tileRecovery.current.due();if(keys.length)send({type:'retryTiles',keys})},5000);store.setForeground(AppState.currentState==='active');const subscription=AppState.addEventListener('change',state=>store.setForeground(state==='active'));return ()=>{clearInterval(recoveryTimer);subscription.remove()}},[]);
  useEffect(()=>{(async()=>{const saved=await SecureStore.getItemAsync('topo-connection');if(saved&&!__DEV__){const c=JSON.parse(saved);store.api=c.api;credential.current=c.token}await store.init()})().catch(e=>setError(`Cannot reach the map server at ${api}. ${String(e)}`)).finally(()=>setLoading(false))},[]);
  useEffect(sync,[mode,store.meta,JSON.stringify(store.regions),insets.top,insets.right,insets.bottom,insets.left]);
  const onMessage=async(event:WebViewMessageEvent)=>{try{
   const m=JSON.parse(event.nativeEvent.data);
   if(m.type==='ready'){setInfoOpen(false);setNoteOpen(false);noteRestored.current=false;for(const owner of viewportRequests.current.values())owner.alive=false;viewportRequests.current.clear();store.cancelUnused();ready.current=true;setIsReady(true);setRendererFailed(false);setError(current=>current.startsWith('Map renderer:')?'':current);sync();if(areas.current)send({type:'areas',data:areas.current});if(lastLocation.current)send({type:'location',...lastLocation.current})}
-  else if(m.type==='tile'){const owner={alive:true};viewportRequests.current.set(m.id,owner);try{const src=await store.source(m.key,()=>owner.alive);if(owner.alive){send({type:'tile',id:m.id,src});if(/^(osm|dem|contours)\//.test(m.key))setError(current=>current.startsWith('Map tiles:')?'':current)}}catch{if(owner.alive){send({type:'tile',id:m.id,error:'Tile unavailable offline or server unreachable'});if(/^(osm|dem|contours)\//.test(m.key))setError('Map tiles: some detail could not load. Retry when connected to the map server.')}}finally{if(viewportRequests.current.get(m.id)===owner)viewportRequests.current.delete(m.id)}}
+  else if(m.type==='tile'){const owner={alive:true};viewportRequests.current.set(m.id,owner);try{const src=await store.source(m.key,()=>owner.alive);if(owner.alive){tileRecovery.current.success(m.key);send({type:'tile',id:m.id,src});if(/^(osm|dem|contours)\//.test(m.key))setError(current=>current.startsWith('Map tiles:')?'':current)}}catch{if(owner.alive){tileRecovery.current.fail(m.key);send({type:'tile',id:m.id,error:'Tile unavailable offline or server unreachable'});if(/^(osm|dem|contours)\//.test(m.key))setError('Map tiles: some detail could not load. Retry when connected to the map server.')}}finally{if(viewportRequests.current.get(m.id)===owner)viewportRequests.current.delete(m.id)}}
   else if(m.type==='tileCancel'){const owner=viewportRequests.current.get(m.id);if(owner){owner.alive=false;viewportRequests.current.delete(m.id);store.cancelUnused()}}
   else if(m.type==='fatal'){console.error('Map renderer:',m.message,m.details||'');setRendererFailed(true);setError('Map renderer: '+m.message)}
   else if(m.type==='copyMapNote'){try{if(!await Clipboard.setStringAsync(m.text))throw Error('Clipboard unavailable');send({type:'mapNoteCopyResult',id:m.id})}catch{send({type:'mapNoteCopyResult',id:m.id,error:'Clipboard unavailable'})}}
