@@ -1,0 +1,16 @@
+{
+  "source": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:60];(nwr[amenity](37.70,-119.69,37.78,-119.53);nwr[tourism](37.70,-119.69,37.78,-119.53);nwr[leisure](37.70,-119.69,37.78,-119.53);nwr[shop](37.70,-119.69,37.78,-119.53);nwr[waterway=slipway](37.70,-119.69,37.78,-119.53););out body geom;",
+  "bbox": [
+    37.7,
+    -119.69,
+    37.78,
+    -119.53
+  ],
+  "osm_timestamp": "2026-09-06T03:18:04Z",
+  "sha256": "a8416e537a60df24501614e50b9252cd32999409fe630229bcdbf958cf0ca4be",
+  "license": "ODbL-1.0",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "license_url": "https://www.openstreetmap.org/copyright",
+  "grouping": "Site polygon containment; unambiguous distance <=70m only for point sites. Polygon representative points stay inside their sites. No swimming inferred from beaches. Site facility tags contribute to group icons, not invented individual facility points."
+}

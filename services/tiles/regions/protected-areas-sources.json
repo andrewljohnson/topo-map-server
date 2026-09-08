@@ -1,0 +1,24 @@
+{
+  "retrieved": "2026-09-05",
+  "sources": {
+    "park": "https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NPS_Land_Resources_Division_Boundary_and_Tract_Data_Service/FeatureServer/2",
+    "forest": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_ForestSystemBoundaries_01/MapServer/0",
+    "wilderness": "https://services1.arcgis.com/ERdCHt0sNM6dENSD/arcgis/rest/services/Wilderness_Areas_in_the_United_States/FeatureServer/0"
+  },
+  "counts": {
+    "park": {
+      "sourceRecords": 442,
+      "areas": 429
+    },
+    "forest": {
+      "sourceRecords": 112,
+      "areas": 112
+    },
+    "wilderness": {
+      "sourceRecords": 843,
+      "areas": 806
+    }
+  },
+  "processing": "WGS84 polygons dissolved by agency unit identifier; topology-preserving overview simplification 0.005 degrees; coordinate precision 5 decimal places. Antimeridian overview retains split polygons, navigation uses dominant component. Overview boundaries do not imply public access. Geometry validity repaired after coordinate rounding. Label anchors: Mercator centroid of largest connected component, falling back to an interior pole of inaccessibility when centroid lies outside or in a hole. Navigation centers retained separately.",
+  "sha256": "e0db836787bfa0dd82e57a6173f0e453992eee612b71e7803e2d1950c464c44d"
+}

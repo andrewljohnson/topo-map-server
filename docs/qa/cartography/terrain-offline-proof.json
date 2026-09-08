@@ -1,0 +1,129 @@
+{
+  "states": [
+    {
+      "phase": "online",
+      "terrain": {
+        "generated": 6,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 3625.4999997615814,
+        "maxMs": 653,
+        "worker": true
+      },
+      "contours": 362,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    },
+    {
+      "phase": "online-landscape",
+      "terrain": {
+        "generated": 8,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 3652.599999666214,
+        "maxMs": 653,
+        "worker": true
+      },
+      "contours": 509,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    },
+    {
+      "phase": "offline",
+      "terrain": {
+        "generated": 6,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 2190.400000333786,
+        "maxMs": 511.40000009536743,
+        "worker": true
+      },
+      "contours": 362,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    },
+    {
+      "phase": "offline-landscape",
+      "terrain": {
+        "generated": 9,
+        "cancelled": 2,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 2042.6000003814697,
+        "maxMs": 528.2999999523163,
+        "worker": true
+      },
+      "contours": 509,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    }
+  ],
+  "offlineRequested": [
+    "dem/13/1374/3167",
+    "dem/13/1373/3167",
+    "dem/13/1374/3166",
+    "dem/13/1373/3166"
+  ],
+  "rawTilesSaved": 4,
+  "httpResponsesSaved": 28,
+  "failures": []
+}

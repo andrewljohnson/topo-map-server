@@ -1,0 +1,11 @@
+**/node_modules
+**/.venv
+**/data
+**/dist
+**/.wrangler
+**/.expo
+**/.env*
+.git
+.agents
+.codex
+docs/qa

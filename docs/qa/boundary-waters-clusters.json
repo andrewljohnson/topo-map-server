@@ -1,0 +1,1709 @@
+{
+  "scope": "Every cached OSM cluster within Boundary Waters overview boundary plus 0.01 degree fringe",
+  "complete_regional_refresh": false,
+  "refresh_limitation": "OSM regional queries timed out and returned HTTP 429",
+  "groups": 109,
+  "fixed_site_badges": 76,
+  "fixed_bathrooms": 75,
+  "remaining_missing_icons": 0,
+  "rows": [
+    {
+      "id": "node/10780911785",
+      "name": "Pine Island Lake #1",
+      "center": [
+        -90.7905313,
+        48.130254
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780918346",
+      "name": "Clove Lake #1",
+      "center": [
+        -90.7963691,
+        48.1431275
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780918348",
+      "name": "Clove Lake #3",
+      "center": [
+        -90.7960504,
+        48.1331147
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780918352",
+      "name": "Clove Lake #2",
+      "center": [
+        -90.8029048,
+        48.1344818
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780918401",
+      "name": "Larch Lake #2",
+      "center": [
+        -90.8188553,
+        48.1284526
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780918415",
+      "name": "Larch Lake #3",
+      "center": [
+        -90.8127496,
+        48.1317437
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780918420",
+      "name": "Larch Lake #1",
+      "center": [
+        -90.8188301,
+        48.1342768
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930450",
+      "name": "Maraboeuf Lake #11",
+      "center": [
+        -90.8420944,
+        48.178012
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930459",
+      "name": "Maraboeuf Lake #10",
+      "center": [
+        -90.8467942,
+        48.1773025
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930460",
+      "name": "Maraboeuf Lake #9",
+      "center": [
+        -90.8355993,
+        48.1693824
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930470",
+      "name": "Maraboeuf Lake #8",
+      "center": [
+        -90.8271358,
+        48.1712897
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930471",
+      "name": "Maraboeuf Lake #7",
+      "center": [
+        -90.8220676,
+        48.1717096
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930475",
+      "name": "Maraboeuf Lake #6",
+      "center": [
+        -90.8176017,
+        48.1732336
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930484",
+      "name": "Maraboeuf Lake #5",
+      "center": [
+        -90.8195987,
+        48.1751095
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930485",
+      "name": "Maraboeuf Lake #1",
+      "center": [
+        -90.8231947,
+        48.1787923
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930486",
+      "name": "Maraboeuf Lake #2",
+      "center": [
+        -90.822125,
+        48.1795461
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930489",
+      "name": "Maraboeuf Lake #3",
+      "center": [
+        -90.8203268,
+        48.1816882
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930494",
+      "name": "Maraboeuf Lake #4",
+      "center": [
+        -90.8133418,
+        48.1784079
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780930496",
+      "name": "Gneiss Lake #2",
+      "center": [
+        -90.8089227,
+        48.1768612
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780939708",
+      "name": "Gneiss Lake #1",
+      "center": [
+        -90.8063452,
+        48.1746466
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10780939709",
+      "name": "Gneiss Lake #3",
+      "center": [
+        -90.8037132,
+        48.1723554
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10805630917",
+      "name": "Site 1175",
+      "center": [
+        -91.2181861,
+        47.9543575
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/10805630959",
+      "name": "Site 1170",
+      "center": [
+        -91.2088394,
+        47.9471384
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12839155162",
+      "name": "Banadad Lake #4",
+      "center": [
+        -90.680226,
+        48.0380061
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12839155163",
+      "name": "Banadad Lake #3",
+      "center": [
+        -90.6710186,
+        48.0407487
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12839155164",
+      "name": "Banadad Lake #2",
+      "center": [
+        -90.6661823,
+        48.0385763
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275090",
+      "name": "Saganaga Lake #97",
+      "center": [
+        -90.9397727,
+        48.2064514
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275091",
+      "name": "Saganaga Lake #96",
+      "center": [
+        -90.875788,
+        48.2295844
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275092",
+      "name": "Saganaga Lake #91",
+      "center": [
+        -90.859832,
+        48.2380744
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275093",
+      "name": "Saganaga Lake #66",
+      "center": [
+        -90.9500132,
+        48.1884316
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275094",
+      "name": "Saganaga Lake #55",
+      "center": [
+        -90.9327827,
+        48.2087616
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275095",
+      "name": "Saganaga Lake #54",
+      "center": [
+        -90.928842,
+        48.2095391
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275096",
+      "name": "Saganaga Lake #53",
+      "center": [
+        -90.9109282,
+        48.2152521
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275097",
+      "name": "Saganaga Lake #51",
+      "center": [
+        -90.907171,
+        48.2179693
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275098",
+      "name": "Saganaga Lake #50",
+      "center": [
+        -90.9030055,
+        48.2162075
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275099",
+      "name": "Saganaga Lake #49",
+      "center": [
+        -90.9003318,
+        48.2189235
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843275100",
+      "name": "Saganaga Lake #40",
+      "center": [
+        -90.8910999,
+        48.2361514
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318501",
+      "name": "Saganaga Lake #39",
+      "center": [
+        -90.8940769,
+        48.2380592
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318502",
+      "name": "Saganaga Lake #34",
+      "center": [
+        -90.8861505,
+        48.2356246
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318503",
+      "name": "Saganaga Lake #33",
+      "center": [
+        -90.8817242,
+        48.2360862
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318504",
+      "name": "Saganaga Lake #32",
+      "center": [
+        -90.8767302,
+        48.2344559
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318505",
+      "name": "Saganaga Lake #31",
+      "center": [
+        -90.883516,
+        48.2319538
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318506",
+      "name": "Saganaga Lake #27",
+      "center": [
+        -90.846543,
+        48.2388117
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318507",
+      "name": "Saganaga Lake #22",
+      "center": [
+        -90.8493374,
+        48.2372082
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318508",
+      "name": "Saganaga Lake #21",
+      "center": [
+        -90.8663782,
+        48.2369725
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318509",
+      "name": "Saganaga Lake #20",
+      "center": [
+        -90.8690277,
+        48.2346328
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318510",
+      "name": "Saganaga Lake #18",
+      "center": [
+        -90.8611004,
+        48.2139711
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318511",
+      "name": "Saganaga Lake #17",
+      "center": [
+        -90.8665397,
+        48.2181706
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318512",
+      "name": "Saganaga Lake #15",
+      "center": [
+        -90.8820624,
+        48.2220158
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318513",
+      "name": "Saganaga Lake #14",
+      "center": [
+        -90.88225,
+        48.219415
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318514",
+      "name": "Saganaga Lake #13",
+      "center": [
+        -90.8795706,
+        48.2163446
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318515",
+      "name": "Saganaga Lake #12",
+      "center": [
+        -90.8810009,
+        48.2146301
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318516",
+      "name": "Saganaga Lake #11",
+      "center": [
+        -90.8982448,
+        48.2091575
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318517",
+      "name": "Saganaga Lake #10",
+      "center": [
+        -90.8912236,
+        48.2059884
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318518",
+      "name": "Saganaga Lake #9",
+      "center": [
+        -90.893357,
+        48.2052973
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318519",
+      "name": "Saganaga Lake #8",
+      "center": [
+        -90.8817123,
+        48.2080946
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318520",
+      "name": "Saganaga Lake #7",
+      "center": [
+        -90.880234,
+        48.2052642
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318521",
+      "name": "Saganaga Lake #3",
+      "center": [
+        -90.8823636,
+        48.192359
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318522",
+      "name": "Saganaga Lake #2",
+      "center": [
+        -90.8848525,
+        48.188223
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318523",
+      "name": "Saganaga Lake #1",
+      "center": [
+        -90.8868297,
+        48.1853401
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/12843318524",
+      "name": "Maraboeuf Lake #12",
+      "center": [
+        -90.840948,
+        48.1789541
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/1742381733",
+      "name": "Baker Lake Campground",
+      "center": [
+        -90.8170451,
+        47.8444591
+      ],
+      "icons": [
+        "campsite"
+      ],
+      "previously_missing": [],
+      "members": 1
+    },
+    {
+      "id": "node/3382298343",
+      "name": "Saganaga Lake #94",
+      "center": [
+        -90.8686147,
+        48.2278487
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3382298377",
+      "name": "Saganaga Lake #19",
+      "center": [
+        -90.8622015,
+        48.2292799
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3382298386",
+      "name": "Saganaga Lake #29",
+      "center": [
+        -90.8433402,
+        48.2312364
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3382298425",
+      "name": "Saganaga Lake #98",
+      "center": [
+        -90.8409155,
+        48.2348025
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3382298426",
+      "name": "Saganaga Lake #99",
+      "center": [
+        -90.8397461,
+        48.2330516
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383865093",
+      "name": "Saganaga Lake #48",
+      "center": [
+        -90.9192749,
+        48.2228869
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868596",
+      "name": "Saganaga Lake #52",
+      "center": [
+        -90.9141747,
+        48.2204441
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868597",
+      "name": "Saganaga Lake #47",
+      "center": [
+        -90.9067356,
+        48.224597
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868598",
+      "name": "Saganaga Lake #44",
+      "center": [
+        -90.9021101,
+        48.2264268
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868599",
+      "name": "Saganaga Lake #41",
+      "center": [
+        -90.9019291,
+        48.2286139
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868600",
+      "name": "Saganaga Lake #43",
+      "center": [
+        -90.9074906,
+        48.2322534
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868601",
+      "name": "Saganaga Lake #45",
+      "center": [
+        -90.9100696,
+        48.2280385
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868602",
+      "name": "Saganaga Lake #46",
+      "center": [
+        -90.9202445,
+        48.2265787
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868603",
+      "name": "Saganaga Lake #60",
+      "center": [
+        -90.9460139,
+        48.2073486
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383868604",
+      "name": "Saganaga Lake #59",
+      "center": [
+        -90.9469795,
+        48.2048799
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872417",
+      "name": "Saganaga Lake #58",
+      "center": [
+        -90.9435717,
+        48.2049425
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872418",
+      "name": "Saganaga Lake #57",
+      "center": [
+        -90.9424398,
+        48.2035875
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872419",
+      "name": "Saganaga Lake #56",
+      "center": [
+        -90.9391313,
+        48.2048996
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872420",
+      "name": "Saganaga Lake #61",
+      "center": [
+        -90.9419041,
+        48.201402
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872421",
+      "name": "Saganaga Lake #70",
+      "center": [
+        -90.9638941,
+        48.2167259
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872422",
+      "name": "Saganaga Lake #71",
+      "center": [
+        -90.9666863,
+        48.2168832
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872423",
+      "name": "Saganaga Lake #72",
+      "center": [
+        -90.9682809,
+        48.2152872
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872424",
+      "name": "Saganaga Lake #73",
+      "center": [
+        -90.9764549,
+        48.2126456
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872425",
+      "name": "Saganaga Lake #74",
+      "center": [
+        -91.0032971,
+        48.1988562
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872426",
+      "name": "Saganaga Lake #75",
+      "center": [
+        -91.0110018,
+        48.1967698
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872427",
+      "name": "Saganaga Lake #77",
+      "center": [
+        -91.0233922,
+        48.1876507
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872428",
+      "name": "Saganaga Lake #76",
+      "center": [
+        -91.0322556,
+        48.1875917
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3383872440",
+      "name": "Zephyr Lake #1",
+      "center": [
+        -91.0273498,
+        48.1789861
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "node/3394742776",
+      "name": "Saganaga Lake #63",
+      "center": [
+        -90.9262785,
+        48.1939768
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/3394742777",
+      "name": "Saganaga Lake #62",
+      "center": [
+        -90.9298137,
+        48.1947921
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/3394742778",
+      "name": "Grandpa Lake #2",
+      "center": [
+        -90.9336305,
+        48.1664594
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/3394742779",
+      "name": "Grandpa Lake #1",
+      "center": [
+        -90.9262195,
+        48.1650819
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/4296526963",
+      "name": "BSA Northern Tier Charles L Sommers Canoe Base",
+      "center": [
+        -91.4949113,
+        47.9894763
+      ],
+      "icons": [
+        "campsite",
+        "parking",
+        "shop"
+      ],
+      "previously_missing": [],
+      "members": 3
+    },
+    {
+      "id": "node/9693931547",
+      "name": "Red Rock Lake #7",
+      "center": [
+        -90.9823159,
+        48.1509442
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931548",
+      "name": "Red Rock Lake #5",
+      "center": [
+        -90.9753501,
+        48.154347
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931549",
+      "name": "Red Rock Lake #6",
+      "center": [
+        -90.9672124,
+        48.1572541
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931550",
+      "name": "Red Rock Lake #1",
+      "center": [
+        -90.9807927,
+        48.1599437
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931551",
+      "name": "Red Rock Lake #3",
+      "center": [
+        -90.9868387,
+        48.1611189
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931552",
+      "name": "Red Rock Lake #8",
+      "center": [
+        -90.9839996,
+        48.1666569
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931553",
+      "name": "Red Rock Lake #2",
+      "center": [
+        -90.9786514,
+        48.1687046
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931554",
+      "name": "Saganaga Lake #69",
+      "center": [
+        -90.9655617,
+        48.1737795
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931555",
+      "name": "Red Rock Lake #4",
+      "center": [
+        -90.9729732,
+        48.1637834
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "node/9693931556",
+      "name": "Saganaga Lake #68",
+      "center": [
+        -90.9640926,
+        48.1790629
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [
+        "toilet"
+      ],
+      "members": 1
+    },
+    {
+      "id": "way/1159074518",
+      "name": "Kawishiwi Lake Campground",
+      "center": [
+        -91.1031384,
+        47.8387826
+      ],
+      "icons": [
+        "campsite",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 2
+    },
+    {
+      "id": "way/1159076048",
+      "name": "Trail's End Campground",
+      "center": [
+        -90.8962509,
+        48.1575129
+      ],
+      "icons": [
+        "campsite",
+        "drinking-water",
+        "toilet"
+      ],
+      "previously_missing": [
+        "drinking-water"
+      ],
+      "members": 5
+    },
+    {
+      "id": "way/1172233309",
+      "name": "Sawbill Lake Campground",
+      "center": [
+        -90.8856818,
+        47.8665606
+      ],
+      "icons": [
+        "campsite",
+        "drinking-water",
+        "toilet"
+      ],
+      "previously_missing": [],
+      "members": 8
+    },
+    {
+      "id": "way/1174455122",
+      "name": "Fall Lake Campground",
+      "center": [
+        -91.7208108,
+        47.9514786
+      ],
+      "icons": [
+        "campsite",
+        "toilet",
+        "parking"
+      ],
+      "previously_missing": [],
+      "members": 7
+    }
+  ],
+  "vector_renderer_checks": {
+    "groups": 109,
+    "zoom": 15,
+    "failures": 0,
+    "method": "Actual encoded z10\u201314 amenity vector fixtures in mobile MapLibre renderer; checks all in-viewport members, accounting for deduplication."
+  },
+  "zoom_sweep": {
+    "groups": 109,
+    "zooms": [
+      14,
+      15,
+      18,
+      15
+    ],
+    "checks": 436,
+    "missing_service_badges": 0
+  }
+}

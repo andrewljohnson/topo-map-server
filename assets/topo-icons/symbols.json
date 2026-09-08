@@ -1,0 +1,25 @@
+{
+  "icons": [
+    "waterfall",
+    "cascade",
+    "arch",
+    "cave",
+    "spring",
+    "rock",
+    "pass",
+    "shelter"
+  ],
+  "kinds": {
+    "waterfall": "waterfall",
+    "cascade": "cascade",
+    "arch": "arch",
+    "natural_arch": "arch",
+    "cave": "cave",
+    "cave_entrance": "cave",
+    "spring": "spring",
+    "rock": "rock",
+    "pass": "pass",
+    "saddle": "pass",
+    "shelter": "shelter"
+  }
+}

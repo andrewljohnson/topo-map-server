@@ -1,0 +1,256 @@
+{
+  "date": "2026-09-07",
+  "dataset": "dem-terrarium-usgs10m-v2-20260907",
+  "visualFrames": 23,
+  "framesWithoutErrorsAndSettled": 18,
+  "terrainWorkerErrors": 0,
+  "affectedFrames": [
+    {
+      "name": "boundary-waters",
+      "zoom": 12,
+      "errors": [
+        "AJAXError: Failed to fetch (0): http://localhost:3001/tiles/12/1012/1422.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/tiles/12/1012/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/amenities/12/1012/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/amenities/12/1012/1422.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/amenities/12/1012/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/boundaries/12/1012/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/boundaries/12/1013/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/12/1013/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/trails/12/1013/1422.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/trails/12/1013/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/landcover/12/1013/1422.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/recreation/12/1012/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/landcover/12/1013/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/recreation/12/1012/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/tiles/12/1013/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/trails/12/1012/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/tiles/12/1013/1422.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/tiles/12/1013/1421.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/trails/12/1012/1422.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/amenities/12/1013/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/tiles/12/1012/1420.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/amenities/12/1013/1422.pbf"
+      ]
+    },
+    {
+      "name": "zion",
+      "zoom": 14,
+      "errors": [
+        "AJAXError: Service Unavailable (503): http://localhost:3001/waterways/14/3049/6360.pbf"
+      ]
+    },
+    {
+      "name": "bar-harbor",
+      "zoom": 10,
+      "errors": [
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/10/317/370.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/10/317/371.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/10/317/369.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/amenities/10/317/369.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/10/318/371.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/10/318/369.pbf"
+      ]
+    },
+    {
+      "name": "bar-harbor",
+      "zoom": 13,
+      "errors": [
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/13/2543/2967.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/13/2544/2966.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/13/2543/2965.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/13/2544/2967.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/13/2544/2965.pbf"
+      ]
+    },
+    {
+      "name": "bar-harbor",
+      "zoom": 16,
+      "errors": [
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/14/5088/5933.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/14/5087/5933.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/14/5088/5932.pbf",
+        "AJAXError: Failed to fetch (0): http://localhost:3001/waterways/14/5087/5932.pbf"
+      ]
+    }
+  ],
+  "demBytesBefore": 43846024,
+  "demBytesAfter": 24737511,
+  "sameDemRequestKeys": true,
+  "demByteReductionPercent": 43.6,
+  "pythonTests": 147,
+  "javascriptTests": 71,
+  "webBuild": "passed",
+  "iosExport": "passed",
+  "androidExport": "passed",
+  "expoGoBundleHttpStatus": 200,
+  "offlineStates": [
+    {
+      "phase": "online",
+      "terrain": {
+        "generated": 6,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 3625.4999997615814,
+        "maxMs": 653,
+        "worker": true
+      },
+      "contours": 362,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    },
+    {
+      "phase": "online-landscape",
+      "terrain": {
+        "generated": 8,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 3652.599999666214,
+        "maxMs": 653,
+        "worker": true
+      },
+      "contours": 509,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    },
+    {
+      "phase": "offline",
+      "terrain": {
+        "generated": 6,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 2190.400000333786,
+        "maxMs": 511.40000009536743,
+        "worker": true
+      },
+      "contours": 362,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    },
+    {
+      "phase": "offline-landscape",
+      "terrain": {
+        "generated": 9,
+        "cancelled": 2,
+        "failed": 0,
+        "demRequests": 4,
+        "demBytes": 1811538,
+        "totalMs": 2042.6000003814697,
+        "maxMs": 528.2999999523163,
+        "worker": true
+      },
+      "contours": 509,
+      "sources": {
+        "waterways": true,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true,
+        "grid": true,
+        "user-location": true
+      }
+    }
+  ],
+  "boundedTransportRecheck": [
+    {
+      "name": "boundary-waters",
+      "zoom": 12,
+      "settled": false,
+      "loadMs": 66407,
+      "errors": [],
+      "terrain": {
+        "generated": 6,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 19,
+        "demBytes": 3138124,
+        "totalMs": 24465.00000023842,
+        "maxMs": 4086.600000143051,
+        "worker": true
+      },
+      "contours": 13,
+      "sourceLoaded": {
+        "waterways": false,
+        "states": true,
+        "boundaries": true,
+        "amenities": true,
+        "areas": true,
+        "osm": true,
+        "contours": true,
+        "landcover": true,
+        "trails": true,
+        "recreation": true,
+        "dem": true
+      },
+      "layers": {
+        "lake-labels": 1,
+        "amenity-groups": 3
+      },
+      "peaks": [],
+      "destinations": [
+        "Red Rock Lake #8",
+        "Grandpa Lake #2",
+        "Red Rock Lake #7"
+      ],
+      "areaLabels": [],
+      "matches": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 0,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 0
+      }
+    }
+  ],
+  "physicalPhoneTested": false
+}

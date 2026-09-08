@@ -1,0 +1,93 @@
+{
+  "trail-PCT": {
+    "ref": "PCT",
+    "name": "Pacific Crest Trail",
+    "file": "pct.svg",
+    "color": "#286b89",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-AT": {
+    "ref": "AT",
+    "name": "Appalachian Trail",
+    "file": "at.svg",
+    "color": "#415d3c",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-CDT": {
+    "ref": "CDT",
+    "name": "Continental Divide Trail",
+    "file": "cdt.svg",
+    "color": "#8c553b",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-JMT": {
+    "ref": "JMT",
+    "name": "John Muir Trail",
+    "file": "jmt.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-TRT": {
+    "ref": "TRT",
+    "name": "Tahoe Rim Trail",
+    "file": "trt.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-PNT": {
+    "ref": "PNT",
+    "name": "Pacific Northwest Trail",
+    "file": "pnt.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-AZT": {
+    "ref": "AZT",
+    "name": "Arizona Trail",
+    "file": "azt.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-FT": {
+    "ref": "FT",
+    "name": "Florida Trail",
+    "file": "ft.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-IAT": {
+    "ref": "IAT",
+    "name": "Ice Age Trail",
+    "file": "iat.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-NCT": {
+    "ref": "NCT",
+    "name": "North Country Trail",
+    "file": "nct.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-NET": {
+    "ref": "NET",
+    "name": "New England Trail",
+    "file": "net.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-PHT": {
+    "ref": "PHT",
+    "name": "Potomac Heritage Trail",
+    "file": "pht.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  },
+  "trail-NTT": {
+    "ref": "NTT",
+    "name": "Natchez Trace Trail",
+    "file": "ntt.svg",
+    "color": "#745b3e",
+    "license": "Original project artwork; not an official trail insignia"
+  }
+}

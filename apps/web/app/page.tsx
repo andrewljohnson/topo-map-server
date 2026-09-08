@@ -1,0 +1,89 @@
+"use client";
+import {installDeviceTerrain} from './terrainRuntime';
+import {terrainWorkerSource} from './terrainWorkerSource';
+import { useEffect, useRef, useState } from 'react';
+import { RefreshCw } from 'lucide-react';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import {DownloadStatus} from './DownloadStatus';
+import {parseAreaData,AreaData} from './areas';
+import {createStyle} from './vectorStyle';
+import {tileTemplateUrl} from './tileUrls';
+import {installShieldImages} from './shieldImages';
+import {installPoiImages} from './poiImages';
+import {installMapNotes} from './mapNotes';
+import {installAmenityImages} from './amenityImages';
+import {installTrailBadges} from './trailBadges';
+import {installPoiMatching} from './poiMatching';
+import {installFeatureInfo} from './featureInfo';
+import {installMapInfo} from './mapInfo';
+
+type Metadata = { name: string; bounds: [number,number,number,number]; center: [number,number]; initialZoom?:number; minZoom: number; maxZoom: number; tileUrl: string; tilesets?: {dem?: {tileUrl:string;bounds?:number[];attribution?:string};contours?: {tileUrl:string};amenities?: {tileUrl:string};boundaries?: {tileUrl:string};waterways?: {tileUrl:string};landcover?:{tileUrl:string};trails?:{tileUrl:string};recreation?:{tileUrl:string}} };
+export default function Home() {
+  const root = useRef<HTMLDivElement>(null);
+  const map = useRef<import('maplibre-gl').Map | null>(null);
+  const areas = useRef<AreaData|null>(null);
+  const updateAreas=(data:AreaData)=>{areas.current=data;(map.current?.getSource('areas') as import('maplibre-gl').GeoJSONSource|undefined)?.setData(data)};
+  const [error, setError] = useState('');
+  const [locationError, setLocationError] = useState('');
+  const [loaded, setLoaded] = useState(false);
+  const [retry, setRetry] = useState(0);
+  useEffect(() => {
+    let disposed = false;
+    let resizeObserver: ResizeObserver | undefined;
+    const controller = new AbortController();
+    (async () => {
+      try {
+        setError(''); setLoaded(false);
+        const api = import.meta.env.VITE_TILE_API_URL || (import.meta.env.PROD ? location.origin : `${location.protocol}//${location.hostname}:3001`);
+        const response = await fetch(`${api}/metadata`, {signal: controller.signal});
+        if (!response.ok) throw new Error('Tile service is unavailable.');
+        const info: Metadata = await response.json();
+        const L = await import('maplibre-gl');
+        if (disposed || !root.current) return;
+        const mapStyle=createStyle(info, tileTemplateUrl(info.tileUrl,api), info.tilesets?.dem ? 'topocontour://{z}/{x}/{y}' : info.tilesets?.contours ? tileTemplateUrl(info.tilesets.contours.tileUrl,api) : undefined, info.tilesets?.amenities ? tileTemplateUrl(info.tilesets.amenities.tileUrl,api) : undefined, info.tilesets?.boundaries ? tileTemplateUrl(info.tilesets.boundaries.tileUrl,api) : undefined, info.tilesets?.waterways ? tileTemplateUrl(info.tilesets.waterways.tileUrl,api) : undefined, info.tilesets?.landcover ? tileTemplateUrl(info.tilesets.landcover.tileUrl,api) : undefined, info.tilesets?.trails ? tileTemplateUrl(info.tilesets.trails.tileUrl,api) : undefined, info.tilesets?.recreation ? tileTemplateUrl(info.tilesets.recreation.tileUrl,api) : undefined);
+        const terrain=installDeviceTerrain(L,mapStyle,info.tilesets?.dem,async(key,c)=>{const [z,x,y]=key.split('/');const template=tileTemplateUrl(info.tilesets!.dem!.tileUrl,api);const response=await fetch(template.replace('{z}',z).replace('{x}',x).replace('{y}',y),{signal:c.signal});if(!response.ok)throw Error('DEM '+response.status);return response.arrayBuffer()},terrainWorkerSource);
+        const instance = new L.Map({container:root.current, style:mapStyle, center:info.center,zoom:info.initialZoom??3,minZoom:info.minZoom,maxZoom:18,renderWorldCopies:true,attributionControl:false});
+        map.current = instance;
+        if(import.meta.env.DEV)(window as any).__topoMap=instance;
+        if(terrain){terrain.attach(instance);(instance as any).__topoTerrainStats=terrain.stats;instance.on('remove',terrain.dispose);}
+        // Handle stylesheet load order and container changes without relying on a window resize.
+        resizeObserver = new ResizeObserver(() => instance.resize());
+        resizeObserver.observe(root.current);
+        instance.on('load',()=>{if(areas.current)updateAreas(areas.current);});
+        fetch(`${api}/areas.geojson`,{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Areas unavailable');return r.json()}).then(data=>{if(!disposed){areas.current=parseAreaData(data);if(instance.isStyleLoaded())updateAreas(areas.current)}}).catch(()=>{});
+        installShieldImages(instance);
+        installPoiImages(instance);
+        installAmenityImages(instance);
+        installMapInfo(instance);
+        installMapNotes(instance,()=>info);
+        installTrailBadges(instance);
+        installPoiMatching(instance);
+        installFeatureInfo(instance,L.Popup);
+        instance.addControl(new L.NavigationControl({showCompass:true,visualizePitch:true}), 'bottom-left');
+        const geolocate = new L.GeolocateControl({
+          positionOptions:{enableHighAccuracy:true,maximumAge:30000,timeout:15000},
+          trackUserLocation:true,showUserLocation:true,showAccuracyCircle:true,
+          fitBoundsOptions:{maxZoom:16}
+        });
+        // No automatic trigger: browser permission and centering follow a user click.
+        instance.addControl(geolocate, 'bottom-left');
+        geolocate.on('geolocate',()=>{if(!disposed)setLocationError('');});
+        geolocate.on('error',(event)=>{
+          if(disposed)return;
+          setLocationError(event.code===1
+            ? 'Location access was denied. Allow location for this site, then tap locate again.'
+            : 'Your location is unavailable. Check location services, then tap locate again.');
+        });
+        instance.addControl(new L.ScaleControl({unit:'metric'}), 'bottom-left');
+        instance.on('sourcedata',(event)=>{if(!disposed && event.sourceId==='osm' && event.isSourceLoaded){setLoaded(true);}});
+        instance.on('error',()=>{if(!disposed)setError('Some map data could not load. Check the tile service and retry.');});
+      } catch(e) {if(!disposed)setError(e instanceof Error ? e.message : 'Unable to load the map.');}
+    })();
+    return () => {disposed=true;controller.abort();resizeObserver?.disconnect();map.current?.remove();map.current=null;};
+  },[retry]);
+  return <main className="explorer">
+    <div ref={root} className="map" aria-label="Interactive OpenStreetMap map" />
+    <div className="map-tools"><DownloadStatus/></div>
+    {error || locationError ? <div className="notice" role="alert"><span>{error || locationError}</span>{error ? <button onClick={()=>setRetry(x=>x+1)}><RefreshCw size={16}/>Retry</button> : <button onClick={()=>setLocationError('')}>Dismiss</button>}</div> : !loaded ? <div className="notice" role="status">Loading map tiles…</div> : null}
+  </main>
+}

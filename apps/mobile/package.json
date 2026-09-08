@@ -1,0 +1,31 @@
+{
+  "name": "@topo/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node scripts/bundle-map.mjs && expo start --lan",
+    "bundle:map": "node scripts/bundle-map.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "export": "node scripts/bundle-map.mjs && expo export --platform ios --platform android"
+  },
+  "dependencies": {
+    "expo": "^57.0.0",
+    "expo-clipboard": "~57.0.1",
+    "expo-constants": "*",
+    "expo-file-system": "*",
+    "expo-location": "~57.0.16",
+    "expo-task-manager": "~57.0.16",
+    "maplibre-contour": "0.1.0",
+    "maplibre-gl": "^5.0.0",
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-webview": "^13.16.1"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.0",
+    "typescript": "~6.0.3"
+  }
+}

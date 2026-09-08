@@ -1,0 +1,37 @@
+{
+  "raw_unique_records": 135844,
+  "combined_records": 135518,
+  "created_at": "2026-09-07T05:44:39.352361+00:00",
+  "seconds": 8.97,
+  "families": {
+    "detail": 525,
+    "destination": 7007,
+    "landmark": 50493,
+    "summit": 77493
+  },
+  "zooms": {
+    "15": 524,
+    "11": 24763,
+    "12": 17860,
+    "14": 42667,
+    "13": 9888,
+    "10": 28443,
+    "9": 8674,
+    "8": 2295,
+    "6": 36,
+    "7": 368
+  },
+  "known_peak_elevations": 68942,
+  "dataset": "us-agency-recreation-v8",
+  "algorithm": "nested-spatial-hierarchy-v2",
+  "index": "label-ranking/hierarchy-v1.sqlite",
+  "sha256": "056af47c81f8e29f0d28c7aec76f49b57a0a49be08be2028788147db565452fc",
+  "inputs": {
+    "gazetteers": "gazetteer-sources.json",
+    "facilities": "RIDB nationwide import plus locally cached public NPS/USFS cells at build time"
+  },
+  "summit_spacing_pixels": {
+    "6-9": 120,
+    "10-13": 72
+  }
+}

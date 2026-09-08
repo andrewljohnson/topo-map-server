@@ -1,0 +1,37 @@
+import os
+from pathlib import Path
+import tempfile
+import unittest
+from unittest.mock import patch
+from osm_bulk import import_pbf, query_local
+from national_amenities import query_box
+from regions.build_amenities import geometry
+
+OSM="""<osm version="0.6" generator="test">
+<node id="1" lat="37.7" lon="-119.5" version="1"><tag k="amenity" v="toilets"/></node>
+<node id="2" lat="37.71" lon="-119.5" version="1"/>
+<node id="3" lat="37.71" lon="-119.49" version="1"/>
+<node id="4" lat="37.7" lon="-119.49" version="1"/>
+<way id="10" version="1"><nd ref="1"/><nd ref="2"/><tag k="waterway" v="stream"/><tag k="seasonal" v="yes"/></way>
+<way id="20" version="1"><nd ref="1"/><nd ref="2"/><nd ref="3"/><nd ref="4"/><nd ref="1"/><tag k="tourism" v="camp_site"/></way>
+</osm>"""
+class BulkTests(unittest.TestCase):
+    def test_real_import_preserves_geometry_tags_and_spatial_query(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);source=root/'test.osm';source.write_text(OSM)
+            target=root/'index.sqlite';import_pbf(source,target)
+            data=query_local(query_box([-119.6,37.6,-119.4,37.8]),target)
+            self.assertEqual({(e['type'],e['id']) for e in data['elements']},{('node',1),('way',20)})
+            self.assertTrue(all(not geometry(e).is_empty for e in data['elements']))
+            self.assertEqual(query_local(query_box([0,0,1,1]),target)['elements'],[])
+            tags=query_local('[out:json];way(id:10,99);out tags;',target)['elements']
+            self.assertEqual(len(tags),1)
+            self.assertEqual(tags[0]['tags']['seasonal'],'yes')
+            self.assertTrue(data['_endpoint'].startswith('local-osm-pbf:'))
+    def test_production_requires_bulk_without_querying_public_server(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'OSM_REQUIRE_BULK':'1'}):
+            with self.assertRaises(RuntimeError):query_local('anything',Path(tmp)/'absent')
+    def test_local_development_can_keep_existing_overpass_fallback(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,{'OSM_REQUIRE_BULK':'0'}):
+            self.assertIsNone(query_local('anything',Path(tmp)/'absent'))
+if __name__=='__main__':unittest.main()

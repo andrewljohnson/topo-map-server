@@ -1,0 +1,129 @@
+{
+  "repository": "https://github.com/mapbox/maki",
+  "commit": "28e2a3602e4bde033a1dd388e86e9c117b425e34",
+  "license": "CC0-1.0",
+  "license_file": "LICENSE.txt",
+  "license_sha256": "36ffd9dc085d529a7e60e1276d73ae5a030b020313e6c5408593a6ae2af39673",
+  "icons": [
+    {
+      "name": "restaurant",
+      "file": "icons/restaurant.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/restaurant.svg",
+      "sha256": "0a51307695a54f27c510e7703cb8f4d54a5f25baa48e0cef2fab0362e3de44a4"
+    },
+    {
+      "name": "cafe",
+      "file": "icons/cafe.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/cafe.svg",
+      "sha256": "183ec9cbbf2fe0edd61672b9e83e1134e6a2b0511c89f3c334c3115bda0d29ea"
+    },
+    {
+      "name": "toilet",
+      "file": "icons/toilet.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/toilet.svg",
+      "sha256": "34bea90d322e10470ba3266083d0f0cb125f312b3a3217e2f71723ea54e7b54e"
+    },
+    {
+      "name": "drinking-water",
+      "file": "icons/drinking-water.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/drinking-water.svg",
+      "sha256": "f20a59e7ebb954664e6b680a01ddef73a93849bc093b6b70164159c5837a6acb"
+    },
+    {
+      "name": "parking",
+      "file": "icons/parking.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/parking.svg",
+      "sha256": "278c990e7eec7b9d740da26b128825066c7c89536a26dc1fc03e30bc0d9af824"
+    },
+    {
+      "name": "fuel",
+      "file": "icons/fuel.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/fuel.svg",
+      "sha256": "c480ea19df667ec2723fb120bb59f15d987f2bfa0e01b6d7d75cb506531caf46"
+    },
+    {
+      "name": "information",
+      "file": "icons/information.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/information.svg",
+      "sha256": "bf9e360168db3a6c8a9f07673d7c6aae1564500a39846c885a64688742732481"
+    },
+    {
+      "name": "hospital",
+      "file": "icons/hospital.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/hospital.svg",
+      "sha256": "00b76d183cdec4df12488c49835938a808b28e04606017a38d8da22834480209"
+    },
+    {
+      "name": "pharmacy",
+      "file": "icons/pharmacy.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/pharmacy.svg",
+      "sha256": "03297cf1af6d7af9af47cf1c54497fa373a488daf38909226de0b0b62c81b5e0"
+    },
+    {
+      "name": "picnic-site",
+      "file": "icons/picnic-site.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/picnic-site.svg",
+      "sha256": "64302b04fbc41441efc2fcfb1cb64f5df4f2dcb622b955d92e79c1744a541ada"
+    },
+    {
+      "name": "campsite",
+      "file": "icons/campsite.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/campsite.svg",
+      "sha256": "dc9746fc2e504624b19d8d304e04642a7c54976d26705aa7d0af89a621c09d03"
+    },
+    {
+      "name": "lodging",
+      "file": "icons/lodging.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/lodging.svg",
+      "sha256": "cc8e756612c6aa292b257a855234da2c55612d95831d4f10fc3d4416f5a7c79f"
+    },
+    {
+      "name": "mountain",
+      "file": "icons/mountain.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/mountain.svg",
+      "sha256": "9c5f0d06d07eea0c6b983c2f930a6148156acbd92ee4dd4f7f599d0b05b5035f"
+    },
+    {
+      "name": "viewpoint",
+      "file": "icons/viewpoint.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/viewpoint.svg",
+      "sha256": "b542353205c6b6e86756dbbf62e480fb723d998de8187c7c1787b4e4a7fdcd82"
+    },
+    {
+      "name": "park",
+      "file": "icons/park.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/park.svg",
+      "sha256": "9f25e71f59ea90b3ffd974005cb94b704911526832dd157776e36f18ccc9085a"
+    },
+    {
+      "name": "monument",
+      "file": "icons/monument.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/monument.svg",
+      "sha256": "4ab7dc4bfa395e37782e7b589fcec05ccfa27bcb96a286ff6285508cd1990095"
+    },
+    {
+      "name": "museum",
+      "file": "icons/museum.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/museum.svg",
+      "sha256": "0faa66b24d534adc0767e614a838a746d6d178798368348bad49b699e11ad0e1"
+    },
+    {
+      "name": "shop",
+      "file": "icons/shop.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/shop.svg",
+      "sha256": "1e5b1aa8e2ddd4585d3f0d76f13782d9ab1d5cb3089fea42a1e76acc7aa3304b"
+    },
+    {
+      "name": "swimming",
+      "file": "icons/swimming.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/swimming.svg",
+      "sha256": "27b16e1ae4375459c15a7dbd3126b6c7c27b13cc8938866439ee5b2141b88c67"
+    },
+    {
+      "name": "marker",
+      "file": "icons/marker.svg",
+      "source_url": "https://github.com/mapbox/maki/blob/28e2a3602e4bde033a1dd388e86e9c117b425e34/icons/marker.svg",
+      "sha256": "5350899297309f6864c3c34f532c320d9e9ceafe5fbee48bf337d40fc9ac217c"
+    }
+  ]
+}

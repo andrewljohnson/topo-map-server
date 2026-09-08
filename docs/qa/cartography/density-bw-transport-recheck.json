@@ -1,0 +1,50 @@
+[
+  {
+    "name": "boundary-waters",
+    "zoom": 12,
+    "settled": false,
+    "loadMs": 66407,
+    "errors": [],
+    "terrain": {
+      "generated": 6,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 19,
+      "demBytes": 3138124,
+      "totalMs": 24465.00000023842,
+      "maxMs": 4086.600000143051,
+      "worker": true
+    },
+    "contours": 13,
+    "sourceLoaded": {
+      "waterways": false,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true
+    },
+    "layers": {
+      "lake-labels": 1,
+      "amenity-groups": 3
+    },
+    "peaks": [],
+    "destinations": [
+      "Red Rock Lake #8",
+      "Grandpa Lake #2",
+      "Red Rock Lake #7"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "name": "overview",
+      "zoom": 7,
+      "terrain": {
+        "generated": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 9,
+        "demBytes": 780570,
+        "totalMs": 0,
+        "maxMs": 0,
+        "worker": true
+      },
+      "layers": 129,
+      "contours": 0
+    },
+    {
+      "name": "yosemite",
+      "zoom": 13,
+      "terrain": {
+        "generated": 9,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 27,
+        "demBytes": 9280308,
+        "totalMs": 15748.499999761581,
+        "maxMs": 1847.2999999523163,
+        "worker": true
+      },
+      "layers": 129,
+      "contours": 767
+    },
+    {
+      "name": "campground",
+      "zoom": 17,
+      "terrain": {
+        "generated": 11,
+        "cancelled": 0,
+        "failed": 0,
+        "demRequests": 31,
+        "demBytes": 10447578,
+        "totalMs": 15848.299999713898,
+        "maxMs": 1847.2999999523163,
+        "worker": true
+      },
+      "layers": 129,
+      "contours": 3
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,69 @@
+name: topo-map
+services:
+  tiles:
+    image: topo-tiles:${RELEASE_SHA:?set RELEASE_SHA}
+    build:
+      context: ../services/tiles
+    restart: unless-stopped
+    environment:
+      TILE_MODE: national
+      OSM_REQUIRE_BULK: "1"
+      TILE_DATA_DIR: /data
+      TILE_RENDER_WORKERS: "2"
+      TILE_RENDER_CONCURRENCY: "2"
+      TILE_MIN_FREE_GB: "50"
+      VIEWPORT_WARMING: "1"
+    volumes:
+      - ${DATA_DIR:?set DATA_DIR}:/data
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:3001/health', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    logging: &logging
+      driver: local
+      options:
+        max-size: 10m
+        max-file: "3"
+  web:
+    image: topo-web:${RELEASE_SHA:?set RELEASE_SHA}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+    restart: unless-stopped
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:?set SITE_ADDRESS}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      tiles:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD-SHELL, "wget -q -O /dev/null http://127.0.0.1:2019/config/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    logging: *logging
+  warmer:
+    image: topo-tiles:${RELEASE_SHA:?set RELEASE_SHA}
+    profiles: [warm]
+    command: [python, prepare_us.py, --api, "http://tiles:3001", --data, /data]
+    environment:
+      TILE_MIN_FREE_GB: "50"
+    restart: unless-stopped
+    stop_grace_period: 30s
+    volumes:
+      - ${DATA_DIR:?set DATA_DIR}:/data
+    depends_on:
+      tiles:
+        condition: service_healthy
+    logging: *logging
+volumes:
+  caddy_data:
+  caddy_config:

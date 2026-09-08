@@ -1,0 +1,154 @@
+{
+  "sources": [
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w076/USGS_13_n38w076_20260324.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w076/USGS_13_n38w076_20260324.tif",
+      "id": "69c36023b66b01edf9600815",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n38w076 20260324",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/69c36023b66b01edf9600815"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w077/USGS_13_n38w077_20260324.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w077/USGS_13_n38w077_20260324.tif",
+      "id": "69c36023b66b01edf9600813",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n38w077 20260324",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/69c36023b66b01edf9600813"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w078/USGS_13_n38w078_20211220.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w078/USGS_13_n38w078_20211220.tif",
+      "id": "61c2bf16d34e2ca389d9e9e1",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n38w078 20211220",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/61c2bf16d34e2ca389d9e9e1"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w079/USGS_13_n38w079_20211229.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w079/USGS_13_n38w079_20211229.tif",
+      "id": "61cd4b21d34ed79293fc6ad9",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n38w079 20211229",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/61cd4b21d34ed79293fc6ad9"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w080/USGS_13_n38w080_20211229.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n38w080/USGS_13_n38w080_20211229.tif",
+      "id": "61cd4b21d34ed79293fc6ad7",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n38w080 20211229",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/61cd4b21d34ed79293fc6ad7"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w076/USGS_13_n39w076_20260324.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w076/USGS_13_n39w076_20260324.tif",
+      "id": "69c36022b66b01edf9600811",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n39w076 20260324",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/69c36022b66b01edf9600811"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w077/USGS_13_n39w077_20260512.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w077/USGS_13_n39w077_20260512.tif",
+      "id": "6a03dd86b66b01cc610dd994",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n39w077 20260512",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/6a03dd86b66b01cc610dd994"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w078/USGS_13_n39w078_20260407.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w078/USGS_13_n39w078_20260407.tif",
+      "id": "69e6dcafb66b01f903b6a278",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n39w078 20260407",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/69e6dcafb66b01f903b6a278"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w079/USGS_13_n39w079_20250512.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w079/USGS_13_n39w079_20250512.tif",
+      "id": "6822aa0dd4be02673d76c361",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n39w079 20250512",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/6822aa0dd4be02673d76c361"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w080/USGS_13_n39w080_20230816.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n39w080/USGS_13_n39w080_20230816.tif",
+      "id": "64defb5bd34e5f6cd553ac4e",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n39w080 20230816",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/64defb5bd34e5f6cd553ac4e"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w076/USGS_13_n40w076_20250507.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w076/USGS_13_n40w076_20250507.tif",
+      "id": "681c128cd4be0260c2c465b7",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n40w076 20250507",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/681c128cd4be0260c2c465b7"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w077/USGS_13_n40w077_20260512.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w077/USGS_13_n40w077_20260512.tif",
+      "id": "6a03dd85b66b01cc610dd98b",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n40w077 20260512",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/6a03dd85b66b01cc610dd98b"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w078/USGS_13_n40w078_20260512.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w078/USGS_13_n40w078_20260512.tif",
+      "id": "6a03dd85b66b01cc610dd986",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n40w078 20260512",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/6a03dd85b66b01cc610dd986"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w079/USGS_13_n40w079_20260512.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w079/USGS_13_n40w079_20260512.tif",
+      "id": "6a03dd84b66b01cc610dd982",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n40w079 20260512",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/6a03dd84b66b01cc610dd982"
+    },
+    {
+      "path": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w080/USGS_13_n40w080_20260512.tif",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/historical/n40w080/USGS_13_n40w080_20260512.tif",
+      "id": "6a03dd83b66b01cc610dd978",
+      "vertical_units": "meters",
+      "vertical_datum": "NAVD88",
+      "resolution_m": 10,
+      "title": "USGS 1/3 Arc Second n40w080 20260512",
+      "metadata_url": "https://www.sciencebase.gov/catalog/item/6a03dd83b66b01cc610dd978"
+    }
+  ]
+}

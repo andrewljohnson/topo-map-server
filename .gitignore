@@ -1,0 +1,17 @@
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+services/tiles/data/
+.expo/
+dist/
+.wrangler/
+.env
+.env.local
+.DS_Store
+
+services/tiles/regions/raw/
+
+/deploy/deploy.env
+/deploy/server.env
+**/*.tsbuildinfo

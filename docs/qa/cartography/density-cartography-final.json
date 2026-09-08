@@ -1,0 +1,1549 @@
+[
+  {
+    "name": "yosemite",
+    "zoom": 7,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 0,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 7,
+      "demBytes": 3268646,
+      "totalMs": 0,
+      "maxMs": 0,
+      "worker": true
+    },
+    "contours": 0,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": false,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": false
+    },
+    "layers": {
+      "area-labels": 12,
+      "long-trail-badges": 2,
+      "places": 26
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [
+      {
+        "name": "Tahoe National Forest",
+        "coordinates": [
+          -120.54027557373047,
+          39.393489270968416
+        ]
+      },
+      {
+        "name": "Lake Tahoe Basin Management Unit",
+        "coordinates": [
+          -120.03250122070312,
+          39.042119568939796
+        ]
+      },
+      {
+        "name": "Yosemite National Park",
+        "coordinates": [
+          -119.55734252929688,
+          37.848832506474025
+        ]
+      },
+      {
+        "name": "White Mountains Wilderness",
+        "coordinates": [
+          -118.20362091064453,
+          37.61831068887274
+        ]
+      },
+      {
+        "name": "Stanislaus National Forest",
+        "coordinates": [
+          -120.01705169677734,
+          38.169114135560875
+        ]
+      },
+      {
+        "name": "Kings Canyon National Park",
+        "coordinates": [
+          -118.58745574951172,
+          36.89994002082845
+        ]
+      },
+      {
+        "name": "Inyo National Forest",
+        "coordinates": [
+          -118.64341735839844,
+          37.27432600781958
+        ]
+      },
+      {
+        "name": "Humboldt-Toiyabe National Forest",
+        "coordinates": [
+          -119.36885833740234,
+          38.613919645742214
+        ]
+      },
+      {
+        "name": "Eldorado National Forest",
+        "coordinates": [
+          -120.3603744506836,
+          38.78673968774251
+        ]
+      },
+      {
+        "name": "Ansel Adams Wilderness",
+        "coordinates": [
+          -119.18106079101562,
+          37.594919818005295
+        ]
+      },
+      {
+        "name": "Sequoia National Park",
+        "coordinates": [
+          -118.575439453125,
+          36.50798045161311
+        ]
+      },
+      {
+        "name": "Sequoia National Forest",
+        "coordinates": [
+          -118.46488952636719,
+          35.96939293796699
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "yosemite",
+    "zoom": 10,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 0,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 11,
+      "demBytes": 4875161,
+      "totalMs": 0,
+      "maxMs": 0,
+      "worker": true
+    },
+    "contours": 0,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "ranked-peaks": 24,
+      "amenity-groups": 1,
+      "recreation-pois": 3
+    },
+    "peaks": [
+      "Hetch Hetchy Dome",
+      "Indian Rock",
+      "Smith Peak",
+      "Sentinel Dome",
+      "Double Rock",
+      "Half Dome",
+      "Devils Dance Floor",
+      "Boundary Hill",
+      "Rancheria Mountain",
+      "Tuolumne Peak",
+      "Cold Mountain",
+      "Clouds Rest",
+      "Pettit Peak",
+      "Sunrise Mountain",
+      "Wawona Dome",
+      "Pinoche Peak",
+      "Devil Peak",
+      "Mount Raymond",
+      "Iron Mountain",
+      "Old Inspiration Point",
+      "Mount Clark",
+      "Mount Starr King",
+      "Mount Bruce",
+      "Quartz Mountain"
+    ],
+    "destinations": [
+      "Bridalveil Creek Campground",
+      "Summit Camp",
+      "Ostrander Ski Hut",
+      "Buck Camp (staffed intermittently)"
+    ],
+    "areaLabels": [
+      {
+        "name": "Yosemite National Park",
+        "coordinates": [
+          -119.55738544464111,
+          37.84890028113131
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 30,
+      "nearbyFacilityGroups": 18,
+      "matchedSites": 35
+    }
+  },
+  {
+    "name": "yosemite",
+    "zoom": 13,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 6,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 23,
+      "demBytes": 10499833,
+      "totalMs": 36482.70000052452,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 445,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "ranked-peaks": 4,
+      "amenity-groups": 2,
+      "recreation-pois": 10,
+      "places": 1,
+      "road-labels": 1,
+      "contour-labels": 5
+    },
+    "peaks": [
+      "Sentinel Dome",
+      "Union Point",
+      "Eagle Peak",
+      "Taft Point"
+    ],
+    "destinations": [
+      "Cathedral Beach Picnic Area",
+      "Yellow Pine Administrative Campground",
+      "Arrowhead Spire",
+      "Yosemite Falls",
+      "Sentinel Fall",
+      "Lower Brother",
+      "Lower Yosemite Fall",
+      "Yosemite Valley Welcome Center",
+      "Sentinel Meadow",
+      "Four Mile Trailhead",
+      "Yosemite Falls Trailhead",
+      "Sentinel Dome Trailhead (Pohono Trail)"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 3,
+      "nearbyFacilityGroups": 2,
+      "matchedSites": 9
+    }
+  },
+  {
+    "name": "yosemite",
+    "zoom": 15,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 12,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 23,
+      "demBytes": 10499833,
+      "totalMs": 38110.20000052452,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 362,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "lake-labels": 1,
+      "amenity-group-members": 7,
+      "amenity-details": 5,
+      "trail-labels": 1,
+      "road-labels": 1,
+      "water-labels": 1,
+      "contour-labels": 12
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 8,
+      "nearbyFacilityGroups": 1,
+      "matchedSites": 3
+    }
+  },
+  {
+    "name": "yosemite",
+    "zoom": 13,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 12,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 23,
+      "demBytes": 10499833,
+      "totalMs": 38110.20000052452,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 445,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "ranked-peaks": 4,
+      "amenity-groups": 2,
+      "recreation-pois": 10,
+      "places": 1,
+      "road-labels": 1,
+      "contour-labels": 5
+    },
+    "peaks": [
+      "Sentinel Dome",
+      "Union Point",
+      "Eagle Peak",
+      "Taft Point"
+    ],
+    "destinations": [
+      "Cathedral Beach Picnic Area",
+      "Yellow Pine Administrative Campground",
+      "Arrowhead Spire",
+      "Yosemite Falls",
+      "Sentinel Fall",
+      "Lower Brother",
+      "Lower Yosemite Fall",
+      "Yosemite Valley Welcome Center",
+      "Sentinel Meadow",
+      "Four Mile Trailhead",
+      "Yosemite Falls Trailhead",
+      "Sentinel Dome Trailhead (Pohono Trail)"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 3,
+      "nearbyFacilityGroups": 2,
+      "matchedSites": 9
+    }
+  },
+  {
+    "name": "yosemite",
+    "zoom": 10,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 12,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 23,
+      "demBytes": 10499833,
+      "totalMs": 38110.20000052452,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 0,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "ranked-peaks": 24,
+      "amenity-groups": 1,
+      "recreation-pois": 3
+    },
+    "peaks": [
+      "Hetch Hetchy Dome",
+      "Indian Rock",
+      "Smith Peak",
+      "Sentinel Dome",
+      "Double Rock",
+      "Half Dome",
+      "Devils Dance Floor",
+      "Boundary Hill",
+      "Rancheria Mountain",
+      "Tuolumne Peak",
+      "Cold Mountain",
+      "Clouds Rest",
+      "Pettit Peak",
+      "Sunrise Mountain",
+      "Wawona Dome",
+      "Pinoche Peak",
+      "Devil Peak",
+      "Mount Raymond",
+      "Iron Mountain",
+      "Old Inspiration Point",
+      "Mount Clark",
+      "Mount Starr King",
+      "Mount Bruce",
+      "Quartz Mountain"
+    ],
+    "destinations": [
+      "Bridalveil Creek Campground",
+      "Summit Camp",
+      "Ostrander Ski Hut",
+      "Buck Camp (staffed intermittently)"
+    ],
+    "areaLabels": [
+      {
+        "name": "Yosemite National Park",
+        "coordinates": [
+          -119.55738544464111,
+          37.84890028113131
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 30,
+      "nearbyFacilityGroups": 18,
+      "matchedSites": 35
+    }
+  },
+  {
+    "name": "fallen-leaf",
+    "zoom": 12,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 18,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 35,
+      "demBytes": 14988767,
+      "totalMs": 72723.4000005722,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 69,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "ranked-peaks": 4,
+      "official-road-refs": 4,
+      "lake-labels": 1,
+      "amenity-groups": 3,
+      "recreation-pois": 2,
+      "places": 7,
+      "highway-shields-overview": 1,
+      "contour-labels": 2
+    },
+    "peaks": [
+      "Tahoe Mountain",
+      "Gardner Mountain",
+      "Angora Peak",
+      "Twin Peaks"
+    ],
+    "destinations": [
+      "Lower Eagle Point Campground",
+      "Camp Shelly",
+      "Stanford Sierra Camp",
+      "Sawyier Falls",
+      "Angora Resort Parking"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 3
+    }
+  },
+  {
+    "name": "fallen-leaf",
+    "zoom": 14,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 22,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 39,
+      "demBytes": 16156037,
+      "totalMs": 89594.80000066757,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 38,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-groups": 2,
+      "amenity-details": 8,
+      "recreation-pois": 1,
+      "trail-labels": 4,
+      "highway-shields": 1,
+      "road-labels": 3,
+      "contour-labels": 1
+    },
+    "peaks": [],
+    "destinations": [
+      "Camp Concord",
+      "Fallen Leaf Campground",
+      "Kiva Picnic Area"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 1,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 1
+    }
+  },
+  {
+    "name": "fallen-leaf",
+    "zoom": 15,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 26,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 39,
+      "demBytes": 16156037,
+      "totalMs": 89604.00000047684,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 19,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-group-members": 19,
+      "trail-labels": 3,
+      "road-labels": 3,
+      "contour-labels": 2
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 1,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 1
+    }
+  },
+  {
+    "name": "fallen-leaf",
+    "zoom": 17,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 28,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 39,
+      "demBytes": 16156037,
+      "totalMs": 89604.00000047684,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 2,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-group-members": 4,
+      "trail-labels": 2,
+      "road-labels": 2
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 1,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 1
+    }
+  },
+  {
+    "name": "fallen-leaf",
+    "zoom": 14,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 28,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 39,
+      "demBytes": 16156037,
+      "totalMs": 89604.00000047684,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 38,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-groups": 2,
+      "amenity-details": 8,
+      "recreation-pois": 1,
+      "trail-labels": 4,
+      "highway-shields": 1,
+      "road-labels": 3,
+      "contour-labels": 1
+    },
+    "peaks": [],
+    "destinations": [
+      "Camp Concord",
+      "Fallen Leaf Campground",
+      "Kiva Picnic Area"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 1,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 1
+    }
+  },
+  {
+    "name": "desolation",
+    "zoom": 11,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 31,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 45,
+      "demBytes": 18299422,
+      "totalMs": 105276.80000042915,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 8,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "ranked-peaks": 17,
+      "amenity-groups": 2,
+      "recreation-pois": 6
+    },
+    "peaks": [
+      "Lost Corner Mountain",
+      "Jakes Peak",
+      "Rubicon Peak",
+      "Mount Tallac",
+      "Talking Mountain",
+      "Ralston Peak",
+      "Pyramid Peak",
+      "Mount Price",
+      "Keiths Dome",
+      "Echo Peak",
+      "Cracked Crag",
+      "Blue Mountain",
+      "Red Peak",
+      "Phipps Peak",
+      "Middle Mountain",
+      "Dicks Peak",
+      "Inspiration Point"
+    ],
+    "destinations": [
+      "Meeks Bay Campground and Resort",
+      "Stanford Sierra Camp",
+      "Bunker Hill Lookout",
+      "Mckinney Rubicon Trailhead",
+      "Rockbound Pass",
+      "Mosquito Pass",
+      "Dicks Pass",
+      "Twin Lakes Trailhead"
+    ],
+    "areaLabels": [
+      {
+        "name": "Desolation Wilderness",
+        "coordinates": [
+          -120.17165422439575,
+          38.92060483810482
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 5
+    }
+  },
+  {
+    "name": "desolation",
+    "zoom": 14,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 37,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 54,
+      "demBytes": 22283052,
+      "totalMs": 135712.4000005722,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 275,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "long-trail-badges": 3,
+      "lake-labels-horizontal": 1,
+      "amenity-groups": 1,
+      "trail-labels": 1,
+      "contour-labels": 3
+    },
+    "peaks": [],
+    "destinations": [
+      "Fontanillis Lake"
+    ],
+    "areaLabels": [
+      {
+        "name": "Desolation Wilderness",
+        "coordinates": [
+          -120.17164617776871,
+          38.92060901171456
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 2,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "desolation",
+    "zoom": 11,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 37,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 54,
+      "demBytes": 22283052,
+      "totalMs": 135712.4000005722,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 8,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "ranked-peaks": 17,
+      "amenity-groups": 2,
+      "recreation-pois": 6
+    },
+    "peaks": [
+      "Lost Corner Mountain",
+      "Jakes Peak",
+      "Rubicon Peak",
+      "Mount Tallac",
+      "Talking Mountain",
+      "Ralston Peak",
+      "Pyramid Peak",
+      "Mount Price",
+      "Keiths Dome",
+      "Echo Peak",
+      "Cracked Crag",
+      "Blue Mountain",
+      "Red Peak",
+      "Phipps Peak",
+      "Middle Mountain",
+      "Dicks Peak",
+      "Inspiration Point"
+    ],
+    "destinations": [
+      "Meeks Bay Campground and Resort",
+      "Stanford Sierra Camp",
+      "Bunker Hill Lookout",
+      "Mckinney Rubicon Trailhead",
+      "Rockbound Pass",
+      "Mosquito Pass",
+      "Dicks Pass",
+      "Twin Lakes Trailhead"
+    ],
+    "areaLabels": [
+      {
+        "name": "Desolation Wilderness",
+        "coordinates": [
+          -120.17165422439575,
+          38.92060483810482
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 5
+    }
+  },
+  {
+    "name": "boundary-waters",
+    "zoom": 9,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 37,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 60,
+      "demBytes": 24057980,
+      "totalMs": 135712.4000005722,
+      "maxMs": 6137.400000095367,
+      "worker": true
+    },
+    "contours": 0,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "ranked-peaks": 2,
+      "recreation-pois": 2
+    },
+    "peaks": [
+      "Honeymoon Mountain",
+      "Kelso Mountain"
+    ],
+    "destinations": [
+      "TRAILS END CAMPGROUND",
+      "IRON LAKE"
+    ],
+    "areaLabels": [
+      {
+        "name": "Boundary Waters Canoe Area Wilderness",
+        "coordinates": [
+          -91.35869979858398,
+          48.03120677302482
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "boundary-waters",
+    "zoom": 12,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 43,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 75,
+      "demBytes": 29170637,
+      "totalMs": 278526.10000038147,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 13,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "lake-labels": 1,
+      "amenity-groups": 3
+    },
+    "peaks": [],
+    "destinations": [
+      "Red Rock Lake #8",
+      "Grandpa Lake #2",
+      "Red Rock Lake #7"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "boundary-waters",
+    "zoom": 15,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 46,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 77,
+      "demBytes": 29729409,
+      "totalMs": 295272.7000005245,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 8,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-details": 1,
+      "contour-labels": 1
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "zion",
+    "zoom": 8,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 46,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 83,
+      "demBytes": 32272584,
+      "totalMs": 295272.7000005245,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 0,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 11,
+      "places": 7,
+      "highway-shields-overview": 1
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [
+      {
+        "name": "Zion National Park",
+        "coordinates": [
+          -113.0270004272461,
+          37.299319414257454
+        ]
+      },
+      {
+        "name": "Red Mountain Wilderness",
+        "coordinates": [
+          -113.70214462280273,
+          37.24194516218043
+        ]
+      },
+      {
+        "name": "Pipe Spring National Monument",
+        "coordinates": [
+          -112.73929595947266,
+          36.86300409158366
+        ]
+      },
+      {
+        "name": "Dixie National Forest",
+        "coordinates": [
+          -113.61425399780273,
+          37.46886354992637
+        ]
+      },
+      {
+        "name": "Deep Creek North Wilderness",
+        "coordinates": [
+          -112.93190002441406,
+          37.45278492349607
+        ]
+      },
+      {
+        "name": "Canaan Mountain Wilderness",
+        "coordinates": [
+          -112.98391342163086,
+          37.082434277583786
+        ]
+      },
+      {
+        "name": "Beaver Dam Mountains Wilderness",
+        "coordinates": [
+          -113.79518508911133,
+          36.97938088693358
+        ]
+      },
+      {
+        "name": "Ashdown Gorge Wilderness",
+        "coordinates": [
+          -112.88263320922852,
+          37.643869039858615
+        ]
+      },
+      {
+        "name": "Mount Logan Wilderness",
+        "coordinates": [
+          -113.20621490478516,
+          36.31595506262053
+        ]
+      },
+      {
+        "name": "Grand Wash Cliffs Wilderness",
+        "coordinates": [
+          -113.7828254699707,
+          36.45290807477076
+        ]
+      },
+      {
+        "name": "Kaibab National Forest",
+        "coordinates": [
+          -112.24319458007812,
+          36.577765297068495
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "zion",
+    "zoom": 11,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 50,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 96,
+      "demBytes": 37591236,
+      "totalMs": 337705.1000006199,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 13,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 4,
+      "ranked-peaks": 12,
+      "amenity-groups": 1,
+      "recreation-pois": 4,
+      "places": 1,
+      "highway-shields-overview": 1
+    },
+    "peaks": [
+      "North Guardian Angel",
+      "Home Valley Knoll",
+      "Upsilon Temple",
+      "Wynopits Mountain",
+      "Volcano Knoll",
+      "Mountain of Mystery",
+      "Church Mesa",
+      "The West Temple",
+      "The Watchman",
+      "The Great White Throne",
+      "The East Temple",
+      "Meridian Tower"
+    ],
+    "destinations": [
+      "Oak Valley Camp",
+      "Riverside Walk",
+      "East Mesa",
+      "Court of the Patriarchs",
+      "Stave Spring"
+    ],
+    "areaLabels": [
+      {
+        "name": "Goose Creek Wilderness",
+        "coordinates": [
+          -112.99489974975586,
+          37.37222057768078
+        ]
+      },
+      {
+        "name": "Deep Creek Wilderness",
+        "coordinates": [
+          -112.93683528900146,
+          37.388452901257935
+        ]
+      },
+      {
+        "name": "Zion Wilderness",
+        "coordinates": [
+          -113.0057144165039,
+          37.28327268915797
+        ]
+      },
+      {
+        "name": "Zion National Park",
+        "coordinates": [
+          -113.02693605422974,
+          37.299319414257454
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 1,
+      "nearbyFacilityGroups": 1,
+      "matchedSites": 4
+    }
+  },
+  {
+    "name": "zion",
+    "zoom": 14,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 54,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 100,
+      "demBytes": 39591083,
+      "totalMs": 374885.4000005722,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 202,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-groups": 4,
+      "contour-labels": 2
+    },
+    "peaks": [],
+    "destinations": [
+      "Campsite 6",
+      "Campsite 5",
+      "Campsite 4",
+      "Campsite 1"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  },
+  {
+    "name": "bar-harbor",
+    "zoom": 10,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 54,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 106,
+      "demBytes": 41483626,
+      "totalMs": 374885.4000005722,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 0,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "area-labels": 1,
+      "ranked-peaks": 13,
+      "amenity-groups": 2,
+      "recreation-pois": 1,
+      "places": 1
+    },
+    "peaks": [
+      "Bailey Mountain",
+      "McFarland Mountain",
+      "Ireson Hill",
+      "Schoodic Head",
+      "Long Pond Hill",
+      "Black Mountain",
+      "Ash Mountain",
+      "Winn Joy Mountain",
+      "Hio Hill",
+      "Eliot Mountain",
+      "Dolly Hill",
+      "Bernard Mountain",
+      "Acadia Mountain"
+    ],
+    "destinations": [
+      "Mount Desert Campground",
+      "Bar Harbor / Oceanside KOA Holiday",
+      "Acadia Gateway Center"
+    ],
+    "areaLabels": [
+      {
+        "name": "Acadia National Park",
+        "coordinates": [
+          -68.24295043945312,
+          44.3530074577435
+        ]
+      }
+    ],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 3,
+      "nearbyFacilityGroups": 3,
+      "matchedSites": 2
+    }
+  },
+  {
+    "name": "bar-harbor",
+    "zoom": 13,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 60,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 118,
+      "demBytes": 43846024,
+      "totalMs": 438686.30000019073,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 59,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "ranked-peaks": 1,
+      "recreation-pois": 2,
+      "highway-shields": 2,
+      "road-labels": 6,
+      "contour-labels": 4
+    },
+    "peaks": [
+      "Kebo Mountain"
+    ],
+    "destinations": [
+      "Winter Information: Bar Harbor Chamber of Commerce",
+      "Bear Brook Picnic Area"
+    ],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 0,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 1
+    }
+  },
+  {
+    "name": "bar-harbor",
+    "zoom": 16,
+    "labelsLoaded": true,
+    "terrain": {
+      "generated": 64,
+      "cancelled": 0,
+      "failed": 0,
+      "demRequests": 118,
+      "demBytes": 43846024,
+      "totalMs": 438810.9000008106,
+      "maxMs": 23802.89999985695,
+      "worker": true
+    },
+    "contours": 7,
+    "sourceLoaded": {
+      "waterways": true,
+      "states": true,
+      "boundaries": true,
+      "amenities": true,
+      "areas": true,
+      "osm": true,
+      "contours": true,
+      "landcover": true,
+      "trails": true,
+      "recreation": true,
+      "dem": true,
+      "grid": true,
+      "user-location": true
+    },
+    "layers": {
+      "amenity-details": 20,
+      "highway-shields": 1,
+      "poi-icons": 3,
+      "road-labels": 14
+    },
+    "peaks": [],
+    "destinations": [],
+    "areaLabels": [],
+    "matches": {
+      "osmDuplicates": 0,
+      "agencyDuplicates": 1,
+      "nearbyFacilityGroups": 0,
+      "matchedSites": 0
+    }
+  }
+]

@@ -1,0 +1,4 @@
+node_modules/
+.expo/
+dist/
+src/mapAssets.ts

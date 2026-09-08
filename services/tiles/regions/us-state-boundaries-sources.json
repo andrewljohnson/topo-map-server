@@ -1,0 +1,8 @@
+{
+  "source": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_1_states_provinces_lines.geojson",
+  "retrieved": "2026-09-06",
+  "source_sha256": "72cca93c850d412628a5da4bc5ebfe21ba4d376eb34611bde6b623ee73f0fdcf",
+  "output_sha256": "13f1c025ea2a60eda34987a07251bed2c89a7b08c7a182ba1a414586c8664400",
+  "license": "Public domain",
+  "selection": "ADM0_A3 = USA; internal state boundaries, 1:50 million overview scale"
+}
