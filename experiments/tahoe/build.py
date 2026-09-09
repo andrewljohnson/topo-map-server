@@ -128,7 +128,7 @@ def main():
   parents=[tuple(key) for key in json.loads(a.parent_file.read_text())]
   if not 1<=len(parents)<=512 or len(set(parents))!=len(parents) or any(len(k)!=2 or any(type(v)!=int or not 0<=v<4096 for v in k) for k in parents):raise ValueError('Use 1–512 unique z12 parents')
   if not a.output:raise ValueError('A shard requires its own output directory')
-  out=a.output.resolve();allowed=ROOT/'services/tiles/data/publication/combined'
+  out=a.output.resolve();allowed=(ROOT/'services/tiles/data/publication/combined').resolve()
   if not out.is_relative_to(allowed) or a.clean_derived:raise ValueError('Shard output must be disposable combined publication scratch')
   out.parent.mkdir(parents=True,exist_ok=True)
  if shutil.disk_usage(out.parent).free<50*10**9:raise RuntimeError('Experiment requires 50 GB free disk reserve; release only expendable experiment outputs before continuing')

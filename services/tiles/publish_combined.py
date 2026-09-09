@@ -142,7 +142,7 @@ def run(args):
   reports=folder/'reports';reports.mkdir(exist_ok=True)
   if (out/'report.json').exists():shutil.copy2(out/'report.json',reports/(out.name+'.json'))
   atomic(folder/(out.name+'.done'),compact({'files':len(files),'verifiedAt':time.time()}))
-  if not out.resolve().is_relative_to(folder/'spool'):raise ValueError('Refusing unsafe scratch eviction')
+  if not out.resolve().is_relative_to((folder/'spool').resolve()):raise ValueError('Refusing unsafe scratch eviction')
   shutil.rmtree(out)
  try:
   immutable_document(publisher,'publication/releases/'+args.release+'/contract.json',contract)
