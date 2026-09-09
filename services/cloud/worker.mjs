@@ -34,7 +34,7 @@ async function object(env,key,ctx,ttl=86400){
  if(cached)return cached.status===404?null:cached;
  const item=await env.TILES.get(key);
  if(!item){if(cache)ctx.waitUntil(cache.put(url,new Response(null,{status:404,headers:{'Cache-Control':'public,max-age=30'}})));return null}
- const response=new Response(item.body,{headers:{'Content-Type':item.httpMetadata?.contentType||'application/octet-stream','Content-Length':String(item.size),'Cache-Control':'public,max-age='+ttl,'ETag':item.httpEtag,...(item.httpMetadata?.contentEncoding?{'Content-Encoding':item.httpMetadata.contentEncoding}:{})}});
+ const response=new Response(item.body,{encodeBody:'manual',headers:{'Content-Type':item.httpMetadata?.contentType||'application/octet-stream','Content-Length':String(item.size),'Cache-Control':'public,max-age='+ttl,'ETag':item.httpEtag,...(item.httpMetadata?.contentEncoding?{'Content-Encoding':item.httpMetadata.contentEncoding}:{})}});
  if(cache)ctx.waitUntil(cache.put(url,response.clone()));return response;
 }
 function valid(spec,z,x,y){return spec&&Number.isInteger(z)&&z>=spec.minZoom&&z<=spec.maxZoom&&Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<2**z&&y<2**z}
