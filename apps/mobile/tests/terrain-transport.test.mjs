@@ -21,3 +21,12 @@ test('worker receives an owned DEM buffer while GPU and cached consumers retain 
   assert.equal(sent.filter(m=>m.type==='demResult')[1].buffer.byteLength,8);assert.equal(loads,1);
  }finally{terrain.dispose()}
 });
+test('DEM setup preserves the canonical land-cover fade',async()=>{
+ const {createStyle}=await import('../src/style.mjs');
+ const context=vm.createContext({exports:{},URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},Blob,AbortController,Worker:class{postMessage(){}terminate(){}}});
+ vm.runInContext(source,context);vm.runInContext(context.exports.terrainRuntimeScript,context);
+ const style=createStyle({bounds:[-180,-85,180,85],minZoom:0,maxZoom:14},'base',undefined,undefined,undefined,undefined,'cover');
+ const before=structuredClone(style.layers.find(l=>l.id==='nlcd-forest').paint['fill-opacity']);
+ const runtime=context.installDeviceTerrain({addProtocol(){},removeProtocol(){}},style,{maxZoom:12,minZoom:12},async()=>new ArrayBuffer(0),'');
+ try{assert.deepEqual(style.layers.find(l=>l.id==='nlcd-forest').paint['fill-opacity'],before);assert.ok(before.at(-1)<.15)}finally{runtime.dispose()}
+});

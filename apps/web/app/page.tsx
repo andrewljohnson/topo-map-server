@@ -1,6 +1,6 @@
+"use client";
 import {installMapDiagnostics,profileMapGraphics} from './mapDiagnostics';
 import {logicalMap} from './combinedMap';
-"use client";
 import {installDeviceTerrain} from './terrainRuntime';
 import {terrainWorkerSource} from './terrainWorkerSource';
 import { useEffect, useRef, useState } from 'react';
@@ -28,7 +28,7 @@ export default function Home() {
   const [error, setError] = useState('');
   const [locationError, setLocationError] = useState('');
   const [loaded, setLoaded] = useState(false);
-  const [publicAccess,setPublicAccess]=useState(false);
+  const [publicAccess,setPublicAccess]=useState<boolean|null>(null);
   const [retry, setRetry] = useState(0);
   const [accessOpen,setAccessOpen]=useState(false),[accessKey,setAccessKey]=useState('');
 
@@ -47,7 +47,7 @@ export default function Home() {
         const release=new URLSearchParams(location.search).get('release');
         const metadataPath=release&&/^[a-z0-9-]{1,80}$/.test(release)?`/releases/${release}/metadata`:'/metadata';
         const response = await fetch(`${api}${metadataPath}`, {headers,signal: controller.signal});
-        if(response.status===401){setAccessOpen(true);throw new Error('Enter your map access key to connect.');}
+        if(response.status===401){setPublicAccess(false);setAccessOpen(true);throw new Error('Enter your map access key to connect.');}
         if(response.status===429)throw new Error('Map allowance reached. Check the server usage limits.');
 
         if (!response.ok) throw new Error('Tile service is unavailable.');
@@ -59,7 +59,7 @@ export default function Home() {
         stamp('style-created');
         const terrain=installDeviceTerrain(L,mapStyle,info.tilesets?.dem,async(key,c)=>{const [z,x,y]=key.split('/');const template=tileTemplateUrl(info.tilesets!.dem!.tileUrl,api);const response=await fetch(template.replace('{z}',z).replace('{x}',x).replace('{y}',y),{headers,signal:c.signal});if(!response.ok)throw Error('DEM '+response.status);return response.arrayBuffer()},terrainWorkerSource);
         stamp('terrain-installed');
-        const diagnostics=import.meta.env.VITE_MAP_DIAGNOSTICS==='1'&&new URLSearchParams(location.search).has('diagnostics');
+        const diagnostics=import.meta.env.VITE_MAP_DIAGNOSTICS==='1'&&(['diagnostics','proof'].some(key=>new URLSearchParams(location.search).has(key)));
         const graphics=diagnostics?profileMapGraphics():null;
         const instance = new L.Map({collectResourceTiming:diagnostics,hash:true,container:root.current, transformRequest:(url)=>({url,headers:url.startsWith(api+'/')?headers:{}}), style:mapStyle, center:info.center,zoom:info.initialZoom??3,minZoom:info.minZoom,maxZoom:18,renderWorldCopies:true,attributionControl:false});
         map.current = instance;stamp('map-constructor');
@@ -104,7 +104,7 @@ export default function Home() {
   },[retry]);
   return <main className="explorer">
     <div ref={root} className="map" aria-label="Interactive OpenStreetMap map" />
-    <div className="map-tools"><DownloadStatus/>{!publicAccess&&<button className="downloads-toggle" aria-label="Map access key" onClick={()=>setAccessOpen(true)}>⚿</button>}</div>
+    <div className="map-tools"><DownloadStatus/>{publicAccess===false&&<button className="downloads-toggle" aria-label="Map access key" onClick={()=>setAccessOpen(true)}>⚿</button>}</div>
     {accessOpen&&<div style={{position:'absolute',inset:0,background:'#17392a55',display:'grid',placeItems:'center',zIndex:20}}><form aria-label="Map access" onSubmit={e=>{e.preventDefault();sessionStorage.setItem('topo-access-key',accessKey.trim());setAccessKey('');setAccessOpen(false);setRetry(x=>x+1)}} style={{background:'#fafbf5',padding:24,borderRadius:16,width:'min(90vw,360px)',boxSizing:'border-box'}}><h2>Map access</h2><p>Paste your private map key. It stays in this browser tab for this session.</p><input aria-label="Map access key" type="password" autoComplete="off" value={accessKey} onChange={e=>setAccessKey(e.target.value)} required style={{width:'100%',boxSizing:'border-box',padding:12}}/><div style={{display:'flex',gap:12,marginTop:16}}><button type="submit">Connect</button><button type="button" onClick={()=>setAccessOpen(false)}>Close</button><button type="button" onClick={()=>{sessionStorage.removeItem('topo-access-key');setAccessOpen(false);setRetry(x=>x+1)}}>Sign out</button></div></form></div>}
     {error || locationError ? <div className="notice" role="alert"><span>{error || locationError}</span>{error ? <button onClick={()=>setRetry(x=>x+1)}><RefreshCw size={16}/>Retry</button> : <button onClick={()=>setLocationError('')}>Dismiss</button>}</div> : !loaded ? <div className="notice" role="status">Loading map tiles…</div> : null}
   </main>

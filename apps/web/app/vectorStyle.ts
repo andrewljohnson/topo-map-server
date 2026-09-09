@@ -126,7 +126,7 @@ function applyDensity(style:any) {
  const outdoor={...JSON.parse(JSON.stringify(poiBase)),id:'outdoor-pois',minzoom:11,filter:['all',['in',['get','poi_icon'],['literal',outdoors]],['>=',['zoom'],['max',11,['coalesce',['get','min_zoom'],12]]]]};
  outdoor.layout['icon-size']=.9;outdoor.layout['icon-padding']=9;
  const peaks={...JSON.parse(JSON.stringify(poiBase)),id:'peak-labels',minzoom:11,filter:['all',['==',['get','poi_icon'],'mountain'],['>=',['zoom'],['max',11,['-', ['coalesce',['get','min_zoom'],14],1]]]]};
- peaks.layout['icon-size']=.9;peaks.layout['text-size']=12;peaks.layout['text-padding']=9;peaks.layout['text-optional']=false;
+ peaks.layout['icon-size']=.9;peaks.layout['text-size']=12;peaks.layout['text-padding']=9;peaks.layout['text-optional']=false;peaks.layout['text-variable-anchor']=['top','bottom','left','right'];peaks.layout['text-radial-offset']=.8;peaks.layout['text-justify']='auto';
  peaks.paint['text-color']='#48463b';
  // Keep small subdivisions out of overview maps and reduce their local label weight.
  const places=layer('places');
@@ -200,7 +200,7 @@ function applyBaseDetails(style:any,landcoverUrl?:string,trailsUrl?:string,recre
   style.sources.landcover={type:'vector',tiles:[landcoverUrl],bounds:[-129.28,21.80,-63.11,52.93],minzoom:6,maxzoom:14,attribution:'Land cover: USGS Annual NLCD 2024'};
   const colors={forest:'#ccdab9',scrub:'#e0e3bd',grass:'#e8ebca',wetland:'#cbded0',farmland:'#eee4bd',rock:'#e3ded4',ice:'#eaf2f1',developed:'#e8dfd6'};
   // Categorical land cover is beneath water, roads, contours and labels.
-  insertBefore('area-fill',Object.entries(colors).map(([kind,color])=>({id:'nlcd-'+kind,type:'fill',source:'landcover','source-layer':'landcover',minzoom:6,filter:['==',['get','class'],kind],paint:{'fill-color':color,'fill-opacity':['interpolate',['linear'],['zoom'],6,.42,10,.58,14,.66]}})));
+  insertBefore('area-fill',Object.entries(colors).map(([kind,color])=>({id:'nlcd-'+kind,type:'fill',source:'landcover','source-layer':'landcover',minzoom:6,filter:['==',['get','class'],kind],paint:{'fill-color':color,'fill-opacity':['interpolate',['linear'],['zoom'],6,.42,10,.58,14,.6,15,.45,16,.25,17,.14,18,.08]}})));
  }
  // Keep municipal green spaces legible above categorical developed land cover.
  insertBefore('area-fill',[{id:'local-park-tint',type:'fill',source:'osm','source-layer':'grass',minzoom:8,filter:['in',['get','class'],['literal',['park','garden','recreation_ground']]],paint:{'fill-color':'#b5cca4','fill-opacity':['interpolate',['linear'],['zoom'],8,.18,12,.32,16,.22]}}]);

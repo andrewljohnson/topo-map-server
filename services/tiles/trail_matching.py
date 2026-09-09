@@ -132,9 +132,10 @@ def preserve_source_junctions(result, additions, matches):
     """
     if not matches:return result
     geometries=[f['geometry'] for f in result];tree=STRtree(geometries)
-    original_ends={}
+    original_ends={};original_shapes={};source_corridors={}
     for f in additions:
         key=(f['properties'].get('agency'),f['properties'].get('id'))
+        original_shapes.setdefault(key,[]).append(f['geometry'])
         original_ends.setdefault(key,[]).extend(Point(c) for g in lines(f['geometry']) for c in (g.coords[0],g.coords[-1]))
     match_tree=STRtree([m[0] for m in matches]);output=[]
     for index,f in enumerate(result):
@@ -142,7 +143,7 @@ def preserve_source_junctions(result, additions, matches):
         if key not in original_ends:output.append(f);continue
         changed=False;parts=[]
         for line in lines(f['geometry']):
-            coords=list(line.coords)
+            coords=list(line.coords);discard=False
             if line.is_ring:parts.append(line);continue
             for end in (0,-1):
                 point=Point(coords[end])
@@ -151,16 +152,27 @@ def preserve_source_junctions(result, additions, matches):
                 eligible=[]
                 for j in match_tree.query(point.buffer(.05)):
                     original,mask,target,limit,other_key,other_props=matches[int(j)]
-                    if other_key==key or point.distance(original)>.05 or not mask.buffer(.05).covers(point):continue
+                    if other_key==key or point.distance(original)>.05 or not mask.buffer(1).covers(point):continue
                     if any(bool(props.get(k,False))!=bool(other_props.get(k,False)) for k in ('is_bridge','is_tunnel')):continue
+                    if key not in source_corridors:source_corridors[key]=unary_union(original_shapes[key]).buffer(1)
+                    # Duplicate surveys sharing a terminal segment do not prove
+                    # a junction; the source partner must actually branch away.
+                    if original.intersection(point.buffer(20)).difference(source_corridors[key]).length<5:continue
                     anchor=nearest_points(point,target)[1];distance=point.distance(anchor)
                     if .05<distance<=limit:eligible.append((distance,anchor))
                 if eligible:
                     anchor=min(eligible,key=lambda item:item[0])[1]
+                    opposite=Point(coords[-1 if end==0 else 0])
+                    # A short terminal survey offset can already start at this
+                    # same mapped junction. Do not turn it into an out-and-back
+                    # spur by adding the identical connection in reverse.
+                    opposite_original=any(opposite.distance(p)<.01 for p in original_ends[key])
+                    if not opposite_original and opposite.distance(anchor)<.01 and line.length<15 and line.length<=point.distance(anchor)*1.05:
+                        discard=True;changed=True;break
                     if end==0:coords.insert(0,(anchor.x,anchor.y))
                     else:coords.append((anchor.x,anchor.y))
                     changed=True
-            parts.append(LineString(coords))
+            if not discard:parts.append(LineString(coords))
         output.append({**f,'geometry':unary_union(parts),'properties':{**props,'junction_basis':'matched_source_junction'}} if changed else f)
     return output
 

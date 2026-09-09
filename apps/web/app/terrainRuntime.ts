@@ -50,7 +50,6 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  const textures:Record<string,{color:string;kind:string}>={'cover-wetland':{color:'#538c872d',kind:'wetland'},'cover-sand':{color:'#ab87452b',kind:'dots'},'cover-scrub':{color:'#79885822',kind:'dots'}};
  for(const layer of [...style.layers]){
   if(layer.type==='symbol'&&layer.paint?.['text-halo-width']){layer.paint['text-halo-width']=Math.min(Number(layer.paint['text-halo-width'])||1.3,1.3);layer.paint['text-halo-blur']=.35;}
-  if(layer.id.startsWith('nlcd-')&&layer.type==='fill')layer.paint['fill-opacity']=['interpolate',['linear'],['zoom'],6,.42,10,.58,14,.66,17,.4,18,.3];
   if(layer.id.startsWith('waterways-')&&layer.type==='line')layer.paint['line-width']=['interpolate',['linear'],['zoom'],6,.4,12,['match',['get','class'],'river',1.6,.9],16,['match',['get','class'],'river',3,1.6],18,['match',['get','class'],'river',4,2.2]];
   const texture=layer.id.includes('wetland')?'cover-wetland':layer.id==='landcover-sand'?'cover-sand':layer.id==='nlcd-scrub'?'cover-scrub':null;
   if(texture&&layer.type==='fill')style.layers.splice(style.layers.indexOf(layer)+1,0,{...layer,id:layer.id+'-texture',minzoom:12,paint:{'fill-pattern':texture,'fill-opacity':['interpolate',['linear'],['zoom'],12,0,14,.65,17,.8]}});

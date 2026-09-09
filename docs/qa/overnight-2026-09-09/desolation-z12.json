@@ -1,0 +1,888 @@
+{
+  "capturedAt": "2026-09-09T09:13:19.163Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -120.19173146057085,
+    38.877093283439564,
+    -120.1242685394281,
+    38.99086109163909
+  ],
+  "center": [
+    -120.158,
+    38.934
+  ],
+  "zoom": 12,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "48ca25643722581e478bf30b42e7fba6eb05158021fc45911f870b37cea68edf",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.18735587596893,
+        38.884489753676405
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Little Pyramid",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.15407502651215,
+        38.8904649767895
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Jacks Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.13063251972198,
+        38.906496634508926
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Janine's Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.1812994480133,
+        38.95657223369764
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Middle Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.149906873703,
+        38.95462829109846
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Phipps Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.1509690284729,
+        38.900501886178006
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Dicks Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 2,
+      "coordinates": [
+        -120.12951672077179,
+        38.98366924348824
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.13323962688446,
+        38.98851866860315
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Rubicon Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.12443661689758,
+        38.975253889504756
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Hidden Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 2,
+      "coordinates": [
+        -120.15215456485748,
+        38.977063817149684
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -120.16412794589996,
+        38.985153711564806
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Crag Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 195512156048815,
+      "coordinates": [
+        -120.15397846698761,
+        38.89030631209164
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "El Dorado",
+        "elevation_ft": 9849,
+        "elevation_m": 3002,
+        "geonames_id": "5360154",
+        "gnis_id": "226070",
+        "higher_peak_km": 1.16,
+        "id": "gnis:226070",
+        "isolation_km": 1.16,
+        "kind": "summit",
+        "label_minzoom": 12,
+        "label_rank": 41807,
+        "license": "Public domain",
+        "map_name": "Rockbound Valley",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Jacks Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 182.065,
+        "rank_elevation_m": 3002,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:226070\",\"agency\":\"USGS GNIS\",\"name\":\"Jacks Peak\",\"coordinates\":[-120.1539776,38.8903078],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:226070\",\"gnis_id\":\"226070\",\"agency\":\"USGS GNIS\",\"name\":\"Jacks Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/06/2026\"}},{\"id\":\"geonames:5360154\",\"agency\":\"GeoNames\",\"name\":\"Jacks Peak\",\"coordinates\":[-120.15408,38.89046],\"source_url\":\"https://www.geonames.org/5360154\",\"details\":{\"id\":\"geonames:5360154\",\"geonames_id\":\"5360154\",\"agency\":\"GeoNames\",\"name\":\"Jacks Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5360154\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-15\",\"alternate_names\":\"\",\"elevation_m\":3002.0,\"elevation_ft\":9849}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "08/06/2026"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 272236716724070,
+      "coordinates": [
+        -120.15089929103851,
+        38.90046013824502
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Dicks Peak",
+        "county": "El Dorado",
+        "elevation_ft": 9980,
+        "elevation_m": 3042,
+        "geonames_id": "5343080",
+        "gnis_id": "222367",
+        "higher_peak_km": 22.05,
+        "id": "gnis:222367",
+        "isolation_km": 1.16,
+        "kind": "summit",
+        "label_minzoom": 9,
+        "label_rank": 1301,
+        "license": "Public domain",
+        "map_name": "Rockbound Valley",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Dicks Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 420.258,
+        "rank_elevation_m": 3042,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:222367\",\"agency\":\"USGS GNIS\",\"name\":\"Dicks Peak\",\"coordinates\":[-120.1509004,38.9004581],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:222367\",\"gnis_id\":\"222367\",\"agency\":\"USGS GNIS\",\"name\":\"Dicks Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/05/2026\"}},{\"id\":\"geonames:5343080\",\"agency\":\"GeoNames\",\"name\":\"Dicks Peak\",\"coordinates\":[-120.15102,38.90046],\"source_url\":\"https://www.geonames.org/5343080\",\"details\":{\"id\":\"geonames:5343080\",\"geonames_id\":\"5343080\",\"agency\":\"GeoNames\",\"name\":\"Dicks Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5343080\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2010-02-14\",\"alternate_names\":\"Dicks Peak\",\"elevation_m\":3042.0,\"elevation_ft\":9980}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "08/05/2026"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 242698683907662,
+      "coordinates": [
+        -120.1814067363739,
+        38.95655554772196
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Middle Mountain,Ortadagliq relyef,Ortada\u011fl\u0131q relyef,jbl mydl,\u062c\u0628\u0644 \u0645\u064a\u062f\u0644",
+        "county": "El Dorado",
+        "elevation_ft": 8330,
+        "elevation_m": 2539,
+        "geonames_id": "5372789",
+        "gnis_id": "228607",
+        "higher_peak_km": 2.75,
+        "id": "gnis:228607",
+        "isolation_km": 2.75,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 30128,
+        "license": "Public domain",
+        "map_name": "Rockbound Valley",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Middle Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 221.141,
+        "rank_elevation_m": 2539,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:228607\",\"agency\":\"USGS GNIS\",\"name\":\"Middle Mountain\",\"coordinates\":[-120.1814067,38.9565576],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:228607\",\"gnis_id\":\"228607\",\"agency\":\"USGS GNIS\",\"name\":\"Middle Mountain\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/06/2026\"}},{\"id\":\"geonames:5372789\",\"agency\":\"GeoNames\",\"name\":\"Middle Mountain\",\"coordinates\":[-120.1813,38.95657],\"source_url\":\"https://www.geonames.org/5372789\",\"details\":{\"id\":\"geonames:5372789\",\"geonames_id\":\"5372789\",\"agency\":\"GeoNames\",\"name\":\"Middle Mountain\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5372789\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Middle Mountain,Ortadagliq relyef,Ortada\\u011fl\\u0131q relyef,jbl mydl,\\u062c\\u0628\\u0644 \\u0645\\u064a\\u062f\\u0644\",\"elevation_m\":2539.0,\"elevation_ft\":8330}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "08/06/2026"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 259435456350418,
+      "coordinates": [
+        -120.14968156814575,
+        38.954390509051706
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Phipps Peak,jbl fyps pyak,\u062c\u0628\u0644 \u0641\u064a\u067e\u0633 \u067e\u064a\u0627\u0643",
+        "county": "El Dorado",
+        "elevation_ft": 9229,
+        "elevation_m": 2813,
+        "geonames_id": "5382408",
+        "gnis_id": "230605",
+        "higher_peak_km": 6,
+        "id": "gnis:230605",
+        "isolation_km": 2.75,
+        "kind": "summit",
+        "label_minzoom": 10,
+        "label_rank": 12183,
+        "license": "Public domain",
+        "map_name": "Rockbound Valley",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Phipps Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 293.017,
+        "rank_elevation_m": 2813,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:230605\",\"agency\":\"USGS GNIS\",\"name\":\"Phipps Peak\",\"coordinates\":[-120.1496818,38.954391],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:230605\",\"gnis_id\":\"230605\",\"agency\":\"USGS GNIS\",\"name\":\"Phipps Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/30/2021\"}},{\"id\":\"geonames:5382408\",\"agency\":\"GeoNames\",\"name\":\"Phipps Peak\",\"coordinates\":[-120.14991,38.95463],\"source_url\":\"https://www.geonames.org/5382408\",\"details\":{\"id\":\"geonames:5382408\",\"geonames_id\":\"5382408\",\"agency\":\"GeoNames\",\"name\":\"Phipps Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5382408\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Phipps Peak,jbl fyps pyak,\\u062c\\u0628\\u0644 \\u0641\\u064a\\u067e\\u0633 \\u067e\\u064a\\u0627\\u0643\",\"elevation_m\":2813.0,\"elevation_ft\":9229}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "08/30/2021"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 156567570824020,
+      "coordinates": [
+        -120.13344347476959,
+        38.98848114208323
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Rubicon Peak,jbl rwbykwn pyak,\u062c\u0628\u0644 \u0631\u0648\u0628\u064a\u0643\u0648\u0646 \u067e\u064a\u0627\u0643",
+        "county": "El Dorado",
+        "elevation_ft": 9180,
+        "elevation_m": 2798,
+        "geonames_id": "5389204",
+        "gnis_id": "231997",
+        "higher_peak_km": 4.04,
+        "id": "gnis:231997",
+        "isolation_km": 2.27,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 19434,
+        "license": "Public domain",
+        "map_name": "Rockbound Valley",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Rubicon Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 259.713,
+        "rank_elevation_m": 2798,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:231997\",\"agency\":\"USGS GNIS\",\"name\":\"Rubicon Peak\",\"coordinates\":[-120.1334436,38.9884802],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:231997\",\"gnis_id\":\"231997\",\"agency\":\"USGS GNIS\",\"name\":\"Rubicon Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/30/2021\"}},{\"id\":\"geonames:5389204\",\"agency\":\"GeoNames\",\"name\":\"Rubicon Peak\",\"coordinates\":[-120.13324,38.98852],\"source_url\":\"https://www.geonames.org/5389204\",\"details\":{\"id\":\"geonames:5389204\",\"geonames_id\":\"5389204\",\"agency\":\"GeoNames\",\"name\":\"Rubicon Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5389204\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2010-02-14\",\"alternate_names\":\"Rubicon Peak,jbl rwbykwn pyak,\\u062c\\u0628\\u0644 \\u0631\\u0648\\u0628\\u064a\\u0643\\u0648\\u0646 \\u067e\\u064a\\u0627\\u0643\",\"elevation_m\":2798.0,\"elevation_ft\":9180}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "08/30/2021"
+      }
+    }
+  ],
+  "renderedPeaks": [
+    {
+      "name": "Jakes Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.12237131595612,
+        38.970003169460824
+      ]
+    },
+    {
+      "name": "Rubicon Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.13344347476959,
+        38.98848114208323
+      ]
+    },
+    {
+      "name": "Middle Mountain",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.1814067363739,
+        38.95655554772196
+      ]
+    },
+    {
+      "name": "Dicks Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.15089929103851,
+        38.90046013824502
+      ]
+    },
+    {
+      "name": "Jacks Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.15397846698761,
+        38.89030631209164
+      ]
+    }
+  ],
+  "peakLayers": [
+    {
+      "id": "peak-labels",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "osm__poi",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "all",
+          [
+            "==",
+            [
+              "get",
+              "poi_icon"
+            ],
+            "mountain"
+          ],
+          [
+            ">=",
+            [
+              "zoom"
+            ],
+            [
+              "max",
+              11,
+              [
+                "-",
+                [
+                  "coalesce",
+                  [
+                    "get",
+                    "min_zoom"
+                  ],
+                  14
+                ],
+                1
+              ]
+            ]
+          ]
+        ],
+        [
+          "!",
+          [
+            "in",
+            [
+              "get",
+              "poi_icon"
+            ],
+            [
+              "literal",
+              [
+                "information",
+                "toilet",
+                "parking",
+                "viewpoint",
+                "drinking-water",
+                "restaurant",
+                "campsite",
+                "picnic-site",
+                "shop",
+                "museum",
+                "lodging",
+                "swimming",
+                "cafe",
+                "hospital"
+              ]
+            ]
+          ]
+        ]
+      ],
+      "layout": {
+        "symbol-sort-key": [
+          "match",
+          [
+            "concat",
+            [
+              "get",
+              "class"
+            ],
+            "|",
+            [
+              "get",
+              "name"
+            ]
+          ],
+          "peak|Angora Peak",
+          45693,
+          "peak|Becker Peak",
+          51383,
+          "peak|Blue Mountain",
+          29979,
+          "peak|Cracked Crag",
+          25882,
+          "peak|Dicks Peak",
+          1301,
+          "peak|Echo Peak",
+          22836,
+          "peak|Indian Rock",
+          13237,
+          "peak|Inspiration Point",
+          41623,
+          "peak|Jacks Peak",
+          41807,
+          "peak|Jakes Peak",
+          31560,
+          "peak|Keiths Dome",
+          33060,
+          "peak|Lost Corner Mountain",
+          13736,
+          "peak|Maggies Peaks",
+          26368,
+          "peak|Middle Mountain",
+          30128,
+          "peak|Mount Price",
+          26804,
+          "peak|Mount Tallac",
+          15931,
+          "peak|Phipps Peak",
+          12183,
+          "peak|Pyramid Peak",
+          10358,
+          "peak|Ralston Peak",
+          15261,
+          "peak|Red Peak",
+          10498,
+          "peak|Rubicon Peak",
+          19434,
+          "peak|Silver Peak",
+          42962,
+          "peak|Sourdough Hill",
+          38901,
+          "peak|Talking Mountain",
+          29298,
+          100000
+        ],
+        "icon-image": [
+          "match",
+          [
+            "coalesce",
+            [
+              "get",
+              "kind"
+            ],
+            [
+              "get",
+              "class"
+            ],
+            ""
+          ],
+          "waterfall",
+          [
+            "case",
+            [
+              "in",
+              "cascade",
+              [
+                "downcase",
+                [
+                  "coalesce",
+                  [
+                    "get",
+                    "name"
+                  ],
+                  ""
+                ]
+              ]
+            ],
+            "poi-circle-cascade",
+            "poi-circle-waterfall"
+          ],
+          "cascade",
+          "poi-circle-cascade",
+          "arch",
+          "poi-circle-arch",
+          "natural_arch",
+          "poi-circle-arch",
+          "cave",
+          "poi-circle-cave",
+          "cave_entrance",
+          "poi-circle-cave",
+          "spring",
+          "poi-circle-spring",
+          "rock",
+          "poi-circle-rock",
+          "pass",
+          "poi-circle-pass",
+          "saddle",
+          "poi-circle-pass",
+          "shelter",
+          "poi-square-shelter",
+          [
+            "concat",
+            "poi-",
+            [
+              "get",
+              "poi_frame"
+            ],
+            "-",
+            [
+              "get",
+              "poi_icon"
+            ]
+          ]
+        ],
+        "icon-size": 0.9,
+        "icon-padding": 5,
+        "icon-allow-overlap": false,
+        "text-field": [
+          "get",
+          "name"
+        ],
+        "text-font": [
+          "Arial",
+          "sans-serif"
+        ],
+        "text-size": 12,
+        "text-max-width": 10,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          1.5
+        ],
+        "text-padding": 9,
+        "text-optional": false,
+        "text-allow-overlap": false,
+        "text-variable-anchor": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "text-radial-offset": 0.8,
+        "text-justify": "auto"
+      },
+      "paint": {
+        "text-color": "#48463b",
+        "text-halo-color": "#fffdf5",
+        "text-halo-width": 1.3,
+        "text-halo-blur": 0.35
+      }
+    },
+    {
+      "id": "ranked-peaks",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "recreation__recreation",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "kind"
+          ],
+          "summit"
+        ],
+        [
+          ">=",
+          [
+            "zoom"
+          ],
+          [
+            "coalesce",
+            [
+              "get",
+              "label_minzoom"
+            ],
+            13
+          ]
+        ]
+      ],
+      "layout": {
+        "symbol-sort-key": [
+          "coalesce",
+          [
+            "get",
+            "label_rank"
+          ],
+          100000
+        ],
+        "icon-image": [
+          "match",
+          [
+            "coalesce",
+            [
+              "get",
+              "kind"
+            ],
+            [
+              "get",
+              "class"
+            ],
+            ""
+          ],
+          "waterfall",
+          [
+            "case",
+            [
+              "in",
+              "cascade",
+              [
+                "downcase",
+                [
+                  "coalesce",
+                  [
+                    "get",
+                    "name"
+                  ],
+                  ""
+                ]
+              ]
+            ],
+            "poi-circle-cascade",
+            "poi-circle-waterfall"
+          ],
+          "cascade",
+          "poi-circle-cascade",
+          "arch",
+          "poi-circle-arch",
+          "natural_arch",
+          "poi-circle-arch",
+          "cave",
+          "poi-circle-cave",
+          "cave_entrance",
+          "poi-circle-cave",
+          "spring",
+          "poi-circle-spring",
+          "rock",
+          "poi-circle-rock",
+          "pass",
+          "poi-circle-pass",
+          "saddle",
+          "poi-circle-pass",
+          "shelter",
+          "poi-square-shelter",
+          [
+            "coalesce",
+            [
+              "get",
+              "poi_image"
+            ],
+            [
+              "concat",
+              "poi-",
+              [
+                "get",
+                "poi_frame"
+              ],
+              "-",
+              [
+                "get",
+                "poi_icon"
+              ]
+            ]
+          ]
+        ],
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          0.65,
+          11,
+          0.8,
+          15,
+          0.9
+        ],
+        "icon-padding": 6,
+        "text-field": [
+          "get",
+          "name"
+        ],
+        "text-font": [
+          "Arial",
+          "sans-serif"
+        ],
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          11,
+          11,
+          12,
+          15,
+          13
+        ],
+        "text-max-width": 12,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          1.5
+        ],
+        "text-padding": 10,
+        "text-optional": false,
+        "text-variable-anchor": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "text-radial-offset": 0.8,
+        "text-justify": "auto"
+      },
+      "paint": {
+        "text-color": "#48463b",
+        "text-halo-color": "#fffdf5",
+        "text-halo-width": 1.3,
+        "text-halo-blur": 0.35
+      }
+    }
+  ],
+  "nearbySymbols": [
+    {
+      "name": "Lower Velma Lake",
+      "layer": "lake-labels",
+      "coordinates": [
+        -120.14166176319122,
+        38.938686784986515
+      ]
+    },
+    {
+      "name": "Phipps Pass",
+      "layer": "recreation-pois",
+      "coordinates": [
+        -120.1418548822403,
+        38.96018465492517
+      ]
+    },
+    {
+      "name": "Lower Velma Lake",
+      "layer": "lake-labels",
+      "coordinates": [
+        -120.14166176319122,
+        38.938686784986515
+      ]
+    },
+    {
+      "name": "Phipps Pass",
+      "layer": "recreation-pois",
+      "coordinates": [
+        -120.1418548822403,
+        38.96018465492517
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "tiles": 640,
+  "counts": {
+    "agencyEnds": 3571,
+    "sourceDeadEnds": 289,
+    "duplicateTermini": 7
+  },
+  "findings": []
+}

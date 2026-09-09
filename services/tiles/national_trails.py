@@ -16,7 +16,7 @@ from trail_matching import conflate, lines, paved_surface
 from shapely import make_valid
 from national_boundaries import cached, bounds, project
 
-DATASET_ID = 'us-official-trails-v10'
+DATASET_ID = 'us-official-trails-v11'
 RAW_CACHE_VERSION = 'us-official-trails-v1'
 MIN_ZOOM, MAX_ZOOM = 5, 14
 BOUNDS = [-180, 18, -60, 72]

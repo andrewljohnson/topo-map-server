@@ -222,3 +222,35 @@ class SurveySpikeTests(unittest.TestCase):
      p=Point(c)
      if any(p.distance(q)<.01 for q in original_ends):continue
      self.assertTrue(any(i!=j and p.distance(other)<1 for j,(_,other) in enumerate(segments)),row['name']+' has a newly disconnected end')
+
+class TerminalOffsetTests(unittest.TestCase):
+ def test_known_junction_terminal_offset_does_not_create_reverse_spur(self):
+  from shapely.geometry import box
+  from trail_matching import preserve_source_junctions
+  road=feature([(0,0),(100,0)],'Road','OpenStreetMap','osm')
+  original_branch=feature([(0,5),(50,5)],'Branch','USFS','branch')
+  parent=feature([(50,5),(50,100)],'Parent','USFS','parent')
+  stub={**original_branch,'geometry':LineString([(50,0),(50,5)])}
+  match=(parent['geometry'],box(49,4.5,51,100),road['geometry'],15.01,('USFS','parent'),parent['properties'])
+  result=preserve_source_junctions([road,stub],[original_branch,parent],[match])
+  self.assertTrue(result[1]['geometry'].is_empty)
+  self.assertTrue(result[0]['geometry'].equals(road['geometry']))
+ def test_actual_short_branch_with_two_original_ends_is_retained(self):
+  from shapely.geometry import box
+  from trail_matching import preserve_source_junctions
+  road=feature([(0,0),(100,0)],'Road','OpenStreetMap','osm')
+  branch=feature([(50,0),(50,5)],'Branch','USFS','branch')
+  parent=feature([(50,5),(50,100)],'Parent','USFS','parent')
+  match=(parent['geometry'],box(49,4.5,51,100),road['geometry'],15.01,('USFS','parent'),parent['properties'])
+  result=preserve_source_junctions([road,branch],[branch,parent],[match])
+  self.assertTrue(result[1]['geometry'].covers(branch['geometry']))
+ def test_duplicate_terminal_records_do_not_authorize_a_new_connection(self):
+  from shapely.geometry import box
+  from trail_matching import preserve_source_junctions
+  road=feature([(45,0),(45,100)],'Road','OpenStreetMap','osm')
+  branch=feature([(50,5),(50,100)],'Branch','USFS','branch')
+  duplicate=feature([(50,5),(50,100)],'Survey copy','USFS','copy')
+  match=(duplicate['geometry'],box(40,0,55,105),road['geometry'],15.01,('USFS','copy'),duplicate['properties'])
+  result=preserve_source_junctions([road,branch],[branch,duplicate],[match])
+  self.assertTrue(result[1]['geometry'].equals(branch['geometry']))
+  self.assertNotIn('junction_basis',result[1]['properties'])
