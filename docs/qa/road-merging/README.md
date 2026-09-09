@@ -1,7 +1,8 @@
 # Tahoe road matching and worker scaling
 
 The implementation uses general matching rules; there are no Tahoe-specific name
-or coordinate exceptions. Candidate release: `topo-z12-pilot-20260909-r2`.
+or coordinate exceptions. Promoted release: `topo-z12-pilot-20260909-r2`. The live website and Expo default
+metadata now point to this release.
 
 ## Generation
 
@@ -81,3 +82,12 @@ switchbacks, parallel roads, short junctions, campground lanes, full/partial
 pavement, conflicting surfaces and preservation of access/source records.
 
 ![Before and after road geometry](tahoe-before-after.png)
+
+## Published result
+
+All 352 objects generated, uploaded and remotely checksum-verified in 104.36
+seconds (earlier pilot: 162.06 seconds; transfer timing also varies). Fresh and
+cached runs of the real mobile queue each downloaded 37 unique base/DEM files
+for Tahoe/SF cells and reopened them with networking disabled. Runs took 5.08
+and 4.20 seconds; the test uses an in-memory filesystem, not a physical iPhone.
+Root metadata was checked after reversible promotion. Reload Expo to fetch it.
