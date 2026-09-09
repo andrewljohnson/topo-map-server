@@ -29,7 +29,9 @@ export class Usage {
 }
 async function meter(env,values){return env.USAGE.get(env.USAGE.idFromName('owner')).fetch('https://quota/',{method:'POST',body:JSON.stringify(values)})}
 async function object(env,key,ctx,ttl=86400){
- const url='https://tile-cache.invalid/'+key,cache=globalThis.caches?.default;
+ // Version the cache after correcting precompressed response handling; old entries
+ // may contain gzip bytes without Content-Encoding.
+ const url='https://tile-cache.invalid/manual-gzip-v2/'+key,cache=globalThis.caches?.default;
  const cached=cache?await cache.match(url):null;
  if(cached)return cached.status===404?null:cached;
  const item=await env.TILES.get(key);
