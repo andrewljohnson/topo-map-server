@@ -40,3 +40,19 @@ test('combined base uses a stable z12 network and one physical dataset at every 
  assert.ok(s.layers.every(l=>!l.source||s.sources[l.source]));
  assert.deepEqual(s.layers.find(l=>l.id==='official-roads-center').filter,['!=',['get','class'],'unclassified']);
 });
+
+test('walking paths share one hiker-facing trail style across all clients',async()=>{
+ const factories=[createStyle];
+ for(const file of ['../src/vectorStyle.ts','../../web/app/vectorStyle.ts']){
+  const code=ts.transpileModule(fs.readFileSync(new URL(file,import.meta.url),'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext}}).outputText;
+  factories.push((await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'))).createStyle);
+ }
+ for(const make of factories){
+  const style=make({...meta,combined:true,maxZoom:12},'base');
+  const trail=style.layers.find(l=>l.id==='trails-path');
+  assert.ok(JSON.stringify(trail.filter).includes('["path","footway"]'));
+  assert.ok(!style.layers.some(l=>l.id.includes('trails-footway')));
+  assert.ok(JSON.stringify(style.layers.find(l=>l.id==='trail-labels').paint['text-color']).includes('["path","footway"]'));
+  for(const id of ['trails-sidewalk','trails-step-treads','trails-cycleway'])assert.ok(style.layers.some(l=>l.id===id));
+ }
+});
