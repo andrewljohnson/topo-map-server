@@ -1,0 +1,26 @@
+{
+  "endpoint": "Cloudflare public speed-test upload endpoint",
+  "payload": "48 MiB total synthetic random bytes; no map data or credentials",
+  "trials": [
+    {
+      "bytes": 16777216,
+      "seconds": 1.2095753198955208,
+      "Mbps": 110.96268731044651,
+      "status": 200
+    },
+    {
+      "bytes": 16777216,
+      "seconds": 0.8144954571034759,
+      "Mbps": 164.78634328705482,
+      "status": 200
+    },
+    {
+      "bytes": 16777216,
+      "seconds": 1.3871498659718782,
+      "Mbps": 96.75791440599902,
+      "status": 200
+    }
+  ],
+  "medianMbps": 110.96268731044651,
+  "limitation": "Measures path to Cloudflare edge including request overhead, not sustained R2 object publication"
+}

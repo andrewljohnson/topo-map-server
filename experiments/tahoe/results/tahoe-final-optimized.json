@@ -1,0 +1,231 @@
+{
+  "workers": 4,
+  "executor": "processes",
+  "region": "tahoe",
+  "taskChunksize": 16,
+  "spatialOrder": "morton",
+  "vectorParents": 4,
+  "sources": {
+    "osm": {
+      "seconds": 1.383911931188777,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 0.2173978639766574,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 0.6961717151571065,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 4.2188341789878905,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 64
+    },
+    "amenities": {
+      "seconds": 0.11823226092383265,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 0.13142510899342597,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 0.31787442485801876,
+      "preparedCells": 1,
+      "prepareSeconds": 0.31469850009307265,
+      "parentTiles": 4,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "parents": [
+    {
+      "key": "12/681/1566",
+      "bytes": 242584,
+      "gzipBytes": 106701,
+      "packSeconds": 0.8459646529518068,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 22,
+        "osm__grass": 106,
+        "osm__forest": 159,
+        "osm__rock": 42,
+        "osm__water": 22,
+        "osm__waterline": 36,
+        "osm__building": 4,
+        "osm__rail": 0,
+        "osm__road": 157,
+        "osm__label": 3,
+        "osm__water_label": 12,
+        "osm__poi": 13,
+        "boundaries__areas": 39,
+        "landcover__landcover": 606,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 3,
+        "trails__network": 218,
+        "amenities__amenities": 56,
+        "waterways__waterline": 36,
+        "recreation__recreation": 10
+      },
+      "sha256": "fd1cfef19d279af7327c2b9a7cbe417e4f3e6e3dadb14bfa5a7612410aafee48"
+    },
+    {
+      "key": "12/681/1567",
+      "bytes": 205574,
+      "gzipBytes": 93502,
+      "packSeconds": 0.8625792330130935,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 35,
+        "osm__grass": 76,
+        "osm__forest": 52,
+        "osm__rock": 12,
+        "osm__water": 26,
+        "osm__waterline": 22,
+        "osm__building": 6,
+        "osm__rail": 0,
+        "osm__road": 117,
+        "osm__label": 3,
+        "osm__water_label": 14,
+        "osm__poi": 15,
+        "boundaries__areas": 64,
+        "landcover__landcover": 732,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 7,
+        "trails__network": 173,
+        "amenities__amenities": 24,
+        "waterways__waterline": 22,
+        "recreation__recreation": 13
+      },
+      "sha256": "1310acf717e726fae7661b94d531ed1d842f6f0211dca2088a009cc14aa56ba4"
+    },
+    {
+      "key": "12/682/1566",
+      "bytes": 509979,
+      "gzipBytes": 252002,
+      "packSeconds": 2.0068569460418075,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 432,
+        "osm__grass": 271,
+        "osm__forest": 237,
+        "osm__rock": 18,
+        "osm__water": 21,
+        "osm__waterline": 29,
+        "osm__building": 24,
+        "osm__rail": 0,
+        "osm__road": 672,
+        "osm__label": 41,
+        "osm__water_label": 2,
+        "osm__poi": 68,
+        "boundaries__areas": 16,
+        "landcover__landcover": 1160,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 0,
+        "trails__network": 781,
+        "amenities__amenities": 262,
+        "waterways__waterline": 20,
+        "recreation__recreation": 9
+      },
+      "sha256": "03b0571865195a1362b599b124d5a0b8ef47c9689814cb354cb5f52ba93459df"
+    },
+    {
+      "key": "12/682/1567",
+      "bytes": 401661,
+      "gzipBytes": 197238,
+      "packSeconds": 1.6552396258339286,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 479,
+        "osm__grass": 230,
+        "osm__forest": 507,
+        "osm__rock": 12,
+        "osm__water": 12,
+        "osm__waterline": 28,
+        "osm__building": 17,
+        "osm__rail": 0,
+        "osm__road": 526,
+        "osm__label": 19,
+        "osm__water_label": 2,
+        "osm__poi": 17,
+        "boundaries__areas": 22,
+        "landcover__landcover": 1417,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 3,
+        "trails__network": 599,
+        "amenities__amenities": 58,
+        "waterways__waterline": 28,
+        "recreation__recreation": 5
+      },
+      "sha256": "60ef808d7c539c54c7bbfc1e7684765ccbc2e6690b9885f55dd6c89975624ab5"
+    }
+  ],
+  "mode": "direct full-detail recreation + fine-child vector baseline",
+  "sourceCache": "retained local inputs; cache misses fetched",
+  "startedAt": 1788920290.160247,
+  "loadAverageStart": [
+    18.3828125,
+    19.54150390625,
+    20.078125
+  ],
+  "pipeline": {
+    "directRecreation": true,
+    "rawDemMosaic": true,
+    "reuseTrailBasemap": true,
+    "parallelPacking": true
+  },
+  "packingWallSeconds": 2.0088679410982877,
+  "dem": {
+    "tiles": 16,
+    "bytes": 25553295,
+    "seconds": 1.215707893949002,
+    "tileSize": 1024,
+    "compressionLevel": 3,
+    "executor": "processes",
+    "workers": 4,
+    "requiredNativeChunks": 20,
+    "missingNativeChunks": 0,
+    "prefetchWorkers": 16,
+    "prefetchSeconds": 1.0668300092220306e-06,
+    "generationSeconds": 1.214940652018413,
+    "intermediateChildPngs": 0
+  },
+  "resources": {
+    "userCpuSeconds": 1.779812,
+    "systemCpuSeconds": 0.033805999999999996,
+    "peakRssKiB": 89560,
+    "childUserCpuSeconds": 37.33357,
+    "childSystemCpuSeconds": 1.032648,
+    "maxChildPeakRssKiB": 358516,
+    "loadAverageEnd": [
+      19.234375,
+      19.68798828125,
+      20.12060546875
+    ]
+  },
+  "totalSeconds": 10.519095847848803,
+  "finishedAt": 1788920300.679342
+}

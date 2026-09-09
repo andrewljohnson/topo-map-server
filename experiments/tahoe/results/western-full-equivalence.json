@@ -1,0 +1,6 @@
+{
+  "identicalVectorParents": 4000,
+  "identicalDemParents": 4264,
+  "identicalElevationSamples": 4471128064,
+  "comparison": "First western run vs full retained-input rerun with 16 DEM threads"
+}

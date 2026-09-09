@@ -20,6 +20,7 @@ REGIONS={
  'tahoe':PARENTS,
  'tahoe-10x':[(x,y) for y in range(1560,1568) for x in range(680,685)],
  'sierra-100x':[(x,y) for y in range(1552,1572) for x in range(672,692)],
+ 'nyc-stress':[(x,y) for y in range(1539,1541) for x in range(1205,1207)],
  'sf-10x':[(x,y) for y in range(1580,1588) for x in range(653,658)],
  'smokies-10x':[(x,y) for y in range(1610,1618) for x in range(1095,1100)],
  'desert-10x':[(x,y) for y in range(1601,1609) for x in range(733,738)],
@@ -66,6 +67,21 @@ def acquire(task):
   blob=module.render_tile(z,x,y,**options);atomic(path,blob)
  return x%4,y%4,blob,time.monotonic()-start,hit
 
+
+def prefetch_dem(keys,workers=16):
+ import national_contours as usgs
+ chunks=set()
+ for x,y in keys:
+  for dx in (0,1):
+   for dy in (0,1):chunks.update(usgs.chunks_for_tile(13,x*2+dx,y*2+dy))
+ missing=[key for key in sorted(chunks) if not all((usgs.CACHE/'windows'/f'{key[0]}_{key[1]}{suffix}').exists() for suffix in ('.npz','.json'))]
+ start=time.monotonic()
+ def fetch(key):usgs.load_chunk(*key);return 1
+ if missing and workers:
+  with ThreadPoolExecutor(max_workers=workers) as pool:
+   for _ in pool.map(fetch,missing):pass
+ return {'requiredNativeChunks':len(chunks),'missingNativeChunks':len(missing),'prefetchWorkers':workers,'prefetchSeconds':time.monotonic()-start}
+
 def dem_parent(task):
  x,y,legacy,output,compression=task;canvas=np.empty((1024,1024),dtype='float32');module=importlib.import_module('national_dem')
  for dy in range(2):
@@ -79,7 +95,7 @@ def pack_parent(task):
  return {'key':f'12/{x}/{y}','bytes':len(blob),'gzipBytes':len(compressed),'packSeconds':time.monotonic()-start,'sourceFeatureCounts':counts,'sha256':hashlib.sha256(blob).hexdigest()}
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=4);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');p.add_argument('--executor',choices=('threads','processes'),default='processes');p.add_argument('--region',choices=tuple(REGIONS),default='tahoe');p.add_argument('--serial-pack',action='store_true');p.add_argument('--spatial-order',choices=('row','morton'),default='row');p.add_argument('--task-chunksize',type=int,choices=(1,4,16,64),default=1);p.add_argument('--dem-compression',type=int,choices=range(1,10),default=3);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=4);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');p.add_argument('--executor',choices=('threads','processes'),default='processes');p.add_argument('--region',choices=tuple(REGIONS),default='tahoe');p.add_argument('--serial-pack',action='store_true');p.add_argument('--spatial-order',choices=('row','morton'),default='row');p.add_argument('--task-chunksize',type=int,choices=(1,4,16,64),default=1);p.add_argument('--dem-executor',choices=('threads','processes'),default='processes');p.add_argument('--dem-prefetch-workers',type=int,choices=range(0,33),default=16);p.add_argument('--dem-workers',type=int,choices=range(1,33));p.add_argument('--dem-compression',type=int,choices=range(1,10),default=3);a=p.parse_args()
  out=OUT if a.region=='tahoe' else OUT.parent/(a.region+'-z12-v1')
  parents=sorted(REGIONS[a.region],key=morton_key) if a.spatial_order=='morton' else REGIONS[a.region]
  if shutil.disk_usage(out.parent).free<60*1024**3:raise RuntimeError('Experiment requires 60 GiB free disk reserve; release only expendable experiment outputs before continuing')
@@ -113,11 +129,18 @@ def main():
   packing_start=time.monotonic();packing_tasks=[(x,y,children,str(out)) for (x,y),children in parent_children.items()]
   packed=pool.map(pack_parent,packing_tasks) if a.executor=='processes' and not a.serial_pack else map(pack_parent,packing_tasks)
   report['parents']=list(packed);report['packingWallSeconds']=time.monotonic()-packing_start
-  dem_start=time.monotonic()
-  # Halo supplies neighboring elevation samples for contour stitching.
-  dem_keys=sorted({(x+dx,y+dy) for x,y in parents for dx in (-1,0,1) for dy in (-1,0,1)})
-  if a.spatial_order=='morton':dem_keys.sort(key=morton_key)
-  report['dem']={'tiles':len(dem_keys),'bytes':sum(pool.map(dem_parent,[(x,y,a.legacy_dem,str(out),a.dem_compression) for x,y in dem_keys])),'seconds':time.monotonic()-dem_start,'tileSize':1024,'compressionLevel':a.dem_compression,'intermediateChildPngs':len(dem_keys)*4 if a.legacy_dem else 0}
+ parent_children.clear();del packing_tasks
+ dem_workers=a.dem_workers or (16 if a.dem_executor=='threads' else min(8,a.workers))
+ dem_executor=ThreadPoolExecutor if a.dem_executor=='threads' else ProcessPoolExecutor
+ dem_options={} if a.dem_executor=='threads' else {'mp_context':multiprocessing.get_context('spawn')}
+ dem_start=time.monotonic()
+ # Halo supplies neighboring elevation samples for contour stitching.
+ dem_keys=sorted({(x+dx,y+dy) for x,y in parents for dx in (-1,0,1) for dy in (-1,0,1)})
+ if a.spatial_order=='morton':dem_keys.sort(key=morton_key)
+ prefetch=prefetch_dem(dem_keys,a.dem_prefetch_workers)
+ generation_start=time.monotonic()
+ with dem_executor(max_workers=dem_workers,**dem_options) as dem_pool:
+  report['dem']={'tiles':len(dem_keys),'bytes':sum(dem_pool.map(dem_parent,[(x,y,a.legacy_dem,str(out),a.dem_compression) for x,y in dem_keys])),'seconds':time.monotonic()-dem_start,'tileSize':1024,'compressionLevel':a.dem_compression,'executor':a.dem_executor,'workers':dem_workers,**prefetch,'generationSeconds':time.monotonic()-generation_start,'intermediateChildPngs':len(dem_keys)*4 if a.legacy_dem else 0}
  w,s,_,_=bounds(12,min(x for x,y in parents),max(y for x,y in parents));_,_,e,n=bounds(12,max(x for x,y in parents),min(y for x,y in parents))
  metadata={'name':a.region+' zoom-12 experiment','publicAccess':True,'bounds':[w,s,e,n],'center':[-120.035,38.905] if a.region=='tahoe' else [(w+e)/2,(s+n)/2],'initialZoom':12.5,'minZoom':12,'maxZoom':12,'datasetId':a.region+'-combined-v1','tileUrl':'/base/{z}/{x}/{y}.pbf','combined':True,'tilesets':{'dem':{'datasetId':a.region+'-dem-v1','tileUrl':'/dem/{z}/{x}/{y}.png','bounds':[w,s,e,n],'minZoom':12,'maxZoom':12,'tileSize':1024,'attribution':'Elevation: USGS 3DEP · Mapzen terrain'}}}
  usage=resource.getrusage(resource.RUSAGE_SELF);report['resources']={'userCpuSeconds':usage.ru_utime,'systemCpuSeconds':usage.ru_stime,'peakRssKiB':usage.ru_maxrss,'childUserCpuSeconds':resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime,'childSystemCpuSeconds':resource.getrusage(resource.RUSAGE_CHILDREN).ru_stime,'maxChildPeakRssKiB':resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss,'loadAverageEnd':os.getloadavg()};report['totalSeconds']=time.monotonic()-start;report['finishedAt']=time.time();atomic(out/'metadata.json',json.dumps(metadata).encode());atomic(out/'report.json',json.dumps(report,indent=2).encode());atomic(out/'reports'/f'{time.time_ns()}.json',json.dumps(report,indent=2).encode());print(json.dumps(report),flush=True)

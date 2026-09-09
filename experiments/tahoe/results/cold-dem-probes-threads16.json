@@ -1,0 +1,20 @@
+[
+  {
+    "executor": "threads",
+    "tag": "threads16",
+    "region": "tahoe",
+    "startedAt": 1788917984.908165,
+    "seconds": 67.08493580599315,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 16,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 120,
+    "nativeCacheBytes": 385401459,
+    "seededCatalogFiles": 254,
+    "demBytes": 243451444,
+    "workerCpuSeconds": 66.146738,
+    "maxWorkerRssKiB": 1112596,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  }
+]

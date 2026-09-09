@@ -1,0 +1,224 @@
+{
+  "workers": 2,
+  "executor": "processes",
+  "region": "nyc-stress",
+  "taskChunksize": 64,
+  "spatialOrder": "morton",
+  "vectorParents": 4,
+  "sources": {
+    "osm": {
+      "seconds": 28.181344352895394,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 5.549473627004772,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 5.302809861954302,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 26.151645875070244,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 64
+    },
+    "amenities": {
+      "seconds": 32.291388287907466,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 1.7654879519250244,
+      "childTiles": 64,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 12.916308612097055,
+      "preparedCells": 2,
+      "prepareSeconds": 12.910706332884729,
+      "parentTiles": 4,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "parents": [
+    {
+      "key": "12/1205/1539",
+      "bytes": 1595024,
+      "gzipBytes": 943112,
+      "packSeconds": 9.584654998034239,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 246,
+        "osm__grass": 1062,
+        "osm__forest": 80,
+        "osm__rock": 8,
+        "osm__water": 57,
+        "osm__waterline": 17,
+        "osm__building": 407,
+        "osm__rail": 201,
+        "osm__road": 2287,
+        "osm__label": 39,
+        "osm__water_label": 3,
+        "osm__poi": 500,
+        "boundaries__areas": 2,
+        "landcover__landcover": 1266,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 0,
+        "trails__network": 2288,
+        "amenities__amenities": 2630,
+        "waterways__waterline": 8,
+        "recreation__recreation": 5
+      },
+      "sha256": "b7b5c07f6148a59245bdf1226d3ec38f14ea3bc028dfd1cad736745febd6e91b"
+    },
+    {
+      "key": "12/1206/1539",
+      "bytes": 2550129,
+      "gzipBytes": 1476694,
+      "packSeconds": 6.899375703884289,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 476,
+        "osm__grass": 1702,
+        "osm__forest": 103,
+        "osm__rock": 44,
+        "osm__water": 61,
+        "osm__waterline": 25,
+        "osm__building": 1364,
+        "osm__rail": 261,
+        "osm__road": 2814,
+        "osm__label": 72,
+        "osm__water_label": 10,
+        "osm__poi": 1233,
+        "boundaries__areas": 6,
+        "landcover__landcover": 1143,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 0,
+        "trails__network": 2814,
+        "amenities__amenities": 8827,
+        "waterways__waterline": 3,
+        "recreation__recreation": 5
+      },
+      "sha256": "2f9f665cdffc68e34ad3a7345b1b42ce0a0c10a30ab0a294695da88a3ccf5fd0"
+    },
+    {
+      "key": "12/1205/1540",
+      "bytes": 652792,
+      "gzipBytes": 414565,
+      "packSeconds": 1.6952920879703015,
+      "sourceFeatureCounts": {
+        "osm__land": 15,
+        "osm__residential": 82,
+        "osm__grass": 794,
+        "osm__forest": 66,
+        "osm__rock": 10,
+        "osm__water": 53,
+        "osm__waterline": 20,
+        "osm__building": 363,
+        "osm__rail": 59,
+        "osm__road": 937,
+        "osm__label": 24,
+        "osm__water_label": 4,
+        "osm__poi": 217,
+        "boundaries__areas": 12,
+        "landcover__landcover": 685,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 0,
+        "trails__network": 950,
+        "amenities__amenities": 1267,
+        "waterways__waterline": 7,
+        "recreation__recreation": 32
+      },
+      "sha256": "b60683003e0bd224ad048ac205e7c4a68c7bc0c4e0454e29c8b164f56a16f4f8"
+    },
+    {
+      "key": "12/1206/1540",
+      "bytes": 2493100,
+      "gzipBytes": 1405173,
+      "packSeconds": 7.166112308157608,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 472,
+        "osm__grass": 1348,
+        "osm__forest": 83,
+        "osm__rock": 11,
+        "osm__water": 44,
+        "osm__waterline": 14,
+        "osm__building": 609,
+        "osm__rail": 114,
+        "osm__road": 2569,
+        "osm__label": 30,
+        "osm__water_label": 4,
+        "osm__poi": 940,
+        "boundaries__areas": 0,
+        "landcover__landcover": 1314,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 0,
+        "trails__network": 2569,
+        "amenities__amenities": 5012,
+        "waterways__waterline": 6,
+        "recreation__recreation": 5
+      },
+      "sha256": "6c49163f96e34b4a36d6ecca351d57ff9ebc0cb66eeebee1ee201adbaa95823b"
+    }
+  ],
+  "mode": "direct full-detail recreation + fine-child vector baseline",
+  "sourceCache": "retained local inputs; cache misses fetched",
+  "startedAt": 1788917442.9360998,
+  "loadAverageStart": [
+    21.5751953125,
+    22.7724609375,
+    22.08935546875
+  ],
+  "pipeline": {
+    "directRecreation": true,
+    "rawDemMosaic": true,
+    "reuseTrailBasemap": true,
+    "parallelPacking": true
+  },
+  "packingWallSeconds": 16.027505530044436,
+  "dem": {
+    "tiles": 16,
+    "bytes": 18659324,
+    "seconds": 58.10541044990532,
+    "tileSize": 1024,
+    "compressionLevel": 3,
+    "intermediateChildPngs": 0
+  },
+  "resources": {
+    "userCpuSeconds": 12.702118,
+    "systemCpuSeconds": 0.138632,
+    "peakRssKiB": 242284,
+    "childUserCpuSeconds": 105.12467,
+    "childSystemCpuSeconds": 1.004974,
+    "maxChildPeakRssKiB": 487724,
+    "loadAverageEnd": [
+      20.73486328125,
+      21.88916015625,
+      21.869140625
+    ]
+  },
+  "totalSeconds": 186.40878450497985,
+  "finishedAt": 1788917629.344883
+}

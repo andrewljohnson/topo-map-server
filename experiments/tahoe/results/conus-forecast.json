@@ -1,0 +1,114 @@
+{
+  "counts": {
+    "detailedVectorParents": 144027,
+    "detailedDemParents": 146681,
+    "worldBaseZ0To7": 21845,
+    "conusBaseZ8To11": 48750
+  },
+  "coldDemProjections": [
+    {
+      "region": "tahoe",
+      "workers": 8,
+      "executor": "processes",
+      "hours": 26.920259330950486,
+      "GB": 247.98403650947222
+    },
+    {
+      "region": "kansas",
+      "workers": 8,
+      "executor": "processes",
+      "hours": 26.35818269842468,
+      "GB": 185.16530078343058
+    },
+    {
+      "region": "cascades",
+      "workers": 8,
+      "executor": "processes",
+      "hours": 26.391726470406986,
+      "GB": 273.6246443661042
+    },
+    {
+      "region": "tahoe",
+      "workers": 16,
+      "executor": "threads",
+      "hours": 18.98164635215834,
+      "GB": 247.98403650947222
+    },
+    {
+      "region": "kansas",
+      "workers": 16,
+      "executor": "threads",
+      "hours": 18.796650305399407,
+      "GB": 185.16530078343058
+    },
+    {
+      "region": "tahoe",
+      "workers": 8,
+      "executor": "prefetch",
+      "hours": 14.20946099788578,
+      "GB": 247.98403650947222
+    },
+    {
+      "region": "kansas",
+      "workers": 8,
+      "executor": "prefetch",
+      "hours": 16.95971784671557,
+      "GB": 185.16530078343058
+    }
+  ],
+  "westernVectorStageLinearHours": 5.337502777707123,
+  "planningHours": {
+    "detailedVectors": [
+      8,
+      12
+    ],
+    "coldDem": [
+      19,
+      27
+    ],
+    "overviews": [
+      3,
+      6
+    ],
+    "preparationAndValidationReserve": [
+      6,
+      12
+    ],
+    "totalWithOverlappingUpload": [
+      36,
+      60
+    ]
+  },
+  "storageGB": [
+    210,
+    320
+  ],
+  "r2StandardStorageDollarsPerMonth": [
+    3.0,
+    4.6499999999999995
+  ],
+  "uploadSensitivity": [
+    {
+      "Mbps": 20,
+      "hoursFor210GB": 23.333333333333332,
+      "hoursFor320GB": 35.55555555555556
+    },
+    {
+      "Mbps": 50,
+      "hoursFor210GB": 9.333333333333334,
+      "hoursFor320GB": 14.222222222222221
+    },
+    {
+      "Mbps": 100,
+      "hoursFor210GB": 4.666666666666667,
+      "hoursFor320GB": 7.111111111111111
+    }
+  ],
+  "measuredCloudflareEdgeUploadMbps": 110.96268731044651,
+  "limitations": [
+    "The western vector estimate needs regional density/acquisition allowance.",
+    "Cold DEM probes use empty native caches but retain already-pinned source catalogs and the global fallback cache.",
+    "Cloudflare edge throughput is not an R2 publication benchmark.",
+    "36\u201360 hours is a planning range, dependent on source availability and successful release-contract pilot."
+  ]
+}

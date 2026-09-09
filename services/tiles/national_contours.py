@@ -237,7 +237,7 @@ def inverse_mercator(x, y):
     return x*360-180, math.degrees(math.atan(math.sinh(math.pi*(1-2*y))))
 
 
-def read_tile_dem(z, x, y):
+def tile_window(z, x, y):
     normalized = tile_bounds(z, x, y)
     pad = 8/256/(2**z)
     west, north = inverse_mercator(normalized[0]-pad, normalized[1]-pad)
@@ -245,6 +245,17 @@ def read_tile_dem(z, x, y):
     # Consistent global integer grid; halo extends beyond the MVT buffer.
     col0=max(0,math.floor((west+180)/RESOLUTION)-2); col1=min(GLOBAL_WIDTH,math.ceil((east+180)/RESOLUTION)+2)
     row0=max(0,math.floor((90-north)/RESOLUTION)-2); row1=min(GLOBAL_HEIGHT,math.ceil((90-south)/RESOLUTION)+2)
+    return col0, row0, col1, row1
+
+
+def chunks_for_tile(z, x, y):
+    col0,row0,col1,row1=tile_window(z,x,y)
+    return [(cx,cy) for cy in range(row0//CHUNK,(row1-1)//CHUNK+1)
+            for cx in range(col0//CHUNK,(col1-1)//CHUNK+1)]
+
+
+def read_tile_dem(z, x, y):
+    col0,row0,col1,row1=tile_window(z,x,y)
     data=np.full((row1-row0,col1-col0),np.nan,dtype='float32')
     used=[]
     for cy in range(row0//CHUNK,(row1-1)//CHUNK+1):

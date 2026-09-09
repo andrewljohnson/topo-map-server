@@ -312,8 +312,8 @@ DEMs and 58.95 s for packing. It produced 30,276,120 compressed vector bytes and
 OSM/boundary children; it is not the total first-acquisition time.
 
 The next **full vector regeneration**, using all retained raw inputs and the
-new geometry/compression paths, took **173.11 s** with four workers. Further
-controlled spatial-order and worker-count comparisons are running. Separate
+new geometry/compression paths, took **173.11 s** with four workers. Subsequent
+controlled spatial-order and worker-count comparisons are recorded below. Separate
 `sf-10x`, `smokies-10x`, `desert-10x` (40 parents each) and `western-1000x`
 (4,000 parents) fixtures permit the authorized representative and next-scale
 checks without exposing arbitrary nationwide execution. A 60 GiB free-disk
@@ -323,3 +323,47 @@ Validation: 93 national tile tests pass with `OSM_ENRICHMENT_DB` pointed at a
 nonexistent temporary path, isolating HTTP-fallback tests from the installed
 local OSM database. Seven experiment tests pass, and the original four-parent
 full feature reference still matches. No source index or raw input was deleted.
+
+
+## Final staged result and execution strategy
+
+The 4,000-parent western first build finished in **878.33 s**, producing
+4,264 DEMs and 6.91 GB of final files. It required 2,926 native DEM chunks and
+reused most existing native inputs. To avoid an optimistic cold estimate,
+separate empty native caches were tested in Tahoe, Kansas and the Cascades.
+Eight processes produced 144 DEM parents in 93–95 s in each region.
+
+Sixteen threads improved cold runs to 66–67 s, but the large warm run exposed a
+CPU bottleneck: its DEM phase took **560.99 s**. The selected pipeline therefore
+uses **16 threads only to prefetch missing native chunks, followed by 8 processes
+for reprojection and PNG encoding**. Cold Tahoe/Kansas probes now take **50–60 s**;
+the warm 4,264-DEM phase takes **119.54 s**. Every output PNG is byte-identical.
+Thirty-two threads had a slow tail and were not selected. Existing AI training
+was left running throughout these comparisons.
+
+`--dem-prefetch-workers` defaults to 16, `--dem-executor` to processes, and DEM
+render workers default to the selected vector worker count (up to eight).
+`--dem-prefetch-workers 0` preserves an unprefetched comparison. The planner uses
+the same native-window calculation as rendering, verified by a regression test.
+
+The complete western rerun retained all **4,000 vector hashes and 4,264 DEM hashes**,
+covering 4,471,128,064 identical elevation samples. New York's dense four-parent
+stress test peaked at 1.48 MB compressed / 2.55 MB raw per combined base tile.
+Native overview samples were also composed without changing source geometry,
+IDs, properties or buffers.
+
+The [CONUS plan](../../docs/qa/zoom12-conus-plan.md) reserves **36–60 hours locally**
+for the nationwide rollout, with continuous verified R2 upload and a bounded
+scratch spool. The corpus is approximately 210–320 GB; keeping all of it on this
+box is not the plan. No nationwide generation or experimental R2 publication
+has started. Existing raw sources, phone samples and training jobs remain intact.
+
+The local viewer now has links for the original fixture, the larger Tahoe region
+and San Francisco. `add_sample_overviews.py` adds z10–11 base overviews to the two
+larger samples; all detailed vectors and DEMs still stop at z12. These are browser
+experiments, and Expo/public production retain their existing datasets.
+
+The final four-parent Tahoe regeneration takes **10.52 s**, including 16 DEMs,
+with the selected prefetch/process path and retained raw inputs. Its full feature
+reference still matches. Final validation: 94 national tests, seven experiment
+tests, native overview equivalence, web type checking and production build pass.

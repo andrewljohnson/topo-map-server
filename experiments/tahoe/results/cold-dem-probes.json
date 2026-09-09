@@ -1,0 +1,50 @@
+[
+  {
+    "region": "tahoe",
+    "startedAt": 1788917653.0542536,
+    "seconds": 95.14158232603222,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 8,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 120,
+    "nativeCacheBytes": 385401459,
+    "seededCatalogFiles": 254,
+    "demBytes": 243451444,
+    "workerCpuSeconds": 76.105835,
+    "maxWorkerRssKiB": 413052,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  },
+  {
+    "region": "kansas",
+    "startedAt": 1788917748.204934,
+    "seconds": 93.15509105380625,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 8,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 120,
+    "nativeCacheBytes": 373282170,
+    "seededCatalogFiles": 254,
+    "demBytes": 181780894,
+    "workerCpuSeconds": 81.20443,
+    "maxWorkerRssKiB": 414820,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  },
+  {
+    "region": "cascades",
+    "startedAt": 1788917841.3693316,
+    "seconds": 93.27364145498723,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 8,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 108,
+    "nativeCacheBytes": 376128367,
+    "seededCatalogFiles": 254,
+    "demBytes": 268623399,
+    "workerCpuSeconds": 71.082317,
+    "maxWorkerRssKiB": 407796,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  }
+]

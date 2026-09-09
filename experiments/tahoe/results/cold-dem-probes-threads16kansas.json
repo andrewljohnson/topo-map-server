@@ -1,0 +1,20 @@
+[
+  {
+    "executor": "threads",
+    "tag": "threads16kansas",
+    "region": "kansas",
+    "startedAt": 1788918527.8597617,
+    "seconds": 66.43112276517786,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 16,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 120,
+    "nativeCacheBytes": 373282170,
+    "seededCatalogFiles": 254,
+    "demBytes": 181780894,
+    "workerCpuSeconds": 68.35182999999999,
+    "maxWorkerRssKiB": 1087360,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  }
+]

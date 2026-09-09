@@ -76,4 +76,17 @@ class NationalContoursTests(unittest.TestCase):
   lines=list(nc.contour_lines(dem,Affine(1,0,0,0,-1,16),box(0,0,16,16)))
   self.assertTrue(any(feet<0 for feet,line in lines));self.assertFalse(any(feet==0 for feet,line in lines))
 
+
+class NativeChunkPlanningTests(unittest.TestCase):
+ def test_prefetch_chunk_set_matches_actual_mosaic_reads(self):
+  from unittest.mock import patch
+  import numpy as np
+  import national_contours as n
+  coords=(13,1362,3132)
+  def fake(cx,cy):return np.ones((n.CHUNK,n.CHUNK),dtype='float32'),{'chunk':[cx,cy]}
+  with patch.object(n,'load_chunk',side_effect=fake) as load:
+   values,transform,provenance=n.read_tile_dem(*coords)
+  self.assertEqual(set(n.chunks_for_tile(*coords)),{tuple(c.args) for c in load.call_args_list})
+  self.assertTrue(np.all(values==1))
+
 if __name__=='__main__':unittest.main()

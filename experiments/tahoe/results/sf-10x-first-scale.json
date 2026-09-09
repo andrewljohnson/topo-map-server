@@ -1,0 +1,142 @@
+{
+  "workers": 8,
+  "executor": "processes",
+  "region": "sf-10x",
+  "taskChunksize": 64,
+  "spatialOrder": "morton",
+  "vectorParents": 40,
+  "sources": {
+    "osm": {
+      "seconds": 10.497007687110454,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 0.40171643905341625,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 5.935912898043171,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 17.64909278904088,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 640
+    },
+    "amenities": {
+      "seconds": 5.093215323984623,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 2.485426038969308,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 16.84230284509249,
+      "preparedCells": 4,
+      "prepareSeconds": 16.818712490145117,
+      "parentTiles": 40,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "mode": "direct full-detail recreation + fine-child vector baseline",
+  "sourceCache": "retained local inputs; cache misses fetched",
+  "startedAt": 1788916191.123217,
+  "loadAverageStart": [
+    23.224609375,
+    20.78564453125,
+    19.869140625
+  ],
+  "pipeline": {
+    "directRecreation": true,
+    "rawDemMosaic": true,
+    "reuseTrailBasemap": true,
+    "parallelPacking": true
+  },
+  "packingWallSeconds": 25.331469080178067,
+  "dem": {
+    "tiles": 70,
+    "bytes": 68816770,
+    "seconds": 6.512882438953966,
+    "tileSize": 1024,
+    "compressionLevel": 3,
+    "intermediateChildPngs": 0
+  },
+  "resources": {
+    "userCpuSeconds": 18.235142,
+    "systemCpuSeconds": 0.14873,
+    "peakRssKiB": 209596,
+    "childUserCpuSeconds": 317.505767,
+    "childSystemCpuSeconds": 3.097539,
+    "maxChildPeakRssKiB": 486064,
+    "loadAverageEnd": [
+      24.29638671875,
+      21.76904296875,
+      20.3115234375
+    ]
+  },
+  "totalSeconds": 91.0067728238646,
+  "finishedAt": 1788916282.1299891,
+  "vectorBytes": 15157070,
+  "attemptWallSeconds": 91.29436159133911,
+  "parentHashes": {
+    "12/653/1580": "c31fe468449a22508020cb886a9ae4c8056fb90c85765cc2a8d1fedc1b78dede",
+    "12/653/1581": "d2ff8b41a449faf1bb4f5af0b5201626b94194f11b3780e064b20fdff7673c8b",
+    "12/654/1580": "1e3b72d99534b3bcf5126f8d2b245ae04903c495919f8db57c5900aa6ab8c354",
+    "12/655/1580": "b1a00a262715c19d8b95724bba2ff02e8763f0ac7d2c9c704f9b18ad7ad9eb2e",
+    "12/654/1581": "bc1fbf14ebb1156ffec0c1e2bf23ef28b158724edd30135c211856ea9639d8ac",
+    "12/655/1581": "08ab3e332dc16c84daf1def538d1fb84e796e6d77df5d97e7820f5ddbe7581c4",
+    "12/653/1582": "96bb5c7cfab6872433bbd3c560a81658cfda6a8b08e0bd047affb56c1fa5db6b",
+    "12/653/1583": "93acf15d6fc5d2be71167595aaaa50b6223e7942e7650050c064a56b630b27a8",
+    "12/654/1582": "0d1d9a9b130a1fdf16411bdf6cf9b97d7774b1a50d6630a5904f4a973bdd3e82",
+    "12/655/1582": "11b7f9935eabe5995a6530ac1cbfbefcc3c9f59a0d1ff14bb4ec74c9a16dd31a",
+    "12/654/1583": "0f5d6256b4b1ab04bc6f168d4c48d8e0f13e4345b5928e3c7df1cae0b08d4d80",
+    "12/655/1583": "25a3a56106c2395ce5c0836409b9bc811f06b5bab1c803148364136785d29aad",
+    "12/656/1580": "0788ca5865c0cce2213393a52292f66d5434787eb076133f2cd6eb46ddc671bf",
+    "12/657/1580": "29a647595522217c9e6e84fcb6e3b7956a25d47575ed31b636c1f96c9fb67ab0",
+    "12/656/1581": "ef054f6ce17d54156de90aeca4429b34f2466b7407a09a89deb6593d89b226c4",
+    "12/657/1581": "e9a3e83d9c26607a163ead0bff8b002cf14572affbe0e21be9fcfa452c7caff3",
+    "12/656/1582": "ba756895bb09d27ef3064eb2ecd6740766a3d0e6469402c1042226d2aa1f5983",
+    "12/657/1582": "22fea4c78412b1b8bdf141d302635a6b723e858eb79e8038212f79e429f125d6",
+    "12/656/1583": "42d33bbfd0e8eaf954dff6380e9a27ad81de4d28253ce8495ecda19ab66bf270",
+    "12/657/1583": "d048c28c777cb49ca7278de6b1a974e5c9ceab4a9eb1b601f38d9edf8b65b745",
+    "12/653/1584": "99ad4d50ca7710b36164d7223ea09c29ccdbf9c8fdb796815c02cbcdcc71c067",
+    "12/653/1585": "a52c18959720aae7262f719824357aa9d430a49e4fb0f91c49b4a92a848701d0",
+    "12/654/1584": "9681c3a0530c114ee6a3907ef6fd3e2a1b932484184f8cef8865401ea5b6e8ac",
+    "12/655/1584": "523e19131fcfcc8ba228ee0500a12a105e630e1068d444a23f855d21c86b5a4b",
+    "12/654/1585": "7a4d3f6dd6798efd7bcddeee7174e6a0cce625b56c3639ffcb3a8f38fd307297",
+    "12/655/1585": "93c1e0222ace63f265e2b3d27894ba325ac4ee5c132f9c57adaa3dae88a7dfa5",
+    "12/653/1586": "4039b7a8ef90962044ac92871ea86dd932ee2f61d752aa69c33953ba2cce8564",
+    "12/653/1587": "a5bfd4a09d1a1d34df27ce1d722ac061286037002209ba13c19d94adcbf3c767",
+    "12/654/1586": "b17c1abd50e3fd1cae9a51e14f326c169f9b3a51eae4c65c9a9cc8fbbce1135b",
+    "12/655/1586": "63d5822b6f8637444e1daa000f671e60ad94921be7b9449cbdff9206b90351e2",
+    "12/654/1587": "472bbc175ab1848d065cd1cb555d93f8d6e01f9fdc87396b5196b59dc927733e",
+    "12/655/1587": "16a73578f51292d239ff226926cbe1fcd80ca0d2797a1f89466c4a7c52d5472f",
+    "12/656/1584": "99ad4d50ca7710b36164d7223ea09c29ccdbf9c8fdb796815c02cbcdcc71c067",
+    "12/657/1584": "8d6c7fb3180f37fb740eb043a8f9da71f0248f987b07d1900ba8ac4128f02d5f",
+    "12/656/1585": "a047a90ece180ae44820dd98f3efcc2362dfc8a6e21b7fe7217087d1af4343ba",
+    "12/657/1585": "5677264d424d76410c61dcccd5c526d63eb7505e35f8442b845c5543a357ab77",
+    "12/656/1586": "7639b1a59827333ebf6405fa8b7719a977f6629a6ca597d20a1cf8d9eca53283",
+    "12/657/1586": "c716f0a74829c711ad18ad2dfcb73cde0f207fcc0fa3061a0f9475bd8c7ae3a0",
+    "12/656/1587": "58afdcdd98336650bf592faf1e82a9a3a6242e6d4e2771ab05145d19b6564207",
+    "12/657/1587": "927dee85a925cd2f05b3d2a3fcab099d99ded8a04d5ae87f40ce4b599fbf8aa0"
+  }
+}

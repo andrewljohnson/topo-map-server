@@ -1,6 +1,6 @@
 export const vectorSets=['osm','amenities','boundaries','waterways','landcover','trails','recreation'];
 export function combineStyle(style:any,metadata:any){
- const base={...style.sources.osm,minzoom:12,maxzoom:12,bounds:metadata.bounds};
+ const base={...style.sources.osm,minzoom:metadata.minZoom??12,maxzoom:12,bounds:metadata.bounds};
  for(const layer of style.layers){if(vectorSets.includes(layer.source)&&layer['source-layer']){layer['source-layer']=layer.source+'__'+layer['source-layer'];layer.source='osm';}}
  for(const name of vectorSets)delete style.sources[name];style.sources.osm=base;
  return style;

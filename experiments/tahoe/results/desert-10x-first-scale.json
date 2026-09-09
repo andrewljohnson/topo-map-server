@@ -1,0 +1,142 @@
+{
+  "workers": 8,
+  "executor": "processes",
+  "region": "desert-10x",
+  "taskChunksize": 64,
+  "spatialOrder": "morton",
+  "vectorParents": 40,
+  "sources": {
+    "osm": {
+      "seconds": 10.301911665126681,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 13.477967264130712,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 6.100304816151038,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 8.030781574780121,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 640
+    },
+    "amenities": {
+      "seconds": 2.2687943449709564,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 2.307884265901521,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 1.604742794064805,
+      "preparedCells": 6,
+      "prepareSeconds": 1.5985638794954866,
+      "parentTiles": 40,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "mode": "direct full-detail recreation + fine-child vector baseline",
+  "sourceCache": "retained local inputs; cache misses fetched",
+  "startedAt": 1788916452.6085134,
+  "loadAverageStart": [
+    22.0068359375,
+    21.79736328125,
+    20.5703125
+  ],
+  "pipeline": {
+    "directRecreation": true,
+    "rawDemMosaic": true,
+    "reuseTrailBasemap": true,
+    "parallelPacking": true
+  },
+  "packingWallSeconds": 11.632689936086535,
+  "dem": {
+    "tiles": 70,
+    "bytes": 119399875,
+    "seconds": 2.7458249060437083,
+    "tileSize": 1024,
+    "compressionLevel": 3,
+    "intermediateChildPngs": 0
+  },
+  "resources": {
+    "userCpuSeconds": 2.9805729999999997,
+    "systemCpuSeconds": 0.07796199999999999,
+    "peakRssKiB": 117688,
+    "childUserCpuSeconds": 265.677784,
+    "childSystemCpuSeconds": 3.564955,
+    "maxChildPeakRssKiB": 711760,
+    "loadAverageEnd": [
+      23.3505859375,
+      22.1767578125,
+      20.7705078125
+    ]
+  },
+  "totalSeconds": 59.403986781137064,
+  "finishedAt": 1788916512.012499,
+  "vectorBytes": 8601361,
+  "attemptWallSeconds": 59.7096893787384,
+  "parentHashes": {
+    "12/733/1601": "83b1511a810d0d091262e450a2dd25c4031c9980ead0c1f77fa2af1565539af5",
+    "12/734/1601": "b16b66b2ef1b695f0a7e4101180c96f3330fc221ffe09e834ba161df2ef0c48b",
+    "12/735/1601": "6f17c8ab9f6b56a658f3159375018c957ef99887198ebb354633d5594f9f729a",
+    "12/733/1602": "3e6a5398f0892d3d0dd90347d2675fd2faac4c51e6428faf813a2f57f6fc92dc",
+    "12/733/1603": "3bf5008e85ffe2b77325102fbefa5eea74bba1dd2e82503d8384acde2c1fb07b",
+    "12/734/1602": "283cfc4d97b556ac6ff5ec591e2b384f574cb2796776ade69249799ede8d2d92",
+    "12/735/1602": "cdbc86afe89bec65f71e69bfd5b97a16210abba1b04fc4be01686326292d4574",
+    "12/734/1603": "36026f44a05eb1d577d71f4f9b20196c47e232050a456afb4b14b31cb4e859ba",
+    "12/735/1603": "0513ed199b8d8eaa7daea53ad1f6b3f3c1e354589ce336784942df2ecbf9f44e",
+    "12/733/1604": "e27db923950533b570cbd5cbf0c59bf14ccf5cd12a7de5ed78fbdedeba6e7fde",
+    "12/733/1605": "a251b2d4a568f8ec71675ee2c4d4f2eb798c19bec79395e6c945c4850adf5db0",
+    "12/734/1604": "3e405ed2a2b607f135bcd7eca6ed1619f30435813003a25270f36d5901a77365",
+    "12/735/1604": "1b0a369eb85f71927348b0d32481bad06b546c378a6ad94f08044bb201e7e325",
+    "12/734/1605": "13840ec567e0d899a5e06f8554fbf1793dad2f1aadc7f92296123434731dd12e",
+    "12/735/1605": "497dbcaefe342f51608b7a2d98f201273965770b6c2fb93e2885c8f9be987528",
+    "12/733/1606": "1fb131c28129ae10862030e774526eb6c0c2ff81a86ba4d937f25b7769060166",
+    "12/733/1607": "da198f458cdac59d407c2c3a378ef00377c15d5d6caf59e50f738ef3d30cc1cb",
+    "12/734/1606": "d8bb085d8dc1f97eec690da735d0cdb076eb95c7b2d22b769eb7651208a0dde1",
+    "12/735/1606": "6da1b74571a9fe06a7d30f36ee7da2faa0f91d82e695b43c5888f0b3a2df1f0c",
+    "12/734/1607": "ec761d761bc00cc951687fd7b0626c672cb9bacf6176cb6c8bdd23d8d85917c7",
+    "12/735/1607": "e6dc2413fd78159ea73fbbb68a5344a5271b6af9c0292754e4aad296471380f7",
+    "12/733/1608": "33634aa876c2d894e70913a7c2b9af448c8ed12c6282340697592fc8717dcc28",
+    "12/734/1608": "469df364b207f926564d6c74fb9e0fc6cffc81fd5cbf6e67704d6fe2c2803610",
+    "12/735/1608": "3f0fe417cc6182f16a26d31536e53dcba894d6128498618e7abc189eeaa09976",
+    "12/736/1601": "60444c92c717de81a62cb25b26221bff0a01286c57dfea14c9b3f2292367829f",
+    "12/737/1601": "2714bbed7b6941d73b5ec007bda46c9435ee79f6ba7e7d6954f293d89aa2b7e0",
+    "12/736/1602": "65408175c82b736b5861943df85b5963df251dfb0cf16fc108690809110d5db8",
+    "12/737/1602": "413d2a0b296ad8901651d26278efd725321e67fa99a70e7e799eaeef6e6374a3",
+    "12/736/1603": "b31c67ce1121f8db77af30c53eba2be774226332c0a89cf7e567ddd662664efd",
+    "12/737/1603": "54600af6c05bb440d31a7b4251c1e30aca1100d194f3d5b3025668710716649d",
+    "12/736/1604": "d203a74a7f6916e6560840f09f8f0d7c1a94d709cea8cd2e060dba85920b841e",
+    "12/737/1604": "8fada232d076597b6fedf16c75cef20504e4b0c4ecaa142cf5811d815555c86a",
+    "12/736/1605": "4b7b8898e94ab18895e323e73769379c8311f58c6b92e866ada6180a0e9376bc",
+    "12/737/1605": "55bedd6c465a297b1d647f980ce91d44ad35caac359446b41142136ed9d942be",
+    "12/736/1606": "1d7530923e0c1aabd7b5803100ecd5837fcd9b4aec92e0afc9eba48d45014fa7",
+    "12/737/1606": "d0d651a739c7ffa6329065f4976545cdd001948ef5cde17c9052158ceb344a5a",
+    "12/736/1607": "d4f664f75ba2f4711ba089c809d1ba2e0052c59112098a2aaffc5bd042e17085",
+    "12/737/1607": "548dca3d168f81d3b6aeaf7b39ebf1d3639fd1a58d5ce6e5e58dcdcb4a9065ed",
+    "12/736/1608": "8da39eeed897924a2c36fe41ef7bbe7d85d71f1fd87b772454323b9507ba37cd",
+    "12/737/1608": "f514f3cf1e919e04ee58334f5cc512ebd84c44f3026dd0f9f3bc655bbfe36589"
+  }
+}

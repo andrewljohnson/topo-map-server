@@ -1,0 +1,24 @@
+[
+  {
+    "requiredNativeChunks": 120,
+    "missingNativeChunks": 120,
+    "prefetchWorkers": 16,
+    "prefetchSeconds": 45.21153813204728,
+    "executor": "prefetch",
+    "tag": "prefetch16",
+    "region": "tahoe",
+    "startedAt": 1788919752.0359662,
+    "seconds": 50.21907800808549,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 8,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 120,
+    "nativeCacheBytes": 385401459,
+    "seededCatalogFiles": 254,
+    "demBytes": 243451444,
+    "workerCpuSeconds": 38.755466999999996,
+    "maxWorkerRssKiB": 807792,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  }
+]

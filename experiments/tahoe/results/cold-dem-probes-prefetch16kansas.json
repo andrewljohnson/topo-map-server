@@ -1,0 +1,24 @@
+[
+  {
+    "requiredNativeChunks": 120,
+    "missingNativeChunks": 120,
+    "prefetchWorkers": 16,
+    "prefetchSeconds": 54.14277098909952,
+    "executor": "prefetch",
+    "tag": "prefetch16kansas",
+    "region": "kansas",
+    "startedAt": 1788920123.6487334,
+    "seconds": 59.93903594696894,
+    "vectorAreaParents": 100,
+    "demParents": 144,
+    "workers": 8,
+    "nativeCacheBefore": 0,
+    "nativeChunksFetched": 120,
+    "nativeCacheBytes": 373282170,
+    "seededCatalogFiles": 254,
+    "demBytes": 181780894,
+    "workerCpuSeconds": 42.551041999999995,
+    "maxWorkerRssKiB": 800408,
+    "scope": "Cold native raster acquisition + reprojection + level-3 PNG; source catalogs retained where already pinned; shared global fallback cache retained"
+  }
+]

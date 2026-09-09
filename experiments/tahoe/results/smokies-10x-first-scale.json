@@ -1,0 +1,142 @@
+{
+  "workers": 8,
+  "executor": "processes",
+  "region": "smokies-10x",
+  "taskChunksize": 64,
+  "spatialOrder": "morton",
+  "vectorParents": 40,
+  "sources": {
+    "osm": {
+      "seconds": 3.3977690530009568,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 24.88395971688442,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 6.0402423851192,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 55.68674823711626,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 640
+    },
+    "amenities": {
+      "seconds": 1.3317737930919975,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 0.5435312769841403,
+      "childTiles": 640,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 12.182845921022817,
+      "preparedCells": 6,
+      "prepareSeconds": 12.125997907714918,
+      "parentTiles": 40,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "mode": "direct full-detail recreation + fine-child vector baseline",
+  "sourceCache": "retained local inputs; cache misses fetched",
+  "startedAt": 1788916282.4499254,
+  "loadAverageStart": [
+    24.29638671875,
+    21.76904296875,
+    20.3115234375
+  ],
+  "pipeline": {
+    "directRecreation": true,
+    "rawDemMosaic": true,
+    "reuseTrailBasemap": true,
+    "parallelPacking": true
+  },
+  "packingWallSeconds": 4.608019151957706,
+  "dem": {
+    "tiles": 70,
+    "bytes": 132756394,
+    "seconds": 60.84011093014851,
+    "tileSize": 1024,
+    "compressionLevel": 3,
+    "intermediateChildPngs": 0
+  },
+  "resources": {
+    "userCpuSeconds": 8.369649,
+    "systemCpuSeconds": 0.053035,
+    "peakRssKiB": 108916,
+    "childUserCpuSeconds": 222.629088,
+    "childSystemCpuSeconds": 2.950555,
+    "maxChildPeakRssKiB": 536284,
+    "loadAverageEnd": [
+      22.0068359375,
+      21.79736328125,
+      20.5703125
+    ]
+  },
+  "totalSeconds": 169.85831835702993,
+  "finishedAt": 1788916452.3082423,
+  "vectorBytes": 3799787,
+  "attemptWallSeconds": 170.1705939769745,
+  "parentHashes": {
+    "12/1095/1610": "8ac3caebb6bed2d06d0ce02a9b6a89c684afad06720bb07afa75c1f5333752ee",
+    "12/1095/1611": "c46ddbc871b3829af2c6662c145dd3baa3872e7638fe43cc7523a33a6bde0214",
+    "12/1095/1612": "b07d4e164542ca12891c783b2984c91450b50ae5b9c7c5e2cdc1303539a41754",
+    "12/1095/1613": "4a7268119ff86c94ac5c556699a659c2f702f8e52ba2c813d4bead8ba64d4fd1",
+    "12/1095/1614": "09ac8938c7add36f4a0001eaab337d648bae7648240b8b33142daac2138d901b",
+    "12/1095/1615": "706ebaeef4dc0c992c2375423064769053b22591790a7573e098cabfd0018052",
+    "12/1096/1610": "a6bb165725f0600b7b62739c74adb06c45f28b5726a4d0933f89ef6552a037e8",
+    "12/1097/1610": "63f111db6567ccab8205721b1617b9406e359dfbe8ec08de7cf1e3fe4e5fc84b",
+    "12/1096/1611": "8b1dcaeb2a96a19e130e4e99b38beb5bfa37c8a11ea93bd19e553520b16d244f",
+    "12/1097/1611": "91b2fb0c33dae687db7c83ad64a97e98742676fcb019cdf3d842f687a1be9d50",
+    "12/1098/1610": "9771073a3cd298d447c3b0827e6dfe7aeeb2a9d1bcfdeb3e2df324d111546c88",
+    "12/1099/1610": "47d04cbe54de07f9bc7e51a39a9535dd99f0345903dfcf389129880637f56a08",
+    "12/1098/1611": "0008673e585854e18182bf3a4bf6e9394e9e3411ea19b1b0ab82781859fc8271",
+    "12/1099/1611": "d76a2ad44690cfcf43459f03b170d511215d186ddfffcc5f7eaa1968f8b23fd7",
+    "12/1096/1612": "b315da13e4e22d83f5514e76f8a7bec3725a9bbd98fdc7ab9378b49dc439da2d",
+    "12/1097/1612": "1223338ec072d4785c0ad5deb85b89a7f941f61a0f055e60f64b6a57113375d1",
+    "12/1096/1613": "1c4292aea21f3f1d16d1cdbeb4f89239150613f24a9326e704659484163063b0",
+    "12/1097/1613": "5e89cbb0406c4066b7fa7ebe791db3061817d5a95be7d56b0c0020ea91d7ca8c",
+    "12/1098/1612": "6b526a4928c5f71fd145b050beb5a8ef8b1f10bb8369be20379513c811af0c5d",
+    "12/1099/1612": "9d1926d260a397e45599256cfe41e04f07c01f2da280d5f2815d7a4605d5157a",
+    "12/1098/1613": "539aa24e5b67956b588f697a109824a0e18bb1d1901479a5cd5d8fe142921b54",
+    "12/1099/1613": "2d995440761df60a54f98c4dbc8e4d0ca38dc80a8f4dd4a9bde098fc4851dac8",
+    "12/1096/1614": "b57bdda0b8ea41d14b4a2b657d0f6253cfc27f1c3f421b12c736b84d032a4fe7",
+    "12/1097/1614": "0f282199efa8bbfe425c89ee72c6b41fd8cd46e29c0fa120724b08a9cfdc7181",
+    "12/1096/1615": "4074efbabdcefb384939366880377a077f25230b63cfa8d0b92e517056191297",
+    "12/1097/1615": "77d10b748b4071721eb032c66ad41263d5031b59122ca955c3aa5b934a256f6d",
+    "12/1098/1614": "330d1d05b7d4acc905c457ebc79989899ae93026cc13f3288ff46ccb3e8b883d",
+    "12/1099/1614": "aaefae3668a58bae4a3090094a70198ea9124b24735eac4ac25ad2c32ed2d2d1",
+    "12/1098/1615": "1a7c9aa77f986ad9eb834b6bf3629a6976a5036055261288b1404fe2230bb486",
+    "12/1099/1615": "7b4d84e330c1a2c9868b576c9b58f5e8e497258516566e0b15a64b5bda011f0d",
+    "12/1095/1616": "15f5892b19b388f8b2c3a4409d8181c9ca46852ff27a982723ed7bfd3fa72364",
+    "12/1095/1617": "c11ae60620e5959cf6c81cf220abf6f836685148e66b0a0cd92fea51e554c3d4",
+    "12/1096/1616": "a07890c8dd29f2ad5b3d8b7ba0711b9b17bb044b07c49f0aacaf0fc23a6a73da",
+    "12/1097/1616": "612e1e8a9db8bc600859d7b6440eea8f729e3d35ea2ce498fc4e7074e41bece2",
+    "12/1096/1617": "767f7099fa2d7e69b4a03cd1689803bd8a079c0e0268a763f3308f8c3558baec",
+    "12/1097/1617": "fe144f8637f4a4e0a40cc1ada11a6d2b4bd336375dfaef382baddffd16e0729a",
+    "12/1098/1616": "4f299ebc9748103478075c6a1c08e3b9f7300a397abe2e377729b90b0ab6f92b",
+    "12/1099/1616": "4c7b0f757cb8119869e6f469811d87aba268886cfde04dd356bd3af3c7e19757",
+    "12/1098/1617": "10977af73254f661e346d6ea68ca4dcdb24a26a90021ebfcdb3d1cdccafbd7fe",
+    "12/1099/1617": "f6b5153e2ccb88132271f4283254f2fcd953c683eec0126918c196e1195376cb"
+  }
+}

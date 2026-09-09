@@ -1,0 +1,10 @@
+{
+  "identicalTiles": 144,
+  "comparisons": [
+    "cold eight processes vs cold sixteen threads",
+    "cold raster acquisition vs retained-input 400-parent reference",
+    "cold eight processes vs sixteen-thread prefetch plus eight-process render"
+  ],
+  "demCompressionLevel": 3,
+  "kansasPrefetchIdenticalTiles": 144
+}

@@ -1,0 +1,16 @@
+{
+  "seconds": 119.54281706595793,
+  "generationSeconds": 119.4840563130565,
+  "requiredNativeChunks": 2926,
+  "missingNativeChunks": 0,
+  "prefetchWorkers": 16,
+  "prefetchSeconds": 8.950009942054749e-07,
+  "renderWorkers": 8,
+  "executor": "processes",
+  "demParents": 4264,
+  "demBytes": 6814596243,
+  "identicalTiles": 4264,
+  "childCpuSeconds": 927.0606190000001,
+  "maxChildRssKiB": 406692,
+  "scope": "Retained native inputs; only DEM phase including process startup/shutdown, no vector work"
+}
