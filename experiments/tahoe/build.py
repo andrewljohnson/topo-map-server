@@ -44,7 +44,7 @@ def merge_tiles(children):
  return mvt.encode([{'name':name,'features':features} for name,features in sorted(layers.items())],default_options={'extents':EXTENT,'y_coord_down':True}),counts
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');a=p.parse_args()
  if a.clean_derived and OUT.exists():shutil.rmtree(OUT)
  OUT.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(4,a.workers)),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time()}
  def acquire(task):
@@ -67,10 +67,15 @@ def main():
      parent_children[(x,y)].append((source,None,None,blob))
     report['sources'][source]={'seconds':time.monotonic()-t,'preparedCells':len(cells),'prepareSeconds':prepare_seconds,'parentTiles':len(PARENTS),'childTiles':0,'derivedCacheHits':0}
     atomic(OUT/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True);continue
-   t=time.monotonic();hits=0;tasks=[(source,14,x*4+dx,y*4+dy) for x,y in PARENTS for dy in range(4) for dx in range(4)]
+   t=time.monotonic();hits=0;prepare_seconds=0
+   tasks=[(source,14,x*4+dx,y*4+dy) for x,y in PARENTS for dy in range(4) for dx in range(4)]
+   if source=='trails' and (a.regenerate_vectors or any(not (OUT/'derived'/source/str(z)/str(x)/f'{y}.pbf').exists() for _,z,x,y in tasks)):
+    # Populate the immutable PCT cache before parallel workers can duplicate
+    # its expensive first construction. Include preparation in source timing.
+    importlib.import_module(SOURCES[source]).pct_features();prepare_seconds=time.monotonic()-t
    for task,result in zip(tasks,pool.map(acquire,tasks)):
     dx,dy,blob,seconds,hit=result;hits+=int(hit);parent_children[(task[2]//4,task[3]//4)].append((source,dx,dy,blob))
-   report['sources'][source]={'seconds':time.monotonic()-t,'childTiles':len(tasks),'derivedCacheHits':hits}
+   report['sources'][source]={'seconds':time.monotonic()-t,'childTiles':len(tasks),'derivedCacheHits':hits,'prepareSeconds':prepare_seconds}
    atomic(OUT/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True)
   for (x,y),children in parent_children.items():
    t=time.monotonic();blob,counts=merge_tiles(children);compressed=gzip.compress(blob,mtime=0)
@@ -80,11 +85,11 @@ def main():
   def dem_parent(xy):
    x,y=xy;canvas=np.empty((1024,1024),dtype='float32');module=importlib.import_module('national_dem')
    for dy in range(2):
-    for dx in range(2):canvas[dy*512:(dy+1)*512,dx*512:(dx+1)*512]=decode_png(module.render_tile(13,x*2+dx,y*2+dy))
+    for dx in range(2):canvas[dy*512:(dy+1)*512,dx*512:(dx+1)*512]=decode_png(module.render_tile(13,x*2+dx,y*2+dy)) if a.legacy_dem else module.render_samples(13,x*2+dx,y*2+dy)
    blob=encode_png(canvas);atomic(OUT/'dem/12'/str(x)/f'{y}.png',blob);return len(blob)
   # Halo supplies neighboring elevation samples for contour stitching.
   dem_keys=[(x,y) for x in range(680,684) for y in range(1565,1569)]
-  report['dem']={'tiles':len(dem_keys),'bytes':sum(pool.map(dem_parent,dem_keys)),'seconds':time.monotonic()-dem_start,'tileSize':1024}
+  report['dem']={'tiles':len(dem_keys),'bytes':sum(pool.map(dem_parent,dem_keys)),'seconds':time.monotonic()-dem_start,'tileSize':1024,'intermediateChildPngs':64 if a.legacy_dem else 0}
  w,s,_,_=bounds(12,681,1567);_,_,e,n=bounds(12,682,1566)
  metadata={'name':'Tahoe zoom-12 experiment','publicAccess':True,'bounds':[w,s,e,n],'center':[-120.035,38.905],'initialZoom':12.5,'minZoom':12,'maxZoom':12,'datasetId':'tahoe-combined-v1','tileUrl':'/base/{z}/{x}/{y}.pbf','combined':True,'tilesets':{'dem':{'datasetId':'tahoe-dem-v1','tileUrl':'/dem/{z}/{x}/{y}.png','bounds':[w,s,e,n],'minZoom':12,'maxZoom':12,'tileSize':1024,'attribution':'Elevation: USGS 3DEP · Mapzen terrain'}}}
  report['totalSeconds']=time.monotonic()-start;report['finishedAt']=time.time();atomic(OUT/'metadata.json',json.dumps(metadata).encode());atomic(OUT/'report.json',json.dumps(report,indent=2).encode());atomic(OUT/'reports'/f'{time.time_ns()}.json',json.dumps(report,indent=2).encode());print(json.dumps(report),flush=True)

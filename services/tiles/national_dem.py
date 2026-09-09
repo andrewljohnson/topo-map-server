@@ -41,7 +41,8 @@ def global_dem(z,x,y):
             path.parent.mkdir(parents=True,exist_ok=True);tmp=path.with_suffix('.tmp');tmp.write_bytes(blob);tmp.replace(path)
         return decode_png(path.read_bytes())
 
-def render_tile(z,x,y):
+def render_samples(z,x,y):
+    """Return float32 elevation samples before PNG encoding for bounded mosaics."""
     if not MIN_ZOOM<=z<=MAX_ZOOM or not 0<=x<2**z or not 0<=y<2**z:raise ValueError('Invalid DEM tile')
     span=20037508.342789244;step=2*span/2**z
     target=from_bounds(-span+x*step,span-(y+1)*step,-span+(x+1)*step,span-y*step,TILE_SIZE,TILE_SIZE)
@@ -65,4 +66,7 @@ def render_tile(z,x,y):
         reproject(coarse,expanded,src_transform=from_bounds(*rasterio.transform.array_bounds(TILE_SIZE,TILE_SIZE,target),256,256),src_crs='EPSG:3857',dst_transform=target,dst_crs='EPSG:3857',resampling=Resampling.bilinear)
         data[np.isnan(data)]=expanded[np.isnan(data)]
     usgs.atomic_json(CACHE/'provenance'/str(z)/str(x)/(str(y)+'.json'),{'tile':[z,x,y],'encoding':'terrarium','units':'meters','tileSize':data.shape[0],'usgsPixels':native,'globalFallbackPixels':fallback,'usgsChunks':sources,'globalSource':GLOBAL_URL.format(z=z,x=x,y=y) if fallback else None,'processing':'Elevation samples reprojected to Web Mercator; no contour or hillshade generation. Terrarium quantization 1/256 meter, not source accuracy.'})
-    return encode_png(data)
+    return data
+
+def render_tile(z,x,y):
+    return encode_png(render_samples(z,x,y))

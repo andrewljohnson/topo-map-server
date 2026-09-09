@@ -154,3 +154,47 @@ Next: measure trail work after one-time PCT initialization separately, reduce
 repeated route matching with equivalence checks, and measure DEM overfetch/first
 useful paint. Keep nationwide publication disabled and avoid widening coverage
 until these local tests justify it.
+
+## Iteration 3 — avoid intermediate PNGs and repeated trail corridors
+
+The DEM builder now requests raw float32 samples, combines them, and encodes each
+final parent only once. Previously it encoded and decoded 64 child PNGs before
+encoding the 16 delivered PNGs. `--legacy-dem` retains that path for comparison.
+All 16 delivered PNGs are **byte-for-byte identical** to the previous output,
+including the halo. A synthetic test also compares the paths across positive and
+negative elevations. Source selection, resampling, fallback behavior and
+provenance are unchanged; normal tile-serving calls still return PNGs.
+
+The first full build with this change took 34.62 s, with DEM at 9.44 s (previously
+about 15 s). Another build took 32.00 s with DEM at 7.60 s. Cache/competing CPU
+variation affects these full-build observations; all vector stages regenerated
+from retained inputs rather than reusing derived vector files.
+
+Trail matching now reuses each immutable reference geometry's 15-metre corridor
+within a conflation call, instead of recomputing it for every candidate. All 64
+sample trail tiles are byte-identical. A paired two-thread benchmark, alternating
+old/new order over three rounds and excluding one-time PCT setup, measured:
+
+| Version | Run 1 | Run 2 | Run 3 | Median |
+| --- | ---: | ---: | ---: | ---: |
+| Original | 7.86 s | 7.53 s | 7.82 s | 7.82 s |
+| Reused corridors | 6.66 s | 7.22 s | 6.91 s | 6.91 s |
+
+That is an approximately 12% improvement in this trail-only comparison. The
+builder also initializes the PCT cache once before submitting uncached trail
+work to parallel workers, preventing duplicate first-time construction; its
+cost remains included in reported source time. Cached-only vector repacks skip
+that preparation.
+
+29 trail/DEM regression tests and six experiment tests pass. The full sample
+continues to use the same four vector parents and 16 DEM parents; no coverage
+expansion or paid compute. Hourly Tahoe follow-ups remain active. Next targets
+are the remaining per-child vector work, raw DEM source reads/reprojection, and
+end-to-end loading measurements; none of these local runs establishes a national
+runtime estimate.
+
+The combined final run took **31.79 s**: trails 10.52 s (including 3.04 s of
+one-time PCT preparation), DEM 8.30 s. All 64 trail child hashes and all 16 DEM
+PNG hashes still match the pre-optimization reference; the full parent feature
+comparison also passes. This is about 19% faster than the preceding 39.07 s run,
+and about 56% below the original 71.63 s two-worker baseline, for this fixture.

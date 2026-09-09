@@ -85,6 +85,9 @@ def conflate(reference, additions):
     """
     result=list(reference)
     fixed=len(result)
+    # Geometry is immutable once a result is appended. Reuse its matching
+    # corridor across additions; property enrichment does not change geometry.
+    corridors={}
     tree=STRtree([f['geometry'] for f in result]) if result else None
     for feature in additions:
         geometry=feature['geometry']
@@ -93,7 +96,8 @@ def conflate(reference, additions):
         anchors=[]
         for index in sorted(candidates):
             existing=result[index]
-            if not remaining.intersects(existing['geometry'].buffer(15)):continue
+            if index not in corridors:corridors[index]=existing['geometry'].buffer(15)
+            if not remaining.intersects(corridors[index]):continue
             mask=overlap_mask(remaining,existing['geometry'],feature['properties'],existing['properties'])
             if mask is None:continue
             merge_properties(existing['properties'],feature['properties'])

@@ -1,0 +1,181 @@
+{
+  "workers": 2,
+  "sources": {
+    "osm": {
+      "seconds": 2.9285597819834948,
+      "childTiles": 64,
+      "derivedCacheHits": 0
+    },
+    "boundaries": {
+      "seconds": 0.9662916900124401,
+      "childTiles": 64,
+      "derivedCacheHits": 0
+    },
+    "landcover": {
+      "seconds": 2.224145869957283,
+      "childTiles": 64,
+      "derivedCacheHits": 0
+    },
+    "trails": {
+      "seconds": 12.678402804071084,
+      "childTiles": 64,
+      "derivedCacheHits": 0
+    },
+    "amenities": {
+      "seconds": 0.19876977987587452,
+      "childTiles": 64,
+      "derivedCacheHits": 0
+    },
+    "waterways": {
+      "seconds": 0.28963966597802937,
+      "childTiles": 64,
+      "derivedCacheHits": 0
+    },
+    "recreation": {
+      "seconds": 0.4782374859787524,
+      "preparedCells": 1,
+      "prepareSeconds": 0.47328811697661877,
+      "parentTiles": 4,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "parents": [
+    {
+      "key": "12/681/1566",
+      "bytes": 242584,
+      "gzipBytes": 106701,
+      "packSeconds": 0.8265711879357696,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 22,
+        "osm__grass": 106,
+        "osm__forest": 159,
+        "osm__rock": 42,
+        "osm__water": 22,
+        "osm__waterline": 36,
+        "osm__building": 4,
+        "osm__rail": 0,
+        "osm__road": 157,
+        "osm__label": 3,
+        "osm__water_label": 12,
+        "osm__poi": 13,
+        "boundaries__areas": 39,
+        "landcover__landcover": 606,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 3,
+        "trails__network": 218,
+        "amenities__amenities": 56,
+        "waterways__waterline": 36,
+        "recreation__recreation": 10
+      },
+      "sha256": "fd1cfef19d279af7327c2b9a7cbe417e4f3e6e3dadb14bfa5a7612410aafee48"
+    },
+    {
+      "key": "12/682/1566",
+      "bytes": 509979,
+      "gzipBytes": 252002,
+      "packSeconds": 2.423534990986809,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 432,
+        "osm__grass": 271,
+        "osm__forest": 237,
+        "osm__rock": 18,
+        "osm__water": 21,
+        "osm__waterline": 29,
+        "osm__building": 24,
+        "osm__rail": 0,
+        "osm__road": 672,
+        "osm__label": 41,
+        "osm__water_label": 2,
+        "osm__poi": 68,
+        "boundaries__areas": 16,
+        "landcover__landcover": 1160,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 0,
+        "trails__network": 781,
+        "amenities__amenities": 262,
+        "waterways__waterline": 20,
+        "recreation__recreation": 9
+      },
+      "sha256": "03b0571865195a1362b599b124d5a0b8ef47c9689814cb354cb5f52ba93459df"
+    },
+    {
+      "key": "12/681/1567",
+      "bytes": 205574,
+      "gzipBytes": 93502,
+      "packSeconds": 0.8226381409913301,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 35,
+        "osm__grass": 76,
+        "osm__forest": 52,
+        "osm__rock": 12,
+        "osm__water": 26,
+        "osm__waterline": 22,
+        "osm__building": 6,
+        "osm__rail": 0,
+        "osm__road": 117,
+        "osm__label": 3,
+        "osm__water_label": 14,
+        "osm__poi": 15,
+        "boundaries__areas": 64,
+        "landcover__landcover": 732,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 7,
+        "trails__network": 173,
+        "amenities__amenities": 24,
+        "waterways__waterline": 22,
+        "recreation__recreation": 13
+      },
+      "sha256": "1310acf717e726fae7661b94d531ed1d842f6f0211dca2088a009cc14aa56ba4"
+    },
+    {
+      "key": "12/682/1567",
+      "bytes": 401661,
+      "gzipBytes": 197238,
+      "packSeconds": 1.3344379290938377,
+      "sourceFeatureCounts": {
+        "osm__land": 16,
+        "osm__residential": 479,
+        "osm__grass": 230,
+        "osm__forest": 507,
+        "osm__rock": 12,
+        "osm__water": 12,
+        "osm__waterline": 28,
+        "osm__building": 17,
+        "osm__rail": 0,
+        "osm__road": 526,
+        "osm__label": 19,
+        "osm__water_label": 2,
+        "osm__poi": 17,
+        "boundaries__areas": 22,
+        "landcover__landcover": 1417,
+        "trails__trails": 0,
+        "trails__roads": 0,
+        "trails__routes": 3,
+        "trails__network": 599,
+        "amenities__amenities": 58,
+        "waterways__waterline": 28,
+        "recreation__recreation": 5
+      },
+      "sha256": "60ef808d7c539c54c7bbfc1e7684765ccbc2e6690b9885f55dd6c89975624ab5"
+    }
+  ],
+  "mode": "direct full-detail recreation + fine-child vector baseline",
+  "sourceCache": "retained local inputs; cache misses fetched",
+  "startedAt": 1788912512.5846307,
+  "dem": {
+    "tiles": 16,
+    "bytes": 24131754,
+    "seconds": 9.44167035492137,
+    "tileSize": 1024,
+    "intermediateChildPngs": 0
+  },
+  "totalSeconds": 34.615113970823586,
+  "finishedAt": 1788912547.199744
+}

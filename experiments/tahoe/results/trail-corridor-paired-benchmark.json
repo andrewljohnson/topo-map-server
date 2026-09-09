@@ -1,0 +1,45 @@
+{
+  "workers": 2,
+  "tilesPerRun": 64,
+  "pctInitialization": "performed once before timing",
+  "sourceInputs": "retained",
+  "baselineCommit": "5b8659a",
+  "runs": [
+    {
+      "round": 1,
+      "variant": "legacy",
+      "seconds": 7.859996407059953,
+      "identicalTiles": 64
+    },
+    {
+      "round": 1,
+      "variant": "cached",
+      "seconds": 6.66326357703656,
+      "identicalTiles": 64
+    },
+    {
+      "round": 2,
+      "variant": "cached",
+      "seconds": 7.216915800003335,
+      "identicalTiles": 64
+    },
+    {
+      "round": 2,
+      "variant": "legacy",
+      "seconds": 7.532850202172995,
+      "identicalTiles": 64
+    },
+    {
+      "round": 3,
+      "variant": "legacy",
+      "seconds": 7.816098919836804,
+      "identicalTiles": 64
+    },
+    {
+      "round": 3,
+      "variant": "cached",
+      "seconds": 6.90635995590128,
+      "identicalTiles": 64
+    }
+  ]
+}

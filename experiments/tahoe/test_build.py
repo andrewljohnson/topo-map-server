@@ -41,6 +41,15 @@ class PackingTests(unittest.TestCase):
  def test_source_namespaces(self):
   result,_=merge_tiles([(source,0,0,self.tile(Point(20,30))) for source in ('osm','recreation')])
   self.assertEqual(set(mvt.decode(result)),{'osm__test','recreation__test'})
+ def test_raw_dem_mosaic_matches_child_png_roundtrips(self):
+  rng=np.random.default_rng(42)
+  values=rng.uniform(-430,8849,(128,128)).astype('float32')
+  legacy=np.empty_like(values)
+  for y in range(2):
+   for x in range(2):
+    region=np.s_[y*64:(y+1)*64,x*64:(x+1)*64]
+    legacy[region]=decode_png(encode_png(values[region]))
+  self.assertEqual(encode_png(values),encode_png(legacy))
  def test_dem_mosaic_lossless(self):
   rows,cols=np.indices((1024,1024));values=(1000+rows/256+cols/128).astype('float32')
   np.testing.assert_array_equal(decode_png(encode_png(values)),values)
