@@ -8,7 +8,7 @@ import mapbox_vector_tile
 from shapely import make_valid
 from shapely.geometry import shape, box, mapping
 from shapely.ops import transform, unary_union
-DATASET_ID='us-agency-boundaries-v3'
+DATASET_ID='us-agency-boundaries-v4'
 CACHE=Path(os.environ.get('TILE_DATA_DIR',Path(__file__).parent/'data'))/'national-boundaries'/'us-agency-boundaries-v1'
 SOURCES={
 'park':('https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NPS_Land_Resources_Division_Boundary_and_Tract_Data_Service/FeatureServer/2','UNIT_CODE','UNIT_NAME'),
@@ -91,26 +91,45 @@ def shared_forest_outline(line, polygon, neighbors, units_per_metre):
  """
  from shapely.geometry import Point
  from shapely.ops import substring
+ def opposite_sides(run,prior_polygon,offset_metres):
+  opposite=0
+  for i in range(9):
+   distance=run.length*(i+.5)/9
+   before=run.interpolate(max(0,distance-25*units_per_metre));after=run.interpolate(min(run.length,distance+25*units_per_metre))
+   dx,dy=after.x-before.x,after.y-before.y;length=math.hypot(dx,dy)
+   if not length:continue
+   center=run.interpolate(distance);offset=offset_metres*units_per_metre
+   left=Point(center.x-dy/length*offset,center.y+dx/length*offset)
+   right=Point(center.x+dy/length*offset,center.y-dx/length*offset)
+   if ((polygon.covers(left) and not polygon.covers(right) and prior_polygon.covers(right) and not prior_polygon.covers(left)) or
+       (polygon.covers(right) and not polygon.covers(left) and prior_polygon.covers(left) and not prior_polygon.covers(right))):opposite+=1
+  return opposite>=8
  for prior_line,prior_polygon in neighbors:
   if not polygon.intersects(prior_polygon):continue
+  before_match=line
   corridor=prior_line.buffer(250*units_per_metre,quad_segs=2)
   for coherent in line_parts(line.intersection(corridor)):
    if coherent.length<1000*units_per_metre:continue
    chunks=max(1,int(coherent.length/(1500*units_per_metre)))
    for chunk in range(chunks):
     run=substring(coherent,coherent.length*chunk/chunks,coherent.length*(chunk+1)/chunks)
-    opposite=0;count=9
-    for i in range(count):
-     distance=run.length*(i+.5)/count
-     before=run.interpolate(max(0,distance-25*units_per_metre));after=run.interpolate(min(run.length,distance+25*units_per_metre))
-     dx,dy=after.x-before.x,after.y-before.y;length=math.hypot(dx,dy)
-     if not length:continue
-     center=run.interpolate(distance);offset=300*units_per_metre
-     left=Point(center.x-dy/length*offset,center.y+dx/length*offset)
-     right=Point(center.x+dy/length*offset,center.y-dx/length*offset)
-     if ((polygon.covers(left) and not polygon.covers(right) and prior_polygon.covers(right) and not prior_polygon.covers(left)) or
-         (polygon.covers(right) and not polygon.covers(left) and prior_polygon.covers(left) and not prior_polygon.covers(right))):opposite+=1
-    if opposite>=8:line=line.difference(run.buffer(.01*units_per_metre))
+    if opposite_sides(run,prior_polygon,300):line=line.difference(run.buffer(.01*units_per_metre))
+  # A coarse shared edge can briefly leave the strict corridor and return.
+  # Remove only a bounded island between two cuts made by this same match.
+  # Original endpoints, long deviations and separate branches stay intact.
+  removed=before_match.difference(line)
+  if removed.is_empty:continue
+  original_ends=[point for part in line_parts(before_match) for point in getattr(part.boundary,'geoms',[])]
+  keep=[]
+  for part in line_parts(line):
+   ends=list(getattr(part.boundary,'geoms',[]))
+   bounded=(len(ends)==2 and part.length<=1000*units_per_metre
+            and all(point.distance(removed)<.02*units_per_metre for point in ends)
+            and all(point.distance(prior_line)<=251*units_per_metre for point in ends)
+            and all(point.distance(original)>.02*units_per_metre for point in ends for original in original_ends)
+            and prior_line.buffer(500*units_per_metre,quad_segs=2).covers(part))
+   if not (bounded and opposite_sides(part,prior_polygon,600)):keep.append(part)
+  line=unary_union(keep)
  return line
 
 

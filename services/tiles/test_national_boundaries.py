@@ -162,3 +162,35 @@ class SharedForestEdgeTests(unittest.TestCase):
   prior=normalized(box(-5000,-5000,0,5000));current=normalized(box(-100,-5000,5000,5000))
   line=normalized(LineString([(-100,-3500),(-100,3500)]));ref=normalized(LineString([(0,-4000),(0,4000)]))
   self.assertLess(b.shared_forest_outline(line,current,[(ref,prior)],1e-8).length,1e-10)
+
+
+class SharedEdgeIslandTests(unittest.TestCase):
+ def test_short_excursion_between_two_confirmed_shared_runs_is_removed(self):
+  from shapely.geometry import Polygon,Point
+  edge=LineString([(-100,-4000),(-100,-500),(-370,0),(-100,500),(-100,4000)])
+  current=Polygon([*edge.coords,(5000,4000),(5000,-4000)])
+  prior=box(-5000,-5000,0,5000);reference=LineString([(0,-5000),(0,5000)])
+  self.assertTrue(b.shared_forest_outline(edge,current,[(reference,prior)],1).is_empty)
+ def test_original_endpoint_is_not_a_cut_island(self):
+  from shapely.geometry import Polygon,Point
+  edge=LineString([(-370,0),(-100,500),(-100,4000)])
+  current=Polygon([*edge.coords,(5000,4000),(5000,-4000),(-370,-4000)])
+  result=b.shared_forest_outline(edge,current,[(LineString([(0,-5000),(0,5000)]),box(-5000,-5000,0,5000))],1)
+  self.assertFalse(result.is_empty)
+  self.assertLess(result.distance(Point(-370,0)),.001)
+ def test_wide_deviation_between_shared_runs_survives(self):
+  from shapely.geometry import Polygon,Point
+  edge=LineString([(-100,-4000),(-100,-500),(-700,0),(-100,500),(-100,4000)])
+  current=Polygon([*edge.coords,(5000,4000),(5000,-4000)])
+  result=b.shared_forest_outline(edge,current,[(LineString([(0,-5000),(0,5000)]),box(-5000,-5000,0,5000))],1)
+  self.assertFalse(result.is_empty)
+  self.assertLess(result.distance(Point(-700,0)),.001)
+ def test_tahoe_meadows_report_leaves_no_detached_shared_edge(self):
+  import json
+  from pathlib import Path
+  from shapely.geometry import shape
+  data=json.loads((Path(__file__).parent/'fixtures/tahoe-shared-forest-island.json').read_text())
+  g={k:shape(v) for k,v in data.items() if k!='description'}
+  result=b.shared_forest_outline(g['line'],g['polygon'],[(g['reference'],g['neighbor'])],1)
+  self.assertLess(result.intersection(g['view']).length,.01)
+  self.assertGreater(g['reference'].intersection(g['view']).length,2000)

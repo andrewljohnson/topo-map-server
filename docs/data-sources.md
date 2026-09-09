@@ -326,3 +326,5 @@ in source records. Rules, reproducible audits and Tahoe before/after proof are i
 ### Confirmed trail pairs and shared forest edges
 
 Official trails v6 extends only an already confirmed OSM/agency pair when a generalized agency survey diverges locally. Agency boundaries v3 suppresses a shared forest-administration stroke only after opposite-side polygon checks; original designation polygons remain intact. See [matching rules, safeguards, and Tahoe regression evidence](qa/systematic-conflation/README.md).
+
+Agency boundaries v4 additionally removes bounded remnants between two confirmed shared-forest matches. The polygon footprints remain original; only supported redundant strokes are suppressed. See the Tahoe Meadows follow-up in the matching QA report.

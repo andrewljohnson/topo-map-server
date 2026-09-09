@@ -36,3 +36,11 @@ The real mobile TileStore, using an in-memory filesystem adapter, downloaded 37 
 The actual cloud-served combined tiles were decoded at all three reported views. No secondary USFS trail remains in either trail viewport. The retained forest outline measures 16,237 m and the remaining basin branches 742 m. Cloud measurements can differ from unrestricted fine-source measurements because the pilot's published coverage and combined-tile clipping are bounded; no coverage expansion is implied.
 
 The live browser was visually checked at the TRT and Mt. Rose zooms: each now shows one trail, with TRT badges retained where appropriate. Reload Expo to fetch the new release metadata; no native rebuild is required.
+
+## Follow-up: detached forest stroke near Tahoe Meadows
+
+The subsequent note at bounds `[-119.925647,39.290878,-119.898639,39.302233]`, zoom 14.499465, revealed that one of the r3 residual branches was actually a processing artifact. The basin outline diverged 250–367 m from the retained forest edge, briefly leaving the strict matching corridor. Suppression on both sides left roughly 674 m of detached rendered line. The earlier characterization of every remaining branch as genuine was too strong.
+
+Agency boundaries v4 handles short excursions between two confirmed matches to the same adjacent forest. A remaining piece must be at most 1 km long, have both endpoints newly cut by that match, end within 251 m of the retained edge, lie entirely within 500 m of it, and pass opposite-interior checks at eight of nine positions. Original endpoints and larger deviations survive. This is not a general short-line deletion or a global wider proximity match.
+
+The captured metric-coordinate fixture reproduces 668.4 m of leftover geometry with v3 and zero with v4 (ground scale and pre-encoding clipping differ slightly from rendered tile measurements). It is in `services/tiles/fixtures/tahoe-shared-forest-island.json`. Four new tests cover the real report, an analogous excursion, original endpoints, and a larger deviation. All 104 national-data and three publication tests pass; the Tahoe audit again preserves all eight polygons, three non-forest outlines, and 8,031 OSM feature occurrences across 640 fine tiles.
