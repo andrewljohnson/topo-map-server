@@ -1,0 +1,249 @@
+{
+  "tiles": 64000,
+  "counts": {
+    "agencyEnds": 89852,
+    "sourceDeadEnds": 7583,
+    "duplicateTermini": 1788,
+    "lostSourceJunction": 5
+  },
+  "findings": [
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2704,
+        6203
+      ],
+      "pointMetres": [
+        1568.8162010582164,
+        1397.147281371057
+      ],
+      "id": "usfs-{D694FE6B-7CBA-4E4F-96CC-DB1ECAB598AF}",
+      "agency": "USFS",
+      "name": "QUARRY SPUR",
+      "nearestMetres": 3.4280560656880787,
+      "nearestId": "usfs-{073B38BE-51FD-4E33-9453-83F3608B1BDB}",
+      "nearestName": "QUARRY",
+      "retainedSourcePartners": [
+        {
+          "id": "mvum_trails-{589AC509-1AB7-4DA2-A8F2-A46EB55669A3}",
+          "agency": "USFS"
+        }
+      ],
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{589AC509-1AB7-4DA2-A8F2-A46EB55669A3}",
+          "agency": "USFS",
+          "name": "QUARRY SPUR"
+        }
+      ],
+      "lonlat": [
+        -120.5675444,
+        39.98140530000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2707,
+        6223
+      ],
+      "pointMetres": [
+        1166.7542927665636,
+        505.27410180307925
+      ],
+      "id": "usfs-{59211E29-283B-4A23-B9C6-924D284CBE47}",
+      "agency": "USFS",
+      "name": "CHAPMAN",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "retainedSourcePartners": [
+        {
+          "id": "mvum_trails-{3BBC8D4F-2BB9-497F-B8B0-74AE3F3351ED}",
+          "agency": "USFS"
+        }
+      ],
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{3BBC8D4F-2BB9-497F-B8B0-74AE3F3351ED}",
+          "agency": "USFS",
+          "name": "CHAPMAN"
+        }
+      ],
+      "lonlat": [
+        -120.5064073,
+        39.65191750000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2730,
+        6315
+      ],
+      "pointMetres": [
+        343.33794066216797,
+        1723.9199700653553
+      ],
+      "id": "mvum_roads-{A7AECD14-5FD1-4DF1-A29C-D647D466A5AC}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 7.802688726406238,
+      "nearestId": "mvum_roads-{EA161578-31B3-4A51-85A5-C5C7B09875A7}",
+      "nearestName": "MERRILL SPRINGS RD",
+      "retainedSourcePartners": [],
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{EA161578-31B3-4A51-85A5-C5C7B09875A7}",
+          "agency": "USFS",
+          "name": "MERRILL SPRINGS RD"
+        }
+      ],
+      "lonlat": [
+        -120.0107305,
+        38.067203500000005
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2775,
+        6337
+      ],
+      "pointMetres": [
+        1777.5885612946004,
+        1234.192040881142
+      ],
+      "id": "mvum_roads-{9B2183AC-9710-4F3F-B55C-7A3C5ECF0471}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 2.148106063742817,
+      "nearestId": "mvum_roads-{13C3463A-804F-441E-ABBA-B6136328D3EF}",
+      "nearestName": "",
+      "retainedSourcePartners": [],
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{13C3463A-804F-441E-ABBA-B6136328D3EF}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -119.0056991,
+        37.6901209
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2778,
+        6338
+      ],
+      "pointMetres": [
+        698.4453954547644,
+        434.288652792573
+      ],
+      "id": "mvum_roads-{2CAB28F8-CA02-4B7C-90B6-23AE43E1AAAC}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 1.9417347943908605,
+      "nearestId": "mvum_roads-{CE8D8CB6-DCC3-446A-8CEF-AD10CF95DDC5}",
+      "nearestName": "",
+      "retainedSourcePartners": [],
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{CE8D8CB6-DCC3-446A-8CEF-AD10CF95DDC5}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -118.95203379999998,
+        37.679919399999996
+      ]
+    }
+  ],
+  "shards": [
+    {
+      "shard": "shard-00",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 7960,
+        "sourceDeadEnds": 872,
+        "duplicateTermini": 62,
+        "lostSourceJunction": 2
+      }
+    },
+    {
+      "shard": "shard-01",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 24265,
+        "duplicateTermini": 133,
+        "sourceDeadEnds": 2264
+      }
+    },
+    {
+      "shard": "shard-02",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 38946,
+        "sourceDeadEnds": 3713,
+        "duplicateTermini": 863,
+        "lostSourceJunction": 3
+      }
+    },
+    {
+      "shard": "shard-03",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 4727,
+        "duplicateTermini": 440,
+        "sourceDeadEnds": 171
+      }
+    },
+    {
+      "shard": "shard-04",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 6943,
+        "sourceDeadEnds": 276,
+        "duplicateTermini": 157
+      }
+    },
+    {
+      "shard": "shard-05",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 3705,
+        "sourceDeadEnds": 93,
+        "duplicateTermini": 93
+      }
+    },
+    {
+      "shard": "shard-06",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 2797,
+        "sourceDeadEnds": 155,
+        "duplicateTermini": 27
+      }
+    },
+    {
+      "shard": "shard-07",
+      "tiles": 8000,
+      "counts": {
+        "agencyEnds": 509,
+        "sourceDeadEnds": 39,
+        "duplicateTermini": 13
+      }
+    }
+  ],
+  "seconds": 73.44351660995744,
+  "scope": "Existing western 4000-parent fixture, 64000 source tiles. Warnings are review candidates, not automatic repair orders."
+}

@@ -1,5 +1,10 @@
 # Local generation, Cloudflare delivery
 
+> Historical September 7 design. Worker delivery is now implemented. The current
+> two-dataset z12 pilot, commands and limits are documented in
+> [combined publication](combined-publication.md). The zoom ranges and pending
+> implementation statements below describe the superseded design.
+
 Decision: 2026-09-07. This document records the architecture. See [current operations](../services/cloud/README.md) for the implemented commands and limitations.
 It replaces the continuously running Python cloud server. No cloud resources have
 been purchased and no full-country job has been launched on this computer.

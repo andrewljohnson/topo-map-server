@@ -64,8 +64,9 @@ Expo development reload still clears map tiles and selections, retaining notes/G
 - Resume reuses completed derived work and verified uploads. A shard completion
   marker is durable before its disposable output tree is removed.
 - Only this release's `spool/` directory is removed. Existing raw sources, sample
-  tiles, notes and GPS are untouched. Missing native DEM/NLCD raster inputs go to
-  that shard's scratch directory; existing cached inputs are read in place.
+  tiles, notes and GPS are untouched. New DEM/NLCD raster windows, PMTiles ranges, agency JSON, amenity cells and
+  stream tags go to that shard's scratch directory; existing cached inputs are
+  read in place. Shared cold PMTiles ranges are fetched once across processes.
   Source catalogs and other source indexes persist for provenance/reuse.
 - Generation stops on errors, a 50 GB disk reserve, or a 25 GB spool ceiling.
   Run the same command after correcting the cause; failed data is never recorded
@@ -108,3 +109,13 @@ conservative rural alignment correction across all 640 fine Tahoe source tiles.
 See [road and worker proof](qa/road-merging/README.md) for rules, residual review
 candidates, before/after geometry and measured CPU scaling. No nationwide run
 is started by these changes.
+
+
+## Publication status
+
+For a combined release, `/publication` summarizes the manifest being served:
+release ID, completion/scope and exact base/DEM object counts. The pinned
+`/releases/RELEASE/publication` endpoint describes that candidate. It does not
+reuse a retired legacy publisher's global warming status. In-progress local
+candidate generation remains in its own `status.json`; promotion is separate.
+This status correction is locally tested and awaits the next approved deployment.

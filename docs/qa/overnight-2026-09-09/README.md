@@ -62,3 +62,26 @@ To reproduce the earlier POI speed comparison after later intentional visibility
 The pinned `maplibre-contour` patch releases settled abort listeners, prevents stale cancellation/failure from evicting a replacement entry, and avoids starting work for already-cancelled callers. Both clients embed the same patched ESM worker. Full mobile suite: 131 tests; both typechecks and static web build pass. Public deployment approval remains pending.
 
 [Campground after the terrain-cache fix](terrain-cache-campground-z15.png) confirms detailed contours and separated facilities in the rebuilt shared client.
+
+
+## Final regional check
+
+[Current 4,000-parent western run](western-current-4000.json): eight 500-parent
+local batches finish in 323 seconds from retained inputs, with zero missing native
+DEM chunks. All 4,000 base files and 4,264 unique DEM files decode successfully,
+fit delivery limits and total 6.91 GB. All 736 repeated halo copies are identical.
+This used the default persistent source cache, excludes overviews/uploads, and
+ran alongside light visual QA; it is not a cold national forecast.
+
+[64,000-source-tile connectivity audit](western-junctions-64000.json): 89,852 agency
+endpoint observations, 7,583 original source dead ends, 1,788 duplicate termini,
+five source-junction review candidates and zero disconnected new cuts. Two
+candidates carry merged-partner records (Quarry Spur and Chapman); the other
+three MVUM candidates need source-geometry review before scaling. The audit does
+not silently classify them as repaired or safe.
+
+[San Francisco hills at z14](san-francisco-hills-z14.png) and
+[the reported Relay Peak boundary view](relay-peak-badges-before.png) are final
+additional view checks. A simpler trail-badge trial was reverted because its
+same-camera visual verification was unfinished when the session resumed after
+the work window. No unverified style trial is retained.

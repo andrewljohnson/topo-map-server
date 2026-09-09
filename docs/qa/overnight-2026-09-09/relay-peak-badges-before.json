@@ -1,0 +1,147 @@
+{
+  "capturedAt": "2026-09-09T12:59:33.242Z",
+  "release": null,
+  "bounds": [
+    -119.95028145269166,
+    39.31287065362142,
+    -119.94099454731054,
+    39.31978317563241
+  ],
+  "center": [
+    -119.945638,
+    39.316327
+  ],
+  "zoom": 16.05,
+  "bearing": 48,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "36fbfae3bf53bdaf99f9b4a19ec326c2eec6e6e2c4257de89ff5268f4448b40f",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -119.9468582868576,
+        39.31435368608035
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Relay Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 15678736399625,
+      "coordinates": [
+        -119.9468582868576,
+        39.31530826030979
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Relay Peak,kwh ryly,\u06a9\u0648\u0647 \u0631\u06cc\u0644\u06cc",
+        "county": "Washoe",
+        "elevation_ft": 10285,
+        "elevation_m": 3135,
+        "geonames_id": "5511073",
+        "gnis_id": "862644",
+        "higher_peak_km": 2.18,
+        "id": "gnis:862644",
+        "isolation_km": 2.18,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 28855,
+        "license": "Public domain",
+        "map_name": "Mount Rose",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Relay Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 225.513,
+        "rank_elevation_m": 3135,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:862644\",\"agency\":\"USGS GNIS\",\"name\":\"Relay Peak\",\"coordinates\":[-119.9468591,39.3153102],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:862644\",\"gnis_id\":\"862644\",\"agency\":\"USGS GNIS\",\"name\":\"Relay Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"Nevada\",\"county\":\"Washoe\",\"map_name\":\"Mount Rose\",\"updated\":\"08/11/2026\"}},{\"id\":\"geonames:5511073\",\"agency\":\"GeoNames\",\"name\":\"Relay Peak\",\"coordinates\":[-119.94686,39.31435],\"source_url\":\"https://www.geonames.org/5511073\",\"details\":{\"id\":\"geonames:5511073\",\"geonames_id\":\"5511073\",\"agency\":\"GeoNames\",\"name\":\"Relay Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5511073\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"NV\",\"county\":\"031\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Relay Peak,kwh ryly,\\u06a9\\u0648\\u0647 \\u0631\\u06cc\\u0644\\u06cc\",\"elevation_m\":3135.0,\"elevation_ft\":10285}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "Nevada",
+        "updated": "08/11/2026"
+      }
+    }
+  ],
+  "renderedPeaks": [
+    {
+      "name": "Relay Peak",
+      "layer": "peak-labels",
+      "coordinates": [
+        -119.9468582868576,
+        39.31435368608035
+      ]
+    }
+  ],
+  "renderedSymbols": [
+    {
+      "layer": "long-trail-badges",
+      "sourceLayer": "trails__routes",
+      "id": 140714547510074,
+      "name": "TAHOE RIM TRAIL",
+      "badge": "trail-TRT",
+      "kind": "long_distance_trail",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "long-trail-badges",
+      "sourceLayer": "trails__routes",
+      "id": 188590884191100,
+      "name": "TAHOE RIM TRAIL",
+      "badge": "trail-TRT",
+      "kind": "long_distance_trail",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "peak-labels",
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "name": "Relay Peak",
+      "geometryType": "Point",
+      "coordinates": [
+        -119.9468582868576,
+        39.31435368608035
+      ]
+    },
+    {
+      "layer": "trail-labels",
+      "sourceLayer": "trails__network",
+      "id": 3,
+      "name": "Tahoe Rim Trail",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    }
+  ]
+}

@@ -39,3 +39,17 @@ test('pinned combined release keeps gzip HTTP bytes, decodes cached batches and 
  assert.equal((await s.run('/releases/pilot/tiles/12/681/1566.pbf?datasetId=stale')).status,409);
  const pending=await(await s.quota.fetch(new Request('https://quota/',{method:'POST',body:JSON.stringify({pending:true})}))).json();assert.equal(pending.jobs.length,0);
 });
+
+test('combined publication status follows the served release rather than a retired warming job',async()=>{
+ const s=setup();s.env.PUBLIC_MAP='1';
+ s.objects.set('publication/status.json',JSON.stringify({status:'warming',uploadedTiles:387650,current:{source:'boundaries'}}));
+ const current={releaseId:'pilot-current',combined:true,publication:{status:'pilot-complete',detailRegion:'Tahoe and San Francisco',worldMaxZoom:3},tilesets:{osm:{coverage:{'0':[[0,0,0,0]],'12':[[681,1566,682,1566],[681,1567,681,1567]]}},dem:{coverage:{'12':[[680,1565,683,1568]]}}}};
+ const candidate={...current,releaseId:'pilot-candidate',publication:{...current.publication,status:'pilot-complete'}};
+ s.objects.set('publication/metadata.json',JSON.stringify(current));s.objects.set('publication/releases/pilot-candidate/metadata.json',JSON.stringify(candidate));
+ const status=await(await s.run('/publication',null)).json();
+ assert.deepEqual(status,{...current.publication,releaseId:'pilot-current',combined:true,counts:{base:4,dem:16}});
+ assert.equal(s.reads(),1,'no obsolete status object is fetched');
+ const pinned=await(await s.run('/releases/pilot-candidate/publication',null)).json();assert.equal(pinned.releaseId,'pilot-candidate');
+ s.objects.set('publication/metadata.json',JSON.stringify({tilesets:{}}));
+ assert.equal((await(await s.run('/publication',null)).json()).status,'warming','legacy status remains supported');
+});

@@ -20,7 +20,8 @@ run is still needed to measure peak disk use, retries and cross-shard refetch co
 The current retained-source Sierra repeat is **57.9 / 69.1 / 58.0 seconds** for
 400 base parents and 484 DEMs at **16 / 8 / 16 workers**, with identical outputs.
 Use 16 vector workers for the next regional benchmark on the now-available CPUs;
-keep native acquisition at 16 I/O threads and DEM rendering at 8 processes.
+keep native acquisition at 16 I/O threads and use the current 16-process DEM
+rendering cap. The older cold-fetch comparison below used 8 render processes.
 The older national arithmetic below has not been multiplied by this warm speedup:
 remote source acquisition, overview work and publication remain separate costs.
 The next step is a geographically varied cold 4,000-parent trial with the rolling

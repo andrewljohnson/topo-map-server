@@ -1,0 +1,951 @@
+{
+  "capturedAt": "2026-09-09T12:55:22.240Z",
+  "release": null,
+  "bounds": [
+    -122.45343286514284,
+    37.74354481427888,
+    -122.43656713485717,
+    37.77245236172094
+  ],
+  "center": [
+    -122.445,
+    37.758
+  ],
+  "zoom": 14,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "6d22891b24b81f8cae0fd1d02a9755c42e11cdc92b34d229493b7c20183273bc",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -122.45287299156189,
+        37.75515506776743
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Clarendon Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 4,
+      "coordinates": [
+        -122.44753003120422,
+        37.76001543091557
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Tank Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 6,
+      "coordinates": [
+        -122.44553983211517,
+        37.76331910802338
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Mount Olympus",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 8,
+      "coordinates": [
+        -122.44157016277313,
+        37.76775911940136
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Buena Vista Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 9,
+      "coordinates": [
+        -122.44136095046997,
+        37.75832748758549
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Kite Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 10,
+      "coordinates": [
+        -122.43936538696289,
+        37.76488395620423
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Corona Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 3,
+      "coordinates": [
+        -122.44774997234344,
+        37.75159653661089
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Noe Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 4,
+      "coordinates": [
+        -122.44742274284363,
+        37.75332280611494
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Eureka Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 5,
+      "coordinates": [
+        -122.44177401065826,
+        37.7461884291839
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Red Rock Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 100174508282515,
+      "coordinates": [
+        -122.44167745113373,
+        37.758369898693644
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "geonames_id": "12156597",
+        "id": "geonames:12156597",
+        "isolation_km": 0.64,
+        "kind": "summit",
+        "label_minzoom": 13,
+        "label_rank": 73850,
+        "license": "CC BY 4.0",
+        "min_zoom": 13,
+        "name": "Kite Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 17.305,
+        "rank_family": "summit",
+        "source_class": "T.HLL",
+        "source_url": "https://www.geonames.org/12156597",
+        "state": "CA",
+        "updated": "2020-04-24"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 251448947889177,
+      "coordinates": [
+        -122.44136095046997,
+        37.767428354104126
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "elevation_ft": 568,
+        "elevation_m": 173,
+        "geonames_id": "5331611",
+        "higher_peak_km": 1.73,
+        "id": "geonames:5331611",
+        "isolation_km": 0.59,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 62108,
+        "license": "CC BY 4.0",
+        "min_zoom": 13,
+        "name": "Buena Vista Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 106.655,
+        "rank_elevation_m": 173,
+        "rank_family": "summit",
+        "source_class": "T.MT",
+        "source_url": "https://www.geonames.org/5331611",
+        "state": "CA",
+        "updated": "2010-02-19"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 196878772720020,
+      "coordinates": [
+        -122.4454915523529,
+        37.76326821809579
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "San Francisco",
+        "elevation_ft": 561,
+        "elevation_m": 171,
+        "geonames_id": "5379342",
+        "gnis_id": "1659303",
+        "higher_peak_km": 0.59,
+        "id": "gnis:1659303",
+        "isolation_km": 0.59,
+        "kind": "summit",
+        "label_minzoom": 13,
+        "label_rank": 69117,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Mount Olympus",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 52.246,
+        "rank_elevation_m": 171,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1659303\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Olympus\",\"coordinates\":[-122.445492,37.763269],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1659303\",\"gnis_id\":\"1659303\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Olympus\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5379342\",\"agency\":\"GeoNames\",\"name\":\"Mount Olympus\",\"coordinates\":[-122.44553,37.76299],\"source_url\":\"https://www.geonames.org/5379342\",\"details\":{\"id\":\"geonames:5379342\",\"geonames_id\":\"5379342\",\"agency\":\"GeoNames\",\"name\":\"Mount Olympus\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5379342\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2007-02-14\",\"alternate_names\":\"\",\"elevation_m\":171.0,\"elevation_ft\":561}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 42391480925608,
+      "coordinates": [
+        -122.44773387908936,
+        37.75159229511286
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Las Papas,Los Pechos De La Choca,Los Pechos De La Chola,Mission Peaks,Paps,Pechos de la Choca,Twin Peaks",
+        "county": "San Francisco",
+        "elevation_ft": 915,
+        "elevation_m": 279,
+        "geonames_id": "5404318",
+        "gnis_id": "236709",
+        "higher_peak_km": 1.6,
+        "id": "gnis:236709",
+        "isolation_km": 0.92,
+        "kind": "summit",
+        "label_minzoom": 12,
+        "label_rank": 62359,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Twin Peaks",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 105.381,
+        "rank_elevation_m": 279,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 3,
+        "source_records": "[{\"id\":\"gnis:236709\",\"agency\":\"USGS GNIS\",\"name\":\"Twin Peaks\",\"coordinates\":[-122.4477358,37.7515922],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:236709\",\"gnis_id\":\"236709\",\"agency\":\"USGS GNIS\",\"name\":\"Twin Peaks\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5404318\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"coordinates\":[-122.44775,37.7516],\"source_url\":\"https://www.geonames.org/5404318\",\"details\":{\"id\":\"geonames:5404318\",\"geonames_id\":\"5404318\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5404318\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Las Papas,Los Pechos De La Choca,Los Pechos De La Chola,Mission Peaks,Paps,Pechos de la Choca,Twin Peaks\",\"elevation_m\":279.0,\"elevation_ft\":915}},{\"id\":\"geonames:6948432\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"coordinates\":[-122.449,37.7508],\"source_url\":\"https://www.geonames.org/6948432\",\"details\":{\"id\":\"geonames:6948432\",\"geonames_id\":\"6948432\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/6948432\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.HLL\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2009-08-31\",\"alternate_names\":\"\"}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    }
+  ],
+  "renderedPeaks": [
+    {
+      "name": "Twin Peaks",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -122.44773387908936,
+        37.75159229511286
+      ]
+    },
+    {
+      "name": "Castro Hill",
+      "layer": "peak-labels",
+      "coordinates": [
+        -122.4355298280716,
+        37.75504055274351
+      ]
+    },
+    {
+      "name": "Tank Hill",
+      "layer": "peak-labels",
+      "coordinates": [
+        -122.44753003120422,
+        37.76001543091557
+      ]
+    },
+    {
+      "name": "Clarendon Heights",
+      "layer": "peak-labels",
+      "coordinates": [
+        -122.45287299156189,
+        37.75515506776743
+      ]
+    }
+  ],
+  "renderedSymbols": [
+    {
+      "layer": "area-labels",
+      "sourceLayer": "osm__area",
+      "id": 1,
+      "name": "George Christopher Playground",
+      "kind": "park",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44058847427368,
+        37.74369420412529
+      ]
+    },
+    {
+      "layer": "area-labels",
+      "sourceLayer": "osm__area",
+      "id": 2,
+      "name": "Pink Triangle Memorial",
+      "kind": "park",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4362701177597,
+        37.76230978458668
+      ]
+    },
+    {
+      "layer": "area-labels",
+      "sourceLayer": "osm__area",
+      "id": 1,
+      "name": "Buena Vista Park",
+      "kind": "park",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4412751197815,
+        37.76836127806729
+      ]
+    },
+    {
+      "layer": "area-labels",
+      "sourceLayer": "osm__area",
+      "id": 1,
+      "name": "Mount Sutro Open Space Reserve",
+      "kind": "park",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45605945587158,
+        37.759430168494845
+      ]
+    },
+    {
+      "layer": "area-labels",
+      "sourceLayer": "osm__area",
+      "id": 1,
+      "name": "Panhandle",
+      "kind": "park",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44696140289307,
+        37.77240239913712
+      ]
+    },
+    {
+      "layer": "lake-labels",
+      "sourceLayer": "osm__water_label",
+      "id": 1,
+      "name": "Twin Peaks Reservoir",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44855463504791,
+        37.75625779596335
+      ]
+    },
+    {
+      "layer": "lake-labels",
+      "sourceLayer": "osm__water_label",
+      "id": 4,
+      "name": "Alvord Lake",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45447158813477,
+        37.7691245707377
+      ]
+    },
+    {
+      "layer": "ranked-peaks",
+      "sourceLayer": "recreation__recreation",
+      "id": 42391480925608,
+      "name": "Twin Peaks",
+      "kind": "summit",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44773387908936,
+        37.75159229511286
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 4699599964687330,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43922591209412,
+        37.75153715561659
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1431460706205699,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44140923023224,
+        37.74581090732018
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 2500851835496629,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4437803030014,
+        37.74881830333848
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 6411724337196531,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45318412780762,
+        37.74757972908897
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 2076492858132754,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45188057422638,
+        37.74579394000018
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8119921588575853,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45200395584106,
+        37.74460197603551
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 4373814956747709,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43843197822571,
+        37.747885132884235
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 7381466780914684,
+      "name": "Parking Lot B",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45053946971893,
+        37.745433383530695
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5834446899941972,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44901061058044,
+        37.74582363280763
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 2756475616881850,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4491286277771,
+        37.74419899455238
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 3027457965697853,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45367765426636,
+        37.744143849547186
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 6839151161930533,
+      "name": "Cityc",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.436683177948,
+        37.77029493753008
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 393215858289261,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43964970111847,
+        37.76982848921705
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5093216570273709,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43778824806213,
+        37.76009176915079
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 6386878730916740,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44376420974731,
+        37.7549175549278
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5339718114339272,
+      "name": "Downey Street Parking Lot",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44681119918823,
+        37.76601198340832
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1361724211543078,
+      "name": "AHF Healthcare Center",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43515431880951,
+        37.760507387049444
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 7452317786091289,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43934392929077,
+        37.765032381819324
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 2492264462620670,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45107591152191,
+        37.77017620551139
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1539659690196020,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4492198228836,
+        37.76863691244044
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 3657611626693835,
+      "name": "Stanyan Park Hotel",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45310366153717,
+        37.76809836432325
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8551143781739079,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45230436325073,
+        37.76423936150577
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5579613559183894,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44138240814209,
+        37.75833596980908
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 4433755782388725,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44835078716278,
+        37.762564237171674
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1317501880167541,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45015323162079,
+        37.76571937650051
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1105681088272589,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44547009468079,
+        37.76328094058097
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 7412921783890709,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44618892669678,
+        37.7622249668638
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8936404457804851,
+      "name": "Counterculture Museum",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.446768283844,
+        37.76993450045566
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5435949360671480,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44646787643433,
+        37.75436618289622
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5197737343590018,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44676291942596,
+        37.7585692305762
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 3989258508303462,
+      "name": "Metro Hotel",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.43746101856232,
+        37.772457523081286
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8778013470077059,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45157480239868,
+        37.77224126737238
+      ]
+    },
+    {
+      "layer": "peak-labels",
+      "sourceLayer": "osm__poi",
+      "id": 13,
+      "name": "Castro Hill",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4355298280716,
+        37.75504055274351
+      ]
+    },
+    {
+      "layer": "peak-labels",
+      "sourceLayer": "osm__poi",
+      "id": 4,
+      "name": "Tank Hill",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44753003120422,
+        37.76001543091557
+      ]
+    },
+    {
+      "layer": "peak-labels",
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "name": "Clarendon Heights",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.45287299156189,
+        37.75515506776743
+      ]
+    },
+    {
+      "layer": "places",
+      "sourceLayer": "osm__label",
+      "id": 3,
+      "name": "Midtown Terrace",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4521917104721,
+        37.75116814408386
+      ]
+    },
+    {
+      "layer": "poi-icons",
+      "sourceLayer": "osm__poi",
+      "id": 7,
+      "name": "Haight Ashbury Express Photo & Mail",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.44500875473022,
+        37.77036278431231
+      ]
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 66,
+      "name": "27th Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 57,
+      "name": "Midcrest Way",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 12,
+      "name": "Diamond Heights Boulevard",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 165,
+      "name": "15th Street",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 141,
+      "name": "21st Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 115,
+      "name": "20th Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 93,
+      "name": "Alvarado Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 88,
+      "name": "Ord Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 78,
+      "name": "Shrader Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 59,
+      "name": "Caselli Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 2,
+      "name": "Market Street",
+      "geometryType": "MultiLineString"
+    }
+  ]
+}

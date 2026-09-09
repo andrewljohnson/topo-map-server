@@ -8,6 +8,16 @@ The Worker serves the existing static web app and private XYZ/batch API from R2.
 It never runs DEM processing or downloads geographic sources. The local publisher
 renders data and verifies immutable R2 uploads before checkpointing progress.
 
+## Current combined pilot
+
+Use [combined publication and rollback](../../docs/combined-publication.md) for
+current commands. `publish_combined.py` produces one base MVT plus one raw DEM,
+with detailed data at z12 and exact manifest coverage. The published pilot is
+Tahoe/San Francisco, not a completed California or US warm. The old
+`publish_cloud.py` commands below are historical and must not be used to resume
+the retired nationwide job. Current measurements and remaining scale gates are
+in the [overnight report](../../docs/qa/overnight-2026-09-09-morning.md).
+
 ## Credentials
 
 `~/.config/topo-map/cloudflare.env`, mode 600:
@@ -33,12 +43,11 @@ Client and publisher keys are generated once outside Git. Verification hashes ar
 Worker secrets. Authorized and unauthorized live smoke tests run after deployment.
 The old VPS deployment remains available only through `scripts/deploy-server.sh`.
 
-The website and mobile Map server dialog use the URL recorded in
-`~/.config/topo-map/deployment.json`. Enter the key from `client.token`; never enter
-R2 credentials into the app. The browser stores its key for the tab session, and
-Expo uses SecureStore. Background native download sessions include authorization.
+The app defaults to the live Cloudflare endpoint; the former Map server dialog
+has been removed. Public mode needs no client key. R2 credentials remain only
+with the local publisher and must never be entered into the website or phone.
 
-## Publication
+## Legacy multi-source publication (retired for the current pilot)
 
 ```
 services/tiles/.venv/bin/python services/tiles/publish_cloud.py --sample
@@ -96,7 +105,7 @@ limits, concurrent reservations, batch bounds and missing tile responses.
 Python service tests and `scripts/test-deploy.py` cover local storage/coverage and
 committed-main release selection. Live smoke tests verify the actual Cloudflare path.
 
-## California priority and local throughput
+## Historical legacy-publisher tuning
 
 The publisher completes the global overview, then **all California layers**
 (basemap/DEM followed by enrichment), before the remaining CONUS passes. It keeps

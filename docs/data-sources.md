@@ -1,9 +1,16 @@
 # Data sources and map composition
 
-This is the source guide for the current nationwide base map. It describes what
+This is the source guide for the map pipeline. It describes what
 we ingest, what we actually draw, and how the web and mobile clients share it.
 The running server's `GET /metadata` is authoritative for dataset versions,
 tile URLs, geographic bounds, and download zoom ranges.
+
+The current public delivery is the Tahoe/San Francisco **combined z12 pilot**:
+one namespaced base MVT plus a separate raw DEM. See
+[the release contract](combined-publication.md). Nationwide on-demand imports
+and the legacy separate-source contracts below describe pipeline capabilities,
+not current public coverage. Combined detail uses the conflated network from
+z12 upward; the older separate-source style changes over at z13.
 
 ## Rendering policy: import existing sources, draw one merged network
 
@@ -84,7 +91,7 @@ closure feed.
    and tile coordinate. Rendering, local icons, clustering, and duplicate
    matching use those bytes without requiring a fresh upstream query.
 
-The current source contracts are:
+The historical separate-source contracts below explain the logical inputs. For current combined dataset IDs and coverage, use `/metadata`:
 
 | Style source | Dataset ID | Generated zooms | MVT source layers used |
 | --- | --- | --- | --- |
@@ -97,9 +104,10 @@ The current source contracts are:
 | `recreation` | `us-agency-recreation-v8` | 6–14 | `recreation` |
 | `trails` | `us-official-trails-v3` | 5–14 | `network` at13–14; `roads` additions below13; `routes` for overview strokes and badges; unused legacy `trails` is empty |
 
-The clients overzoom z14 vector data up to display zoom18. Style-layer zoom
-ranges control detail visibility; member filtering must not rely on a feature
-zoom expression above the source's maximum zoom.
+The legacy clients overzoomed z14 vectors; the current combined clients overzoom
+z12. MapLibre reparses overscaled symbols at display zoom, while geometry remains
+at its native maximum. Source-specific visibility and cluster handoffs are tested
+across that range.
 
 ### Drawing order and cartographic derivations
 
@@ -357,3 +365,10 @@ Wider Sierra checks also cover a source junction immediately outside a trimming 
 The6400-source-tile Sierra audit intentionally retains three review warnings where a second survey is merged into the same retained terminal line. `retainedSourcePartners` exposes their source-record evidence; the audit does not silently suppress such candidates or automatically repair them. Geometry review confirms Squirrel Mine, Gibson and Chapman are duplicate-survey dead ends.
 
 OSM information subtypes are preserved as `information_type` in amenity revision3. General standalone guideposts begin atz16; unnamed bicycle-signposted guideposts and route markers begin atz17. Maps,boards and other information retain their previous priority. These rules change presentation only:original point coordinates and group membership remain;grouped facilities still hand off atz15. An agency representation stays visible until its matching standalone OSM symbol is actually eligible.
+
+
+New working source windows use an explicitly disposable publication shard cache;
+canonical existing inputs and source indexes remain intact. The device contour
+worker uses a pinned cache-lifecycle patch to release settled abort listeners and
+prevent late cancelled requests from evicting replacements. Actual-worker tests
+show bounded DEM memory without changing contour geometry; see the overnight QA.

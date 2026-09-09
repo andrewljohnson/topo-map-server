@@ -78,7 +78,12 @@ export async function api(request,env,ctx){
  let result;
  if(path==='metadata')result=json({...info,publicAccess:env.PUBLIC_MAP==='1'});
  else if(path==='publication'){
-  result=await object(env,'publication/status.json',ctx,30)||json({status:'preparing'});
+  // Combined manifests are published only after every planned object is verified.
+  // A legacy publisher's last status can otherwise claim an abandoned job is warming.
+  if(info.combined){
+   const count=spec=>Object.values(spec?.coverage||{}).flat().reduce((sum,[x0,y0,x1,y1])=>sum+(x1-x0+1)*(y1-y0+1),0);
+   result=json({...info.publication,releaseId:info.releaseId,combined:true,counts:{base:count(info.tilesets.osm),dem:count(info.tilesets.dem)}});
+  }else result=await object(env,'publication/status.json',ctx,30)||json({status:'preparing'});
  }else{
   const batch=batches[path];let source,z,x,y,keys;
   if(batch){source=batch;keys=(url.searchParams.get('tiles')||'').split(',');if(keys.length<1||keys.length>8||keys.some(k=>!/^\d+\/\d+\/\d+$/.test(k)))return json({error:'Use 1–8 valid tile keys'},400)}

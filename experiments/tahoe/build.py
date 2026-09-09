@@ -131,7 +131,7 @@ def main():
   out=a.output.resolve();allowed=ROOT/'services/tiles/data/publication/combined'
   if not out.is_relative_to(allowed) or a.clean_derived:raise ValueError('Shard output must be disposable combined publication scratch')
   out.parent.mkdir(parents=True,exist_ok=True)
- if shutil.disk_usage(out.parent).free<50*10**9:raise RuntimeError('Experiment requires 60 GiB free disk reserve; release only expendable experiment outputs before continuing')
+ if shutil.disk_usage(out.parent).free<50*10**9:raise RuntimeError('Experiment requires 50 GB free disk reserve; release only expendable experiment outputs before continuing')
  if a.clean_derived and out.exists():shutil.rmtree(out)
  out.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':a.workers,'executor':a.executor,'region':a.region,'taskChunksize':a.task_chunksize,'spatialOrder':a.spatial_order,'vectorParents':len(parents),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time(),'loadAverageStart':os.getloadavg(),'pipeline':{'directRecreation':not a.legacy_recreation,'rawDemMosaic':not a.legacy_dem,'reuseTrailBasemap':not a.legacy_trail_basemap,'parallelPacking':a.executor=='processes' and not a.serial_pack}}
  parent_children={xy:[] for xy in parents}
