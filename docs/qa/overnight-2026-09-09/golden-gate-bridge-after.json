@@ -1,0 +1,95 @@
+{
+  "capturedAt": "2026-09-09T09:52:13.155Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -122.49184367050378,
+    37.8047613376454,
+    -122.4557264884512,
+    37.844511355530685
+  ],
+  "center": [
+    -122.478,
+    37.82
+  ],
+  "zoom": 14,
+  "bearing": 25,
+  "pitch": 35,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "04dd90d0c4577a0880c07d79129c580542d9ada09dd5dc3fd2be75810c91f338",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -122.48722672462463,
+        37.84428722634941
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Engagement Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -122.48969435691833,
+        37.83520429904402
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Slacker Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 175003460281326,
+      "coordinates": [
+        -122.48968362808228,
+        37.83520006234309
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "Marin",
+        "elevation_ft": 925,
+        "elevation_m": 282,
+        "geonames_id": "5396344",
+        "gnis_id": "1809049",
+        "higher_peak_km": 11.21,
+        "id": "gnis:1809049",
+        "isolation_km": 1.22,
+        "kind": "summit",
+        "label_minzoom": 10,
+        "label_rank": 19349,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Slacker Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 260.102,
+        "rank_elevation_m": 282,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1809049\",\"agency\":\"USGS GNIS\",\"name\":\"Slacker Hill\",\"coordinates\":[-122.4896816,37.8352008],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1809049\",\"gnis_id\":\"1809049\",\"agency\":\"USGS GNIS\",\"name\":\"Slacker Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"Marin\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5396344\",\"agency\":\"GeoNames\",\"name\":\"Slacker Hill\",\"coordinates\":[-122.48969,37.83521],\"source_url\":\"https://www.geonames.org/5396344\",\"details\":{\"id\":\"geonames:5396344\",\"geonames_id\":\"5396344\",\"agency\":\"GeoNames\",\"name\":\"Slacker Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5396344\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"041\",\"updated\":\"2010-02-19\",\"alternate_names\":\"\",\"elevation_m\":282.0,\"elevation_ft\":925}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    }
+  ],
+  "renderedPeaks": []
+}

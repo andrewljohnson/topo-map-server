@@ -16,9 +16,11 @@ const composition=(meta:Metadata|null)=>meta?JSON.stringify(meta.tilesets?Object
 const isCompatibleUpgrade=(previous:Metadata|null,latest:Metadata)=>{
  if(!previous||previous.gridZoom!==latest.gridZoom)return false;
  const before=previous.tilesets||{osm:previous},after=latest.tilesets||{osm:latest};
+ const combinedBefore=previous.tilesets,combinedAfter=latest.tilesets;
+ const combinedRevision=previous.combined&&latest.combined&&combinedBefore&&combinedAfter&&Object.entries(combinedBefore).every(([name,a])=>{const b=combinedAfter[name as keyof typeof combinedAfter];return a&&b&&a.format===b.format&&JSON.stringify(a.coverage)===JSON.stringify(b.coverage)});
  return Object.entries(before).every(([name,set])=>{
   const next=after[name as keyof typeof after];
-  return (name==='contours'&&!!latest.tilesets?.dem)||!set||next?.datasetId===set.datasetId||(['recreation','trails','amenities','dem','boundaries'].includes(name)&&next&&next.minZoom<=set.minZoom&&next.maxZoom>=set.maxZoom&&next.bounds[0]<=set.bounds[0]&&next.bounds[1]<=set.bounds[1]&&next.bounds[2]>=set.bounds[2]&&next.bounds[3]>=set.bounds[3]);
+  return (name==='contours'&&!!latest.tilesets?.dem)||!set||next?.datasetId===set.datasetId||((['recreation','trails','amenities','dem','boundaries'].includes(name)||name==='osm'&&combinedRevision)&&next&&next.minZoom<=set.minZoom&&next.maxZoom>=set.maxZoom&&next.bounds[0]<=set.bounds[0]&&next.bounds[1]<=set.bounds[1]&&next.bounds[2]>=set.bounds[2]&&next.bounds[3]>=set.bounds[3]);
  });
 };
 export class TileStore{
@@ -72,7 +74,11 @@ export class TileStore{
   signal.addEventListener('abort',cancel,{once:true});
   try{
    if(signal.aborted)throw Error('Cancelled');
-   const result=await task.downloadAsync();
+   // Native cancellation can leave downloadAsync pending on iOS. Release
+   // the JS scheduler independently, and clean any envelope written later.
+   const transfer=task.downloadAsync();
+   void transfer.finally(()=>{if(signal.aborted)return FS.deleteAsync(path,{idempotent:true}).catch(()=>{})}).catch(()=>{});
+   const result=await abortable(transfer,signal);
    if(!result||signal.aborted)throw Error('Cancelled');
    if(result.status!==200)throw Error('Tile batch returned '+result.status);
    return JSON.parse(await FS.readAsStringAsync(path));

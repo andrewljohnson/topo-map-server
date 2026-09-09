@@ -1,5 +1,17 @@
 # Zoom-12 pipeline: measured CONUS plan
 
+**Status update, September9:** the combined z12 Tahoe/San Francisco pilot is now
+live in Cloudflare and shared by Expo. Immutable release contracts, verified
+rolling output publication and mobile offline downloads are implemented. Current
+public data is `topo-z12-pilot-20260909-r12`. The measurements below are historical
+and distinguish retained-input generation from cold acquisition. The36–60hour
+CONUS estimate remains a planning range; it has not been revalidated nationwide
+after the cartographic/conflation changes. Nationwide generation has not resumed.
+See [overnight QA](overnight-2026-09-09.md) for current correctness and delivery proof.
+A bounded, evictable cache for **new working source windows** remains a national
+prerequisite; a rolling output spool alone does not bound raw-input growth.
+
+
 Measured September 8, 2026 PDT on the existing i9-13900KS machine, with both AI
 training jobs left running. The target is a broad worldwide base map through z7,
 CONUS native overviews at z8–11, and full-detail CONUS vectors plus raw DEMs at z12.
@@ -136,10 +148,11 @@ These costs are for retained data, not paid generation servers.
    both online and offline app behavior. Keep the current public dataset usable
    while the new release is prepared, and retain a rollback manifest.
 
-These are the next production changes; the experiment does not already provide
-this national scheduler, rolling eviction, cloud contract or mobile migration.
-No experimental map data has been uploaded to R2, no nationwide generation has
-started, and the old publisher remains disabled.
+The original experiment lacked these production components. The combined pilot
+has since implemented the release contract, verified output spool and compatible
+mobile refresh. The remaining national gate includes working-source cache bounds,
+representative sustained-rate validation and complete coverage verification.
+The earlier national publisher remains disabled.
 
 ## Deadline checkpoints and fallback
 
@@ -162,8 +175,9 @@ No paid instance is needed or provisioned by this plan today.
 - [Lake Tahoe, with overview zooms](http://192.168.1.107:3000/experiment?region=tahoe-10x)
 - [San Francisco](http://192.168.1.107:3000/experiment?region=sf-10x)
 
-These links are for a browser on the same Wi-Fi. Expo and the public cloud map
-still use their existing production datasets. Browser visual checks reached
+These historical local links are for a browser on the same Wi-Fi. The current
+[public map](https://topo-map.andrewljohnson.workers.dev/) and Expo now share the
+combined pilot release. Browser visual checks reached
 z12, z14, z16 and z18 using the same z12 detailed source keys. Development-tab
 `idle` timings were affected by background browser scheduling and are not phone
 rendering benchmarks. Dense city POI styling deserves a separate cartography

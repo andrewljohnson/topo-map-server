@@ -30,3 +30,12 @@ test('DEM setup preserves the canonical land-cover fade',async()=>{
  const runtime=context.installDeviceTerrain({addProtocol(){},removeProtocol(){}},style,{maxZoom:12,minZoom:12},async()=>new ArrayBuffer(0),'');
  try{assert.deepEqual(style.layers.find(l=>l.id==='nlcd-forest').paint['fill-opacity'],before);assert.ok(before.at(-1)<.15)}finally{runtime.dispose()}
 });
+test('bridge decks stay above water and surface roads with regional DEM sources',async()=>{
+ const {createStyle}=await import('../src/style.mjs');
+ for(const regions of [undefined,[[-123,37,-122,38],[-121,38,-120,40]]]){
+  const context=vm.createContext({exports:{},URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},Blob,AbortController,Worker:class{postMessage(){}terminate(){}}});vm.runInContext(source,context);vm.runInContext(context.exports.terrainRuntimeScript,context);
+  const style=createStyle({bounds:[-180,-85,180,85],minZoom:0,maxZoom:12,combined:true,overviewMaxZoom:3},'base');
+  const runtime=context.installDeviceTerrain({addProtocol(){},removeProtocol(){}},style,{maxZoom:12,minZoom:12,renderBounds:regions},async()=>new ArrayBuffer(0),'');
+  try{const index=id=>style.layers.findIndex(l=>l.id===id);assert.ok(index('roads-highway-bridge')>index('water'),'highway bridge must not disappear beneath water fill');assert.ok(index('roads-highway-bridge')>index('roads-highway'),'elevated deck must cross above surface roads');assert.ok(index('roads-highway-casing-bridge')<index('roads-highway-bridge'),'casing stays below deck');assert.ok(index('roads-highway-bridge')<index('road-labels'),'road names stay above decks')}finally{runtime.dispose()}
+ }
+});

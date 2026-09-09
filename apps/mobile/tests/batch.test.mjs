@@ -252,3 +252,13 @@ for(const stage of ['headers','body'])test('cancelled native '+stage+' promise c
  const detail=await Promise.race([store.source('13/1364/3132'),delay(500).then(()=>{throw Error('Cancelled requests retained both foreground slots')})]);assert.equal(detail,'ZGV0YWls');assert.ok((await settled).every(r=>r.status==='rejected'));
  settleOld(stage==='headers'?{ok:true,arrayBuffer:async()=>new TextEncoder().encode('stale').buffer}:new TextEncoder().encode('stale').buffer);await delay(20);assert.equal(memory.has(store.file('3/1/2')),false);await idle(store);
 });
+
+test('combined basemap revisions preserve selected regions and refresh both physical tilesets',async()=>{
+ memory.clear();const sets=version=>Object.fromEntries(['osm','dem'].map(name=>[name,{...meta,datasetId:version+'-'+name,minZoom:12,maxZoom:12,coverage:{12:[[1176,1561,1176,1561]]},tileUrl:'/'+name+'/{z}/{x}/{y}.'+(name==='dem'?'png':'pbf'),batchUrl:'/'+name+'-batch'}]));
+ let current={...meta,combined:true,datasetId:'combined-v1',tilesets:sets('v1')};const calls=[];
+ globalThis.fetch=async url=>{if(url.endsWith('/metadata'))return{ok:true,json:async()=>current};const u=new URL(url),name=u.pathname.split('-')[0].slice(1),set=current.tilesets[name];calls.push(set.datasetId);return{ok:true,json:async()=>({datasetId:set.datasetId,tiles:u.searchParams.get('tiles').split(',').map(key=>({key,data:Buffer.from(set.datasetId).toString('base64')}))})}};
+ const first=new TileStore('http://combined-revision',()=>{});await first.init();await first.toggle(cell);await idle(first);const oldFiles=first.regionTiles(cell).map(key=>first.file(key));
+ current={...current,datasetId:'combined-v2',tilesets:sets('v2')};const next=new TileStore('http://combined-revision',()=>{});await next.init();await idle(next);
+ assert.equal(next.regions[cell]?.status,'complete','routine combined publication must preserve selected download cells');assert.equal(next.regions[cell].done,2);assert.deepEqual(calls.sort(),['v1-dem','v1-osm','v2-dem','v2-osm']);assert.ok(oldFiles.every(path=>memory.has(path)),'previous files are preserved');
+ globalThis.fetch=async()=>{throw Error('offline')};const offline=new TileStore('http://combined-revision',()=>{});await offline.init();for(const name of ['osm','dem'])assert.equal(await offline.source(name+'/12/'+cell),Buffer.from('v2-'+name).toString('base64'));
+});

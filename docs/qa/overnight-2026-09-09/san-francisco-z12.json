@@ -1,0 +1,1429 @@
+{
+  "capturedAt": "2026-09-09T09:20:24.154Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -122.49873146057138,
+    37.712171693934295,
+    -122.43126853942863,
+    37.82778311719436
+  ],
+  "center": [
+    -122.465,
+    37.77
+  ],
+  "zoom": 12,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "ec0a69154653b2aaec0ae8092a48905014d2d69af8047ddf34bf1935010abad3",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "osm__poi",
+      "id": 8,
+      "coordinates": [
+        -122.45191812515259,
+        37.77909753754146
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Lone Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 11,
+      "coordinates": [
+        -122.45108127593994,
+        37.77632033712587
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Ignatius Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 12,
+      "coordinates": [
+        -122.44869410991669,
+        37.78426158091439
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Laurel Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 23,
+      "coordinates": [
+        -122.43480026721954,
+        37.77578184496936
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Alamo Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 4,
+      "coordinates": [
+        -122.47182548046112,
+        37.75632565562317
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Grand View Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 6,
+      "coordinates": [
+        -122.46906280517578,
+        37.768238302400164
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Heidelberg Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 15,
+      "coordinates": [
+        -122.45718061923981,
+        37.75810694943122
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Mount Sutro",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 16,
+      "coordinates": [
+        -122.47552692890167,
+        37.7685393803951
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 15,
+        "name": "Strawberry Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -122.45287299156189,
+        37.75515506776743
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Clarendon Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 4,
+      "coordinates": [
+        -122.44753003120422,
+        37.76001543091557
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Tank Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 6,
+      "coordinates": [
+        -122.44553983211517,
+        37.76331910802338
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Mount Olympus",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 8,
+      "coordinates": [
+        -122.44157016277313,
+        37.76775911940136
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Buena Vista Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 9,
+      "coordinates": [
+        -122.44136095046997,
+        37.75832748758549
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Kite Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 10,
+      "coordinates": [
+        -122.43936538696289,
+        37.76488395620423
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Corona Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 13,
+      "coordinates": [
+        -122.4355298280716,
+        37.75504055274351
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Castro Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 2,
+      "coordinates": [
+        -122.46885895729065,
+        37.7499338507577
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Larsen Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 7,
+      "coordinates": [
+        -122.46716916561127,
+        37.748076009616284
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Forest Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 10,
+      "coordinates": [
+        -122.45936393737793,
+        37.74286277709341
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Edgehill Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -122.45330214500427,
+        37.73826430791077
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 13,
+        "name": "Mount Davidson",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 3,
+      "coordinates": [
+        -122.44774997234344,
+        37.75159653661089
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Noe Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 4,
+      "coordinates": [
+        -122.44742274284363,
+        37.75332280611494
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Eureka Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 5,
+      "coordinates": [
+        -122.44177401065826,
+        37.7461884291839
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Red Rock Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 7,
+      "coordinates": [
+        -122.4374395608902,
+        37.74134836814483
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Gold Mine Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 10,
+      "coordinates": [
+        -122.43338942527771,
+        37.74587453473552
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Duncan Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -122.45116174221039,
+        37.72579524999402
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "City College Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 5,
+      "coordinates": [
+        -122.47635841369629,
+        37.79548301565539
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Rob Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 2,
+      "coordinates": [
+        -122.46429920196533,
+        37.7937068612716
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Presidio Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 3,
+      "coordinates": [
+        -122.44631230831146,
+        37.79189251151418
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Cannon Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "osm__poi",
+      "id": 9,
+      "coordinates": [
+        -122.43784189224243,
+        37.791371089673774
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 100174508282515,
+      "coordinates": [
+        -122.44167745113373,
+        37.758369898693644
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "geonames_id": "12156597",
+        "id": "geonames:12156597",
+        "isolation_km": 0.64,
+        "kind": "summit",
+        "label_minzoom": 13,
+        "label_rank": 73850,
+        "license": "CC BY 4.0",
+        "min_zoom": 13,
+        "name": "Kite Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 17.305,
+        "rank_family": "summit",
+        "source_class": "T.HLL",
+        "source_url": "https://www.geonames.org/12156597",
+        "state": "CA",
+        "updated": "2020-04-24"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 251448947889177,
+      "coordinates": [
+        -122.44136095046997,
+        37.767428354104126
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "elevation_ft": 568,
+        "elevation_m": 173,
+        "geonames_id": "5331611",
+        "higher_peak_km": 1.73,
+        "id": "geonames:5331611",
+        "isolation_km": 0.59,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 62108,
+        "license": "CC BY 4.0",
+        "min_zoom": 13,
+        "name": "Buena Vista Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 106.655,
+        "rank_elevation_m": 173,
+        "rank_family": "summit",
+        "source_class": "T.MT",
+        "source_url": "https://www.geonames.org/5331611",
+        "state": "CA",
+        "updated": "2010-02-19"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 50485839976759,
+      "coordinates": [
+        -122.45108127593994,
+        37.77632033712587
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "elevation_ft": 354,
+        "elevation_m": 108,
+        "geonames_id": "5358988",
+        "higher_peak_km": 0.32,
+        "id": "geonames:5358988",
+        "isolation_km": 0.31,
+        "kind": "summit",
+        "label_minzoom": 14,
+        "label_rank": 71260,
+        "license": "CC BY 4.0",
+        "min_zoom": 13,
+        "name": "Ignatius Heights",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 31.378,
+        "rank_elevation_m": 108,
+        "rank_family": "summit",
+        "source_class": "T.MT",
+        "source_url": "https://www.geonames.org/5358988",
+        "state": "CA",
+        "updated": "2006-01-15"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 40838157825193,
+      "coordinates": [
+        -122.45191812515259,
+        37.779101777462316
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "elevation_ft": 420,
+        "elevation_m": 128,
+        "geonames_id": "5367836",
+        "higher_peak_km": 1.6,
+        "id": "geonames:5367836",
+        "isolation_km": 0,
+        "kind": "summit",
+        "label_minzoom": 12,
+        "label_rank": 63372,
+        "license": "CC BY 4.0",
+        "match_ambiguous": true,
+        "min_zoom": 13,
+        "name": "Lone Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 99.855,
+        "rank_elevation_m": 128,
+        "rank_family": "summit",
+        "source_class": "T.MT",
+        "source_url": "https://www.geonames.org/5367836",
+        "state": "CA",
+        "updated": "2006-01-15"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 251583587799281,
+      "coordinates": [
+        -122.45463252067566,
+        37.738260065648646
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Blue Mountain,Mount Davidson",
+        "county": "San Francisco",
+        "elevation_ft": 928,
+        "elevation_m": 283,
+        "geonames_id": "5341685",
+        "gnis_id": "1658377",
+        "higher_peak_km": 5.9,
+        "id": "gnis:1658377",
+        "isolation_km": 1.6,
+        "kind": "summit",
+        "label_minzoom": 10,
+        "label_rank": 35592,
+        "license": "Public domain",
+        "map_name": "San Francisco South",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Mount Davidson",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 203.003,
+        "rank_elevation_m": 283,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1658377\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Davidson\",\"coordinates\":[-122.4546304,37.7382594],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1658377\",\"gnis_id\":\"1658377\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Davidson\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco South\",\"updated\":\"07/21/2018\"}},{\"id\":\"geonames:5341685\",\"agency\":\"GeoNames\",\"name\":\"Mount Davidson\",\"coordinates\":[-122.4533,37.73826],\"source_url\":\"https://www.geonames.org/5341685\",\"details\":{\"id\":\"geonames:5341685\",\"geonames_id\":\"5341685\",\"agency\":\"GeoNames\",\"name\":\"Mount Davidson\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5341685\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2007-02-14\",\"alternate_names\":\"Blue Mountain,Mount Davidson\",\"elevation_m\":283.0,\"elevation_ft\":928}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/21/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 17924992602145,
+      "coordinates": [
+        -122.45191812515259,
+        37.77909753754146
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "county": "San Francisco",
+        "gnis_id": "1659001",
+        "id": "gnis:1659001",
+        "isolation_km": 0,
+        "kind": "summit",
+        "label_minzoom": 14,
+        "label_rank": 77464,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "min_zoom": 13,
+        "name": "Lone Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 0.019,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "01/19/1981"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 196878772720020,
+      "coordinates": [
+        -122.4454915523529,
+        37.76326821809579
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "San Francisco",
+        "elevation_ft": 561,
+        "elevation_m": 171,
+        "geonames_id": "5379342",
+        "gnis_id": "1659303",
+        "higher_peak_km": 0.59,
+        "id": "gnis:1659303",
+        "isolation_km": 0.59,
+        "kind": "summit",
+        "label_minzoom": 13,
+        "label_rank": 69117,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Mount Olympus",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 52.246,
+        "rank_elevation_m": 171,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1659303\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Olympus\",\"coordinates\":[-122.445492,37.763269],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1659303\",\"gnis_id\":\"1659303\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Olympus\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5379342\",\"agency\":\"GeoNames\",\"name\":\"Mount Olympus\",\"coordinates\":[-122.44553,37.76299],\"source_url\":\"https://www.geonames.org/5379342\",\"details\":{\"id\":\"geonames:5379342\",\"geonames_id\":\"5379342\",\"agency\":\"GeoNames\",\"name\":\"Mount Olympus\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5379342\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2007-02-14\",\"alternate_names\":\"\",\"elevation_m\":171.0,\"elevation_ft\":561}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 74111648972911,
+      "coordinates": [
+        -122.47551620006561,
+        37.768535139868476
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "San Francisco",
+        "elevation_ft": 423,
+        "elevation_m": 129,
+        "geonames_id": "5399340",
+        "gnis_id": "1659887",
+        "higher_peak_km": 1.99,
+        "id": "gnis:1659887",
+        "isolation_km": 1.99,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 60584,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Strawberry Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 113.894,
+        "rank_elevation_m": 129,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1659887\",\"agency\":\"USGS GNIS\",\"name\":\"Strawberry Hill\",\"coordinates\":[-122.4755139,37.7685363],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1659887\",\"gnis_id\":\"1659887\",\"agency\":\"USGS GNIS\",\"name\":\"Strawberry Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5399340\",\"agency\":\"GeoNames\",\"name\":\"Strawberry Hill\",\"coordinates\":[-122.47512,37.76884],\"source_url\":\"https://www.geonames.org/5399340\",\"details\":{\"id\":\"geonames:5399340\",\"geonames_id\":\"5399340\",\"agency\":\"GeoNames\",\"name\":\"Strawberry Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5399340\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.HLL\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2015-12-27\",\"alternate_names\":\"\",\"elevation_m\":129.0,\"elevation_ft\":423}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 42391480925608,
+      "coordinates": [
+        -122.44773387908936,
+        37.75159229511286
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Las Papas,Los Pechos De La Choca,Los Pechos De La Chola,Mission Peaks,Paps,Pechos de la Choca,Twin Peaks",
+        "county": "San Francisco",
+        "elevation_ft": 915,
+        "elevation_m": 279,
+        "geonames_id": "5404318",
+        "gnis_id": "236709",
+        "higher_peak_km": 1.6,
+        "id": "gnis:236709",
+        "isolation_km": 0.92,
+        "kind": "summit",
+        "label_minzoom": 12,
+        "label_rank": 62359,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Twin Peaks",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 105.381,
+        "rank_elevation_m": 279,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 3,
+        "source_records": "[{\"id\":\"gnis:236709\",\"agency\":\"USGS GNIS\",\"name\":\"Twin Peaks\",\"coordinates\":[-122.4477358,37.7515922],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:236709\",\"gnis_id\":\"236709\",\"agency\":\"USGS GNIS\",\"name\":\"Twin Peaks\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5404318\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"coordinates\":[-122.44775,37.7516],\"source_url\":\"https://www.geonames.org/5404318\",\"details\":{\"id\":\"geonames:5404318\",\"geonames_id\":\"5404318\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5404318\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Las Papas,Los Pechos De La Choca,Los Pechos De La Chola,Mission Peaks,Paps,Pechos de la Choca,Twin Peaks\",\"elevation_m\":279.0,\"elevation_ft\":915}},{\"id\":\"geonames:6948432\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"coordinates\":[-122.449,37.7508],\"source_url\":\"https://www.geonames.org/6948432\",\"details\":{\"id\":\"geonames:6948432\",\"geonames_id\":\"6948432\",\"agency\":\"GeoNames\",\"name\":\"Twin Peaks\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/6948432\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.HLL\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2009-08-31\",\"alternate_names\":\"\"}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 243725019142629,
+      "coordinates": [
+        -122.45197713375092,
+        37.77905937824269
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "county": "San Francisco",
+        "gnis_id": "253372",
+        "id": "gnis:253372",
+        "isolation_km": 0.01,
+        "kind": "summit",
+        "label_minzoom": 14,
+        "label_rank": 77249,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "min_zoom": 13,
+        "name": "Lone Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 0.239,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 245795491752986,
+      "coordinates": [
+        -122.45718061923981,
+        37.75810694943122
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "Blue Mountain,Kholm Sjutro,Mount Sutro,Sutro Crest,jbl mwnt swtrw,kwh swtrw,mont Sutro,sutoro shan,\u0425\u043e\u043b\u043c \u0421\u044e\u0442\u0440\u043e,\u062c\u0628\u0644 \u0645\u0648\u0646\u062a \u0633\u0648\u062a\u0631\u0648,\u06a9\u0648\u0647 \u0633\u0648\u062a\u0631\u0648,\u30b9\u30fc\u30c8\u30ed\u5c71",
+        "county": "San Francisco",
+        "elevation_ft": 912,
+        "elevation_m": 278,
+        "geonames_id": "5400374",
+        "gnis_id": "253951",
+        "higher_peak_km": 1.1,
+        "id": "gnis:253951",
+        "isolation_km": 1.1,
+        "kind": "summit",
+        "label_minzoom": 12,
+        "label_rank": 65872,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Mount Sutro",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 84.011,
+        "rank_elevation_m": 278,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:253951\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Sutro\",\"coordinates\":[-122.4571803,37.758106],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:253951\",\"gnis_id\":\"253951\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Sutro\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/18/2024\"}},{\"id\":\"geonames:5400374\",\"agency\":\"GeoNames\",\"name\":\"Mount Sutro\",\"coordinates\":[-122.45719,37.75826],\"source_url\":\"https://www.geonames.org/5400374\",\"details\":{\"id\":\"geonames:5400374\",\"geonames_id\":\"5400374\",\"agency\":\"GeoNames\",\"name\":\"Mount Sutro\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5400374\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2007-02-14\",\"alternate_names\":\"Blue Mountain,Kholm Sjutro,Mount Sutro,Sutro Crest,jbl mwnt swtrw,kwh swtrw,mont Sutro,sutoro shan,\\u0425\\u043e\\u043b\\u043c \\u0421\\u044e\\u0442\\u0440\\u043e,\\u062c\\u0628\\u0644 \\u0645\\u0648\\u0646\\u062a \\u0633\\u0648\\u062a\\u0631\\u0648,\\u06a9\\u0648\\u0647 \\u0633\\u0648\\u062a\\u0631\\u0648,\\u30b9\\u30fc\\u30c8\\u30ed\\u5c71\",\"elevation_m\":278.0,\"elevation_ft\":912}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/18/2024"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 122368153405355,
+      "coordinates": [
+        -122.46442258358002,
+        37.79382131642119
+      ],
+      "properties": {
+        "agency": "GeoNames",
+        "alternate_names": "",
+        "county": "075",
+        "elevation_ft": 387,
+        "elevation_m": 118,
+        "geonames_id": "5367837",
+        "higher_peak_km": 1.97,
+        "id": "geonames:5367837",
+        "isolation_km": 0.05,
+        "kind": "summit",
+        "label_minzoom": 14,
+        "label_rank": 60783,
+        "license": "CC BY 4.0",
+        "min_zoom": 13,
+        "name": "Lone Mountain",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 113.027,
+        "rank_elevation_m": 118,
+        "rank_family": "summit",
+        "source_class": "T.MT",
+        "source_url": "https://www.geonames.org/5367837",
+        "state": "CA",
+        "updated": "2006-01-15"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 156405818512296,
+      "coordinates": [
+        -122.46500194072723,
+        37.79377468656682
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "San Francisco",
+        "elevation_ft": 387,
+        "elevation_m": 118,
+        "geonames_id": "5384855",
+        "gnis_id": "1878683",
+        "higher_peak_km": 2,
+        "id": "gnis:1878683",
+        "isolation_km": 0.05,
+        "kind": "summit",
+        "label_minzoom": 11,
+        "label_rank": 60594,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Presidio Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 113.857,
+        "rank_elevation_m": 118,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1878683\",\"agency\":\"USGS GNIS\",\"name\":\"Presidio Hill\",\"coordinates\":[-122.4650038,37.7937727],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1878683\",\"gnis_id\":\"1878683\",\"agency\":\"USGS GNIS\",\"name\":\"Presidio Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5384855\",\"agency\":\"GeoNames\",\"name\":\"Presidio Hill\",\"coordinates\":[-122.46442,37.79354],\"source_url\":\"https://www.geonames.org/5384855\",\"details\":{\"id\":\"geonames:5384855\",\"geonames_id\":\"5384855\",\"agency\":\"GeoNames\",\"name\":\"Presidio Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5384855\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2006-01-15\",\"alternate_names\":\"\",\"elevation_m\":118.0,\"elevation_ft\":387}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 153640196178024,
+      "coordinates": [
+        -122.47649788856506,
+        37.79563137984094
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "San Francisco",
+        "elevation_ft": 384,
+        "elevation_m": 117,
+        "geonames_id": "5388001",
+        "gnis_id": "1878685",
+        "higher_peak_km": 1.03,
+        "id": "gnis:1878685",
+        "isolation_km": 1.03,
+        "kind": "summit",
+        "label_minzoom": 13,
+        "label_rank": 67000,
+        "license": "Public domain",
+        "map_name": "San Francisco North",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Rob Hill",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 74.944,
+        "rank_elevation_m": 117,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:1878685\",\"agency\":\"USGS GNIS\",\"name\":\"Rob Hill\",\"coordinates\":[-122.4764979,37.7956325],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1878685\",\"gnis_id\":\"1878685\",\"agency\":\"USGS GNIS\",\"name\":\"Rob Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"San Francisco\",\"map_name\":\"San Francisco North\",\"updated\":\"07/24/2018\"}},{\"id\":\"geonames:5388001\",\"agency\":\"GeoNames\",\"name\":\"Rob Hill\",\"coordinates\":[-122.47636,37.79548],\"source_url\":\"https://www.geonames.org/5388001\",\"details\":{\"id\":\"geonames:5388001\",\"geonames_id\":\"5388001\",\"agency\":\"GeoNames\",\"name\":\"Rob Hill\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5388001\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"075\",\"updated\":\"2010-02-20\",\"alternate_names\":\"\",\"elevation_m\":117.0,\"elevation_ft\":384}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "California",
+        "updated": "07/24/2018"
+      }
+    }
+  ],
+  "renderedPeaks": [
+    {
+      "name": "Hawk Hill",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -122.49963998794556,
+        37.82761597765956
+      ]
+    },
+    {
+      "name": "Twin Peaks",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -122.44773387908936,
+        37.75159229511286
+      ]
+    },
+    {
+      "name": "Mount Davidson",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -122.45463252067566,
+        37.738260065648646
+      ]
+    },
+    {
+      "name": "Lone Mountain",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -122.45191812515259,
+        37.779101777462316
+      ]
+    },
+    {
+      "name": "Buena Vista Heights",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -122.44136095046997,
+        37.767428354104126
+      ]
+    }
+  ],
+  "peakLayers": [
+    {
+      "id": "peak-labels",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "osm__poi",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "all",
+          [
+            "==",
+            [
+              "get",
+              "poi_icon"
+            ],
+            "mountain"
+          ],
+          [
+            ">=",
+            [
+              "zoom"
+            ],
+            [
+              "max",
+              11,
+              [
+                "-",
+                [
+                  "coalesce",
+                  [
+                    "get",
+                    "min_zoom"
+                  ],
+                  14
+                ],
+                1
+              ]
+            ]
+          ]
+        ],
+        [
+          "!",
+          [
+            "in",
+            [
+              "get",
+              "poi_icon"
+            ],
+            [
+              "literal",
+              [
+                "information",
+                "toilet",
+                "parking",
+                "viewpoint",
+                "drinking-water",
+                "restaurant",
+                "campsite",
+                "picnic-site",
+                "shop",
+                "museum",
+                "lodging",
+                "swimming",
+                "cafe",
+                "hospital"
+              ]
+            ]
+          ]
+        ]
+      ],
+      "layout": {
+        "symbol-sort-key": [
+          "match",
+          [
+            "concat",
+            [
+              "get",
+              "class"
+            ],
+            "|",
+            [
+              "get",
+              "name"
+            ]
+          ],
+          "peak|Buena Vista Heights",
+          62108,
+          "peak|Hawk Hill",
+          65439,
+          "peak|Ignatius Heights",
+          71260,
+          "peak|Kite Hill",
+          73850,
+          "peak|Lone Mountain",
+          77249,
+          "peak|Mount Davidson",
+          35592,
+          "peak|Mount Olympus",
+          69117,
+          "peak|Mount Sutro",
+          65872,
+          "peak|Nob Hill",
+          49195,
+          "peak|Potrero Hill",
+          60336,
+          "peak|Presidio Hill",
+          60594,
+          "peak|Rincon Hill",
+          59694,
+          "peak|Rob Hill",
+          67000,
+          "peak|Russian Hill",
+          70098,
+          "peak|Slacker Hill",
+          19349,
+          "peak|Stony Hill",
+          58611,
+          "peak|Strawberry Hill",
+          60584,
+          "peak|Telegraph Hill",
+          67684,
+          "peak|Visitacion Knob",
+          48878,
+          100000
+        ],
+        "icon-image": [
+          "match",
+          [
+            "coalesce",
+            [
+              "get",
+              "kind"
+            ],
+            [
+              "get",
+              "class"
+            ],
+            ""
+          ],
+          "waterfall",
+          [
+            "case",
+            [
+              "in",
+              "cascade",
+              [
+                "downcase",
+                [
+                  "coalesce",
+                  [
+                    "get",
+                    "name"
+                  ],
+                  ""
+                ]
+              ]
+            ],
+            "poi-circle-cascade",
+            "poi-circle-waterfall"
+          ],
+          "cascade",
+          "poi-circle-cascade",
+          "arch",
+          "poi-circle-arch",
+          "natural_arch",
+          "poi-circle-arch",
+          "cave",
+          "poi-circle-cave",
+          "cave_entrance",
+          "poi-circle-cave",
+          "spring",
+          "poi-circle-spring",
+          "rock",
+          "poi-circle-rock",
+          "pass",
+          "poi-circle-pass",
+          "saddle",
+          "poi-circle-pass",
+          "shelter",
+          "poi-square-shelter",
+          [
+            "concat",
+            "poi-",
+            [
+              "get",
+              "poi_frame"
+            ],
+            "-",
+            [
+              "get",
+              "poi_icon"
+            ]
+          ]
+        ],
+        "icon-size": 0.9,
+        "icon-padding": 5,
+        "icon-allow-overlap": false,
+        "text-field": [
+          "get",
+          "name"
+        ],
+        "text-font": [
+          "Arial",
+          "sans-serif"
+        ],
+        "text-size": 12,
+        "text-max-width": 10,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          1.5
+        ],
+        "text-padding": 9,
+        "text-optional": false,
+        "text-allow-overlap": false,
+        "text-variable-anchor": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "text-radial-offset": 0.8,
+        "text-justify": "auto"
+      },
+      "paint": {
+        "text-color": "#48463b",
+        "text-halo-color": "#fffdf5",
+        "text-halo-width": 1.3,
+        "text-halo-blur": 0.35
+      }
+    },
+    {
+      "id": "ranked-peaks",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "recreation__recreation",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "kind"
+          ],
+          "summit"
+        ],
+        [
+          ">=",
+          [
+            "zoom"
+          ],
+          [
+            "coalesce",
+            [
+              "get",
+              "label_minzoom"
+            ],
+            13
+          ]
+        ]
+      ],
+      "layout": {
+        "symbol-sort-key": [
+          "coalesce",
+          [
+            "get",
+            "label_rank"
+          ],
+          100000
+        ],
+        "icon-image": [
+          "match",
+          [
+            "coalesce",
+            [
+              "get",
+              "kind"
+            ],
+            [
+              "get",
+              "class"
+            ],
+            ""
+          ],
+          "waterfall",
+          [
+            "case",
+            [
+              "in",
+              "cascade",
+              [
+                "downcase",
+                [
+                  "coalesce",
+                  [
+                    "get",
+                    "name"
+                  ],
+                  ""
+                ]
+              ]
+            ],
+            "poi-circle-cascade",
+            "poi-circle-waterfall"
+          ],
+          "cascade",
+          "poi-circle-cascade",
+          "arch",
+          "poi-circle-arch",
+          "natural_arch",
+          "poi-circle-arch",
+          "cave",
+          "poi-circle-cave",
+          "cave_entrance",
+          "poi-circle-cave",
+          "spring",
+          "poi-circle-spring",
+          "rock",
+          "poi-circle-rock",
+          "pass",
+          "poi-circle-pass",
+          "saddle",
+          "poi-circle-pass",
+          "shelter",
+          "poi-square-shelter",
+          [
+            "coalesce",
+            [
+              "get",
+              "poi_image"
+            ],
+            [
+              "concat",
+              "poi-",
+              [
+                "get",
+                "poi_frame"
+              ],
+              "-",
+              [
+                "get",
+                "poi_icon"
+              ]
+            ]
+          ]
+        ],
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          0.65,
+          11,
+          0.8,
+          15,
+          0.9
+        ],
+        "icon-padding": 6,
+        "text-field": [
+          "get",
+          "name"
+        ],
+        "text-font": [
+          "Arial",
+          "sans-serif"
+        ],
+        "text-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          11,
+          11,
+          12,
+          15,
+          13
+        ],
+        "text-max-width": 12,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          1.5
+        ],
+        "text-padding": 10,
+        "text-optional": false,
+        "text-variable-anchor": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "text-radial-offset": 0.8,
+        "text-justify": "auto"
+      },
+      "paint": {
+        "text-color": "#48463b",
+        "text-halo-color": "#fffdf5",
+        "text-halo-width": 1.3,
+        "text-halo-blur": 0.35
+      }
+    }
+  ],
+  "nearbySymbols": []
+}

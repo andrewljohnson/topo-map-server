@@ -1,5 +1,6 @@
 "use client";
 import {installMapDiagnostics,profileMapGraphics} from './mapDiagnostics';
+import {installLakeOrientation} from './lakeOrientation';
 import {logicalMap} from './combinedMap';
 import {installDeviceTerrain} from './terrainRuntime';
 import {terrainWorkerSource} from './terrainWorkerSource';
@@ -76,6 +77,7 @@ export default function Home() {
         installAmenityImages(instance);stamp('amenity-icons');
         const logical=info.combined?logicalMap(instance):instance;
         installMapInfo(logical);stamp('legend');
+        installLakeOrientation(instance);
         installMapNotes(instance,()=>info);stamp('notes');
         installTrailBadges(instance);stamp('route-badges');
         installPoiMatching(logical);stamp('poi-matching');

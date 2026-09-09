@@ -1,3 +1,25 @@
+// Small, explicit subset used by this map's legend paint. Regression checks
+// compare every current line/fill expression with MapLibre's own evaluator.
+function legendPaint(value:any,properties:Record<string,any>={},zoom=14):any{
+ if(!Array.isArray(value)||typeof value[0]!=='string')return value;
+ const evaluate=(v:any)=>legendPaint(v,properties,zoom),op=value[0];
+ if(op==='literal')return value[1];if(op==='get')return properties[value[1]]??null;if(op==='has')return Object.hasOwn(properties,value[1]);if(op==='zoom')return zoom;
+ if(op==='coalesce'){for(const v of value.slice(1)){const result=evaluate(v);if(result!=null)return result}return null}
+ if(op==='case'){for(let i=1;i<value.length-1;i+=2)if(evaluate(value[i]))return evaluate(value[i+1]);return evaluate(value.at(-1))}
+ if(op==='match'){const input=evaluate(value[1]);for(let i=2;i<value.length-1;i+=2)if(Array.isArray(value[i])?value[i].includes(input):value[i]===input)return evaluate(value[i+1]);return evaluate(value.at(-1))}
+ if(op==='interpolate'){
+  const input=evaluate(value[2]);if(input<=value[3])return evaluate(value[4]);
+  for(let i=5;i<value.length;i+=2)if(input<=value[i]){const a=evaluate(value[i-1]),b=evaluate(value[i+1]),span=value[i]-value[i-2],base=value[1][0]==='exponential'?value[1][1]:1,t=base===1?(input-value[i-2])/span:(base**(input-value[i-2])-1)/(base**span-1);return a+(b-a)*t}
+  return evaluate(value.at(-1));
+ }
+ if(op==='step'){const input=evaluate(value[1]);let result=value[2];for(let i=3;i<value.length;i+=2){if(input<value[i])break;result=value[i+1]}return evaluate(result)}
+ const args=value.slice(1).map(evaluate),[a,b]=args;
+ if(op==='all')return args.every(Boolean);if(op==='any')return args.some(Boolean);if(op==='!')return !a;if(op==='in')return Array.isArray(b)||typeof b==='string'?b.includes(a):false;
+ if(op==='==')return a===b;if(op==='!=')return a!==b;if(op==='>=')return a>=b;if(op==='<=')return a<=b;if(op==='>')return a>b;if(op==='<')return a<b;
+ if(op==='+')return args.reduce((a,b)=>a+b,0);if(op==='*')return args.reduce((a,b)=>a*b,1);if(op==='-')return args.length===1?-a:a-b;if(op==='/')return a/b;if(op==='max')return Math.max(...args);if(op==='min')return Math.min(...args);
+ return undefined;
+}
+
 /** Current-viewport legend shared with the embedded mobile renderer. */
 export function installMapInfo(map: any) {
  let cleanup=()=>{};
@@ -37,30 +59,22 @@ export function installMapInfo(map: any) {
  const scroll=el('div','topo-info-scroll'),note=el('p','topo-info-note'),list=el('div','topo-info-legend'),credits=el('div','topo-info-credits');note.hidden=true;append(scroll,note,list,credits);append(sheet,heading,scroll);append(overlay,sheet);map.getContainer().appendChild(overlay);
  let signature='';
  function sample(canvas:HTMLCanvasElement,item:any){
-  canvas.width=80;canvas.height=56;const ctx=canvas.getContext('2d');if(!ctx)return;ctx.scale(2,2);
-  if(item.image){const image=map.getImage(item.image);if(image?.data){const d=image.data,tmp=document.createElement('canvas');tmp.width=d.width;tmp.height=d.height;tmp.getContext('2d')!.putImageData(new ImageData(new Uint8ClampedArray(d.data),d.width,d.height),0,0);const size=Math.min(26/d.width,26/d.height);ctx.drawImage(tmp,(40-d.width*size)/2,(28-d.height*size)/2,d.width*size,d.height*size);if(item.shield){ctx.fillStyle=['interstate','county','california'].includes(item.shield)?'#fffdf5':'#30332e';ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.fillText(item.shield==='interstate'?'80':'50',20,17)}return}}
-  const paint=item.layer?.paint||{},color=paint['line-color']||paint['fill-color']||paint['circle-color']||'#476b50';ctx.strokeStyle=ctx.fillStyle=typeof color==='string'?color:'#476b50';
+  canvas.width=80;canvas.height=56;const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;ctx.scale(2,2);
+  if(item.image){const image=map.getImage(item.image);if(image?.data){const d=image.data,tmp=document.createElement('canvas');tmp.width=d.width;tmp.height=d.height;tmp.getContext('2d',{willReadFrequently:true})!.putImageData(new ImageData(new Uint8ClampedArray(d.data),d.width,d.height),0,0);const size=Math.min(26/d.width,26/d.height);ctx.drawImage(tmp,(40-d.width*size)/2,(28-d.height*size)/2,d.width*size,d.height*size);if(item.shield){ctx.fillStyle=['interstate','county','california'].includes(item.shield)?'#fffdf5':'#30332e';ctx.font='bold 9px Arial';ctx.textAlign='center';ctx.fillText(item.shield==='interstate'?'80':'50',20,17)}return}}
+  const zoom=map.getZoom?.()??14,read=(v:any)=>legendPaint(v,item.properties,zoom),paint=item.layer?.paint||{},color=read(paint['line-color']||paint['fill-color']||paint['circle-color'])||'#476b50';ctx.strokeStyle=ctx.fillStyle=typeof color==='string'?color:'#476b50';
   if(item.id==='terrain-shading'){const gradient=ctx.createLinearGradient(4,6,36,22);gradient.addColorStop(0,'#faf8ed');gradient.addColorStop(.5,'#c5ccb8');gradient.addColorStop(1,'#7b8473');ctx.fillStyle=gradient;ctx.fillRect(4,6,32,16);return}
-  if(item.layer?.type==='fill'){ctx.globalAlpha=typeof paint['fill-opacity']==='number'?paint['fill-opacity']:1;ctx.fillRect(4,6,32,16);ctx.globalAlpha=1;const pattern=map.getImage(item.pattern||'');if(pattern?.data){const d=pattern.data,tmp=document.createElement('canvas');tmp.width=d.width;tmp.height=d.height;tmp.getContext('2d')!.putImageData(new ImageData(new Uint8ClampedArray(d.data),d.width,d.height),0,0);ctx.drawImage(tmp,0,0,32,16,4,6,32,16)}ctx.strokeStyle='#70806f';ctx.lineWidth=.5;ctx.strokeRect(4,6,32,16);return}
+  if(item.layer?.type==='fill'){ctx.globalAlpha=read(paint['fill-opacity'])??1;ctx.fillRect(4,6,32,16);ctx.globalAlpha=1;const pattern=map.getImage(item.pattern||'');if(pattern?.data){const d=pattern.data,tmp=document.createElement('canvas');tmp.width=d.width;tmp.height=d.height;tmp.getContext('2d',{willReadFrequently:true})!.putImageData(new ImageData(new Uint8ClampedArray(d.data),d.width,d.height),0,0);ctx.drawImage(tmp,0,0,32,16,4,6,32,16)}ctx.strokeStyle='#70806f';ctx.lineWidth=.5;ctx.strokeRect(4,6,32,16);return}
   if(item.layer?.type==='circle'){ctx.beginPath();ctx.arc(20,14,6,0,Math.PI*2);ctx.fill();return}
   // A legend stroke uses the same ordered paint layers as its map feature.
-  const zoom=typeof map.getZoom==='function'?map.getZoom():14;
-  const width=(value:any):number=>{
-   if(typeof value==='number')return value;
-   if(Array.isArray(value)&&value[0]==='interpolate'&&value[2]?.[0]==='zoom'){
-    if(zoom<=value[3])return value[4];
-    for(let i=5;i<value.length;i+=2)if(zoom<=value[i])return value[i-1]+(value[i+1]-value[i-1])*(zoom-value[i-2])/(value[i]-value[i-2]);
-    return value[value.length-1];
-   }return 1.5;
-  };
+  const width=(value:any):number=>{const result=read(value);return typeof result==='number'&&Number.isFinite(result)?Math.max(0,result):1.5};
   const stack=item.stack?.length?item.stack:[item.layer];
   const outer=Math.max(...stack.map((layer:any)=>width(layer?.paint?.['line-width'])));
   const magnification=stack.length>1?6/Math.max(.1,outer):1;
   for(const layer of stack){
-   const paint=layer?.paint||{};ctx.strokeStyle=typeof paint['line-color']==='string'?paint['line-color']:'#476b50';
+   const paint=layer?.paint||{};const color=read(paint['line-color']);ctx.strokeStyle=typeof color==='string'?color:'#476b50';ctx.globalAlpha=read(paint['line-opacity'])??1;
    ctx.lineWidth=stack.length>1?width(paint['line-width'])*magnification:(item.id==='contours'?1:1.8);
    ctx.lineCap=layer?.layout?.['line-cap']||'butt';
-   const dash=paint['line-dasharray'];ctx.setLineDash(Array.isArray(dash)&&dash.every((v:any)=>typeof v==='number')?dash.map((v:number)=>v*ctx.lineWidth):[]);
+   const dash=read(paint['line-dasharray']);ctx.setLineDash(Array.isArray(dash)&&dash.every((v:any)=>typeof v==='number')?dash.map((v:number)=>v*ctx.lineWidth):[]);
    ctx.beginPath();ctx.moveTo(4,14);ctx.lineTo(36,14);ctx.stroke();
   }
   if(item.id==='railway'){ctx.setLineDash([]);ctx.lineWidth=1;for(let x=6;x<38;x+=6){ctx.beginPath();ctx.moveTo(x,10);ctx.lineTo(x,18);ctx.stroke()}}
@@ -78,6 +92,8 @@ export function installMapInfo(map: any) {
    if(id==='highway-shields'){const kind=p.network==='US:CA'?'california':p.shield_kind||'state';items.set('shield-'+kind,{id:'shield-'+kind,label:({interstate:'Interstate highway',us:'U.S. highway',state:'State route',california:'California route',county:'County route'} as any)[kind]||'Route shield',image:'shield-'+kind,shield:kind});continue}
    if(labels[id]){
     const legendZoom=map.getZoom?.()??14,terrainInterval=legendZoom>=14?20:legendZoom>=13?40:legendZoom>=12?100:200;
+    const shownLayer=styleLayers.get(raw)||f.layer,opacity=legendPaint(shownLayer?.paint?.[shownLayer?.type==='line'?'line-opacity':'fill-opacity'],p,legendZoom);
+    if(typeof opacity==='number'&&opacity<=0)continue;
     const terrainLabel=map.getSource?.('dem')&&(id==='contours'||id==='contour-index')?(id==='contours'?'Contour · '+terrainInterval+' ft':'Index contour · '+(terrainInterval*5)+' ft'):labels[id];
     let stackIds:string[]=[];
     if(id==='official-roads-center')stackIds=['official-roads-casing','official-roads','official-roads-center'];
@@ -93,7 +109,7 @@ export function installMapInfo(map: any) {
      const road=['motorway','motorway_link','trunk','trunk_link'].includes(p.class)?'highway':String(p.class||'').startsWith('primary')?'primary':String(p.class||'').startsWith('secondary')?'secondary':String(p.class||'').startsWith('tertiary')?'tertiary':'local';
      stackIds=['roads-'+road+'-casing','roads-'+road,raw];
     }
-    items.set(id,{id,label:terrainLabel,pattern:styleLayers.get(raw+'-texture')?.paint?.['fill-pattern'],layer:styleLayers.get(raw)||f.layer,stack:stackIds.map(key=>styleLayers.get(raw.endsWith('-overview')?key.replace(/-overview$/,'')+'-overview':key)).filter(Boolean)});
+    items.set(id,{id,label:terrainLabel,properties:p,pattern:styleLayers.get(raw+'-texture')?.paint?.['fill-pattern'],layer:styleLayers.get(raw)||f.layer,stack:stackIds.map(key=>styleLayers.get(raw.endsWith('-overview')?key.replace(/-overview$/,'')+'-overview':key)).filter(Boolean)});
    }
   }
   if(map.getSource?.('dem')&&map.getZoom()>=3)items.set('terrain-shading',{id:'terrain-shading',label:'Shaded relief'});
@@ -109,7 +125,7 @@ export function installMapInfo(map: any) {
   const order=['roads-highway','roads-primary','roads-secondary','roads-tertiary','roads-local','unpaved-roads','tracks-center','trails-path','trails-cycleway','trails-bridleway','trails-pedestrian','trails-sidewalk','trails-step-treads','railway','water','waterways-perennial','waterways','waterways-intermittent','waterways-seasonal','contour-index','contours'];
   const rank=(id:string)=>order.includes(id)?order.indexOf(id):100;
   const rows=[...items.values()].sort((a,b)=>group(a.id)-group(b.id)||rank(a.id)-rank(b.id)||a.label.localeCompare(b.label));
-  const next=JSON.stringify(rows.map(i=>[i.id,i.layer?.paint,i.stack,typeof map.getZoom==='function'?map.getZoom():14]));if(next===signature)return;signature=next;list.replaceChildren();
+  const next=JSON.stringify(rows.map(i=>[i.id,i.label,i.image,i.pattern,...[i.layer,...(i.stack||[])].filter(Boolean).map(l=>[l.type,l.layout?.['line-cap'],Object.fromEntries(Object.entries(l.paint||{}).map(([key,value])=>[key,legendPaint(value,i.properties,map.getZoom?.()??14)]))])]));if(next===signature)return;signature=next;list.replaceChildren();
   for(let index=0;index<groups.length;index++){
    const members=rows.filter(item=>group(item.id)===index);if(!members.length)continue;
    const section=el('section','topo-info-group'),heading=el('h3'),entries=el('ul','topo-info-list');heading.textContent=groups[index];append(section,heading,entries);append(list,section);

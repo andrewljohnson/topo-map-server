@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import ts from 'typescript';
-const memory=new Map(),tasks=[];
+const memory=new Map(),tasks=[];let ignoreCancellation=false;
 const meta={name:'test',datasetId:'background-v1',bounds:[-180,-85,180,85],center:[0,0],gridZoom:12,minZoom:6,maxZoom:14,tileUrl:'/tiles/{z}/{x}/{y}.pbf',batchUrl:'/tile-batch',batchSize:8};
 globalThis.__tileFS={documentDirectory:'memory://',EncodingType:{Base64:'base64'},FileSystemSessionType:{BACKGROUND:0},
  makeDirectoryAsync:async()=>{},getInfoAsync:async p=>({exists:memory.has(p),size:3}),
@@ -14,7 +14,7 @@ globalThis.__tileFS={documentDirectory:'memory://',EncodingType:{Base64:'base64'
   const query=new URL(url).searchParams;
   const keys=query.get('tiles').split(',');assert.ok(keys.length<=8);
   const task={keys,path,cancelled:false,finish(){memory.set(path,JSON.stringify({datasetId:query.get('datasetId'),tiles:keys.map(key=>({key,data:'cGJm'}))}));done({status:200})}};
-  tasks.push(task);return{downloadAsync:()=>promise,cancelAsync:async()=>{task.cancelled=true;fail(Error('Cancelled'))}};
+  tasks.push(task);return{downloadAsync:()=>promise,cancelAsync:async()=>{task.cancelled=true;if(!ignoreCancellation)fail(Error('Cancelled'))}};
  }
 };
 globalThis.fetch=async url=>{assert.ok(url.endsWith('/metadata'),'offline transfers must not use fetch');return{ok:true,json:async()=>meta}};
@@ -55,4 +55,19 @@ test('foreground bounds native batches and promotes a visible tile out of a stal
  assert.notEqual(store.regions['1176/1561'].status,'error','yielding preserves the selected download');
  store.setForeground(false);await wait(()=>tasks.filter(t=>!t.cancelled).reduce((n,t)=>n+t.keys.length,0)===26);
  for(const task of tasks.filter(t=>!t.cancelled))task.finish();await wait(()=>!store.running);assert.equal(store.regions['1176/1561'].status,'complete');
+});
+
+test('a native cancellation that never settles cannot hold a visible tile hostage',async()=>{
+ memory.clear();tasks.length=0;ignoreCancellation=true;
+ globalThis.fetch=async url=>url.endsWith('/metadata')?{ok:true,json:async()=>meta}:{ok:true,arrayBuffer:async()=>new TextEncoder().encode('visible').buffer};
+ const store=new TileStore('http://native-hang',()=>{});await store.init();await store.toggle('1176/1561');await wait(()=>tasks.length===2);
+ const key=tasks[0].keys[0],old=tasks.slice();
+ try{
+  const content=await Promise.race([store.source('osm/'+key),new Promise((_,reject)=>setTimeout(()=>reject(Error('Native cancellation retained the promoted tile')),700))]);
+  assert.equal(Buffer.from(content,'base64').toString(),'visible');assert.ok(old.every(t=>t.cancelled));
+  await store.toggle('1176/1561');await wait(()=>!store.running);
+  for(const task of tasks)task.finish();await new Promise(r=>setTimeout(r,20));
+  assert.equal(Buffer.from(await store.source('osm/'+key),'base64').toString(),'visible','late native data cannot overwrite current cache');
+  assert.ok(tasks.every(t=>!memory.has(t.path)),'late temporary envelopes are cleaned');
+ }finally{ignoreCancellation=false;if(store.regions['1176/1561'])await store.toggle('1176/1561').catch(()=>{})}
 });

@@ -22,7 +22,7 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  }
  worker.onmessage=async(event:any)=>{const m=event.data;if(disposed)return;
   if(m.type==='cancelDem'){demRequests.get(m.id)?.abort();return}
-  if(m.type==='dem'){const controller=new AbortController();demRequests.set(m.id,controller);try{const bytes=await raw(m.key,controller.signal);if(controller.signal.aborted||disposed)return;if(m.decodeInWorker){const buffer=bytes.slice(0);worker.postMessage({type:'demResult',id:m.id,buffer},[buffer])}else{const tile=await decode(bytes);if(!controller.signal.aborted&&!disposed)worker.postMessage({type:'demResult',id:m.id,tile},[tile.data.buffer])}}catch(e){if(!disposed)worker.postMessage({type:'demResult',id:m.id,error:String(e)})}finally{demRequests.delete(m.id)}return}
+  if(m.type==='dem'){const controller=new AbortController();demRequests.set(m.id,controller);try{const bytes=await raw(m.key,controller.signal);if(controller.signal.aborted||disposed)return;if(m.decodeInWorker){const buffer=bytes;worker.postMessage({type:'demResult',id:m.id,buffer},[buffer])}else{const tile=await decode(bytes);if(!controller.signal.aborted&&!disposed)worker.postMessage({type:'demResult',id:m.id,tile},[tile.data.buffer])}}catch(e){if(!disposed)worker.postMessage({type:'demResult',id:m.id,error:String(e)})}finally{demRequests.delete(m.id)}return}
   const p=requests.get(m.id);if(!p)return;requests.delete(m.id);p.signal.removeEventListener('abort',p.cancel);if(m.error){stats.failed++;p.reject(Error(m.error))}else{stats.generated++;stats.totalMs+=m.ms;stats.maxMs=Math.max(stats.maxMs,m.ms);p.resolve({data:m.buffer})}
  };
  worker.onerror=()=>{for(const p of requests.values()){p.signal.removeEventListener('abort',p.cancel);p.reject(Error('Terrain worker failed'))}for(const c of demRequests.values())c.abort();requests.clear();stats.failed++};
@@ -62,7 +62,11 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
   const bridge=JSON.parse(JSON.stringify(layer));bridge.id+='-bridge';bridge.filter=['all',layer.filter,['==',['get','is_bridge'],true]];
   layer.filter=['all',layer.filter,['!=',['get','is_bridge'],true]];bridges.push(bridge);
  }
- const symbolStart=style.layers.findIndex((l:any)=>l.type==='symbol'&&l.source!=='contours');style.layers.splice(symbolStart<0?style.layers.length:symbolStart,0,...bridges);
+ // Coarse overview labels and regional contour labels can precede the
+ // detailed water/roads. Anchor decks after road geometry, not the first symbol.
+ const roadSources=['road','network','roads','routes','trails','osm__road','trails__network','trails__roads','trails__routes','trails__trails'];
+ const roadEnd=style.layers.reduce((last:number,l:any,index:number)=>l.type==='line'&&roadSources.includes(l['source-layer'])?index:last,-1);
+ style.layers.splice(roadEnd+1,0,...bridges);
  function attach(map:any){
   const add=()=>{for(const [id,texture] of Object.entries(textures)){
    const canvas=document.createElement('canvas');canvas.width=canvas.height=32;const c=canvas.getContext('2d',{willReadFrequently:true})!;c.strokeStyle=c.fillStyle=texture.color;c.lineWidth=1;

@@ -1,0 +1,722 @@
+{
+  "capturedAt": "2026-09-09T09:22:55.152Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -120.16992584228475,
+    38.84253617482699,
+    -119.90007415771458,
+    39.296733093603336
+  ],
+  "center": [
+    -120.035,
+    39.07
+  ],
+  "zoom": 10,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "e5fb8716cd73c54133764f3a3d7d559436f9b58cd599286ff4980ac7693832b6",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 20124029437442,
+      "coordinates": [
+        -120.10013580322266,
+        38.94605929058201
+      ],
+      "properties": {
+        "id": "gnis:1656093",
+        "gnis_id": "1656093",
+        "agency": "USGS GNIS",
+        "name": "Inspiration Point",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Emerald Bay",
+        "updated": "08/30/2021",
+        "geonames_id": "5359546",
+        "alternate_names": "",
+        "elevation_m": 2081,
+        "elevation_ft": 6827,
+        "source_records": "[{\"id\":\"gnis:1656093\",\"agency\":\"USGS GNIS\",\"name\":\"Inspiration Point\",\"coordinates\":[-120.1001068,38.9460578],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1656093\",\"gnis_id\":\"1656093\",\"agency\":\"USGS GNIS\",\"name\":\"Inspiration Point\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Emerald Bay\",\"updated\":\"08/30/2021\"}},{\"id\":\"geonames:5359546\",\"agency\":\"GeoNames\",\"name\":\"Inspiration Point\",\"coordinates\":[-120.10046,38.9463],\"source_url\":\"https://www.geonames.org/5359546\",\"details\":{\"id\":\"geonames:5359546\",\"geonames_id\":\"5359546\",\"agency\":\"GeoNames\",\"name\":\"Inspiration Point\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5359546\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-15\",\"alternate_names\":\"\",\"elevation_m\":2081.0,\"elevation_ft\":6827}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 2,
+        "rank_elevation_m": 2081,
+        "isolation_km": 2,
+        "poi_importance": 182.858,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 41623
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 272236716724070,
+      "coordinates": [
+        -120.1508617401123,
+        38.900451788655516
+      ],
+      "properties": {
+        "id": "gnis:222367",
+        "gnis_id": "222367",
+        "agency": "USGS GNIS",
+        "name": "Dicks Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Rockbound Valley",
+        "updated": "08/05/2026",
+        "geonames_id": "5343080",
+        "alternate_names": "Dicks Peak",
+        "elevation_m": 3042,
+        "elevation_ft": 9980,
+        "source_records": "[{\"id\":\"gnis:222367\",\"agency\":\"USGS GNIS\",\"name\":\"Dicks Peak\",\"coordinates\":[-120.1509004,38.9004581],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:222367\",\"gnis_id\":\"222367\",\"agency\":\"USGS GNIS\",\"name\":\"Dicks Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/05/2026\"}},{\"id\":\"geonames:5343080\",\"agency\":\"GeoNames\",\"name\":\"Dicks Peak\",\"coordinates\":[-120.15102,38.90046],\"source_url\":\"https://www.geonames.org/5343080\",\"details\":{\"id\":\"geonames:5343080\",\"geonames_id\":\"5343080\",\"agency\":\"GeoNames\",\"name\":\"Dicks Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5343080\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2010-02-14\",\"alternate_names\":\"Dicks Peak\",\"elevation_m\":3042.0,\"elevation_ft\":9980}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 22.05,
+        "rank_elevation_m": 3042,
+        "isolation_km": 1.16,
+        "poi_importance": 420.258,
+        "rank_family": "summit",
+        "label_minzoom": 9,
+        "label_rank": 1301
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 259435456350418,
+      "coordinates": [
+        -120.14966011047363,
+        38.9544030239162
+      ],
+      "properties": {
+        "id": "gnis:230605",
+        "gnis_id": "230605",
+        "agency": "USGS GNIS",
+        "name": "Phipps Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Rockbound Valley",
+        "updated": "08/30/2021",
+        "geonames_id": "5382408",
+        "alternate_names": "Phipps Peak,jbl fyps pyak,\u062c\u0628\u0644 \u0641\u064a\u067e\u0633 \u067e\u064a\u0627\u0643",
+        "elevation_m": 2813,
+        "elevation_ft": 9229,
+        "source_records": "[{\"id\":\"gnis:230605\",\"agency\":\"USGS GNIS\",\"name\":\"Phipps Peak\",\"coordinates\":[-120.1496818,38.954391],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:230605\",\"gnis_id\":\"230605\",\"agency\":\"USGS GNIS\",\"name\":\"Phipps Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Rockbound Valley\",\"updated\":\"08/30/2021\"}},{\"id\":\"geonames:5382408\",\"agency\":\"GeoNames\",\"name\":\"Phipps Peak\",\"coordinates\":[-120.14991,38.95463],\"source_url\":\"https://www.geonames.org/5382408\",\"details\":{\"id\":\"geonames:5382408\",\"geonames_id\":\"5382408\",\"agency\":\"GeoNames\",\"name\":\"Phipps Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5382408\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Phipps Peak,jbl fyps pyak,\\u062c\\u0628\\u0644 \\u0641\\u064a\\u067e\\u0633 \\u067e\\u064a\\u0627\\u0643\",\"elevation_m\":2813.0,\"elevation_ft\":9229}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 6,
+        "rank_elevation_m": 2813,
+        "isolation_km": 2.75,
+        "poi_importance": 293.017,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 12183
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 23986190264704,
+      "coordinates": [
+        -119.90015029907227,
+        38.857421671912135
+      ],
+      "properties": {
+        "id": "gnis:260360",
+        "gnis_id": "260360",
+        "agency": "USGS GNIS",
+        "name": "Freel Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Freel Peak",
+        "updated": "01/21/2021",
+        "geonames_id": "5350691",
+        "alternate_names": "Bald Mountain,Freel Peak,Freels Peak,Jobs Peaks,Jobs Sister,Pico Freel,San Mountain,jbl fryl pyak,\u062c\u0628\u0644 \u0641\u0631\u064a\u0644 \u067e\u064a\u0627\u0643",
+        "elevation_m": 3305,
+        "elevation_ft": 10843,
+        "source_records": "[{\"id\":\"gnis:260360\",\"agency\":\"USGS GNIS\",\"name\":\"Freel Peak\",\"coordinates\":[-119.9001228,38.8574287],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:260360\",\"gnis_id\":\"260360\",\"agency\":\"USGS GNIS\",\"name\":\"Freel Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Freel Peak\",\"updated\":\"01/21/2021\"}},{\"id\":\"geonames:5350691\",\"agency\":\"GeoNames\",\"name\":\"Freel Peak\",\"coordinates\":[-119.90046,38.85768],\"source_url\":\"https://www.geonames.org/5350691\",\"details\":{\"id\":\"geonames:5350691\",\"geonames_id\":\"5350691\",\"agency\":\"GeoNames\",\"name\":\"Freel Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5350691\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"003\",\"updated\":\"2006-01-17\",\"alternate_names\":\"Bald Mountain,Freel Peak,Freels Peak,Jobs Peaks,Jobs Sister,Pico Freel,San Mountain,jbl fryl pyak,\\u062c\\u0628\\u0644 \\u0641\\u0631\\u064a\\u0644 \\u067e\\u064a\\u0627\\u0643\",\"elevation_m\":3305.0,\"elevation_ft\":10843}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 37.08,
+        "rank_elevation_m": 3305,
+        "isolation_km": 1.46,
+        "poi_importance": 479.645,
+        "rank_family": "summit",
+        "label_minzoom": 8,
+        "label_rank": 413
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 225370930652517,
+      "coordinates": [
+        -120.1578140258789,
+        38.84485517192604
+      ],
+      "properties": {
+        "id": "gnis:265078",
+        "gnis_id": "265078",
+        "agency": "USGS GNIS",
+        "name": "Pyramid Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Pyramid Peak",
+        "updated": "03/17/2021",
+        "geonames_id": "5385258",
+        "alternate_names": "Pyramid Peak,jbl pyramyd pyak,\u062c\u0628\u0644 \u067e\u064a\u0631\u0627\u0645\u064a\u062f \u067e\u064a\u0627\u0643",
+        "elevation_m": 3035,
+        "elevation_ft": 9957,
+        "source_records": "[{\"id\":\"gnis:265078\",\"agency\":\"USGS GNIS\",\"name\":\"Pyramid Peak\",\"coordinates\":[-120.157782,38.8448692],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:265078\",\"gnis_id\":\"265078\",\"agency\":\"USGS GNIS\",\"name\":\"Pyramid Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Pyramid Peak\",\"updated\":\"03/17/2021\"}},{\"id\":\"geonames:5385258\",\"agency\":\"GeoNames\",\"name\":\"Pyramid Peak\",\"coordinates\":[-120.15769,38.84491],\"source_url\":\"https://www.geonames.org/5385258\",\"details\":{\"id\":\"geonames:5385258\",\"geonames_id\":\"5385258\",\"agency\":\"GeoNames\",\"name\":\"Pyramid Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5385258\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-17\",\"alternate_names\":\"Pyramid Peak,jbl pyramyd pyak,\\u062c\\u0628\\u0644 \\u067e\\u064a\\u0631\\u0627\\u0645\\u064a\\u062f \\u067e\\u064a\\u0627\\u0643\",\"elevation_m\":3035.0,\"elevation_ft\":9957}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 6.21,
+        "rank_elevation_m": 3035,
+        "isolation_km": 2.57,
+        "poi_importance": 303.77,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 10358
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 221730805414096,
+      "coordinates": [
+        -120.03584861755371,
+        38.910203440080096
+      ],
+      "properties": {
+        "id": "gnis:268062",
+        "gnis_id": "268062",
+        "agency": "USGS GNIS",
+        "name": "Tahoe Mountain",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Emerald Bay",
+        "updated": "01/12/2021",
+        "geonames_id": "5400925",
+        "alternate_names": "",
+        "elevation_m": 2205,
+        "elevation_ft": 7234,
+        "source_records": "[{\"id\":\"gnis:268062\",\"agency\":\"USGS GNIS\",\"name\":\"Tahoe Mountain\",\"coordinates\":[-120.0358116,38.9102137],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:268062\",\"gnis_id\":\"268062\",\"agency\":\"USGS GNIS\",\"name\":\"Tahoe Mountain\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Emerald Bay\",\"updated\":\"01/12/2021\"}},{\"id\":\"geonames:5400925\",\"agency\":\"GeoNames\",\"name\":\"Tahoe Mountain\",\"coordinates\":[-120.03574,38.91019],\"source_url\":\"https://www.geonames.org/5400925\",\"details\":{\"id\":\"geonames:5400925\",\"geonames_id\":\"5400925\",\"agency\":\"GeoNames\",\"name\":\"Tahoe Mountain\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5400925\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2006-01-15\",\"alternate_names\":\"\",\"elevation_m\":2205.0,\"elevation_ft\":7234}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 5.48,
+        "rank_elevation_m": 2205,
+        "isolation_km": 1.8,
+        "poi_importance": 263.976,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 18417
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 9641346919321,
+      "coordinates": [
+        -120.09884834289551,
+        38.90592890845505
+      ],
+      "properties": {
+        "id": "gnis:268072",
+        "gnis_id": "268072",
+        "agency": "USGS GNIS",
+        "name": "Mount Tallac",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "El Dorado",
+        "map_name": "Emerald Bay",
+        "updated": "01/12/2021",
+        "geonames_id": "5400991",
+        "alternate_names": "Crystal Peak,Monte Tallac,Mount Tahlac,Mount Tallac,Tallac Peak,jbl mwnt talak,mont Tallac,taraku shan,\u062c\u0628\u0644 \u0645\u0648\u0646\u062a \u062a\u0627\u0644\u0627\u0643,\u30bf\u30e9\u30af\u5c71",
+        "elevation_m": 2965,
+        "elevation_ft": 9728,
+        "source_records": "[{\"id\":\"gnis:268072\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Tallac\",\"coordinates\":[-120.098848,38.9058967],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:268072\",\"gnis_id\":\"268072\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Tallac\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"El Dorado\",\"map_name\":\"Emerald Bay\",\"updated\":\"01/12/2021\"}},{\"id\":\"geonames:5400991\",\"agency\":\"GeoNames\",\"name\":\"Mount Tallac\",\"coordinates\":[-120.0988,38.90602],\"source_url\":\"https://www.geonames.org/5400991\",\"details\":{\"id\":\"geonames:5400991\",\"geonames_id\":\"5400991\",\"agency\":\"GeoNames\",\"name\":\"Mount Tallac\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5400991\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"017\",\"updated\":\"2010-02-15\",\"alternate_names\":\"Crystal Peak,Monte Tallac,Mount Tahlac,Mount Tallac,Tallac Peak,jbl mwnt talak,mont Tallac,taraku shan,\\u062c\\u0628\\u0644 \\u0645\\u0648\\u0646\\u062a \\u062a\\u0627\\u0644\\u0627\\u0643,\\u30bf\\u30e9\\u30af\\u5c71\",\"elevation_m\":2965.0,\"elevation_ft\":9728}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 4.54,
+        "rank_elevation_m": 2965,
+        "isolation_km": 3.12,
+        "poi_importance": 275.058,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 15931
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 75671369288693,
+      "coordinates": [
+        -119.91654396057129,
+        38.977159733683465
+      ],
+      "properties": {
+        "id": "gnis:846383",
+        "gnis_id": "846383",
+        "agency": "USGS GNIS",
+        "name": "Folsom Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "Nevada",
+        "county": "Douglas",
+        "map_name": "South Lake Tahoe",
+        "updated": "11/01/1990",
+        "geonames_id": "5504184",
+        "alternate_names": "Folsom Peak,Folsoms Knob",
+        "elevation_m": 2093,
+        "elevation_ft": 6867,
+        "source_records": "[{\"id\":\"gnis:846383\",\"agency\":\"USGS GNIS\",\"name\":\"Folsom Peak\",\"coordinates\":[-119.9165692,38.9771302],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:846383\",\"gnis_id\":\"846383\",\"agency\":\"USGS GNIS\",\"name\":\"Folsom Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"Nevada\",\"county\":\"Douglas\",\"map_name\":\"South Lake Tahoe\",\"updated\":\"11/01/1990\"}},{\"id\":\"geonames:5504184\",\"agency\":\"GeoNames\",\"name\":\"Folsom Peak\",\"coordinates\":[-119.91657,38.97713],\"source_url\":\"https://www.geonames.org/5504184\",\"details\":{\"id\":\"geonames:5504184\",\"geonames_id\":\"5504184\",\"agency\":\"GeoNames\",\"name\":\"Folsom Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5504184\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"NV\",\"county\":\"005\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Folsom Peak,Folsoms Knob\",\"elevation_m\":2093.0,\"elevation_ft\":6867}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 3.93,
+        "rank_elevation_m": 2093,
+        "isolation_km": 1.2,
+        "poi_importance": 232.773,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 26712
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 79632147514943,
+      "coordinates": [
+        -119.9374008178711,
+        39.07997414532926
+      ],
+      "properties": {
+        "id": "gnis:861330",
+        "gnis_id": "861330",
+        "agency": "USGS GNIS",
+        "name": "Shakespeare Point",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "Nevada",
+        "county": "Douglas",
+        "map_name": "Glenbrook",
+        "updated": "08/11/2026",
+        "geonames_id": "5512074",
+        "alternate_names": "Shakespeare Cliff,Shakespeare Point,Shakespeare Rock",
+        "elevation_m": 2148,
+        "elevation_ft": 7047,
+        "source_records": "[{\"id\":\"gnis:861330\",\"agency\":\"USGS GNIS\",\"name\":\"Shakespeare Point\",\"coordinates\":[-119.9373724,39.0799721],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:861330\",\"gnis_id\":\"861330\",\"agency\":\"USGS GNIS\",\"name\":\"Shakespeare Point\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"Nevada\",\"county\":\"Douglas\",\"map_name\":\"Glenbrook\",\"updated\":\"08/11/2026\"}},{\"id\":\"geonames:5512074\",\"agency\":\"GeoNames\",\"name\":\"Shakespeare Point\",\"coordinates\":[-119.93713,39.07991],\"source_url\":\"https://www.geonames.org/5512074\",\"details\":{\"id\":\"geonames:5512074\",\"geonames_id\":\"5512074\",\"agency\":\"GeoNames\",\"name\":\"Shakespeare Point\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5512074\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"NV\",\"county\":\"005\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Shakespeare Cliff,Shakespeare Point,Shakespeare Rock\",\"elevation_m\":2148.0,\"elevation_ft\":7047}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 3.46,
+        "rank_elevation_m": 2148,
+        "isolation_km": 3.46,
+        "poi_importance": 224.792,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 29057
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 169008657701042,
+      "coordinates": [
+        -120.16227722167969,
+        39.108951160061196
+      ],
+      "properties": {
+        "id": "gnis:1658453",
+        "gnis_id": "1658453",
+        "agency": "USGS GNIS",
+        "name": "Eagle Rock",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "Placer",
+        "map_name": "Homewood",
+        "updated": "08/30/2021",
+        "geonames_id": "5344629",
+        "alternate_names": "Eagle Cliff,Eagle Rock",
+        "elevation_m": 1916,
+        "elevation_ft": 6286,
+        "source_records": "[{\"id\":\"gnis:1658453\",\"agency\":\"USGS GNIS\",\"name\":\"Eagle Rock\",\"coordinates\":[-120.1622962,39.1089573],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:1658453\",\"gnis_id\":\"1658453\",\"agency\":\"USGS GNIS\",\"name\":\"Eagle Rock\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"Placer\",\"map_name\":\"Homewood\",\"updated\":\"08/30/2021\"}},{\"id\":\"geonames:5344629\",\"agency\":\"GeoNames\",\"name\":\"Eagle Rock\",\"coordinates\":[-120.16158,39.1088],\"source_url\":\"https://www.geonames.org/5344629\",\"details\":{\"id\":\"geonames:5344629\",\"geonames_id\":\"5344629\",\"agency\":\"GeoNames\",\"name\":\"Eagle Rock\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5344629\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"061\",\"updated\":\"2006-01-15\",\"alternate_names\":\"Eagle Cliff,Eagle Rock\",\"elevation_m\":1916.0,\"elevation_ft\":6286}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 5.45,
+        "rank_elevation_m": 1916,
+        "isolation_km": 5.45,
+        "poi_importance": 253.409,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 21111
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 13329962631052,
+      "coordinates": [
+        -120.13996124267578,
+        39.24149373569347
+      ],
+      "properties": {
+        "id": "gnis:230831",
+        "gnis_id": "230831",
+        "agency": "USGS GNIS",
+        "name": "Mount Pluto",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "Placer",
+        "map_name": "Tahoe City",
+        "updated": "04/09/2021",
+        "geonames_id": "5383870",
+        "alternate_names": "Mount Pluto,Pluto Peak",
+        "elevation_m": 2625,
+        "elevation_ft": 8612,
+        "source_records": "[{\"id\":\"gnis:230831\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Pluto\",\"coordinates\":[-120.1399473,39.2415182],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:230831\",\"gnis_id\":\"230831\",\"agency\":\"USGS GNIS\",\"name\":\"Mount Pluto\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"Placer\",\"map_name\":\"Tahoe City\",\"updated\":\"04/09/2021\"}},{\"id\":\"geonames:5383870\",\"agency\":\"GeoNames\",\"name\":\"Mount Pluto\",\"coordinates\":[-120.13964,39.24157],\"source_url\":\"https://www.geonames.org/5383870\",\"details\":{\"id\":\"geonames:5383870\",\"geonames_id\":\"5383870\",\"agency\":\"GeoNames\",\"name\":\"Mount Pluto\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5383870\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"061\",\"updated\":\"2007-02-14\",\"alternate_names\":\"Mount Pluto,Pluto Peak\",\"elevation_m\":2625.0,\"elevation_ft\":8612}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 10.75,
+        "rank_elevation_m": 2625,
+        "isolation_km": 2.36,
+        "poi_importance": 338.281,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 5808
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 58028043300121,
+      "coordinates": [
+        -120.03293037414551,
+        39.291398480517955
+      ],
+      "properties": {
+        "id": "gnis:263240",
+        "gnis_id": "263240",
+        "agency": "USGS GNIS",
+        "name": "Martis Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "Placer",
+        "map_name": "Martis Peak",
+        "updated": "02/23/2021",
+        "geonames_id": "5370910",
+        "alternate_names": "",
+        "elevation_m": 2656,
+        "elevation_ft": 8714,
+        "source_records": "[{\"id\":\"gnis:263240\",\"agency\":\"USGS GNIS\",\"name\":\"Martis Peak\",\"coordinates\":[-120.0329376,39.2913859],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:263240\",\"gnis_id\":\"263240\",\"agency\":\"USGS GNIS\",\"name\":\"Martis Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"Placer\",\"map_name\":\"Martis Peak\",\"updated\":\"02/23/2021\"}},{\"id\":\"geonames:5370910\",\"agency\":\"GeoNames\",\"name\":\"Martis Peak\",\"coordinates\":[-120.03269,39.29157],\"source_url\":\"https://www.geonames.org/5370910\",\"details\":{\"id\":\"geonames:5370910\",\"geonames_id\":\"5370910\",\"agency\":\"GeoNames\",\"name\":\"Martis Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5370910\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"061\",\"updated\":\"2006-01-17\",\"alternate_names\":\"\",\"elevation_m\":2656.0,\"elevation_ft\":8714}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 3.17,
+        "rank_elevation_m": 2656,
+        "isolation_km": 3.17,
+        "poi_importance": 235.778,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 25833
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 208315219574030,
+      "coordinates": [
+        -120.08811950683594,
+        39.25678125398122
+      ],
+      "properties": {
+        "id": "gnis:2745591",
+        "gnis_id": "2745591",
+        "agency": "USGS GNIS",
+        "name": "Gold Star Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "California",
+        "county": "Placer",
+        "map_name": "Martis Peak",
+        "updated": "02/23/2021",
+        "geonames_id": "9682099",
+        "alternate_names": "",
+        "elevation_m": 2359,
+        "elevation_ft": 7740,
+        "source_records": "[{\"id\":\"gnis:2745591\",\"agency\":\"USGS GNIS\",\"name\":\"Gold Star Peak\",\"coordinates\":[-120.088126,39.2567492],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:2745591\",\"gnis_id\":\"2745591\",\"agency\":\"USGS GNIS\",\"name\":\"Gold Star Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"California\",\"county\":\"Placer\",\"map_name\":\"Martis Peak\",\"updated\":\"02/23/2021\"}},{\"id\":\"geonames:9682099\",\"agency\":\"GeoNames\",\"name\":\"Gold Star Peak\",\"coordinates\":[-120.08861,39.25639],\"source_url\":\"https://www.geonames.org/9682099\",\"details\":{\"id\":\"geonames:9682099\",\"geonames_id\":\"9682099\",\"agency\":\"GeoNames\",\"name\":\"Gold Star Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/9682099\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"CA\",\"county\":\"061\",\"updated\":\"2014-10-10\",\"alternate_names\":\"\",\"elevation_m\":2359.0,\"elevation_ft\":7740}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 4.77,
+        "rank_elevation_m": 2359,
+        "isolation_km": 1.52,
+        "poi_importance": 257.882,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 19908
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 218015849904463,
+      "coordinates": [
+        -119.95782852172852,
+        39.293524125006655
+      ],
+      "properties": {
+        "id": "gnis:861169",
+        "gnis_id": "861169",
+        "agency": "USGS GNIS",
+        "name": "Rose Knob Peak",
+        "kind": "summit",
+        "poi_icon": "mountain",
+        "poi_frame": "circle",
+        "poi_image": "poi-circle-mountain",
+        "min_zoom": 13,
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "license": "Public domain",
+        "source_class": "Summit",
+        "state": "Nevada",
+        "county": "Washoe",
+        "map_name": "Mount Rose",
+        "updated": "08/11/2026",
+        "geonames_id": "5511405",
+        "alternate_names": "",
+        "elevation_m": 2932,
+        "elevation_ft": 9619,
+        "source_records": "[{\"id\":\"gnis:861169\",\"agency\":\"USGS GNIS\",\"name\":\"Rose Knob Peak\",\"coordinates\":[-119.9577945,39.2935027],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:861169\",\"gnis_id\":\"861169\",\"agency\":\"USGS GNIS\",\"name\":\"Rose Knob Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"Nevada\",\"county\":\"Washoe\",\"map_name\":\"Mount Rose\",\"updated\":\"08/11/2026\"}},{\"id\":\"geonames:5511405\",\"agency\":\"GeoNames\",\"name\":\"Rose Knob Peak\",\"coordinates\":[-119.95714,39.29352],\"source_url\":\"https://www.geonames.org/5511405\",\"details\":{\"id\":\"geonames:5511405\",\"geonames_id\":\"5511405\",\"agency\":\"GeoNames\",\"name\":\"Rose Knob Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5511405\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"NV\",\"county\":\"031\",\"updated\":\"2006-01-15\",\"alternate_names\":\"\",\"elevation_m\":2932.0,\"elevation_ft\":9619}}]",
+        "match_reason": "name_kind_distance",
+        "source_count": 2,
+        "higher_peak_km": 2.6,
+        "rank_elevation_m": 2932,
+        "isolation_km": 2.08,
+        "poi_importance": 230.742,
+        "rank_family": "summit",
+        "label_minzoom": 10,
+        "label_rank": 27342
+      }
+    }
+  ],
+  "renderedPeaks": [
+    {
+      "name": "Snow Valley Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.88324165344238,
+        39.15422470321286
+      ]
+    },
+    {
+      "name": "Slide Mountain",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.88435745239258,
+        39.31271842865769
+      ]
+    },
+    {
+      "name": "Rose Knob Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.95782852172852,
+        39.293524125006655
+      ]
+    },
+    {
+      "name": "Martis Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.03293037414551,
+        39.291398480517955
+      ]
+    },
+    {
+      "name": "Mount Pluto",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.13996124267578,
+        39.24149373569347
+      ]
+    },
+    {
+      "name": "Bald Mountain",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.18270492553711,
+        39.297044581744416
+      ]
+    },
+    {
+      "name": "Eagle Rock",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.16227722167969,
+        39.108951160061196
+      ]
+    },
+    {
+      "name": "Shakespeare Point",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.9374008178711,
+        39.07997414532926
+      ]
+    },
+    {
+      "name": "Folsom Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.91654396057129,
+        38.977159733683465
+      ]
+    },
+    {
+      "name": "Mount Tallac",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.09884834289551,
+        38.90592890845505
+      ]
+    },
+    {
+      "name": "Tahoe Mountain",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.03584861755371,
+        38.910203440080096
+      ]
+    },
+    {
+      "name": "Pyramid Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.1578140258789,
+        38.84485517192604
+      ]
+    },
+    {
+      "name": "Lost Corner Mountain",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.20416259765625,
+        39.01331517698719
+      ]
+    },
+    {
+      "name": "Freel Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.90015029907227,
+        38.857421671912135
+      ]
+    },
+    {
+      "name": "Phipps Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.14966011047363,
+        38.9544030239162
+      ]
+    },
+    {
+      "name": "Monument Peak",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -119.89766120910645,
+        38.92282516381192
+      ]
+    },
+    {
+      "name": "Inspiration Point",
+      "layer": "ranked-peaks",
+      "coordinates": [
+        -120.10013580322266,
+        38.94605929058201
+      ]
+    }
+  ]
+}

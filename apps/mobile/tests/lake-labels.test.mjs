@@ -32,3 +32,9 @@ test('minor lakes use smaller medium-scale text and limited placement alternativ
  assert.deepEqual(layer.layout['text-variable-anchor'],['center','top','bottom']);
  assert.equal(layer.layout['text-allow-overlap'],false);
 });
+test('major lakes have stronger type without changing small lake density or fitting too early',()=>{
+ const size=expression.createExpression(layer.layout['text-size']);assert.equal(size.result,'success');const at=(zoom,p)=>size.value.evaluate({zoom},{type:1,properties:p});
+ const tahoe={min_zoom:10,label_horizontal_zoom:8.4,label_angle:-85.1};assert.equal(at(10,tahoe),18);assert.equal(rotation(9,tahoe),0);
+ const narrow={min_zoom:10,label_horizontal_zoom:10,label_angle:45};assert.equal(rotation(10,narrow),45);assert.equal(rotation(11,narrow),0,'larger font eventually fits');
+ const minor={min_zoom:13,label_horizontal_zoom:17.4};assert.equal(at(12,minor),12);assert.ok(at(12,tahoe)>at(12,minor));
+});
