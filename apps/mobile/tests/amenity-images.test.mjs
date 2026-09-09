@@ -38,7 +38,7 @@ test('cluster members survive source maxzoom and hand off at zoom 15',async()=>{
  assert.equal(members['source-layer'],'amenities');
  for(const layer of [members,details])assert.ok(!JSON.stringify(layer.filter).includes('["zoom"]'),'member selection must not depend on capped source tile zoom');
  assert.deepEqual(members.filter,['all',['==',['get','kind'],'amenity'],['!=',['coalesce',['get','group_id'],''],'']]);
- assert.deepEqual(details.filter,['all',['==',['get','kind'],'amenity'],['==',['coalesce',['get','group_id'],''],'']]);
+ assert.deepEqual(details.filter[1],['all',['==',['get','kind'],'amenity'],['==',['coalesce',['get','group_id'],''],'']]);
 });
 
 test('coincident members get stable separate icon offsets without moving feature coordinates',async()=>{

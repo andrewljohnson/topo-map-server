@@ -30,10 +30,10 @@ PINNED_SIZE = 137295889397
 PINNED_BLAKE3 = 'b2aa7f4b1858ec873bd2fb6aff1393ce330ad4d236f2b4f9ad1875e910c1eb8e'
 PINNED_ETAG = '"e4343a15fa4bf60f81112ba7784a3f73-512"'
 SOURCE_URL = os.environ.get('NATIONAL_PMTILES_URL', PINNED_URL)
-DATASET_ID = 'osm-us-pm20260811-b2aa7f4b1858-v6'
-SOURCE_INFO = {'provider':'Protomaps','source':'OpenStreetMap and Natural Earth via Protomaps v4 basemap','snapshot':'2026-08-11','version':'4.15.1','url':PINNED_URL,'blake3':PINNED_BLAKE3,'archiveBytes':PINNED_SIZE,'etag':PINNED_ETAG,'attribution':'© OpenStreetMap contributors · Protomaps · Natural Earth','license':'ODbL Produced Work; OpenStreetMap attribution required','schemaVersion':'national-osm-v6','documentation':'https://docs.protomaps.com/basemaps/downloads'}
+DATASET_ID = 'osm-us-pm20260811-b2aa7f4b1858-v7'
+SOURCE_INFO = {'provider':'Protomaps','source':'OpenStreetMap and Natural Earth via Protomaps v4 basemap','snapshot':'2026-08-11','version':'4.15.1','url':PINNED_URL,'blake3':PINNED_BLAKE3,'archiveBytes':PINNED_SIZE,'etag':PINNED_ETAG,'attribution':'© OpenStreetMap contributors · Protomaps · Natural Earth','license':'ODbL Produced Work; OpenStreetMap attribution required','schemaVersion':'national-osm-v7','documentation':'https://docs.protomaps.com/basemaps/downloads'}
 DATA = Path(os.environ.get('TILE_DATA_DIR',Path(__file__).resolve().parent/'data'))
-LAYERS = ('land','residential','grass','forest','rock','water','waterline','building','rail','road','label','water_label','poi')
+LAYERS = ('land','residential','grass','forest','rock','water','waterline','building','rail','road','label','water_label','poi','area')
 BLOCK_SIZE = 256*1024
 MAX_READ = 16*1024*1024
 USER_AGENT = 'topo-map-server/0.3'
@@ -197,6 +197,10 @@ def classify(layer,properties,geometry_type):
     polygon=geometry_type in ('Polygon','MultiPolygon')
     line=geometry_type in ('LineString','MultiLineString')
     point=geometry_type in ('Point','MultiPoint')
+    if layer=='pois' and point and kind in ('water','lake','reservoir','basin'):
+        return 'water_label',detail or kind
+    if layer=='pois' and point and kind in ('park','national_park','nature_reserve','forest','protected_area'):
+        return 'area',kind
     if layer=='pois' and point and poi_properties(properties):
         return 'poi',detail or kind
     if layer=='earth' and polygon:
@@ -240,6 +244,25 @@ def road_properties(props):
     return result
 
 
+def merge_water_labels(features):
+    """Water POIs and polygon-label records may describe the same anchor.
+
+    Keep the earliest supplied zoom and the more specific water classification.
+    Equal names at distinct locations remain separate lakes.
+    """
+    merged={}
+    for feature in features:
+        props=feature['properties'];key=(props['name'].strip().casefold(),feature['geometry'].wkb)
+        previous=merged.get(key)
+        if previous is None:
+            merged[key]=feature
+            continue
+        minimum=min(previous['properties']['min_zoom'],props['min_zoom'])
+        if props['class']!='water':previous['properties'].update(props)
+        previous['properties']['min_zoom']=minimum
+    return list(merged.values())
+
+
 def normalize_tile(blob,z):
     result={name:[] for name in LAYERS}
     if blob:
@@ -257,12 +280,14 @@ def normalize_tile(blob,z):
                     continue
                 target,subtype=destination
                 name=props.get('name:en') or props.get('name') or props.get('name_en') or ''
-                if target in ('label','water_label') and not name:
+                if target in ('label','water_label','area') and not name:
                     continue
                 shape_value=shape(geometry)
                 if extent!=4096:
                     shape_value=scale(shape_value,xfact=4096/extent,yfact=4096/extent,origin=(0,0))
                 output={'class':subtype,'name':str(name)}
+                if target=='area':
+                    output.update(kind='forest' if subtype=='forest' else 'park',min_zoom=minimum if isinstance(minimum,(int,float)) else 12,priority=3,label_source='osm')
                 if target=='poi':
                     output.update(poi_properties(props))
                     output['min_zoom']=minimum if isinstance(minimum,(int,float)) else 14
@@ -274,6 +299,7 @@ def normalize_tile(blob,z):
                     output['min_zoom']=minimum if isinstance(minimum,(int,float)) else 6
                     output['sort_rank']=props.get('sort_rank',200)
                 result[target].append({'id':len(result[target])+1,'geometry':shape_value,'properties':output})
+    result['water_label']=merge_water_labels(result['water_label'])
     return mapbox_vector_tile.encode([{'name':name,'features':features} for name,features in result.items()],default_options={'extents':4096,'y_coord_down':True})
 
 
@@ -355,14 +381,21 @@ def lake_axis(world_x,world_y,name="Lake"):
 
 def orient_lake_labels(blob,z,x,y):
     decoded=mapbox_vector_tile.decode(blob,default_options={'y_coord_down':True})
-    if not decoded.get('water_label',{}).get('features'):
+    from area_tiles import features_for_tile,owns_name
+    local=[]
+    for feature in decoded.get('area',{}).get('features',[]):
+        point=shape(feature['geometry']);wx=(x+point.x/4096)/2**z;wy=(y+point.y/4096)/2**z
+        if not owns_name(feature['properties']['name'],wx,wy):local.append(feature)
+    area_features=local+features_for_tile(z,x,y)
+    if not decoded.get('water_label',{}).get('features') and not area_features and not decoded.get('area',{}).get('features'):
         return blob
+    decoded['area']={'features':area_features}
     for feature in decoded.get('water_label',{}).get('features',[]):
         point=shape(feature['geometry'])
         if point.geom_type!='Point':
             continue
         wx=(x+point.x/4096)/2**z;wy=(y+point.y/4096)/2**z
-        angle,elongated,horizontal_zoom=lake_axis(round(wx,6),round(wy,6),feature['properties']['name'])
+        angle,elongated,horizontal_zoom=lake_axis(round(wx,9),round(wy,9),feature['properties']['name'])
         feature['properties'].update(label_angle=angle,label_elongated=elongated,label_horizontal_zoom=horizontal_zoom)
     return mapbox_vector_tile.encode([{'name':name,'features':layer['features']} for name,layer in decoded.items()],default_options={'extents':4096,'y_coord_down':True})
 

@@ -328,3 +328,12 @@ in source records. Rules, reproducible audits and Tahoe before/after proof are i
 Official trails v6 extends only an already confirmed OSM/agency pair when a generalized agency survey diverges locally. Agency boundaries v3 suppresses a shared forest-administration stroke only after opposite-side polygon checks; original designation polygons remain intact. See [matching rules, safeguards, and Tahoe regression evidence](qa/systematic-conflation/README.md).
 
 Agency boundaries v4 additionally removes bounded remnants between two confirmed shared-forest matches. The polygon footprints remain original; only supported redundant strokes are suppressed. See the Tahoe Meadows follow-up in the matching QA report.
+
+
+### Combined-map area labels and trail metadata (September 9)
+
+The combined base MVT includes an `osm__area` layer. Agency park/forest/wilderness labels use the bundled catalog's reviewed visual centers and priorities. Coarse agency fills are included below zoom 8; detailed authoritative boundaries supply later geometry. Invalid catalog rings are repaired before clipping. Named OSM park POIs supply municipal labels; an OSM name is suppressed only when a same-name agency area covers its neighborhood. Combined clients no longer depend on a separate `/areas.geojson` request, so these labels also work offline.
+
+Named water POIs supplement polygon label records. Equal names at identical anchors merge using the earliest source minimum zoom; distinct nearby lakes are retained. Shape-aware orientation uses a fixed reference geometry and a zoom-dependent horizontal text fit.
+
+Trail matching retains full reference geometry during pair matching, then partitions its metadata by the confirmed matching masks. Names, route designations, provenance and pavement classification cannot spread to unrelated parts of an aggregated OSM MultiLineString. Original geometry is retained, allowing only subpixel rounding where newly split endpoints enter the MVT grid. Original source gaps are not automatically bridged.

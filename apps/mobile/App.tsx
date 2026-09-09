@@ -28,7 +28,7 @@ function MapApp(){
  const noteWrites=useRef(Promise.resolve()),noteRestored=useRef(false);
  const storeRef=useRef<TileStore|null>(null);if(!storeRef.current)storeRef.current=new TileStore(api,()=>render(n=>n+1));const store=storeRef.current;
  const send=(m:unknown)=>web.current?.injectJavaScript(rendererScript(m));
- useAreaBoundaries(api,data=>{areas.current=data;if(ready.current)send({type:'areas',data})});
+ useAreaBoundaries(api,data=>{areas.current=data;if(ready.current)send({type:'areas',data})},Boolean(store.meta&&!store.meta.combined));
  const location=useUserLocation(point=>{lastLocation.current={...point,center:false};if(ready.current)send({type:'location',...point})},record);
  const sync=()=>{if(ready.current){send({type:'safeArea',insets});if(store.meta){send(rendererInit(store.meta));if(!noteRestored.current){noteRestored.current=true;Promise.all(['map-note-draft.json','map-notes.json'].map(name=>FS.readAsStringAsync(FS.documentDirectory+name).then(text=>JSON.parse(text)).catch(()=>null))).then(([draft,notes])=>{send({type:'restoreMapNote',draft});send({type:'restoreMapNotes',notes:Array.isArray(notes)?notes:[]})});}send({type:'state',mode,regions:store.regions})}}};
  useEffect(()=>{const recoveryTimer=setInterval(()=>{if(AppState.currentState!=='active'||!ready.current)return;const keys=tileRecovery.current.due();if(keys.length)send({type:'retryTiles',keys})},5000);store.setForeground(AppState.currentState==='active');const subscription=AppState.addEventListener('change',state=>store.setForeground(state==='active'));return ()=>{clearInterval(recoveryTimer);subscription.remove()}},[]);

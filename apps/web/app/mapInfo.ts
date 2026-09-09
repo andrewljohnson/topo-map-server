@@ -73,7 +73,7 @@ export function installMapInfo(map: any) {
     const label=({trailhead:'Trailhead',spring:'Spring',waterfall:'Waterfall',shelter:'Shelter',summit:'Summit',pass:'Pass / saddle',arch:'Natural arch',rock:'Rock landmark',cave:'Cave',ranger_station:'Ranger station',visitor_center:'Visitor center'} as any)[p.kind];
     if(label){const cascade=p.kind==='waterfall'&&/cascade/i.test(p.name||'');const id='poi-recreation-'+(cascade?'cascade':p.kind);items.set(id,{id,label:cascade?'Cascade':label,image:map.__topoPoiIcon?.(p)||p.poi_image||'poi-'+p.poi_frame+'-'+p.poi_icon});continue}
    }
-   if(['poi-icons','outdoor-pois','peak-labels','amenity-details','amenity-group-members','recreation-pois','recreation-poi-details'].includes(raw)){const natural=map.__topoPoiIcon?.(p);if(natural){const [,frame,...icon]=natural.split('-');addPoi(icon.join('-'),frame)}else addPoi(p.poi_icon,p.poi_frame);continue}
+   if(['poi-icons','outdoor-pois','peak-labels','amenity-details','amenity-secondary-details','amenity-group-members','recreation-pois','recreation-poi-details'].includes(raw)){const natural=map.__topoPoiIcon?.(p);if(natural){const [,frame,...icon]=natural.split('-');addPoi(icon.join('-'),frame)}else addPoi(p.poi_icon,p.poi_frame);continue}
    if(raw==='long-trail-badges'){const id='trail-badge-'+p.route_ref;items.set(id,{id,label:p.name||p.route_ref,image:p.badge});continue}
    if(id==='highway-shields'){const kind=p.network==='US:CA'?'california':p.shield_kind||'state';items.set('shield-'+kind,{id:'shield-'+kind,label:({interstate:'Interstate highway',us:'U.S. highway',state:'State route',california:'California route',county:'County route'} as any)[kind]||'Route shield',image:'shield-'+kind,shield:kind});continue}
    if(labels[id]){

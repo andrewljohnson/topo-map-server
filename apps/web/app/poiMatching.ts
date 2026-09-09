@@ -109,7 +109,7 @@ export function installPoiMatching(map:any){
    const sorted=[...hidden].sort((a,b)=>a-b),sig=JSON.stringify(sorted);if(signatures.get(id)===sig)return;signatures.set(id,sig);
    const base=bases.get(id);map.setFilter(id,sorted.length?['all',...(base?[base]:[]),['!',['in',['id'],['literal',sorted]]]]:base);
   };
-  for(const id of ['amenity-details','amenity-group-members'])apply(id,hiddenOSM);
+  for(const id of ['amenity-details','amenity-secondary-details','amenity-group-members'])apply(id,hiddenOSM);
   for(const id of ['recreation-pois','recreation-poi-details','ranked-peaks'])apply(id,hiddenRecreation);
   const hiddenGroups=new Set<number>();for(const [id,rank]of groupRanks){const group=groups.get(id);if(group&&zoom<rank.minimum)hiddenGroups.add(group.id)}apply('amenity-groups',hiddenGroups);
   const sort=(id:string,field:any,entries:any[])=>{

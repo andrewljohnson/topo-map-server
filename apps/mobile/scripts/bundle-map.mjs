@@ -1,3 +1,4 @@
+import '../../../scripts/build-map-style.mjs';
 import '../../../scripts/build-map-info.mjs';
 import '../../../scripts/build-terrain.mjs';
 import '../../../scripts/build-base-features.mjs';

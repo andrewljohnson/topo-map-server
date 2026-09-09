@@ -5,7 +5,7 @@ export function installFeatureInfo(map:any,Popup:any,enabled:()=>boolean=()=>tru
  let popup:any;
  map.on('click',(event:any)=>{
   if(!enabled())return;
-  const ids=['recreation-pois','recreation-poi-details','amenity-group-members','amenity-details','amenity-groups','ranked-peaks','peak-labels','outdoor-pois','poi-icons','long-trail-badges','official-road-refs','official-roads-center','trails-path','trails-footway','trails-cycleway','trails-bridleway','trail-labels','tracks-center','road-labels'];
+  const ids=['recreation-pois','recreation-poi-details','amenity-group-members','amenity-details','amenity-secondary-details','amenity-groups','ranked-peaks','peak-labels','outdoor-pois','poi-icons','long-trail-badges','official-road-refs','official-roads-center','trails-path','trails-footway','trails-cycleway','trails-bridleway','trail-labels','tracks-center','road-labels'];
   const networkLayers=(map.getStyle()?.layers||[]).filter((l:any)=>l.source==='trails'&&l['source-layer']==='network'&&l.type==='line'&&!/halo|casing/.test(l.id)).map((l:any)=>l.id);
   const layers=[...new Set([...ids,...networkLayers])].filter(id=>map.getLayer(id));if(!layers.length)return;
   const features=map.queryRenderedFeatures(event.point,{layers});let feature=features.find((f:any)=>f.source==='recreation'||f.source==='trails');

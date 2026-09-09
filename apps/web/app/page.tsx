@@ -62,7 +62,7 @@ export default function Home() {
         resizeObserver = new ResizeObserver(() => instance.resize());
         resizeObserver.observe(root.current);
         instance.on('load',()=>{if(areas.current)updateAreas(areas.current);});
-        fetch(`${api}/areas.geojson`,{headers,signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Areas unavailable');return r.json()}).then(data=>{if(!disposed){areas.current=parseAreaData(data);if(instance.isStyleLoaded())updateAreas(areas.current)}}).catch(()=>{});
+        if(!info.combined)fetch(`${api}/areas.geojson`,{headers,signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Areas unavailable');return r.json()}).then(data=>{if(!disposed){areas.current=parseAreaData(data);if(instance.isStyleLoaded())updateAreas(areas.current)}}).catch(()=>{});
         installShieldImages(instance);
         installPoiImages(instance);
         installAmenityImages(instance);

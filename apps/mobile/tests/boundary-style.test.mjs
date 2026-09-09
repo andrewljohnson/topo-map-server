@@ -26,3 +26,15 @@ test('area labels stay centered on their geometry anchors when composed with rec
  assert.equal(label.layout['text-radial-offset'],0);
  assert.ok(style.layers.indexOf(label)>style.layers.findIndex(l=>l.id==='ranked-peaks'),'park name wins placement rather than shifting away from its center');
 });
+
+
+test('combined maps carry area names and overview fills in base tiles',()=>{
+ const style=createStyle({bounds:[-180,-85,180,85],minZoom:0,maxZoom:12,combined:true,overviewMaxZoom:11},'base',undefined,undefined,'boundaries');
+ assert.equal(style.sources.areas,undefined);
+ for(const id of ['area-labels','area-fill','park-boundaries']){
+  const layer=style.layers.find(l=>l.id===id);
+  assert.equal(layer.source,'osm');assert.equal(layer['source-layer'],'osm__area');
+  const overview=style.layers.find(l=>l.id==='world-overview-'+id);
+  assert.equal(overview.source,'world-overview');assert.equal(overview['source-layer'],'osm__area');
+ }
+});

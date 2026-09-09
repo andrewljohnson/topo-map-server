@@ -87,7 +87,7 @@ def overlap_mask(incoming, reference, a, b, *, aligned_road=False, confirmed_tra
     if incoming.equals(reference):return incoming.buffer(.01)
     # A closed loop has no net start-to-end progress, so use whole-shape agreement.
     if any(g.is_ring for g in lines(incoming)) and .88 <= incoming.length/max(reference.length,.01) <= 1.12 and incoming.hausdorff_distance(reference)<=tolerance:
-        return incoming.buffer(.01)
+        return incoming.buffer(.01).union(reference.buffer(.01))
     parts=[]
     for ref in lines(reference):
         corridor=ref.buffer(tolerance,cap_style=2)
@@ -129,7 +129,11 @@ def conflate(reference, additions):
     Feature geometries must already be in ground metres with a processing halo.
     Input dictionaries are local to this build and may be enriched in-place.
     """
-    result=list(reference)
+    # Keep full tile-fragment context for geometric matching. Upstream may batch
+    # unrelated paths into one feature, so apply metadata only to the matched
+    # geometry in the final partition, never indiscriminately to that feature.
+    result=[{**f,'properties':dict(f['properties'])} for f in reference]
+    matched_metadata={}
     fixed=len(result)
     # Geometry is immutable once a result is appended. Reuse its matching
     # corridor across additions; property enrichment does not change geometry.
@@ -142,11 +146,12 @@ def conflate(reference, additions):
         anchors=[];anchor_limits=[]
         for index in sorted(candidates):
             existing=result[index]
+            reference_props=original_properties(existing['properties'])
             if index not in corridors:corridors[index]=existing['geometry'].buffer(15)
             if not remaining.intersects(corridors[index]):continue
-            mask=overlap_mask(remaining,existing['geometry'],feature['properties'],existing['properties'])
+            mask=overlap_mask(remaining,existing['geometry'],feature['properties'],reference_props)
             if mask is None:continue
-            refined=refine_trail_match(remaining,existing['geometry'],feature['properties'],existing['properties'],mask)
+            refined=refine_trail_match(remaining,existing['geometry'],feature['properties'],reference_props,mask)
             snap_limit=50.01 if refined is not mask else 15.01
             mask=refined
             # Long, tightly aligned rural road overlap establishes a shared
@@ -155,15 +160,12 @@ def conflate(reference, additions):
             # or use proximity alone to merge parallel campground roads.
             rural={'track','unclassified'}
             if feature['properties'].get('kind')=='forest_road' and existing['properties'].get('class') in rural and remaining.intersection(mask).length>=100:
-                extended=overlap_mask(remaining,existing['geometry'],feature['properties'],existing['properties'],aligned_road=True)
+                extended=overlap_mask(remaining,existing['geometry'],feature['properties'],reference_props,aligned_road=True)
                 if extended is not None:mask=mask.union(extended)
             original=original_properties(existing['properties'])
             incoming=feature['properties']
             pavement=(original.get('class')=='track' and not original.get('surface') and incoming.get('kind')=='forest_road' and paved_surface(incoming.get('surface')) and existing['geometry'].difference(mask).length<=existing['geometry'].length*.05)
-            merge_properties(existing['properties'],incoming)
-            if pavement:
-                existing['properties']['class']='unclassified'
-                existing['properties']['class_basis']='agency_explicit_pavement'
+            matched_metadata.setdefault(index,[]).append((mask,dict(incoming),pavement))
             anchors.append(existing['geometry']);anchor_limits.append(snap_limit)
             remaining=remaining.difference(mask)
             if remaining.is_empty:break
@@ -185,4 +187,22 @@ def conflate(reference, additions):
         if parts:
             feature={**feature,'geometry':unary_union(parts)}
             result.append(feature)
-    return result
+    output=[]
+    for index,feature in enumerate(result):
+        segments=[(part,dict(feature['properties'])) for part in lines(feature['geometry'])]
+        for mask,incoming,pavement in matched_metadata.get(index,[]):
+            next_segments=[]
+            for geometry,props in segments:
+                inside=geometry.intersection(mask)
+                outside=geometry.difference(mask)
+                # Keep the complete reference geometry. Only matched portions
+                # acquire agency names, route badges, permissions and provenance.
+                next_segments.extend((part,dict(props)) for part in lines(outside))
+                if not inside.is_empty:
+                    enriched=dict(props);merge_properties(enriched,incoming)
+                    if pavement:
+                        enriched['class']='unclassified';enriched['class_basis']='agency_explicit_pavement'
+                    next_segments.extend((part,dict(enriched)) for part in lines(inside))
+            segments=next_segments
+        output.extend({**feature,'geometry':geometry,'properties':props} for geometry,props in segments)
+    return output

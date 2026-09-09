@@ -156,3 +156,30 @@ class NationalBasemapTests(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
+
+class WaterPoiLabelTests(unittest.TestCase):
+    def tile(self,layers):
+        return mapbox_vector_tile.encode([{'name':name,'features':features} for name,features in layers],default_options={'extents':4096,'y_coord_down':True})
+    def water(self,name='Lake',minimum=12,point=(2048,2048),kind='water',**props):
+        return {'geometry':Point(*point),'properties':{'name':name,'kind':kind,'min_zoom':minimum,**props}}
+    def test_named_water_poi_is_a_lake_label_at_its_overview_zoom(self):
+        raw=self.tile([('pois',[self.water('Dicks Lake')])])
+        tile=mapbox_vector_tile.decode(national.normalize_tile(raw,11))
+        self.assertEqual(tile['poi']['features'],[])
+        self.assertEqual(tile['water_label']['features'][0]['properties']['name'],'Dicks Lake')
+        self.assertEqual(tile['water_label']['features'][0]['properties']['min_zoom'],12)
+    def test_duplicate_sources_keep_earliest_zoom_and_specific_kind(self):
+        for layers in ([('water',[self.water('Fallen Leaf Lake',13,kind_detail='lake')]),('pois',[self.water('Fallen Leaf Lake',12)])], [('pois',[self.water('Fallen Leaf Lake',12)]),('water',[self.water('Fallen Leaf Lake',13,kind_detail='lake')])]):
+            features=mapbox_vector_tile.decode(national.normalize_tile(self.tile(layers),12))['water_label']['features']
+            self.assertEqual(len(features),1)
+            self.assertEqual(features[0]['properties']['min_zoom'],12)
+            self.assertEqual(features[0]['properties']['class'],'lake')
+    def test_same_name_at_distinct_anchors_is_not_merged(self):
+        raw=self.tile([('pois',[self.water(point=(500,500)),self.water(point=(3500,3500))])])
+        self.assertEqual(len(mapbox_vector_tile.decode(national.normalize_tile(raw,12))['water_label']['features']),2)
+    def test_other_pois_and_unnamed_water_do_not_become_lake_labels(self):
+        raw=self.tile([('pois',[self.water('',12),self.water('A spring',12,kind='spring'),self.water('Cafe',12,kind='cafe')])])
+        tile=mapbox_vector_tile.decode(national.normalize_tile(raw,12))
+        self.assertEqual(tile['water_label']['features'],[])
+        self.assertEqual(tile['poi']['features'][0]['properties']['name'],'Cafe')

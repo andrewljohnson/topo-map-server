@@ -103,11 +103,11 @@ class TrailMatchingTest(unittest.TestCase):
  def test_short_shared_junction_does_not_swallow_different_road(self):
   base=feature([(0,0),(500,0)],'Upper',**{'class':'track'})
   agency=feature([(0,1),(40,1),(50,6),(500,6)],'Lower','USFS','two',kind='forest_road',**{'class':'track'})
-  result=conflate([base],[agency]);self.assertEqual(len(result),2);self.assertGreater(result[1]['geometry'].length,400)
+  result=conflate([base],[agency]);self.assertGreater(sum(f['geometry'].length for f in result if f['properties']['agency']=='USFS'),400)
  def test_service_lane_does_not_get_rural_alignment_expansion(self):
   base=feature([(0,0),(500,0)],'Campground Loop A',**{'class':'service'})
   agency=feature([(0,1),(200,1),(250,6),(500,6)],'Campground Loop B','USFS','two',kind='forest_road',**{'class':'track'})
-  result=conflate([base],[agency]);self.assertEqual(len(result),2);self.assertGreater(result[1]['geometry'].length,200)
+  result=conflate([base],[agency]);self.assertGreater(sum(f['geometry'].length for f in result if f['properties']['agency']=='USFS'),200)
 
  def test_forest_reference_prefixes_and_missing_numbers(self):
   from trail_matching import road_refs
@@ -127,7 +127,7 @@ class TrailMatchingTest(unittest.TestCase):
   self.assertEqual(len(result),2)
  def test_trail_short_shared_junction_is_not_alias_evidence(self):
   result=conflate([feature([(0,0),(600,0)],'First',agency='OpenStreetMap')],[feature([(0,1),(40,1),(60,20),(600,20)],'Second','USFS','two',kind='trail')])
-  self.assertEqual(len(result),2);self.assertGreater(result[1]['geometry'].length,500)
+  self.assertGreater(sum(f['geometry'].length for f in result if f['properties']['agency']=='USFS'),500)
  def test_refined_trail_extension_reconnects_without_moving_original_endpoint(self):
   incoming=feature([(0,20),(80,20),(100,1),(180,1),(210,35),(750,35)],'Survey','USFS','two',kind='trail')
   result=conflate([feature([(0,0),(600,0)],'Local',agency='OpenStreetMap')],[incoming])
@@ -147,3 +147,33 @@ class TrailMatchingTest(unittest.TestCase):
    refined=refine_trail_match(g,h,a['properties'],b['properties'],seed)
    if h.intersection(refined).length>h.intersection(seed).length+100:improved+=1
   self.assertGreaterEqual(improved,3,'TRT and both Mt Rose child tiles need refinement')
+
+
+class SegmentMetadataTests(unittest.TestCase):
+ def test_unrelated_multiline_component_does_not_inherit_a_route(self):
+  from shapely.geometry import MultiLineString
+  base=feature([(0,0),(200,0)],agency='OpenStreetMap')
+  base['geometry']=MultiLineString([[(0,0),(200,0)],[(500,0),(500,200)]])
+  result=conflate([base],[feature([(0,1),(200,1)],'Agency Trail','USFS','two',route_ref='TRT')])
+  matched=next(f for f in result if f['geometry'].bounds[0]==0)
+  other=next(f for f in result if f['geometry'].bounds[0]==500)
+  self.assertEqual(matched['properties']['route_ref'],'TRT')
+  self.assertEqual(other['properties']['name'],'')
+  self.assertNotIn('route_ref',other['properties'])
+  self.assertNotIn('source_records',other['properties'])
+ def test_partial_match_enriches_only_the_shared_segment(self):
+  from shapely.ops import unary_union
+  base=feature([(0,0),(300,0)],agency='OpenStreetMap')
+  result=conflate([base],[feature([(100,1),(200,1)],'Agency Trail','USFS','two',route_ref='PCT')])
+  self.assertTrue(unary_union([f['geometry'] for f in result]).equals(base['geometry']))
+  named=[f for f in result if f['properties'].get('route_ref')=='PCT']
+  self.assertEqual(sum(f['geometry'].length for f in named),100)
+  self.assertEqual(sum(f['geometry'].length for f in result if not f['properties'].get('name')),200)
+ def test_two_route_overlaps_keep_their_own_extents(self):
+  from shapely.ops import unary_union
+  base=feature([(0,0),(300,0)],agency='OpenStreetMap')
+  result=conflate([base],[feature([(0,1),(100,1)],'First','USFS','two',route_ref='PCT'),feature([(200,1),(300,1)],'Second','USFS','three',route_ref='TRT')])
+  self.assertTrue(unary_union([f['geometry'] for f in result]).equals(base['geometry']))
+  for f in result:
+   if f['properties'].get('route_ref')=='PCT':self.assertLessEqual(f['geometry'].bounds[2],100)
+   if f['properties'].get('route_ref')=='TRT':self.assertGreaterEqual(f['geometry'].bounds[0],200)

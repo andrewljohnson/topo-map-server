@@ -83,11 +83,13 @@ function applyCombined(style: any, meta: any): any {
  // Fine geometry is already present at z12. Use the same conflated network
  // on both sides of the old z13 display handoff.
  for (const layer of style.layers) {
+  if(layer.source==='areas'){layer.source='osm';layer['source-layer']='area';}
   if(layer.source==='osm'&&layer['source-layer']==='road'&&layer.maxzoom===13)layer.maxzoom=12;
   if(layer.source==='trails'&&layer['source-layer']==='network'&&layer.minzoom===13)layer.minzoom=12;
   if(layer.source==='trails'&&['roads','routes'].includes(layer['source-layer'])&&layer.maxzoom===13)layer.maxzoom=12;
   if(names.includes(layer.source)&&layer['source-layer']){layer['source-layer']=layer.source+'__'+layer['source-layer'];layer.source='osm';}
  }
+ delete style.sources.areas;
  for(const name of names)delete style.sources[name];
  style.sources.osm=base;
  if(meta.overviewMaxZoom!==undefined){
@@ -103,6 +105,15 @@ function applyCombined(style: any, meta: any): any {
 // Scale hierarchy: overview areas -> outdoor destinations -> local amenities.
 function applyDensity(style:any) {
  const layer=(id:string)=>style.layers.find((item:any)=>item.id===id);
+ // Small access roads should read below through streets, while remaining usable.
+ const access=['in',['get','class'],['literal',['service','driveway','parking_aisle','alley']]];
+ for(const id of ['roads-local','roads-local-casing']){
+  const road=layer(id),casing=id.endsWith('casing');
+  road.paint['line-width']=['interpolate',['linear'],['zoom'],5,['case',access,casing?.6:.2,casing?1.1:.4],12,['case',access,casing?1.3:.7,casing?2.2:1.5],16,['case',access,casing?2.8:1.9,casing?4.5:3.4],18,['case',access,casing?4.6:3.5,casing?7.5:6.4]];
+ }
+ const roads=layer('road-labels');roads.layout['symbol-spacing']=450;roads.layout['text-padding']=8;
+ roads.layout['text-size']=['interpolate',['linear'],['zoom'],12,['case',access,9,10],16,['case',access,10,11]];
+ const buildings=layer('buildings');buildings.paint={'fill-color':'#aaa394','fill-outline-color':'#918d80','fill-opacity':['interpolate',['linear'],['zoom'],13,.45,15,.72,18,.88]};
  const outdoors=['campsite','viewpoint','swimming','information','lodging'];
  const pois=layer('poi-icons');
  const poiBase=JSON.parse(JSON.stringify(pois));
@@ -154,6 +165,12 @@ function applyDensity(style:any) {
  const amenityDetails=layer('amenity-details');
  amenityDetails.layout['icon-image']=['coalesce',['get','grid_image'],amenityDetails.layout['icon-image']];
  amenityDetails.filter=['all',['==',['get','kind'],'amenity'],['==',['coalesce',['get','group_id'],''],'']];
+ // Local businesses and signboards enter one scale later than practical outdoor facilities.
+ // Use a layer zoom range so detail still appears when z12 source tiles are overzoomed.
+ const secondaryAmenities=['in',['get','poi_icon'],['literal',['shop','restaurant','cafe','information']]];
+ const secondaryDetails={...amenityDetails,id:'amenity-secondary-details',minzoom:15,layout:{...amenityDetails.layout,'icon-padding':9,'text-padding':9},filter:['all',amenityDetails.filter,secondaryAmenities]};
+ amenityDetails.filter=['all',amenityDetails.filter,['!',secondaryAmenities]];
+ style.layers.push(secondaryDetails);
  style.layers.push({...amenityDetails,id:'amenity-group-members',minzoom:15,layout:{...amenityDetails.layout,'icon-allow-overlap':true,'icon-padding':1,'icon-size':['interpolate',['linear'],['zoom'],15,.65,16,.85]},filter:['all',['==',['get','kind'],'amenity'],['!=',['coalesce',['get','group_id'],''],'']]});
  for(const item of style.layers){if(item['source-layer']==='poi'){const covered=['information','toilet','parking','viewpoint','drinking-water','restaurant','campsite','picnic-site','shop','museum','lodging','swimming','cafe','hospital'];if(style.sources.amenities.type==='vector')item.filter=['all',item.filter,['!', ['in',['get','poi_icon'],['literal',covered]]]];else item.filter=['all',item.filter,["!",["all",["within",{"type":"Polygon","coordinates":[[[-119.69,37.7],[-119.53,37.7],[-119.53,37.78],[-119.69,37.78],[-119.69,37.7]]]}],["in",["get","poi_icon"],["literal",["information","toilet","parking","viewpoint","drinking-water","restaurant","campsite","picnic-site","shop","museum","lodging","swimming","cafe","hospital"]]]]]];}}
  if(style.sources.amenities.type==='vector'){
@@ -180,8 +197,10 @@ function applyBaseDetails(style:any,landcoverUrl?:string,trailsUrl?:string,recre
   style.sources.landcover={type:'vector',tiles:[landcoverUrl],bounds:[-129.28,21.80,-63.11,52.93],minzoom:6,maxzoom:14,attribution:'Land cover: USGS Annual NLCD 2024'};
   const colors={forest:'#ccdab9',scrub:'#e0e3bd',grass:'#e8ebca',wetland:'#cbded0',farmland:'#eee4bd',rock:'#e3ded4',ice:'#eaf2f1',developed:'#e8dfd6'};
   // Categorical land cover is beneath water, roads, contours and labels.
-  insertBefore('area-fill',Object.entries(colors).map(([kind,color])=>({id:'nlcd-'+kind,type:'fill',source:'landcover','source-layer':'landcover',minzoom:6,filter:['==',['get','class'],kind],paint:{'fill-color':color,'fill-opacity':['interpolate',['linear'],['zoom'],6,.65,10,.9,14,.85]}})));
+  insertBefore('area-fill',Object.entries(colors).map(([kind,color])=>({id:'nlcd-'+kind,type:'fill',source:'landcover','source-layer':'landcover',minzoom:6,filter:['==',['get','class'],kind],paint:{'fill-color':color,'fill-opacity':['interpolate',['linear'],['zoom'],6,.42,10,.58,14,.66]}})));
  }
+ // Keep municipal green spaces legible above categorical developed land cover.
+ insertBefore('area-fill',[{id:'local-park-tint',type:'fill',source:'osm','source-layer':'grass',minzoom:8,filter:['in',['get','class'],['literal',['park','garden','recreation_ground']]],paint:{'fill-color':'#b5cca4','fill-opacity':['interpolate',['linear'],['zoom'],8,.18,12,.32,16,.22]}}]);
  if(trailsUrl){
   // z13+ uses the server's single OSM + agency network. Preserve the same
   // road/trail classes, shields and labels; never draw the OSM copy beneath it.
@@ -244,6 +263,9 @@ function applyBaseDetails(style:any,landcoverUrl?:string,trailsUrl?:string,recre
   insertBefore('amenity-details',[{...detail,id:'recreation-poi-details',layout:{...detail.layout,'text-optional':true},minzoom:15,filter:['all',['>=',['coalesce',['get','min_zoom'],13],15]]}]);
  }
  for(const layer of style.layers){if(layer.type==='symbol'&&(layer.source==='recreation'||layer.source==='osm'&&layer['source-layer']==='poi'))layer.layout['icon-image']=[...NATURAL_POI_MATCH,layer.layout['icon-image']];}
+ // Apply water-name priority after all agency and route layers have been composed.
+ const waterNames=style.layers.filter((l:any)=>l.id==='lake-labels'||l.id==='lake-labels-horizontal');
+ style.layers=style.layers.filter((l:any)=>!waterNames.includes(l));style.layers.push(...waterNames);
  return style;
 }
 
