@@ -142,3 +142,16 @@ test('nearby generic facilities, different names, areas, and distant locations a
   const a=setup([],[f,g]);assert.equal(a.hidden('recreation-poi-details').size,0,variant);a.events.remove();
  }
 });
+
+test('matching index includes external IDs gained by a canonical merged record',()=>{
+ const first=agency(1,'Shared Camp');first.properties.agency='NPS';first.properties.ridb_id='123';
+ const second=agency(2,'Shared Camp');second.properties.agency='USFS';second.properties.ridb_id='123';second.properties.geonames_id='456';
+ const third=agency(3,'Different published name');third.properties.agency='GeoNames';third.properties.geonames_id='456';
+ const a=setup([],[third,second,first]);assert.equal(a.hidden('recreation-pois').size,2);assert.equal(a.map.__topoPoiDetails.get('nps:1').properties.source_count,3);a.events.remove();
+});
+test('candidate index preserves summit-rock cross-kind matches and conflicting source IDs',()=>{
+ const first=agency(1,'Granite Example','summit');first.properties.gnis_id='100';
+ const second=agency(2,'Granite Example','rock');second.properties.gnis_id='100';
+ const conflict=agency(3,'Granite Example','rock');conflict.properties.gnis_id='200';
+ const a=setup([],[first,second,conflict]);assert.ok(a.hidden('recreation-pois').has(2));assert.ok(!a.hidden('recreation-pois').has(3));a.events.remove();
+});

@@ -1,0 +1,331 @@
+{
+  "baselineRef": "c84402e",
+  "currentCommit": "c84402e2002224735a2434808a132f93263ca0cf",
+  "scope": "Nine actual z12 parents per fixture; Node matching CPU only; current working matcher may be uncommitted.",
+  "fixtures": [
+    {
+      "name": "sf",
+      "zoom": 11,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        1126.202972,
+        1064.797086,
+        1065.6699370000001
+      ],
+      "afterMs": [
+        60.2445800000005,
+        59.94832299999962,
+        57.906301999999414
+      ],
+      "equivalent": true,
+      "snapshotSha256": "38bc96547b2f27849d1c4d71e3d305da0c54c6aff0481e80e431424dec1b51d1",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 4,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 12,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        1099.444869,
+        1082.753847,
+        1058.4204499999996
+      ],
+      "afterMs": [
+        56.79208800000015,
+        57.398895999998786,
+        55.83254400000078
+      ],
+      "equivalent": true,
+      "snapshotSha256": "656778a846a5833a930dd102514c65103b76700d2b5ea70811f0e1e8f9e610b8",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 5,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 14.99,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        1097.5726219999997,
+        1080.9071560000011,
+        1064.306727000001
+      ],
+      "afterMs": [
+        55.219168999999965,
+        61.717092999999295,
+        58.695363000000725
+      ],
+      "equivalent": true,
+      "snapshotSha256": "4d99493aa1c9b66f54de05150e56b1bb503ebba66c5930d341348098aa68bba5",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 15,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        1076.2678299999989,
+        1055.6462460000002,
+        1057.0305370000005
+      ],
+      "afterMs": [
+        58.923038999999335,
+        55.65092900000127,
+        52.80837799999972
+      ],
+      "equivalent": true,
+      "snapshotSha256": "196551ac0e2f8732867deb3dced4e8706825d490432c33b19bf9fa180fba2faa",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 17,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        1062.6810100000002,
+        1075.9855900000002,
+        1058.913923
+      ],
+      "afterMs": [
+        55.214772999999695,
+        55.685663999996905,
+        51.922450000001845
+      ],
+      "equivalent": true,
+      "snapshotSha256": "196551ac0e2f8732867deb3dced4e8706825d490432c33b19bf9fa180fba2faa",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 18,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        1096.2504520000002,
+        1091.5001730000004,
+        1062.3401669999985
+      ],
+      "afterMs": [
+        57.69960799999899,
+        55.63518099999783,
+        52.77933299999859
+      ],
+      "equivalent": true,
+      "snapshotSha256": "196551ac0e2f8732867deb3dced4e8706825d490432c33b19bf9fa180fba2faa",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 11,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        28.125671000001603,
+        26.748473999999987,
+        25.74906800000099
+      ],
+      "afterMs": [
+        4.885503000001336,
+        4.0502159999996366,
+        4.3380770000003395
+      ],
+      "equivalent": true,
+      "snapshotSha256": "af1b0b06c5889c70e8c595ae02a3d955bd6ce0b3b3952346f460d9c7fea1a19d",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 0,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 12,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        27.925579999999172,
+        26.880285999999614,
+        25.622026000000915
+      ],
+      "afterMs": [
+        4.496007000001555,
+        4.001858000003267,
+        3.702724999999191
+      ],
+      "equivalent": true,
+      "snapshotSha256": "b82fb613e555589e21a61874ff66de11e0fb24130bc70d45faf21702ff209739",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 1,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 14.99,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        28.368618000000424,
+        26.74909900000057,
+        25.842876999999135
+      ],
+      "afterMs": [
+        4.617268000001786,
+        4.054792000002635,
+        3.8557399999990594
+      ],
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 15,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        28.737458999999944,
+        26.915823999999702,
+        25.90102399999887
+      ],
+      "afterMs": [
+        4.828996000000188,
+        4.09612300000299,
+        3.7863450000004377
+      ],
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 17,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        28.20336600000155,
+        26.247996000001876,
+        26.38687899999786
+      ],
+      "afterMs": [
+        4.811670000002778,
+        4.1473430000005465,
+        3.775564999999915
+      ],
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 18,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        28.388867000001483,
+        26.227277999998478,
+        25.262292999999772
+      ],
+      "afterMs": [
+        4.519825999999739,
+        3.8801499999972293,
+        3.550796999999875
+      ],
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    }
+  ]
+}

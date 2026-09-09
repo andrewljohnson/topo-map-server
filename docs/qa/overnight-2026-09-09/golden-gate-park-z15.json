@@ -1,0 +1,288 @@
+{
+  "capturedAt": "2026-09-09T11:51:36.241Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -122.49041643257192,
+    37.7621738738989,
+    -122.48198356742908,
+    37.776625420030385
+  ],
+  "center": [
+    -122.4862,
+    37.7694
+  ],
+  "zoom": 15,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "987b898c0f96c063477f2ef85881493f7738cf37cca3ce2d2baae9508b72c052",
+  "candidatePeaks": [],
+  "renderedPeaks": [],
+  "renderedSymbols": [
+    {
+      "layer": "area-labels",
+      "sourceLayer": "osm__area",
+      "id": 1,
+      "name": "Golden Gate Park",
+      "kind": "park",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48218417167664,
+        37.76936627844083
+      ]
+    },
+    {
+      "layer": "lake-labels",
+      "sourceLayer": "osm__water_label",
+      "id": 6,
+      "name": "Lloyd Lake",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48164772987366,
+        37.77061720919127
+      ]
+    },
+    {
+      "layer": "lake-labels",
+      "sourceLayer": "osm__water_label",
+      "id": 5,
+      "name": "Elk Glen Lake",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48203933238983,
+        37.7674750005818
+      ]
+    },
+    {
+      "layer": "lake-labels",
+      "sourceLayer": "osm__water_label",
+      "id": 4,
+      "name": "Mallard Lake",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48608946800232,
+        37.766410605448826
+      ]
+    },
+    {
+      "layer": "lake-labels",
+      "sourceLayer": "osm__water_label",
+      "id": 3,
+      "name": "Metson Lake",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48943150043488,
+        37.76711879037035
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8269826450792322,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48894333839417,
+        37.765049344727814
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 4675900203701194,
+      "name": "SK Tea",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48235583305359,
+        37.76346753677886
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 4877406815015264,
+      "name": "Lam Hoa Thun",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48320877552032,
+        37.76317491980427
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 7747009540907524,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48983919620514,
+        37.77412394291572
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 3149619106433717,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48996257781982,
+        37.775217908033895
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5381225690370605,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48773097991943,
+        37.77436139408424
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 878707475326945,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48442649841309,
+        37.772406639441954
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 134250600442444,
+      "name": "Balboa Bi-rite Market",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48537063598633,
+        37.776133773358225
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 6539465471605335,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48630940914154,
+        37.771092133289756
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 5362147821940628,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48507022857666,
+        37.762958636948525
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1236105146435121,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4842494726181,
+        37.763442091870516
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8049962276221288,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48482346534729,
+        37.76896767233208
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 8825278376997105,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.4861592054367,
+        37.76727569269873
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 4210305473610603,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48497366905212,
+        37.769713996908635
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 2122431966356225,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48428165912628,
+        37.771736668258626
+      ]
+    },
+    {
+      "layer": "trail-labels",
+      "sourceLayer": "trails__network",
+      "id": 81,
+      "name": "Fulton Trail",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 28,
+      "name": "28th Avenue",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 13,
+      "name": "30th Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-1",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+{
+  "scope": "Retained-source local generation, no overviews or uploads. All 884 output hashes match across 16/8/16 worker runs.",
+  "runs": [
+    {
+      "workers": 16,
+      "executor": "processes",
+      "region": "tahoe",
+      "taskChunksize": 64,
+      "spatialOrder": "morton",
+      "vectorParents": 400,
+      "sources": {
+        "osm": {
+          "seconds": 8.352423319825903,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 4.294892044039443,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 6.000857667066157,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 14.07454969896935,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.3991860980167985,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.4677623601164669,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.5628904118202627,
+          "preparedCells": 25,
+          "prepareSeconds": 5.67418922111392,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "mode": "direct full-detail recreation + fine-child vector baseline",
+      "sourceCache": "retained local inputs; cache misses fetched",
+      "startedAt": 1788953371.2303748,
+      "loadAverageStart": [
+        0.45068359375,
+        0.279296875,
+        0.521484375
+      ],
+      "pipeline": {
+        "directRecreation": true,
+        "rawDemMosaic": true,
+        "reuseTrailBasemap": true,
+        "parallelPacking": true
+      },
+      "packingWallSeconds": 11.906367758056149,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 7.3244201361667365,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 7.490161806344986e-07,
+        "generationSeconds": 7.308573169168085,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.135181,
+        "systemCpuSeconds": 0.166175,
+        "peakRssKiB": 181120,
+        "childUserCpuSeconds": 802.107226,
+        "childSystemCpuSeconds": 15.740819,
+        "maxChildPeakRssKiB": 543376,
+        "loadAverageEnd": [
+          8.4912109375,
+          2.486328125,
+          1.26025390625
+        ]
+      },
+      "totalSeconds": 57.901404233882204,
+      "finishedAt": 1788953429.1317787,
+      "fixture": "sierra-400"
+    },
+    {
+      "workers": 8,
+      "executor": "processes",
+      "region": "sierra-100x",
+      "taskChunksize": 64,
+      "spatialOrder": "morton",
+      "vectorParents": 400,
+      "sources": {
+        "osm": {
+          "seconds": 9.043729025870562,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 4.007837977958843,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 7.910609200131148,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 14.939496000064537,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.392172480933368,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.3907175990752876,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.6211359181907028,
+          "preparedCells": 25,
+          "prepareSeconds": 4.523664636071771,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "mode": "direct full-detail recreation + fine-child vector baseline",
+      "sourceCache": "retained local inputs; cache misses fetched",
+      "startedAt": 1788953519.2078862,
+      "loadAverageStart": [
+        2.072265625,
+        1.89501953125,
+        1.16064453125
+      ],
+      "pipeline": {
+        "directRecreation": true,
+        "rawDemMosaic": true,
+        "reuseTrailBasemap": true,
+        "parallelPacking": true
+      },
+      "packingWallSeconds": 17.396694574970752,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 10.503725000889972,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 8,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 8.069910109043121e-07,
+        "generationSeconds": 10.496017578989267,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.10377,
+        "systemCpuSeconds": 0.124028,
+        "peakRssKiB": 184176,
+        "childUserCpuSeconds": 521.173485,
+        "childSystemCpuSeconds": 8.54813,
+        "maxChildPeakRssKiB": 565324,
+        "loadAverageEnd": [
+          5.5576171875,
+          2.99169921875,
+          1.59814453125
+        ]
+      },
+      "totalSeconds": 69.09734357893467,
+      "finishedAt": 1788953588.3052301,
+      "identicalOutputFiles": 884,
+      "fixture": "sierra-400"
+    },
+    {
+      "workers": 16,
+      "executor": "processes",
+      "region": "sierra-100x",
+      "taskChunksize": 64,
+      "spatialOrder": "morton",
+      "vectorParents": 400,
+      "sources": {
+        "osm": {
+          "seconds": 8.461859775939956,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 4.188886122079566,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 5.928630857961252,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 14.146510203136131,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.282179384957999,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.3756454221438617,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.5760386909823865,
+          "preparedCells": 25,
+          "prepareSeconds": 5.59440555004403,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "mode": "direct full-detail recreation + fine-child vector baseline",
+      "sourceCache": "retained local inputs; cache misses fetched",
+      "startedAt": 1788953633.69487,
+      "loadAverageStart": [
+        2.875,
+        2.634765625,
+        1.541015625
+      ],
+      "pipeline": {
+        "directRecreation": true,
+        "rawDemMosaic": true,
+        "reuseTrailBasemap": true,
+        "parallelPacking": true
+      },
+      "packingWallSeconds": 12.08562353788875,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 7.357662632130086,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 9.010545909404755e-07,
+        "generationSeconds": 7.350131520070136,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.165401,
+        "systemCpuSeconds": 0.12819,
+        "peakRssKiB": 181784,
+        "childUserCpuSeconds": 809.729768,
+        "childSystemCpuSeconds": 15.649201,
+        "maxChildPeakRssKiB": 554096,
+        "loadAverageEnd": [
+          11.267578125,
+          5.09912109375,
+          2.45947265625
+        ]
+      },
+      "totalSeconds": 57.952814164804295,
+      "finishedAt": 1788953691.647684,
+      "identicalOutputFiles": 884,
+      "fixture": "sierra-400"
+    }
+  ]
+}

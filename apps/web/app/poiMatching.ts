@@ -29,6 +29,18 @@ export function installPoiMatching(map:any){
   const vector=map.getStyle().sources[source]?.type==='vector';
   return [...new Map(map.querySourceFeatures(source,vector?{sourceLayer}:{}).filter((f:any)=>f.geometry?.type==='Point'&&f.id!=null).map((f:any)=>[source==='osm'?JSON.stringify([f.properties.class,f.properties.name,f.geometry.coordinates]):f.id,f])).values()] as any[];
  };
+ // Candidate indexes narrow comparisons without changing matching thresholds or
+ // tie order. Full reasons still decide every match, including conflicting IDs.
+ const matchingKeys=(f:any)=>{
+  const p=f.properties,k=kind(f),name=key(p.name,k),family=['summit','rock'].includes(k)?'summit-rock':k;
+  return [...['ridb_id','gnis_id','geonames_id'].filter(id=>p[id]).map(id=>id+':'+String(p[id])),...(!generic.has(name)?['name:'+family+':'+name]:[])];
+ };
+ const matchingIndex=(features:any[])=>{
+  const buckets=new Map<string,Set<number>>();
+  const add=(f:any,index:number)=>{for(const key of matchingKeys(f)){if(!buckets.has(key))buckets.set(key,new Set());buckets.get(key)!.add(index)}};
+  features.forEach(add);
+  return {add,candidates:(f:any)=>[...new Set(matchingKeys(f).flatMap(key=>[...(buckets.get(key)||[])]))].sort((a,b)=>a-b).map(index=>({index,feature:features[index]}))};
+ };
  const bases=new Map<string,any>(),signatures=new Map<string,string>();
  let timer:ReturnType<typeof setTimeout>|undefined;
  function refresh(){
@@ -42,12 +54,13 @@ export function installPoiMatching(map:any){
   const hiddenOSM=new Set<number>(),hiddenRecreation=new Set<number>(),details=new Map<string,any>(),kept:any[]=[];
   // Parent/site representations are preferable to unnamed representations of the same object.
   osm.sort((a,b)=>(b.properties.osm_id===b.properties.group_id?1:0)-(a.properties.osm_id===a.properties.group_id?1:0)||Number(!!b.properties.name)-Number(!!a.properties.name)||String(a.properties.osm_id).localeCompare(String(b.properties.osm_id)));
+  const groupMembers=new Map<string,any[]>();
   for(const f of osm){
-   const p=f.properties;
-   const same=kept.find(g=>{const q=g.properties;return p.group_id&&p.group_id===q.group_id&&p.poi_icon===q.poi_icon&&p.osm_id?.split('/')[0]!==q.osm_id?.split('/')[0]&&(!p.name||!q.name||key(p.name,kind(f))===key(q.name,kind(g)))&&meters(f,g)<=3});
-   if(same)hiddenOSM.add(f.id);else kept.push(f);
+   const p=f.properties,groupKey=JSON.stringify([p.group_id,p.poi_icon]);
+   const same=p.group_id&&(groupMembers.get(groupKey)||[]).find(g=>{const q=g.properties;return p.group_id&&p.group_id===q.group_id&&p.poi_icon===q.poi_icon&&p.osm_id?.split('/')[0]!==q.osm_id?.split('/')[0]&&(!p.name||!q.name||key(p.name,kind(f))===key(q.name,kind(g)))&&meters(f,g)<=3});
+   if(same)hiddenOSM.add(f.id);else {kept.push(f);if(p.group_id){if(!groupMembers.has(groupKey))groupMembers.set(groupKey,[]);groupMembers.get(groupKey)!.push(f)}}
   }
-  const canonical:any[]=[];
+  const canonical:any[]=[],canonicalIndex=matchingIndex(canonical),amenityIndex=matchingIndex(kept),baseIndex=matchingIndex(base);
   const priority=(f:any)=>({NPS:0,USFS:1,'Recreation.gov':2,'USGS GNIS':3,GeoNames:4} as any)[f.properties.agency]??5;
   const sourceRecords=(f:any)=>{try{const records=JSON.parse(f.properties.source_records||'[]');if(records.length)return records}catch{}return [{id:f.properties.id,agency:f.properties.agency,name:f.properties.name,coordinates:f.geometry.coordinates,source_url:f.properties.source_url,details:f.properties}]};
   function merged(a:any,b:any,why:string){
@@ -57,9 +70,9 @@ export function installPoiMatching(map:any){
    return {...a,id:a.id,geometry:a.geometry,source:a.source,sourceLayer:a.sourceLayer,properties:p};
   }
   for(const f of recreation.sort((a,b)=>Number(zoom>=(b.properties.min_zoom??10))-Number(zoom>=(a.properties.min_zoom??10))||priority(a)-priority(b)||String(a.properties.id).localeCompare(String(b.properties.id)))){
-   const matches=canonical.map((g,i)=>({i,why:reason(f,g),d:meters(f,g)})).filter(c=>c.why).sort((a,b)=>Number(b.why.endsWith('_id'))-Number(a.why.endsWith('_id'))||a.d-b.d);
+   const matches=canonicalIndex.candidates(f).map(({index:i,feature:g})=>({i,why:reason(f,g),d:meters(f,g)})).filter(c=>c.why).sort((a,b)=>Number(b.why.endsWith('_id'))-Number(a.why.endsWith('_id'))||a.d-b.d);
    const best=matches[0];const same=best&&(best.why.endsWith('_id')||matches.length===1||matches[1].d-best.d>=30)?best.i:-1;
-   if(same>=0){hiddenRecreation.add(f.id);canonical[same]=merged(canonical[same],f,reason(f,canonical[same]))}else canonical.push(f);
+   if(same>=0){hiddenRecreation.add(f.id);canonical[same]=merged(canonical[same],f,reason(f,canonical[same]));canonicalIndex.add(canonical[same],same)}else {canonical.push(f);canonicalIndex.add(f,canonical.length-1)}
   }
   // Nearby same-name small facilities may be distinct buildings or imprecise
   // agency points. Share their presentation, never their underlying identity.
@@ -85,8 +98,8 @@ export function installPoiMatching(map:any){
    canonical[canonical.indexOf(group.lead)]=combined;
   }
   for(const f of canonical){
-   const amenityCandidates=kept.filter(g=>reason(f,g));
-   const candidates=(amenityCandidates.length?amenityCandidates:base.filter(g=>reason(f,g))).sort((a,b)=>meters(f,a)-meters(f,b));
+   const amenityCandidates=amenityIndex.candidates(f).map(c=>c.feature).filter(g=>reason(f,g));
+   const candidates=(amenityCandidates.length?amenityCandidates:baseIndex.candidates(f).map(c=>c.feature).filter(g=>reason(f,g))).sort((a,b)=>meters(f,a)-meters(f,b));
    // Do not guess between distinct nearby sites with equally good names.
    const same=candidates[0],ambiguous=candidates[1]&&meters(f,candidates[1])-meters(f,same)<30;
    if(same&&!ambiguous){

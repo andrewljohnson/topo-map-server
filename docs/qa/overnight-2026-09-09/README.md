@@ -27,3 +27,9 @@ SF strict connectivity proof: [before](sf-junctions-before.json) and [after](sf-
 - [Late-detail source audit](late-detail-source-audit.json): no supported features were discarded by the finest-level zoom guard in 1,280 pilot source tiles.
 
 These are desktop/local measurements and browser map renders. Physical Expo/background/lock-screen acceptance remains separate. The latest client changes await public publication approval; the live release still uses r12 data and client186b4d3.
+
+## Late-morning interaction and scale checks
+
+- [Golden Gate Park z15](golden-gate-park-z15.png), [view and rendered-symbol metadata](golden-gate-park-z15.json): actual browser map render after POI indexing; exported canvas does not include app controls.
+- [POI matching equivalence](poi-matching-equivalence.json): nine actual z12 parents per SF/Tahoe fixture, six zooms, three repeats. All hidden-marker filters, sort expressions, merged detail records and matching statistics exactly equal the previous matcher. Median Node refresh CPU: SF1070.8→56.3ms; Tahoe26.7→4.1ms. These are not physical-phone timings. Reproduce with `experiments/tahoe/benchmark_poi_matching.mjs`.
+- [Current Sierra worker comparison](sierra-current-worker-comparison.json):400 base parents plus484 DEMs,58/69/58seconds at16/8/16workers;884 byte-identical outputs. Sources retained; zero missing native DEM chunks. This is not cold nationwide throughput.
