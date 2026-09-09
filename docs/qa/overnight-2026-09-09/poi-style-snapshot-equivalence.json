@@ -1,0 +1,360 @@
+{
+  "baselineRef": "d969be9",
+  "candidateRef": null,
+  "matcherSha256": {
+    "before": "e1e6f6b643e8db80f26a7e1d57d0146436519b74ae983ec93eda29bf8503ae33",
+    "after": "422dc6c56e3d990ec39f8add9dd139bebfa2406b0f23c78c8a928bdfc56a9d93"
+  },
+  "currentCommit": "d969be96efe1faad29cb03830ae9b2d1bd9326c2",
+  "scope": "Nine actual z12 parents per fixture; Node matching CPU only; current working matcher may be uncommitted.",
+  "fixtures": [
+    {
+      "name": "sf",
+      "zoom": 11,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        76.02502499999991,
+        63.19087300000001,
+        61.13559099999998
+      ],
+      "afterMs": [
+        62.58140800000001,
+        61.89651000000026,
+        60.061199000000215
+      ],
+      "beforeStyleReads": 111,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "38bc96547b2f27849d1c4d71e3d305da0c54c6aff0481e80e431424dec1b51d1",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 4,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 12,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        61.16011200000003,
+        59.79436200000009,
+        56.175886999999875
+      ],
+      "afterMs": [
+        60.20153599999958,
+        57.72646399999985,
+        59.44857899999988
+      ],
+      "beforeStyleReads": 111,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "656778a846a5833a930dd102514c65103b76700d2b5ea70811f0e1e8f9e610b8",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 5,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 14.99,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        59.561249999999745,
+        65.15379299999995,
+        62.479648
+      ],
+      "afterMs": [
+        61.22956500000009,
+        67.76326500000005,
+        69.52395400000023
+      ],
+      "beforeStyleReads": 111,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "a0b41949124280424c01995a23136ed3d0dbc08132456496540123eb54f23690",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 32,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 15,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        62.61295599999994,
+        60.813490999999885,
+        61.214534000000185
+      ],
+      "afterMs": [
+        63.729763999999705,
+        62.385033999999905,
+        60.82590900000014
+      ],
+      "beforeStyleReads": 111,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "196551ac0e2f8732867deb3dced4e8706825d490432c33b19bf9fa180fba2faa",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 17,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        61.211753000000044,
+        62.34019099999978,
+        56.80321099999992
+      ],
+      "afterMs": [
+        63.544558999999936,
+        59.693353000000116,
+        60.32485599999973
+      ],
+      "beforeStyleReads": 111,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "196551ac0e2f8732867deb3dced4e8706825d490432c33b19bf9fa180fba2faa",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "sf",
+      "zoom": 18,
+      "inputCounts": {
+        "osm": 1777,
+        "amenities": 10883,
+        "recreation": 135
+      },
+      "beforeMs": [
+        62.273183000000245,
+        59.45822499999986,
+        59.4973100000002
+      ],
+      "afterMs": [
+        61.112270999999964,
+        61.11412100000007,
+        53.17522199999985
+      ],
+      "beforeStyleReads": 111,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "196551ac0e2f8732867deb3dced4e8706825d490432c33b19bf9fa180fba2faa",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 34,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 13
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 11,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        5.5295350000001235,
+        3.934447000000091,
+        3.667182000000139
+      ],
+      "afterMs": [
+        4.712452999999641,
+        4.061591000000135,
+        3.6474699999998847
+      ],
+      "beforeStyleReads": 99,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "af1b0b06c5889c70e8c595ae02a3d955bd6ce0b3b3952346f460d9c7fea1a19d",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 0,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 12,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        4.680865999999696,
+        4.040354000000207,
+        3.7675090000002456
+      ],
+      "afterMs": [
+        4.626933999999892,
+        3.9696069999999963,
+        3.664180000000215
+      ],
+      "beforeStyleReads": 99,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "b82fb613e555589e21a61874ff66de11e0fb24130bc70d45faf21702ff209739",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 1,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 14.99,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        4.605156999999963,
+        3.9782530000002225,
+        3.6967140000001564
+      ],
+      "afterMs": [
+        4.687257000000045,
+        4.115052999999989,
+        3.757955999999922
+      ],
+      "beforeStyleReads": 99,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "7b80513aa0d7d1f228200541b6c7bc301b704620b29f96ff4840e3d918e60753",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 20,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 15,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        5.5168180000000575,
+        4.125301000000036,
+        3.8594889999999396
+      ],
+      "afterMs": [
+        4.896631999999954,
+        4.248147999999674,
+        3.827853000000232
+      ],
+      "beforeStyleReads": 99,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 17,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        4.866898000000219,
+        4.199303999999756,
+        3.8541959999993196
+      ],
+      "afterMs": [
+        4.883883000000424,
+        4.154573999999229,
+        3.8487169999998514
+      ],
+      "beforeStyleReads": 99,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    },
+    {
+      "name": "tahoe",
+      "zoom": 18,
+      "inputCounts": {
+        "osm": 213,
+        "amenities": 812,
+        "recreation": 43
+      },
+      "beforeMs": [
+        4.786038999999619,
+        4.149065000000519,
+        4.180782999999792
+      ],
+      "afterMs": [
+        4.8537829999995665,
+        4.18810300000041,
+        3.8965690000004543
+      ],
+      "beforeStyleReads": 99,
+      "afterStyleReads": 3,
+      "equivalent": true,
+      "snapshotSha256": "58ecef72b9ad08cc7271f54de8a349e5f5802d5f074641d72fee85d985898295",
+      "stats": {
+        "osmDuplicates": 0,
+        "agencyDuplicates": 21,
+        "nearbyFacilityGroups": 0,
+        "matchedSites": 4
+      }
+    }
+  ]
+}

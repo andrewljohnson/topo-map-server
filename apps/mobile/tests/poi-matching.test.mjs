@@ -164,3 +164,8 @@ test('agency information stays visible until its standalone OSM replacement is e
   a.map.getZoom=()=>minimum;a.events.idle();assert.ok(a.hidden('recreation-pois').has(2));a.events.remove();
  }
 });
+
+test('one coherent style snapshot serves the entire POI matching refresh',()=>{
+ const a=setup([camp(1)],[agency(2)]),getStyle=a.map.getStyle;let reads=0;
+ a.map.getStyle=()=>{reads++;return getStyle()};a.events.idle();assert.equal(reads,1);assert.ok(a.hidden('recreation-pois').has(2));a.events.remove();
+});

@@ -31,16 +31,16 @@ const candidateRef=args.includes('--candidate-ref')?option('--candidate-ref'):nu
 if(candidateRef&&(!/^[\w./-]+$/.test(candidateRef)||candidateRef.startsWith('-')))throw Error('Invalid local candidate Git ref');
 const before=decode(execFileSync('git',['show',baselineRef+':apps/mobile/src/poiMatching.ts'],{cwd:root,encoding:'utf8'})),after=decode(candidateRef?execFileSync('git',['show',candidateRef+':apps/mobile/src/poiMatching.ts'],{cwd:root,encoding:'utf8'}):fs.readFileSync(root+'/apps/mobile/src/poiMatching.ts','utf8'));
 function run(code,sources,zoom){
- const events={},layouts={},layers=['amenity-details','amenity-secondary-details','amenity-group-members','recreation-pois','recreation-poi-details','ranked-peaks','amenity-groups','peak-labels'].map(id=>({id,filter:['==',['get','kind'],id.startsWith('amenity')?'amenity':'campground']}));
- const map={getZoom:()=>zoom,getStyle:()=>({sources:Object.fromEntries(Object.keys(sources).map(k=>[k,{type:'vector'}])),layers}),getSource:name=>sources[name],querySourceFeatures:name=>sources[name],setFilter:(id,filter)=>{layers.find(l=>l.id===id).filter=filter},setLayoutProperty:(id,key,value)=>layouts[id+':'+key]=value,on:(event,fn)=>events[event]=fn,off:event=>delete events[event]};
+ let styleReads=0;const events={},layouts={},layers=['amenity-details','amenity-secondary-details','amenity-group-members','recreation-pois','recreation-poi-details','ranked-peaks','amenity-groups','peak-labels'].map(id=>({id,filter:['==',['get','kind'],id.startsWith('amenity')?'amenity':'campground']}));
+ const map={getZoom:()=>zoom,getStyle:()=>{styleReads++;return {sources:Object.fromEntries(Object.keys(sources).map(k=>[k,{type:'vector'}])),layers}},getSource:name=>sources[name],querySourceFeatures:name=>sources[name],setFilter:(id,filter)=>{layers.find(l=>l.id===id).filter=filter},setLayoutProperty:(id,key,value)=>layouts[id+':'+key]=value,on:(event,fn)=>events[event]=fn,off:event=>delete events[event]};
  const context=vm.createContext({setTimeout,clearTimeout});vm.runInContext(code,context);context.installPoiMatching(map);
  const milliseconds=[];for(let i=0;i<3;i++){const start=performance.now();events.idle();milliseconds.push(performance.now()-start)}
- const snapshot=JSON.parse(JSON.stringify({layers,layouts,details:[...map.__topoPoiDetails],stats:map.__topoPoiMatchStats}));events.remove();return {milliseconds,snapshot};
+ const snapshot=JSON.parse(JSON.stringify({layers,layouts,details:[...map.__topoPoiDetails],stats:map.__topoPoiMatchStats}));events.remove();return {milliseconds,styleReads,snapshot};
 }
 const report={baselineRef,candidateRef,matcherSha256:{before:createHash('sha256').update(before).digest('hex'),after:createHash('sha256').update(after).digest('hex')},currentCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),scope:'Nine actual z12 parents per fixture; Node matching CPU only; current working matcher may be uncommitted.',fixtures:[]};
 for(const [name,sources] of Object.entries(fixtures))for(const zoom of [11,12,14.99,15,17,18]){
  const old=run(before,sources,zoom),current=run(after,sources,zoom);assert.deepEqual(current.snapshot,old.snapshot,`${name} z${zoom} matching output changed`);
- report.fixtures.push({name,zoom,inputCounts:Object.fromEntries(Object.entries(sources).map(([key,value])=>[key,value.length])),beforeMs:old.milliseconds,afterMs:current.milliseconds,equivalent:true,snapshotSha256:createHash('sha256').update(JSON.stringify(current.snapshot)).digest('hex'),stats:current.snapshot.stats});
- console.log(JSON.stringify({name,zoom,beforeMs:old.milliseconds,afterMs:current.milliseconds,equivalent:true}));
+ report.fixtures.push({name,zoom,inputCounts:Object.fromEntries(Object.entries(sources).map(([key,value])=>[key,value.length])),beforeMs:old.milliseconds,afterMs:current.milliseconds,beforeStyleReads:old.styleReads,afterStyleReads:current.styleReads,equivalent:true,snapshotSha256:createHash('sha256').update(JSON.stringify(current.snapshot)).digest('hex'),stats:current.snapshot.stats});
+ console.log(JSON.stringify({name,zoom,beforeMs:old.milliseconds,afterMs:current.milliseconds,beforeStyleReads:old.styleReads,afterStyleReads:current.styleReads,equivalent:true}));
 }
 fs.writeFileSync(option('--output'),JSON.stringify(report,null,2));

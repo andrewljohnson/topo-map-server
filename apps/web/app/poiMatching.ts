@@ -24,9 +24,9 @@ export function installPoiMatching(map:any){
   const name=key(p.name,k);if(generic.has(name)||name!==key(q.name,k))return '';
   return d<=(['summit','rock','pass'].includes(k)?300:['restroom','drinking_water','store','food'].includes(k)?15:120)?'name_kind_distance':'';
  };
- const read=(source:string,sourceLayer=source)=>{
+ const read=(source:string,style:any,sourceLayer=source)=>{
   if(!map.getSource(source))return [];
-  const vector=map.getStyle().sources[source]?.type==='vector';
+  const vector=style.sources[source]?.type==='vector';
   return [...new Map(map.querySourceFeatures(source,vector?{sourceLayer}:{}).filter((f:any)=>f.geometry?.type==='Point'&&f.id!=null).map((f:any)=>[source==='osm'?JSON.stringify([f.properties.class,f.properties.name,f.geometry.coordinates]):f.id,f])).values()] as any[];
  };
  // Candidate indexes narrow comparisons without changing matching thresholds or
@@ -44,13 +44,16 @@ export function installPoiMatching(map:any){
  const bases=new Map<string,any>(),signatures=new Map<string,string>();
  let timer:ReturnType<typeof setTimeout>|undefined;
  function refresh(){
-  if(!map.querySourceFeatures||!map.getStyle())return;
-  const osmData=read('amenities'),osm=osmData.filter(f=>f.properties.kind==='amenity'),recreation=read('recreation');
+  if(!map.querySourceFeatures)return;
+  // MapLibre serializes the style and the combined-source facade remaps its
+  // layers. Share one coherent snapshot throughout this synchronous refresh.
+  const style=map.getStyle();if(!style)return;
+  const osmData=read('amenities',style),osm=osmData.filter(f=>f.properties.kind==='amenity'),recreation=read('recreation',style);
   const groups=new Map(osmData.filter(f=>f.properties.kind==='group').map(f=>[f.properties.group_id,f]));
   const zoom=map.getZoom();
   const groupRanks=new Map<string,{minimum:number,rank:number}>(),peakRanks=new Map<string,number>();
-  const base=read('osm','poi').map(f=>({...f,id:f.id,geometry:f.geometry,source:'osm',sourceLayer:'poi',properties:{...f.properties,base_key:JSON.stringify([f.properties.class,f.properties.name,f.geometry.coordinates])}}));
-  const osmVisible=(f:any)=>{const p=f.properties;if(p.base_key){const minimum=p.poi_icon==='mountain'?Math.max(11,(p.min_zoom??14)-1):['campsite','viewpoint','swimming','information','lodging'].includes(p.poi_icon)?Math.max(11,p.min_zoom??12):Math.max(14,p.min_zoom??14);return zoom>=Math.max(minimum,map.getStyle().layers?.find((l:any)=>l.id==='peak-labels'&&p.poi_icon==='mountain')?.minzoom||0)}if(!p.group_id)return zoom>=Math.max(p.detail_minzoom??14,['shop','restaurant','cafe','information'].includes(p.poi_icon)?15:14);if(zoom>=15)return true;const group=groups.get(p.group_id);if(!group)return false;const g=group.properties;return zoom>=Math.max(g.min_zoom||10,String(g.grid_image||'').includes(',')?10:13,groupRanks.get(p.group_id)?.minimum||0)};
+  const base=read('osm',style,'poi').map(f=>({...f,id:f.id,geometry:f.geometry,source:'osm',sourceLayer:'poi',properties:{...f.properties,base_key:JSON.stringify([f.properties.class,f.properties.name,f.geometry.coordinates])}}));
+  const osmVisible=(f:any)=>{const p=f.properties;if(p.base_key){const minimum=p.poi_icon==='mountain'?Math.max(11,(p.min_zoom??14)-1):['campsite','viewpoint','swimming','information','lodging'].includes(p.poi_icon)?Math.max(11,p.min_zoom??12):Math.max(14,p.min_zoom??14);return zoom>=Math.max(minimum,style.layers?.find((l:any)=>l.id==='peak-labels'&&p.poi_icon==='mountain')?.minzoom||0)}if(!p.group_id)return zoom>=Math.max(p.detail_minzoom??14,['shop','restaurant','cafe','information'].includes(p.poi_icon)?15:14);if(zoom>=15)return true;const group=groups.get(p.group_id);if(!group)return false;const g=group.properties;return zoom>=Math.max(g.min_zoom||10,String(g.grid_image||'').includes(',')?10:13,groupRanks.get(p.group_id)?.minimum||0)};
   const hiddenOSM=new Set<number>(),hiddenRecreation=new Set<number>(),details=new Map<string,any>(),kept:any[]=[];
   // Parent/site representations are preferable to unnamed representations of the same object.
   osm.sort((a,b)=>(b.properties.osm_id===b.properties.group_id?1:0)-(a.properties.osm_id===a.properties.group_id?1:0)||Number(!!b.properties.name)-Number(!!a.properties.name)||String(a.properties.osm_id).localeCompare(String(b.properties.osm_id)));
@@ -117,7 +120,7 @@ export function installPoiMatching(map:any){
   map.__topoPoiMatchStats={osmDuplicates:hiddenOSM.size,agencyDuplicates:hiddenRecreation.size,nearbyFacilityGroups:presentationGroups.filter(g=>g.members.length>1).length,matchedSites:[...details.keys()].filter(id=>/^(node|way|relation)\//.test(id)).length};
   map.__topoHiddenAmenityIds=hiddenOSM;
   const apply=(id:string,hidden:Set<number>)=>{
-   const layer=map.getStyle().layers?.find((l:any)=>l.id===id);if(!layer)return;
+   const layer=style.layers?.find((l:any)=>l.id===id);if(!layer)return;
    if(!bases.has(id))bases.set(id,layer.filter);
    const sorted=[...hidden].sort((a,b)=>a-b),sig=JSON.stringify(sorted);if(signatures.get(id)===sig)return;signatures.set(id,sig);
    const base=bases.get(id);map.setFilter(id,sorted.length?['all',...(base?[base]:[]),['!',['in',['id'],['literal',sorted]]]]:base);
@@ -126,12 +129,12 @@ export function installPoiMatching(map:any){
   for(const id of ['recreation-pois','recreation-poi-details','ranked-peaks'])apply(id,hiddenRecreation);
   const hiddenGroups=new Set<number>();for(const [id,rank]of groupRanks){const group=groups.get(id);if(group&&zoom<rank.minimum)hiddenGroups.add(group.id)}apply('amenity-groups',hiddenGroups);
   const sort=(id:string,field:any,entries:any[])=>{
-   if(!map.setLayoutProperty||!map.getStyle().layers?.some((l:any)=>l.id===id))return;
+   if(!map.setLayoutProperty||!style.layers?.some((l:any)=>l.id===id))return;
    entries.sort((a,b)=>String(a[0]).localeCompare(String(b[0])));
    const expression=entries.length?['match',field,...entries.flat(),100000]:100000,signature=JSON.stringify(expression);
    if(signatures.get('sort:'+id)===signature)return;signatures.set('sort:'+id,signature);map.setLayoutProperty(id,'symbol-sort-key',expression);
   };
-  if(map.setLayoutProperty&&map.getStyle().layers?.some((l:any)=>l.id==='recreation-poi-details')){
+  if(map.setLayoutProperty&&style.layers?.some((l:any)=>l.id==='recreation-poi-details')){
    const ids=[...hiddenDetailNames].sort((a,b)=>a-b),signature=JSON.stringify(ids);
    if(signatures.get('detail-names')!==signature){
     signatures.set('detail-names',signature);
