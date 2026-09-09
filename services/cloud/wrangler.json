@@ -19,7 +19,8 @@
       "/trails/*",
       "/recreation/*",
       "/*-batch",
-      "/operator/*"
+      "/operator/*",
+      "/releases/*"
     ]
   },
   "r2_buckets": [

@@ -53,7 +53,7 @@ class Publisher:
         try:
             with db:yield db
         finally:db.close()
-    def put(self,key,blob,content_type):
+    def put(self,key,blob,content_type,content_encoding=None,verify_body=False):
         checksum=hashlib.sha256(blob).hexdigest()
         with self.db() as db:
             db.execute('BEGIN IMMEDIATE')
@@ -72,9 +72,17 @@ class Publisher:
             head=None
         if head and (head['ContentLength']!=len(blob) or head.get('Metadata',{}).get('sha256')!=checksum):raise ValueError('Cloud object differs from this dataset')
         if not head:
-            with self.timed('upload'):self.client.put_object(Bucket=self.config['R2_BUCKET'],Key=key,Body=blob,ContentType=content_type,Metadata={'sha256':checksum})
+            with self.timed('upload'):self.client.put_object(Bucket=self.config['R2_BUCKET'],Key=key,Body=blob,ContentType=content_type,Metadata={'sha256':checksum},**({'ContentEncoding':content_encoding} if content_encoding else {}))
             with self.timed('verify'):head=self.client.head_object(Bucket=self.config['R2_BUCKET'],Key=key)
         if head['ContentLength']!=len(blob) or head.get('Metadata',{}).get('sha256')!=checksum:raise ValueError('Upload verification failed')
+        if content_encoding and head.get('ContentEncoding')!=content_encoding:raise ValueError('Cloud content encoding differs')
+        if verify_body:
+            with self.timed('verifyBody'):
+                response=self.client.get_object(Bucket=self.config['R2_BUCKET'],Key=key)
+                body=response['Body']
+                try:remote=body.read(len(blob)+1)
+                finally:body.close()
+                if hashlib.sha256(remote).hexdigest()!=checksum:raise ValueError('Remote body checksum differs')
         with self.db() as db:db.execute('UPDATE uploads SET done=1 WHERE key=?',(key,))
     def tile(self,source,z,x,y,spec):
         # Detailed agency polygons need much more RAM than raster/upload work.

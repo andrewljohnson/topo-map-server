@@ -302,3 +302,12 @@ any geometry already imported from the corresponding way, rather than replacing
 it with fabricated geometry or aborting the entire US import. A rejected relation
 without another usable geometry does not become a map feature. Other runtime
 errors still abort the import and are retained in `osm-source/import-error.json`.
+
+## Combined publication and paved agency roads (September 2026)
+
+The [combined release contract](combined-publication.md) packages logical datasets
+into namespaced z12 vector tiles plus separate 1024-pixel DEM tiles. It retains
+source provenance and uses exact offline coverage. Trail processing v4 distinguishes
+explicitly paved MVUM roads from tracks; Angora Ridge Road's asphalt overview now
+matches its already-conflated OSM/USFS detail representation. MVUM access dates are
+published designations, not a real-time opening guarantee.

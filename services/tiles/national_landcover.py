@@ -82,6 +82,8 @@ def fetch_raster(bbox, size):
 
 
 def cached_raster(path,bbox,size):
+    if os.environ.get('TOPO_SCRATCH_ROOT') and not path.exists():
+        path=Path(os.environ['TOPO_SCRATCH_ROOT'])/'nlcd'/DATASET_ID/path.relative_to(CACHE)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.with_suffix('.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)

@@ -185,6 +185,8 @@ def _memory_chunk(namespace, chunk_size, cx, cy):
 def _load_chunk(cx, cy):
     """Return reusable native-grid DEM data plus explicit acquisition provenance."""
     path = CACHE / 'windows' / f'{cx}_{cy}.npz'
+    if os.environ.get('TOPO_SCRATCH_ROOT') and not (path.exists() and path.with_suffix('.json').exists()):
+        path=Path(os.environ['TOPO_SCRATCH_ROOT'])/'dem'/DATASET_ID/'windows'/path.name
     provenance_path = path.with_suffix('.json')
     with locked(path.with_suffix('.lock')):
         if path.exists() and provenance_path.exists():

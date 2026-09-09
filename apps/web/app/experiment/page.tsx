@@ -28,7 +28,7 @@ export default function TahoeExperiment(){
   const style=createStyle(meta,vector,'topocontour://{z}/{x}/{y}',vector,vector,vector,vector,vector,vector);
   const demFiles=new Set<string>(),baseFiles=new Set<string>();let baseBytes=0,demBytes=0;
   terrain=installDeviceTerrain(gl,style,meta.tilesets.dem,async(key,c)=>{const r=await fetch(api+'/dem/'+key+'.png',{signal:c.signal});if(!r.ok)throw Error('Missing DEM '+key);const data=await r.arrayBuffer();demFiles.add(key);demBytes+=data.byteLength;return data;},terrainWorkerSource);
-  combineStyle(style,meta);
+
   gl.addProtocol('tahoobase',async(p,c)=>{const key=p.url.split('://')[1];const r=await fetch(api+'/base/'+key+'.pbf',{signal:c.signal});if(!r.ok)throw Error('Missing sample tile');const data=await r.arrayBuffer();baseFiles.add(key);baseBytes+=data.byteLength;return {data};});
   style.sources.osm.tiles=['tahoobase://{z}/{x}/{y}'];
   map=new gl.Map({container:root.current!,style,center:meta.center,zoom:meta.initialZoom,minZoom:meta.minZoom??12,maxZoom:18,maxBounds:meta.bounds,attributionControl:false});mapRef.current=map;

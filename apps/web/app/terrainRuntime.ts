@@ -38,6 +38,14 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
   if(layer.id==='contour-index'){layer.paint['line-width']=['interpolate',['linear'],['zoom'],11,.55,14,.75,18,1];layer.paint['line-opacity']=.55}
   if(layer.id==='contour-labels'){layer.layout['symbol-spacing']=420;layer.layout['text-size']=10;layer.paint['text-halo-width']=1;layer.paint['text-halo-color']='#f5f1e5'}
  }
+ if(spec.renderBounds?.length){
+  const originals=style.layers.filter((l:any)=>['dem','contours'].includes(l.source));
+  for(const source of ['dem','contours']){
+   const template=style.sources[source];delete style.sources[source];
+   for(let i=0;i<spec.renderBounds.length;i++)style.sources[source+'-region-'+i]={...template,bounds:spec.renderBounds[i]};
+  }
+  style.layers=style.layers.flatMap((l:any)=>originals.includes(l)?spec.renderBounds.map((bounds:any,i:number)=>({...l,id:l.id+'-region-'+i,source:l.source+'-region-'+i})):l);
+ }
  // Keep geographic information prominent over supporting terrain and land cover.
  const textures:Record<string,{color:string;kind:string}>={'cover-wetland':{color:'#538c872d',kind:'wetland'},'cover-sand':{color:'#ab87452b',kind:'dots'},'cover-scrub':{color:'#79885822',kind:'dots'}};
  for(const layer of [...style.layers]){
@@ -52,7 +60,7 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  // original class's casing/fill pair, and don't alter its physical geometry.
  const bridges=[];
  for(const layer of style.layers){
-  if(layer.type!=='line'||!['road','network'].includes(layer['source-layer'])||!layer.id.startsWith('roads-'))continue;
+  if(layer.type!=='line'||!['road','network','osm__road','trails__network'].includes(layer['source-layer'])||!layer.id.startsWith('roads-'))continue;
   const bridge=JSON.parse(JSON.stringify(layer));bridge.id+='-bridge';bridge.filter=['all',layer.filter,['==',['get','is_bridge'],true]];
   layer.filter=['all',layer.filter,['!=',['get','is_bridge'],true]];bridges.push(bridge);
  }

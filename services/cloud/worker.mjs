@@ -34,12 +34,13 @@ async function object(env,key,ctx,ttl=86400){
  if(cached)return cached.status===404?null:cached;
  const item=await env.TILES.get(key);
  if(!item){if(cache)ctx.waitUntil(cache.put(url,new Response(null,{status:404,headers:{'Cache-Control':'public,max-age=30'}})));return null}
- const response=new Response(item.body,{headers:{'Content-Type':item.httpMetadata?.contentType||'application/octet-stream','Content-Length':String(item.size),'Cache-Control':'public,max-age='+ttl,'ETag':item.httpEtag}});
+ const response=new Response(item.body,{headers:{'Content-Type':item.httpMetadata?.contentType||'application/octet-stream','Content-Length':String(item.size),'Cache-Control':'public,max-age='+ttl,'ETag':item.httpEtag,...(item.httpMetadata?.contentEncoding?{'Content-Encoding':item.httpMetadata.contentEncoding}:{})}});
  if(cache)ctx.waitUntil(cache.put(url,response.clone()));return response;
 }
 function valid(spec,z,x,y){return spec&&Number.isInteger(z)&&z>=spec.minZoom&&z<=spec.maxZoom&&Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<2**z&&y<2**z}
 export async function api(request,env,ctx){
- const url=new URL(request.url),path=url.pathname.slice(1);
+ const url=new URL(request.url);let path=url.pathname.slice(1),release=null;
+ if(path.startsWith('releases/')){const match=path.match(/^releases\/([a-z0-9-]{1,80})\/(.+)$/);if(!match)return json({error:'Invalid release'},400);release=match[1];path=match[2];}
  if(path==='operator/jobs'){
   const auth=request.headers.get('Authorization')||'';
   if(auth.length>512||!auth.startsWith('Bearer ')||!same(await digest(auth.slice(7)),env.PUBLISH_SHA256))return json({error:'Operator key required'},401);
@@ -58,7 +59,7 @@ export async function api(request,env,ctx){
  if(env.PUBLIC_MAP!=='1'&&(auth.length>512||!auth.startsWith('Bearer ')||!env.ACCESS_SHA256||!same(await digest(auth.slice(7)),env.ACCESS_SHA256)))return json({error:'Map access key required'},401);
  let allowed=await meter(env,{requests:1,bytes:1});if(!allowed.ok)return allowed;
  if(path==='usage')return meter(env,{status:true});
- const manifest=await object(env,'publication/metadata.json',ctx,30);
+ const manifest=await object(env,release?'publication/releases/'+release+'/metadata.json':'publication/metadata.json',ctx,30);
  if(!manifest)return json({error:'Map publication is preparing'},503);
  const info=await manifest.json();
  let result;
@@ -75,7 +76,11 @@ export async function api(request,env,ctx){
   for(const key of keys){[z,x,y]=key.split('/').map(Number);if(!valid(spec,z,x,y))return json({error:'Outside tileset coverage'},400)}
   const tiles=[],errors=[];
   // Bound object reads and response memory even for hostile authenticated batches.
+  let decodedTotal=0;
   for(const key of keys){
+   const [cz,cx,cy]=key.split('/').map(Number);
+   const covered=!spec.coverage||spec.coverage[String(cz)]?.some(([x0,y0,x1,y1])=>cx>=x0&&cx<=x1&&cy>=y0&&cy<=y1);
+   if(!covered){if(source==='osm'){if(batch)tiles.push({key,data:''});else result=new Response(new Uint8Array(),{headers:{'Content-Type':'application/vnd.mapbox-vector-tile'}})}else errors.push({key,error:'Outside published pilot coverage'});continue}
    const response=await object(env,'tiles/v1/'+spec.datasetId+'/'+key+(source==='dem'?'.png':'.pbf'),ctx);
    if(!response){
     await meter(env,{enqueue:{id:spec.datasetId+'/'+key+'/'+source,source,key,datasetId:spec.datasetId}});
@@ -83,18 +88,20 @@ export async function api(request,env,ctx){
    }
    if(Number(response.headers.get('Content-Length'))>4000000)return json({error:'Tile exceeds delivery limit'},413);
    if(!batch){result=response;break}
-   const bytes=new Uint8Array(await response.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
+   const stream=response.headers.get('Content-Encoding')==='gzip'?response.body.pipeThrough(new DecompressionStream('gzip')):response.body;
+   const reader=stream.getReader(),chunks=[];let length=0;while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>4000000||decodedTotal+length>16000000){await reader.cancel();return json({error:'Decoded batch exceeds delivery limit'},413)}chunks.push(value)}
+   decodedTotal+=length;const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length}let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
    tiles.push({key,data:btoa(binary)});
   }
   if(batch)result=json({datasetId:spec.datasetId,tiles,errors});
   else if(!result)result=json({error:'Detail is not published yet; overview remains available'},404);
  }
  const body=await result.arrayBuffer();allowed=await meter(env,{bytes:body.byteLength+1024});if(!allowed.ok)return allowed;
- return new Response(request.method==='HEAD'?null:body,{status:result.status,headers:result.headers});
+ return new Response(request.method==='HEAD'?null:body,{status:result.status,headers:result.headers,encodeBody:'manual'});
 }
 export default {async fetch(request,env,ctx){
  const path=new URL(request.url).pathname;
- if(!/^\/(operator|metadata|usage|publication|tiles|dem|amenities|boundaries|waterways|landcover|trails|recreation|tile-batch|dem-batch|amenity-batch|boundary-batch|waterway-batch|landcover-batch|trails-batch|recreation-batch)(\/|$)/.test(path))return env.ASSETS.fetch(request);
+ if(!/^\/(releases|operator|metadata|usage|publication|tiles|dem|amenities|boundaries|waterways|landcover|trails|recreation|tile-batch|dem-batch|amenity-batch|boundary-batch|waterway-batch|landcover-batch|trails-batch|recreation-batch)(\/|$)/.test(path))return env.ASSETS.fetch(request);
  let response;try{response=await api(request,env,ctx)}catch{response=json({error:'Map delivery temporarily unavailable'},503)}
- response=new Response(response.body,response);response.headers.set('Cache-Control','private, no-store');response.headers.set('Access-Control-Allow-Origin','*');response.headers.set('Access-Control-Allow-Headers','Authorization, Content-Type');response.headers.set('Access-Control-Allow-Methods','GET, HEAD, OPTIONS');response.headers.set('X-Content-Type-Options','nosniff');if(response.status===429)response.headers.set('Retry-After','60');return response;
+ response=new Response(response.body,{status:response.status,headers:response.headers,encodeBody:'manual'});response.headers.set('Cache-Control','private, no-store');response.headers.set('Access-Control-Allow-Origin','*');response.headers.set('Access-Control-Allow-Headers','Authorization, Content-Type');response.headers.set('Access-Control-Allow-Methods','GET, HEAD, OPTIONS');response.headers.set('X-Content-Type-Options','nosniff');if(response.status===429)response.headers.set('Retry-After','60');return response;
 }};

@@ -67,7 +67,7 @@ export function installMapInfo(map: any) {
  }
  function refresh(){if(overlay.hidden)return;const styleLayers=new Map<string,any>((map.getStyle()?.layers||[]).map((layer:any)=>[layer.id,layer]));const items=new Map<string,any>();let features:any[]=[];try{features=map.queryRenderedFeatures()}catch{return}
   const addPoi=(icon:string,frame:string)=>{if(!names[icon])return;const id='poi-'+frame+'-'+icon;items.set(id,{id,label:names[icon],image:id})};
-  for(const f of features){const raw=f.layer?.id||'',id=raw.replace(/-bridge$/,'').replace(/^detailed-/,'').replace(/-overview$/,''),p=f.properties||{};
+  for(const f of features){const raw=f.layer?.id||'',id=raw.replace(/-region-\d+$/,'').replace(/^world-overview-/,'').replace(/-bridge$/,'').replace(/^detailed-/,'').replace(/-overview$/,''),p=f.properties||{};
    if(raw==='amenity-groups'||(p.grid_image&&String(p.grid_image).startsWith('amenity-grid:'))){for(const icon of String(p.grid_image||'').replace(/^amenity-grid:/,'').split(','))addPoi(icon,['campsite','swimming','viewpoint','lodging'].includes(icon)?'circle':'square');continue}
    if(raw.startsWith('recreation-poi')||raw==='ranked-peaks'){
     const label=({trailhead:'Trailhead',spring:'Spring',waterfall:'Waterfall',shelter:'Shelter',summit:'Summit',pass:'Pass / saddle',arch:'Natural arch',rock:'Rock landmark',cave:'Cave',ranger_station:'Ranger station',visitor_center:'Visitor center'} as any)[p.kind];

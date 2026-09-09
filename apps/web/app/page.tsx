@@ -1,3 +1,4 @@
+import {logicalMap} from './combinedMap';
 "use client";
 import {installDeviceTerrain} from './terrainRuntime';
 import {terrainWorkerSource} from './terrainWorkerSource';
@@ -17,7 +18,7 @@ import {installPoiMatching} from './poiMatching';
 import {installFeatureInfo} from './featureInfo';
 import {installMapInfo} from './mapInfo';
 
-type Metadata = { publicAccess?:boolean; name: string; bounds: [number,number,number,number]; center: [number,number]; initialZoom?:number; minZoom: number; maxZoom: number; tileUrl: string; tilesets?: {dem?: {tileUrl:string;bounds?:number[];attribution?:string};contours?: {tileUrl:string};amenities?: {tileUrl:string};boundaries?: {tileUrl:string};waterways?: {tileUrl:string};landcover?:{tileUrl:string};trails?:{tileUrl:string};recreation?:{tileUrl:string}} };
+type Metadata = { combined?:boolean;overviewMaxZoom?:number; publicAccess?:boolean; name: string; bounds: [number,number,number,number]; center: [number,number]; initialZoom?:number; minZoom: number; maxZoom: number; tileUrl: string; tilesets?: {dem?: {tileUrl:string;bounds?:number[];attribution?:string};contours?: {tileUrl:string};amenities?: {tileUrl:string};boundaries?: {tileUrl:string};waterways?: {tileUrl:string};landcover?:{tileUrl:string};trails?:{tileUrl:string};recreation?:{tileUrl:string}} };
 export default function Home() {
   const root = useRef<HTMLDivElement>(null);
   const map = useRef<import('maplibre-gl').Map | null>(null);
@@ -40,7 +41,9 @@ export default function Home() {
         const api = import.meta.env.VITE_TILE_API_URL || (import.meta.env.PROD ? location.origin : `${location.protocol}//${location.hostname}:3001`);
         const token=sessionStorage.getItem('topo-access-key')||'';
         const headers:Record<string,string>=token?{Authorization:'Bearer '+token}:{};
-        const response = await fetch(`${api}/metadata`, {headers,signal: controller.signal});
+        const release=new URLSearchParams(location.search).get('release');
+        const metadataPath=release&&/^[a-z0-9-]{1,80}$/.test(release)?`/releases/${release}/metadata`:'/metadata';
+        const response = await fetch(`${api}${metadataPath}`, {headers,signal: controller.signal});
         if(response.status===401){setAccessOpen(true);throw new Error('Enter your map access key to connect.');}
         if(response.status===429)throw new Error('Map allowance reached. Check the server usage limits.');
 
@@ -63,11 +66,12 @@ export default function Home() {
         installShieldImages(instance);
         installPoiImages(instance);
         installAmenityImages(instance);
-        installMapInfo(instance);
+        const logical=info.combined?logicalMap(instance):instance;
+        installMapInfo(logical);
         installMapNotes(instance,()=>info);
         installTrailBadges(instance);
-        installPoiMatching(instance);
-        installFeatureInfo(instance,L.Popup);
+        installPoiMatching(logical);
+        installFeatureInfo(logical,L.Popup);
         instance.addControl(new L.NavigationControl({showCompass:true,visualizePitch:true}), 'bottom-left');
         const geolocate = new L.GeolocateControl({
           positionOptions:{enableHighAccuracy:true,maximumAge:30000,timeout:15000},

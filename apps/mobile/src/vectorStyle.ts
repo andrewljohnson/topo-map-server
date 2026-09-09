@@ -1,10 +1,11 @@
 /** Shared mobile/web style. Omit glyphs: MapLibre generates labels from device fonts. */
-export function createStyle(meta: {bounds: number[];minZoom: number;maxZoom: number},tileUrl: string,contourUrl?: string,amenityUrl?: string,boundaryUrl?: string,waterwayUrl?: string,landcoverUrl?:string,trailsUrl?:string,recreationUrl?:string): any{
+export function createStyle(meta: {bounds: number[];minZoom: number;maxZoom: number;combined?:boolean;overviewMaxZoom?:number},tileUrl: string,contourUrl?: string,amenityUrl?: string,boundaryUrl?: string,waterwayUrl?: string,landcoverUrl?:string,trailsUrl?:string,recreationUrl?:string): any{
+ if(meta.combined){amenityUrl=boundaryUrl=waterwayUrl=landcoverUrl=trailsUrl=recreationUrl=tileUrl;}
  const src={'source':'osm'};
  const waterSrc={source:waterwayUrl?'waterways':'osm'};
  const named=['all',['has','name'],['!=',['get','name'],'']];
  const sources = {...(waterwayUrl?{waterways:{type:'vector',tiles:[waterwayUrl],bounds:meta.bounds,minzoom:6,maxzoom:14,attribution:'Waterways: © OpenStreetMap contributors · Protomaps'}}:{}),countries:{type:'geojson',data:COUNTRY_BOUNDARIES,attribution:'Country boundaries: Natural Earth',tolerance:.4},states:{type:'geojson',data:STATE_BOUNDARIES,attribution:'State boundaries: Natural Earth'},...(boundaryUrl?{boundaries:{type:'vector',tiles:[boundaryUrl],bounds:meta.bounds,minzoom:8,maxzoom:14,attribution:'Protected areas: NPS · USFS · Wilderness Connect'}}:{}),amenities:amenityUrl?{type:'vector',tiles:[amenityUrl],bounds:[-180,18,180,72],minzoom:10,maxzoom:14,attribution:'Amenities: © OpenStreetMap contributors'}:{type:'geojson',data:AMENITY_DATA,attribution:'Amenities: © OpenStreetMap contributors'},areas:{type:'geojson',data:{type:'FeatureCollection',features:[]},attribution:'Protected areas: NPS · USFS · Wilderness Connect'},osm:{type:'vector',tiles:[tileUrl],bounds:meta.bounds,minzoom:meta.minZoom,maxzoom:meta.maxZoom,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · <a href="https://protomaps.com">Protomaps</a> · Natural Earth'},...(contourUrl?{contours:{type:'vector',tiles:[contourUrl],bounds:meta.bounds,minzoom:11,maxzoom:14,attribution:'Elevation: <a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a>'}}:{})};
- return applyBaseDetails(applyDensity({version:8,sources,layers:[
+ return applyCombined(applyBaseDetails(applyDensity({version:8,sources,layers:[
  {id:'background',type:'background',paint:{'background-color':'#b8ddea'}},
  {id:'land',type:'fill',...src,'source-layer':'land',paint:{'fill-color':'#fffdf5'}},
  // Physical cover stays below contours, boundaries, roads, and labels.
@@ -71,7 +72,33 @@ export function createStyle(meta: {bounds: number[];minZoom: number;maxZoom: num
  {id:'poi-icons',type:'symbol',...src,'source-layer':'poi',minzoom:11,filter:['>=',['zoom'],['coalesce',['get','min_zoom'],14]],layout:{'symbol-sort-key':['coalesce',['get','min_zoom'],14],'icon-image':['concat','poi-',['get','poi_frame'],'-',['get','poi_icon']],'icon-size':1,'icon-padding':5,'icon-allow-overlap':false,'text-field':['get','name'],'text-font':['Arial','sans-serif'],'text-size':11,'text-max-width':10,'text-anchor':'top','text-offset':[0,1.5],'text-padding':4,'text-optional':true,'text-allow-overlap':false},paint:{'text-color':'#374d3d','text-halo-color':'#fffdf5','text-halo-width':1.5}},
  {"id":"highway-shields","type":"symbol","source":"osm","source-layer":"road","minzoom":8,"filter":["all",["has","shield_text"],["!=",["get","shield_text"],""],["!=",["get","is_link"],true],["in",["get","class"],["literal",["tertiary","tertiary_link","secondary","secondary_link","primary","primary_link","motorway","motorway_link","trunk","trunk_link"]]]],"layout":{"symbol-placement":"line","symbol-spacing":550,"symbol-sort-key":["match",["get","shield_kind"],"interstate",0,"us",1,"state",2,3],"icon-image":["case",["==",["get","network"],"US:CA"],"shield-california",["match",["get","shield_kind"],"interstate","shield-interstate","us","shield-us","county","shield-county","shield-state"]],"icon-text-fit":"both","icon-text-fit-padding":[1,2,1,2],"icon-rotation-alignment":"viewport","icon-allow-overlap":false,"text-field":["get","shield_text"],"text-font":["Arial Bold","Arial","sans-serif"],"text-size":10,"text-max-width":1000,"text-rotation-alignment":"viewport","text-padding":8,"text-allow-overlap":false,"text-ignore-placement":false},"paint":{"text-color":["case",["==",["get","network"],"US:CA"],"#fffdf5",["match",["get","shield_kind"],"interstate","#fffdf5","county","#f7df86","#30332e"]]}},
  {id:'places',type:'symbol',...src,'source-layer':'label',filter:named,layout:{'text-field':['get','name'],'text-font':['Arial','sans-serif'],'text-size':['interpolate',['linear'],['zoom'],6,11,12,14,18,18],'text-max-width':9},paint:{'text-color':'#2f342e','text-halo-color':'#fffdf5','text-halo-width':2}}
- ].filter(layer=>contourUrl||layer.source!=='contours')}),landcoverUrl,trailsUrl,recreationUrl);
+ ].filter(layer=>contourUrl||layer.source!=='contours')}),landcoverUrl,trailsUrl,recreationUrl),meta);
+}
+
+
+function applyCombined(style: any, meta: any): any {
+ if (!meta.combined) return style;
+ const names=['osm','amenities','boundaries','waterways','landcover','trails','recreation'];
+ const credit=names.map(name=>style.sources[name]?.attribution).filter(Boolean).join(' · ');
+ const base={...style.sources.osm,maxzoom:12,attribution:credit};
+ // Fine geometry is already present at z12. Use the same conflated network
+ // on both sides of the old z13 display handoff.
+ for (const layer of style.layers) {
+  if(layer.source==='osm'&&layer['source-layer']==='road'&&layer.maxzoom===13)layer.maxzoom=12;
+  if(layer.source==='trails'&&layer['source-layer']==='network'&&layer.minzoom===13)layer.minzoom=12;
+  if(layer.source==='trails'&&['roads','routes'].includes(layer['source-layer'])&&layer.maxzoom===13)layer.maxzoom=12;
+  if(names.includes(layer.source)&&layer['source-layer']){layer['source-layer']=layer.source+'__'+layer['source-layer'];layer.source='osm';}
+ }
+ for(const name of names)delete style.sources[name];
+ style.sources.osm=base;
+ if(meta.overviewMaxZoom!==undefined){
+  const z=meta.overviewMaxZoom;
+  style.sources['world-overview']={...base,minzoom:0,maxzoom:z};
+  style.sources.osm={...base,minzoom:z+1};
+  const overview=style.layers.filter((l:any)=>l.source==='osm'&&(l.minzoom||0)<=z).map((l:any)=>({...l,id:'world-overview-'+l.id,source:'world-overview'}));
+  style.layers.splice(1,0,...overview);
+ }
+ return style;
 }
 
 // Scale hierarchy: overview areas -> outdoor destinations -> local amenities.
@@ -175,6 +202,10 @@ function applyBaseDetails(style:any,landcoverUrl?:string,trailsUrl?:string,recre
    {id:'official-roads-center',type:'line',...src,'source-layer':'roads',minzoom:10,maxzoom:13,layout:round,paint:{'line-color':'#8c7756','line-width':.8,'line-dasharray':[5,2.5]}},
 
   ];
+  const paved=['==',['get','class'],'unclassified'];
+  lines[0].paint['line-color']=['case',paved,'#817b6e','#9a8665'];
+  lines[1].paint['line-color']=['case',paved,'#fffdf5','#fff4d7'];
+  lines[2].filter=['!=',['get','class'],'unclassified'];
   // Keep route identity on the conflated geometry at detail zooms. Never add
   // the separate agency centerline back on top of the deduplicated network.
   const routeRef=['coalesce',['get','route_ref'],''];

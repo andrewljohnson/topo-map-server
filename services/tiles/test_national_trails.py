@@ -64,6 +64,10 @@ class OfficialTrailsTest(unittest.TestCase):
    for x in (2724,2725):t.render_tile(14,x,6264,basemap_tile=empty)
    self.assertEqual(fetch.call_count,4)
    self.assertEqual(props.call_count,4)
+ def test_mvum_surface_controls_road_style_not_vehicle_access(self):
+  self.assertEqual(t.agency_road_class({'surface':'AC - ASPHALT'}),'unclassified')
+  self.assertEqual(t.agency_road_class({'surface':'NAT - NATIVE MATERIAL','passengervehicle':'open'}),'track')
+  self.assertEqual(t.agency_road_class({'surface':''}),'track')
  def test_bad_tile_rejected(self):
   for args in [(4,0,0),(15,0,0),(8,-1,2),(8,0,256)]:
    with self.assertRaises(ValueError):t.render_tile(*args)

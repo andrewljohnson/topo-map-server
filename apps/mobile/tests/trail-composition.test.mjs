@@ -26,3 +26,17 @@ test('all clients render the conflated detail network, with distinct long-distan
   assert.ok(style.layers.some(l=>l.id==='trail-labels'&&l.source==='trails'),'merged trail names remain');
  }
 });
+
+test('combined base uses a stable z12 network and one physical dataset at every display zoom',()=>{
+ const s=createStyle({...meta,combined:true,maxZoom:12,overviewMaxZoom:3},'base');
+ const vectors=Object.values(s.sources).filter(source=>source.type==='vector');
+ assert.ok(vectors.every(source=>source.tiles[0]==='base'&&source.maxzoom<=12));
+ assert.ok(!['trails','recreation','amenities','landcover','boundaries','waterways'].some(name=>s.sources[name]));
+ assert.equal(s.layers.find(l=>l.id==='roads-local').minzoom,12);
+ assert.equal(s.layers.find(l=>l.id==='roads-local')['source-layer'],'trails__network');
+ assert.equal(s.layers.find(l=>l.id==='roads-local-overview').maxzoom,12);
+ assert.equal(s.layers.find(l=>l.id==='long-trail-pct').minzoom,12);
+ assert.equal(new Set(s.layers.map(l=>l.id)).size,s.layers.length);
+ assert.ok(s.layers.every(l=>!l.source||s.sources[l.source]));
+ assert.deepEqual(s.layers.find(l=>l.id==='official-roads-center').filter,['!=',['get','class'],'unclassified']);
+});

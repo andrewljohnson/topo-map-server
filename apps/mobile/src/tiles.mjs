@@ -9,7 +9,7 @@ export function cellTiles(cell,meta){
   const x0=Math.max(Math.floor(gx*factor),lonX(meta.bounds[0],z)),x1=Math.min(Math.ceil((gx+1)*factor)-1,lonX(meta.bounds[2],z));
   const y0=Math.max(Math.floor(gy*factor),latY(meta.bounds[3],z)),y1=Math.min(Math.ceil((gy+1)*factor)-1,latY(meta.bounds[1],z));
   if(x0>x1||y0>y1)continue;
-  for(let x=x0-halo;x<=x1+halo;x++)for(let y=Math.max(0,y0-halo);y<=Math.min(2**z-1,y1+halo);y++)result.add(`${z}/${(x+2**z)%2**z}/${y}`);
+  for(let x=x0-halo;x<=x1+halo;x++)for(let y=Math.max(0,y0-halo);y<=Math.min(2**z-1,y1+halo);y++){const wrapped=(x+2**z)%2**z;if(!meta.coverage||meta.coverage[String(z)]?.some(([a,b,c,d])=>wrapped>=a&&wrapped<=c&&y>=b&&y<=d))result.add(`${z}/${wrapped}/${y}`);}
  }
  return [...result];
 }
