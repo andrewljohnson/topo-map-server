@@ -1,0 +1,190 @@
+{
+  "tiles": 640,
+  "counts": {
+    "agencyEnds": 3577,
+    "sourceDeadEnds": 289,
+    "lostSourceJunction": 6
+  },
+  "findings": [
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6244
+      ],
+      "pointMetres": [
+        615.2394905770198,
+        1376.9882167764008
+      ],
+      "id": "mvum_roads-{8BABC044-5C3C-4D24-AF37-B7F88E63BAE1}",
+      "agency": "USFS",
+      "name": "MARTIS SLOPE",
+      "nearestMetres": 4.533432134374543,
+      "nearestId": "osm-14-2729-6244-4",
+      "nearestName": "16N92B",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8C909223-7D2C-48F1-9159-68109D68001C}",
+          "agency": "USFS",
+          "name": "MARTIS PEAK LOOKOUT"
+        },
+        {
+          "id": "usfs-{ABED3702-E30A-4057-BAFB-491A1B48D81A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6250
+      ],
+      "pointMetres": [
+        544.2522352207452,
+        1353.7307461518794
+      ],
+      "id": "usfs-{0EFB11DF-2506-4E37-A342-12C6DBD500E0}",
+      "agency": "USFS",
+      "name": "BEAR CREEK TRAIL",
+      "nearestMetres": 1.671919413528907,
+      "nearestId": "osm-14-2721-6250-6",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B36DA44B-72B2-4CFE-876A-726ECF7FEF0B}",
+          "agency": "USFS",
+          "name": "BEAR CK TH ACCESS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2739,
+        6253
+      ],
+      "pointMetres": [
+        973.8345404760912,
+        678.4123185556382
+      ],
+      "id": "usfs-{33692390-890C-48C4-8775-C562D5EDF5AE}",
+      "agency": "USFS",
+      "name": "MOTORIZ D",
+      "nearestMetres": 1.0858895826114734,
+      "nearestId": "osm-14-2739-6253-1",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{54497827-FE73-49D1-BF84-CAC30D1B1396}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{3EF988F3-FFE3-4956-BE79-0B1AF65DDFC5}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{A90A4BCC-FAB7-499B-A362-1D52262344A9}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{B88A36B6-0345-49E3-9047-6E45FA638DEA}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{6584FDD2-3E25-4A73-B3E9-2D4A8E11DEA3}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{13F10637-2B51-4AFD-988E-011D7AB69861}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6257
+      ],
+      "pointMetres": [
+        1254.7360150003806,
+        1396.0019083470106
+      ],
+      "id": "usfs-{8E381F96-42FC-42E0-883E-77943B73BCC8}",
+      "agency": "USFS",
+      "name": "ELLIS PEAK TRAIL",
+      "nearestMetres": 81.57543870507818,
+      "nearestId": "mvum_roads-{C41A5F0B-0148-4AB7-8009-660377AA1809}",
+      "nearestName": "ELLIS PEAK ROAD",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{CB49D493-15EB-4B36-89A0-C195C874921D}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6257
+      ],
+      "pointMetres": [
+        921.9810369433835,
+        1351.5766987018287
+      ],
+      "id": "usfs-{16181486-995A-4755-B466-47A3826797CF}",
+      "agency": "USFS",
+      "name": "ELLIS LAKE OHV",
+      "nearestMetres": 5.315023882943643,
+      "nearestId": "osm-14-2721-6257-2",
+      "nearestName": "Ellis Lake",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{4D2EA1BE-771C-4072-B3DF-4785B7B1FDEF}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2736,
+        6259
+      ],
+      "pointMetres": [
+        1.5045283902436495,
+        136.11986981146038
+      ],
+      "id": "mvum_roads-{1FB6745D-3B35-49A8-9651-09E642C40310}",
+      "agency": "USFS",
+      "name": "GENOA PEAK ROAD C SPUR",
+      "nearestMetres": 14.357520339222111,
+      "nearestId": "osm-14-2736-6259-1",
+      "nearestName": "Genoa Peak",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{FDEC6EC2-CFD4-4866-A968-A0FBD5EDD60E}",
+          "agency": "USFS",
+          "name": "GENOA PK ELECTRONIC SITE"
+        }
+      ]
+    }
+  ]
+}

@@ -25,3 +25,10 @@ test('angled and horizontal lakes share importance ordering',()=>{
  assert.ok(rank({min_zoom:12,label_horizontal_zoom:17.4})<rank({min_zoom:13,label_horizontal_zoom:0}));
  for(const angle of [-85,-45,0,70])assert.equal(rotation(14.2,{label_angle:angle,label_horizontal_zoom:14.2}),0);
 });
+test('minor lakes use smaller medium-scale text and limited placement alternatives',()=>{
+ const size=expression.createExpression(layer.layout['text-size']);assert.equal(size.result,'success');
+ const at=(zoom,min_zoom)=>size.value.evaluate({zoom},{type:1,properties:{min_zoom}});
+ assert.ok(at(12,13)<at(12,8));assert.ok(at(14,13)>at(12,13));
+ assert.deepEqual(layer.layout['text-variable-anchor'],['center','top','bottom']);
+ assert.equal(layer.layout['text-allow-overlap'],false);
+});

@@ -4,7 +4,7 @@ OSM is the reference network; agency-only portions extend it. Mere crossings and
 close but differently named paths do not match. All matched source records survive.
 """
 import json, math, re, unicodedata
-from shapely.geometry import LineString
+from shapely.geometry import LineString, Point
 from shapely.ops import unary_union, nearest_points, substring
 from shapely.strtree import STRtree
 
@@ -123,6 +123,48 @@ def refine_trail_match(incoming, reference, a, b, seed):
     return seed.union(expanded)
 
 
+def preserve_source_junctions(result, additions, matches):
+    """Reconnect only an agency junction proven in the pre-conflation sources.
+
+    A removed agency segment can have a slightly displaced OSM replacement.
+    Preserve the original branch and add a short connection to that established
+    replacement. Proximity alone is never evidence for a new junction.
+    """
+    if not matches:return result
+    geometries=[f['geometry'] for f in result];tree=STRtree(geometries)
+    original_ends={}
+    for f in additions:
+        key=(f['properties'].get('agency'),f['properties'].get('id'))
+        original_ends.setdefault(key,[]).extend(Point(c) for g in lines(f['geometry']) for c in (g.coords[0],g.coords[-1]))
+    match_tree=STRtree([m[0] for m in matches]);output=[]
+    for index,f in enumerate(result):
+        props=f['properties'];key=(props.get('agency'),props.get('id'))
+        if key not in original_ends:output.append(f);continue
+        changed=False;parts=[]
+        for line in lines(f['geometry']):
+            coords=list(line.coords)
+            if line.is_ring:parts.append(line);continue
+            for end in (0,-1):
+                point=Point(coords[end])
+                if not any(point.distance(p)<.01 for p in original_ends[key]):continue
+                if any(int(j)!=index and point.distance(geometries[int(j)])<.05 for j in tree.query(point.buffer(.05))):continue
+                eligible=[]
+                for j in match_tree.query(point.buffer(.05)):
+                    original,mask,target,limit,other_key,other_props=matches[int(j)]
+                    if other_key==key or point.distance(original)>.05 or not mask.buffer(.05).covers(point):continue
+                    if any(bool(props.get(k,False))!=bool(other_props.get(k,False)) for k in ('is_bridge','is_tunnel')):continue
+                    anchor=nearest_points(point,target)[1];distance=point.distance(anchor)
+                    if .05<distance<=limit:eligible.append((distance,anchor))
+                if eligible:
+                    anchor=min(eligible,key=lambda item:item[0])[1]
+                    if end==0:coords.insert(0,(anchor.x,anchor.y))
+                    else:coords.append((anchor.x,anchor.y))
+                    changed=True
+            parts.append(LineString(coords))
+        output.append({**f,'geometry':unary_union(parts),'properties':{**props,'junction_basis':'matched_source_junction'}} if changed else f)
+    return output
+
+
 def conflate(reference, additions):
     """Return one network, retaining unmatched tails/branches and source metadata.
 
@@ -134,6 +176,7 @@ def conflate(reference, additions):
     # geometry in the final partition, never indiscriminately to that feature.
     result=[{**f,'properties':dict(f['properties'])} for f in reference]
     matched_metadata={}
+    junction_matches=[]
     fixed=len(result)
     # Geometry is immutable once a result is appended. Reuse its matching
     # corridor across additions; property enrichment does not change geometry.
@@ -166,27 +209,34 @@ def conflate(reference, additions):
             incoming=feature['properties']
             pavement=(original.get('class')=='track' and not original.get('surface') and incoming.get('kind')=='forest_road' and paved_surface(incoming.get('surface')) and existing['geometry'].difference(mask).length<=existing['geometry'].length*.05)
             matched_metadata.setdefault(index,[]).append((mask,dict(incoming),pavement))
+            junction_matches.append((geometry,mask,existing['geometry'],snap_limit,(incoming.get('agency'),incoming.get('id')),dict(incoming)))
             anchors.append(existing['geometry']);anchor_limits.append(snap_limit)
             remaining=remaining.difference(mask)
             if remaining.is_empty:break
         parts=[]
         for part in lines(remaining):
             if part.length < 1:continue
-            coords=list(part.coords)
+            coords=list(part.coords);cut_ends=[]
             # Connect only newly cut ends, never move original trail endpoints.
             for end in (0,-1):
                 point=part.boundary.geoms[0 if end==0 else -1] if not part.is_ring else None
                 if point is None:continue
                 original_end=any(point.distance(endpoint)<.01 for line in lines(geometry) for endpoint in getattr(line.boundary,'geoms',[]))
+                cut_ends.append(not original_end)
                 if not original_end and anchors:
                     candidates=[nearest_points(point,g)[1] for g in anchors]
                     eligible=[p for p,limit in zip(candidates,anchor_limits) if point.distance(p)<=limit]
                     if eligible:
                         anchor=min(eligible,key=point.distance);coords[end]=(anchor.x,anchor.y)
+            # Tiny survey excursions can have both cut ends project to the same
+            # reference point. Keeping their middle vertex creates a false spike
+            # (or apparent disconnected spur) longer than the source excursion.
+            if len(cut_ends)==2 and all(cut_ends) and part.length<15 and Point(coords[0]).distance(Point(coords[-1]))<.01:continue
             parts.append(LineString(coords))
         if parts:
             feature={**feature,'geometry':unary_union(parts)}
             result.append(feature)
+    result=preserve_source_junctions(result,additions,junction_matches)
     output=[]
     for index,feature in enumerate(result):
         segments=[(part,dict(feature['properties'])) for part in lines(feature['geometry'])]

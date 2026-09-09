@@ -177,3 +177,48 @@ class SegmentMetadataTests(unittest.TestCase):
   for f in result:
    if f['properties'].get('route_ref')=='PCT':self.assertLessEqual(f['geometry'].bounds[2],100)
    if f['properties'].get('route_ref')=='TRT':self.assertGreaterEqual(f['geometry'].bounds[0],200)
+
+class SourceJunctionTests(unittest.TestCase):
+ def fixtures(self,gap=0,**branch_props):
+  road=feature([(0,0),(200,0)],'Forest Road','OpenStreetMap','osm',**{'class':'track'})
+  survey=feature([(0,7),(200,7)],'Forest Road','USFS','survey',**{'class':'track','kind':'forest_road'})
+  branch=feature([(100,7+gap),(100,100)],'Branch','USFS','branch',**branch_props)
+  return road,survey,branch
+ def test_known_agency_junction_survives_reference_replacement(self):
+  road,survey,branch=self.fixtures()
+  for additions in ([survey,branch],[branch,survey]):
+   result=conflate([road],additions);retained=next(f for f in result if f['properties']['id']=='branch')
+   self.assertTrue(retained['geometry'].covers(branch['geometry']))
+   self.assertLess(retained['geometry'].distance(road['geometry']),.001)
+   self.assertEqual(retained['properties']['junction_basis'],'matched_source_junction')
+   self.assertTrue(next(f for f in result if f['properties']['id']=='osm')['geometry'].equals(road['geometry']))
+ def test_nearby_unconnected_endpoint_is_not_extended(self):
+  road,survey,branch=self.fixtures(gap=2)
+  retained=next(f for f in conflate([road],[survey,branch]) if f['properties']['id']=='branch')
+  self.assertTrue(retained['geometry'].equals(branch['geometry']))
+  self.assertNotIn('junction_basis',retained['properties'])
+ def test_grade_separated_branch_is_not_connected(self):
+  road,survey,branch=self.fixtures(is_bridge=True)
+  retained=next(f for f in conflate([road],[survey,branch]) if f['properties']['id']=='branch')
+  self.assertTrue(retained['geometry'].equals(branch['geometry']))
+ def test_original_osm_gap_is_not_changed(self):
+  road,survey,branch=self.fixtures();branch['properties']['agency']='OpenStreetMap'
+  result=conflate([road,branch],[survey])
+  self.assertTrue(next(f for f in result if f['properties']['id']=='branch')['geometry'].equals(branch['geometry']))
+
+class SurveySpikeTests(unittest.TestCase):
+ def test_real_short_excursions_do_not_become_false_spurs(self):
+  from pathlib import Path
+  from shapely.geometry import shape,Point
+  from trail_matching import lines
+  fixtures=json.loads((Path(__file__).parent/'fixtures/tahoe-junction-spikes.json').read_text())
+  for row in fixtures:
+   for f in row['reference']+row['additions']:f['geometry']=shape(f['geometry'])
+   result=conflate(row['reference'],row['additions']);segments=[(f,g) for f in result for g in lines(f['geometry'])]
+   original_ends=[Point(c) for f in row['additions'] for g in lines(f['geometry']) for c in (g.coords[0],g.coords[-1])]
+   for i,(f,g) in enumerate(segments):
+    if f['properties'].get('agency')!='USFS':continue
+    for c in (g.coords[0],g.coords[-1]):
+     p=Point(c)
+     if any(p.distance(q)<.01 for q in original_ends):continue
+     self.assertTrue(any(i!=j and p.distance(other)<1 for j,(_,other) in enumerate(segments)),row['name']+' has a newly disconnected end')

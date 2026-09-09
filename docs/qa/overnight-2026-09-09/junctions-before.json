@@ -1,0 +1,3574 @@
+{
+  "tiles": 640,
+  "counts": {
+    "agencyEnds": 3571,
+    "sourceDeadEnds": 289,
+    "lostSourceJunction": 134,
+    "disconnectedNewCut": 2
+  },
+  "findings": [
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6243
+      ],
+      "pointMetres": [
+        1831.347931982018,
+        808.332968365401
+      ],
+      "id": "usfs-{1F2EDD20-EBDF-48EC-855F-7B34E3BCB1E3}",
+      "agency": "USFS",
+      "name": "BALD MOUNTAIN MOTORCYCLE TRAIL",
+      "nearestMetres": 3.3025225400141913,
+      "nearestId": "osm-14-2721-6243-5",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        },
+        {
+          "id": "mvum_trails-{8B5F5BF2-D2D4-43B3-BBC4-1EC8FC9063B3}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6243
+      ],
+      "pointMetres": [
+        1877.5494948429987,
+        785.5009030308574
+      ],
+      "id": "usfs-{46783D59-0531-42B6-A883-3FEDE9D85D27}",
+      "agency": "USFS",
+      "name": "16E14-E15",
+      "nearestMetres": 1.9723165372997657,
+      "nearestId": "osm-14-2721-6243-5",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{7A03BB1C-9E92-4A32-A5CE-4466A6FF7DB5}",
+          "agency": "USFS",
+          "name": ""
+        },
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6243
+      ],
+      "pointMetres": [
+        1845.189451652579,
+        802.7223646566272
+      ],
+      "id": "mvum_roads-{BC5B329B-1276-4B96-84BB-9D9A309B7AC3}",
+      "agency": "USFS",
+      "name": "0006-003",
+      "nearestMetres": 2.0796799131039365,
+      "nearestId": "osm-14-2721-6243-5",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6243
+      ],
+      "pointMetres": [
+        639.2890399508178,
+        1841.4166925139725
+      ],
+      "id": "mvum_roads-{92A49884-B172-40C8-AAB0-991B7EDFE223}",
+      "agency": "USFS",
+      "name": "GRANITE FLAT CG, CS 25-34, 66",
+      "nearestMetres": 1.1156927928854001,
+      "nearestId": "osm-14-2721-6243-20",
+      "nearestName": "GRANITE FLAT CG",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8415ECE5-55A4-442A-88A8-ACBFDD5474B0}",
+          "agency": "USFS",
+          "name": "GRANITE FLAT CG"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6243
+      ],
+      "pointMetres": [
+        1794.0438736751676,
+        820.9679440688342
+      ],
+      "id": "mvum_roads-{D3CF8C67-F8B7-49CF-9F1F-F4964DAFFA0B}",
+      "agency": "USFS",
+      "name": "0006-001",
+      "nearestMetres": 1.1235088859524889,
+      "nearestId": "osm-14-2721-6243-5",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6243
+      ],
+      "pointMetres": [
+        697.2105672173202,
+        1739.8820580150932
+      ],
+      "id": "usfs-{CF25C6AF-D8D1-40E4-97F4-4C1D0CE73BBC}",
+      "agency": "USFS",
+      "name": "MEADOW LOOP CONNECTOR",
+      "nearestMetres": 2.9920452385458036,
+      "nearestId": "osm-14-2734-6243-5",
+      "nearestName": "WEST STAIR CONNECTOR",
+      "formerPartners": [
+        {
+          "id": "usfs-{0754AF9A-D265-498F-B097-05E44D8C3EED}",
+          "agency": "USFS",
+          "name": "WEST STAIR CONNECTOR"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6243
+      ],
+      "pointMetres": [
+        1701.5002440400422,
+        1105.7893681265414
+      ],
+      "id": "usfs-{FA589EA4-0B0A-44EA-9CFD-3ED0C8BF21FD}",
+      "agency": "USFS",
+      "name": "TAHOE MEADOWS INTERPRETIVE TRA",
+      "nearestMetres": 4.134780828108474,
+      "nearestId": "osm-14-2734-6243-9",
+      "nearestName": "TAHOE MEADOWS TRAILHEAD",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{3B79D25A-0F51-478A-8FB6-B919CF7A7A08}",
+          "agency": "USFS",
+          "name": "TAHOE MEADOWS TRAILHEAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6243
+      ],
+      "pointMetres": [
+        998.9715229319409,
+        390.57684791088104
+      ],
+      "id": "mvum_roads-{8944B3EF-4E6E-4093-AEEE-EFC47C25C145}",
+      "agency": "USFS",
+      "name": "MT ROSE CAMPGROUND WALKIN",
+      "nearestMetres": 3.085646030123724,
+      "nearestId": "osm-14-2735-6243-2",
+      "nearestName": "Mount Rose Summit Ski Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{9C804159-66A2-4122-B7BD-680C59770A39}",
+          "agency": "USFS",
+          "name": "MT ROSE CAMPGROUND ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2736,
+        6240
+      ],
+      "pointMetres": [
+        1699.3292835932225,
+        774.4439897872508
+      ],
+      "id": "usfs-{0A232177-FCA1-413D-B1FE-34516210DCCE}",
+      "agency": "USFS",
+      "name": "JONES CREEK",
+      "nearestMetres": 1.379970235379937,
+      "nearestId": "mvum_roads-{1E11D6C4-6FDB-498E-BA53-4FBF5BCD790C}",
+      "nearestName": "JONES CREEK ROAD",
+      "formerPartners": [
+        {
+          "id": "usfs-{1DB7A7F0-5865-4541-A296-29957D9E18A2}",
+          "agency": "USFS",
+          "name": "JONES/WHITES CREEK LOOP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2736,
+        6240
+      ],
+      "pointMetres": [
+        1764.208759168163,
+        511.95355460233986
+      ],
+      "id": "usfs-{D5A45534-9542-469C-B5D5-AC7A2FFE4D66}",
+      "agency": "USFS",
+      "name": "JONES CREEK LOOP",
+      "nearestMetres": 3.153027876811391,
+      "nearestId": "osm-14-2736-6240-4",
+      "nearestName": "Jones/Whites Creek Loop",
+      "formerPartners": [
+        {
+          "id": "usfs-{1DB7A7F0-5865-4541-A296-29957D9E18A2}",
+          "agency": "USFS",
+          "name": "JONES/WHITES CREEK LOOP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6244
+      ],
+      "pointMetres": [
+        1060.9039435330778,
+        45.945455921813846
+      ],
+      "id": "mvum_roads-{5256533E-2542-4528-902C-E20F619538CB}",
+      "agency": "USFS",
+      "name": "JACKASS SP",
+      "nearestMetres": 5.933118080389685,
+      "nearestId": "osm-14-2720-6244-2",
+      "nearestName": "JACKASS",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{0419E8EA-4EEE-492F-B67A-A179A603A789}",
+          "agency": "USFS",
+          "name": "JACKASS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6244
+      ],
+      "pointMetres": [
+        1473.097187655978,
+        1453.538027253002
+      ],
+      "id": "mvum_roads-{FACBB493-5E11-4D94-86BA-ECF488B05FC8}",
+      "agency": "USFS",
+      "name": "ROCKY SPUR",
+      "nearestMetres": 3.888097784571248,
+      "nearestId": "osm-14-2720-6244-4",
+      "nearestName": "Woodcamp Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{73045408-EE2E-48D4-9DED-0902CBEE64FE}",
+          "agency": "USFS",
+          "name": "WOODCAMP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6244
+      ],
+      "pointMetres": [
+        1372.4477156940848,
+        515.4309841841459
+      ],
+      "id": "mvum_roads-{DD33C0A3-B848-4342-A018-6CA9EACC37D8}",
+      "agency": "USFS",
+      "name": "0006-006-05",
+      "nearestMetres": 3.2727442940905194,
+      "nearestId": "osm-14-2721-6244-3",
+      "nearestName": "SAWTOOTH SP",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{2F3B287B-E330-47E4-BEC1-AB3242986720}",
+          "agency": "USFS",
+          "name": "SAWTOOTH SP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6244
+      ],
+      "pointMetres": [
+        1317.7315696058795,
+        517.646364254877
+      ],
+      "id": "mvum_roads-{2F3B287B-E330-47E4-BEC1-AB3242986720}",
+      "agency": "USFS",
+      "name": "SAWTOOTH SP",
+      "nearestMetres": 1.2274741946925445,
+      "nearestId": "osm-14-2721-6244-4",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6244
+      ],
+      "pointMetres": [
+        1434.4007634846494,
+        899.7510422039777
+      ],
+      "id": "mvum_roads-{175D7B6B-20D7-43D7-ABA2-D405698BC690}",
+      "agency": "USFS",
+      "name": "0006-011",
+      "nearestMetres": 1.5869575727521599,
+      "nearestId": "osm-14-2721-6244-4",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6244
+      ],
+      "pointMetres": [
+        621.4468568591401,
+        218.84268352761865
+      ],
+      "id": "mvum_roads-{33D1AD1B-2F65-4422-ADDC-CBA36F4EF838}",
+      "agency": "USFS",
+      "name": "GRANITE FLAT CG, CS 57-65",
+      "nearestMetres": 1.3152404299766396,
+      "nearestId": "osm-14-2721-6244-8",
+      "nearestName": "GRANITE FLAT CG",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8415ECE5-55A4-442A-88A8-ACBFDD5474B0}",
+          "agency": "USFS",
+          "name": "GRANITE FLAT CG"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6245
+      ],
+      "pointMetres": [
+        968.5105083649978,
+        1433.1882220692933
+      ],
+      "id": "usfs-{E0FFACF7-4CB9-4D11-BA68-213300E78395}",
+      "agency": "USFS",
+      "name": "BIG CHIEF",
+      "nearestMetres": 1.607573165585338,
+      "nearestId": "osm-14-2721-6245-6",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "usfs-{6812DBF9-E338-4AEA-AE96-E5A999533208}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6245
+      ],
+      "pointMetres": [
+        1186.8508728723973,
+        66.79605889879167
+      ],
+      "id": "mvum_roads-{14CDC5EE-30C0-450F-9B8B-C13626986201}",
+      "agency": "USFS",
+      "name": "BELL",
+      "nearestMetres": 1.0921295110143687,
+      "nearestId": "osm-14-2721-6245-6",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2722,
+        6247
+      ],
+      "pointMetres": [
+        673.7193393418565,
+        659.9703833647072
+      ],
+      "id": "mvum_roads-{2E1E330A-878A-4C64-A4C6-33447DDCACEB}",
+      "agency": "USFS",
+      "name": "SAWTOOTH SP",
+      "nearestMetres": 4.859933850646781,
+      "nearestId": "osm-14-2722-6247-3",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2722,
+        6247
+      ],
+      "pointMetres": [
+        876.0087593169883,
+        1052.053340440616
+      ],
+      "id": "mvum_roads-{D8FDEE20-0EB8-4B00-B71C-ABD55400158B}",
+      "agency": "USFS",
+      "name": "SAWTOOTH SP",
+      "nearestMetres": 1.478151195977403,
+      "nearestId": "osm-14-2722-6247-3",
+      "nearestName": "Sawtooth Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B5C79851-E7F8-4C79-965A-8C100A535504}",
+          "agency": "USFS",
+          "name": "SAWTOOTH"
+        }
+      ]
+    },
+    {
+      "kind": "disconnectedNewCut",
+      "tile": [
+        14,
+        2727,
+        6246
+      ],
+      "pointMetres": [
+        1402.9346373537555,
+        855.1711779870093
+      ],
+      "id": "usfs-{ABED3702-E30A-4057-BAFB-491A1B48D81A}",
+      "agency": "USFS",
+      "name": "TAHOE RIM TRAIL",
+      "nearestMetres": 3.9383429977344533,
+      "nearestId": "osm-14-2727-6246-1",
+      "nearestName": "",
+      "formerPartners": []
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6246
+      ],
+      "pointMetres": [
+        1797.8821091176942,
+        391.650996722281
+      ],
+      "id": "usfs-{1575C5CF-D8C2-44BE-8739-1FDE1B81B821}",
+      "agency": "USFS",
+      "name": "KINGS BEACH",
+      "nearestMetres": 1.7866718247014117,
+      "nearestId": "osm-14-2727-6246-24",
+      "nearestName": "Griff Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{ABED3702-E30A-4057-BAFB-491A1B48D81A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6244
+      ],
+      "pointMetres": [
+        615.2394905770198,
+        1376.9882167764008
+      ],
+      "id": "mvum_roads-{8BABC044-5C3C-4D24-AF37-B7F88E63BAE1}",
+      "agency": "USFS",
+      "name": "MARTIS SLOPE",
+      "nearestMetres": 4.533432134374543,
+      "nearestId": "osm-14-2729-6244-4",
+      "nearestName": "16N92B",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8C909223-7D2C-48F1-9159-68109D68001C}",
+          "agency": "USFS",
+          "name": "MARTIS PEAK LOOKOUT"
+        },
+        {
+          "id": "usfs-{ABED3702-E30A-4057-BAFB-491A1B48D81A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6245
+      ],
+      "pointMetres": [
+        973.6211955985054,
+        713.9312909152359
+      ],
+      "id": "usfs-{AE62BC61-F4AC-4194-AA5D-16E25A3924BB}",
+      "agency": "USFS",
+      "name": "KINGS BEACH",
+      "nearestMetres": 2.5333893700632584,
+      "nearestId": "osm-14-2728-6245-9",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{ABED3702-E30A-4057-BAFB-491A1B48D81A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6245
+      ],
+      "pointMetres": [
+        914.6212764335796,
+        795.6752046402544
+      ],
+      "id": "mvum_roads-{938438A8-40A8-49D8-B1D9-EDD490CF8426}",
+      "agency": "USFS",
+      "name": "RIDGE VIEW ROAD",
+      "nearestMetres": 6.089808794127159,
+      "nearestId": "osm-14-2729-6245-5",
+      "nearestName": "MARTIS SLOPE",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8BABC044-5C3C-4D24-AF37-B7F88E63BAE1}",
+          "agency": "USFS",
+          "name": "MARTIS SLOPE"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6246
+      ],
+      "pointMetres": [
+        1415.1005839304999,
+        206.24412129819393
+      ],
+      "id": "usfs-{B088EC82-B680-4AB0-BB46-2826DB7A19B7}",
+      "agency": "USFS",
+      "name": "KINGS BEACH SYSTEM",
+      "nearestMetres": 3.4393378569625876,
+      "nearestId": "osm-14-2728-6246-34",
+      "nearestName": "Griff Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{1575C5CF-D8C2-44BE-8739-1FDE1B81B821}",
+          "agency": "USFS",
+          "name": "KINGS BEACH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6246
+      ],
+      "pointMetres": [
+        1771.4104143511504,
+        600.8880633972585
+      ],
+      "id": "usfs-{4569C8B3-6F6C-4F64-AD25-4C12F18DD5D2}",
+      "agency": "USFS",
+      "name": "KINGS BEACH OHV TRAIL",
+      "nearestMetres": 4.996488941818279,
+      "nearestId": "osm-14-2729-6246-19",
+      "nearestName": "Beaver Street Extension",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{4E82B618-5512-4425-A8BC-23187C09D28E}",
+          "agency": "USFS",
+          "name": "BEAVER STREET EXTENSION"
+        },
+        {
+          "id": "mvum_trails-{FC1EF43A-77BC-4672-9E9F-6B5CBAA340E4}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2730,
+        6246
+      ],
+      "pointMetres": [
+        121.21124952565879,
+        1551.5964272506535
+      ],
+      "id": "mvum_trails-{61F1EC0D-02C3-4E38-B8D7-27EC277CD40E}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 4.537404682458095,
+      "nearestId": "osm-14-2730-6246-3",
+      "nearestName": "Beaver Street Extension",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{4E82B618-5512-4425-A8BC-23187C09D28E}",
+          "agency": "USFS",
+          "name": "BEAVER STREET EXTENSION"
+        },
+        {
+          "id": "usfs-{128442AE-F44A-43A5-A139-5A168D36F3D9}",
+          "agency": "USFS",
+          "name": "KINGS BEACH OHV RTE 1"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6247
+      ],
+      "pointMetres": [
+        1302.288793197833,
+        19.14326463267207
+      ],
+      "id": "usfs-{ACC10624-B0DF-486B-8114-AE232B489632}",
+      "agency": "USFS",
+      "name": "KINGS BEACH OHV RTE 2",
+      "nearestMetres": 3.3323251672572836,
+      "nearestId": "osm-14-2729-6247-49",
+      "nearestName": "Old Grist Mill Road",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{366B9834-77DF-4327-B022-938BA1FDFD39}",
+          "agency": "USFS",
+          "name": ""
+        },
+        {
+          "id": "mvum_roads-{FB28C198-1955-43BC-9CE3-13FC26D1DA7B}",
+          "agency": "USFS",
+          "name": "OLD GRIST MILL ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6244
+      ],
+      "pointMetres": [
+        21.33755236491561,
+        526.2963598109782
+      ],
+      "id": "usfs-{336F359C-F738-4A2E-8804-1486B94E1F4E}",
+      "agency": "USFS",
+      "name": "GRAY LAKE TRAIL (MT. ROSE)",
+      "nearestMetres": 3.0116320206170726,
+      "nearestId": "osm-14-2733-6244-5",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{AB5AA539-397B-4D2A-8349-BD3BD640A9F4}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        },
+        {
+          "id": "usfs-{15584076-10CE-47B3-A7F4-FB4993A38B77}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6244
+      ],
+      "pointMetres": [
+        1051.3505871333182,
+        66.59758018888533
+      ],
+      "id": "usfs-{42876C79-83FA-40E0-AAFA-76888C35CECE}",
+      "agency": "USFS",
+      "name": "OPHIR CREEK",
+      "nearestMetres": 1.6586462661530048,
+      "nearestId": "osm-14-2734-6244-5",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{FD9291CA-CF2F-4DD4-93EE-C2F4FC9CF00A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2722,
+        6248
+      ],
+      "pointMetres": [
+        203.95004956703633,
+        1577.9347680583596
+      ],
+      "id": "mvum_roads-{AC55A719-99F6-4280-9209-2546A0D578F1}",
+      "agency": "USFS",
+      "name": "VALLEY VIEW",
+      "nearestMetres": 2.556716927943946,
+      "nearestId": "osm-14-2722-6248-11",
+      "nearestName": "Western States Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{5B243BC0-DD64-4C01-86CE-9ADD4E82BCE7}",
+          "agency": "USFS",
+          "name": "WESTERN STATES"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6249
+      ],
+      "pointMetres": [
+        654.4617974841967,
+        1587.3035051804036
+      ],
+      "id": "usfs-{3552B32E-7829-4CF6-91CB-97C5A7E798EC}",
+      "agency": "USFS",
+      "name": "SQUAW VALLEY WST CONNECTION",
+      "nearestMetres": 3.7524600741261716,
+      "nearestId": "osm-14-2721-6249-47",
+      "nearestName": "Western States Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{7B4C4A84-0043-4309-973E-D199074689E0}",
+          "agency": "USFS",
+          "name": "WESTERN STATES"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6250
+      ],
+      "pointMetres": [
+        544.2522352207452,
+        1353.7307461518794
+      ],
+      "id": "usfs-{0EFB11DF-2506-4E37-A342-12C6DBD500E0}",
+      "agency": "USFS",
+      "name": "BEAR CREEK TRAIL",
+      "nearestMetres": 1.671919413528907,
+      "nearestId": "osm-14-2721-6250-6",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{B36DA44B-72B2-4CFE-876A-726ECF7FEF0B}",
+          "agency": "USFS",
+          "name": "BEAR CK TH ACCESS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6251
+      ],
+      "pointMetres": [
+        411.4956134278327,
+        207.59557015821338
+      ],
+      "id": "usfs-{0EFB11DF-2506-4E37-A342-12C6DBD500E0}",
+      "agency": "USFS",
+      "name": "BEAR CREEK TRAIL",
+      "nearestMetres": 1.5981159823225228,
+      "nearestId": "osm-14-2720-6251-1",
+      "nearestName": "Alpine Meadows Road",
+      "formerPartners": [
+        {
+          "id": "usfs-{33BBC232-B4E7-48F0-9836-FDD95B1A5A79}",
+          "agency": "USFS",
+          "name": "FIVE LAKES"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6248
+      ],
+      "pointMetres": [
+        1728.4205889105797,
+        1289.3458133321255
+      ],
+      "id": "mvum_roads-{72CA41AA-0DDC-42CD-B5D4-6F3DE297231A}",
+      "agency": "USFS",
+      "name": "SHIVAGIRI EXTENSION",
+      "nearestMetres": 4.68666280212433,
+      "nearestId": "osm-14-2725-6248-3",
+      "nearestName": "Sawmill Flat",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{C90E503C-3072-473B-82D1-4A5D7DD26DCE}",
+          "agency": "USFS",
+          "name": "SAWMILL FLAT"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6249
+      ],
+      "pointMetres": [
+        1845.4780151201412,
+        41.227509528398514
+      ],
+      "id": "usfs-{B24C6538-A1E9-441F-BB02-530AD239D5B6}",
+      "agency": "USFS",
+      "name": "WATSON CREEK",
+      "nearestMetres": 1.0542502170307884,
+      "nearestId": "osm-14-2725-6249-26",
+      "nearestName": "BP",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{1C9B1CAC-D8FD-433E-A92F-B472ED3A1270}",
+          "agency": "USFS",
+          "name": "SAWMILL FLAT"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6250
+      ],
+      "pointMetres": [
+        1293.4749935669824,
+        859.7160077057779
+      ],
+      "id": "usfs-{FB9BE4B4-787D-4477-85D8-999BD1285145}",
+      "agency": "USFS",
+      "name": "TRT MARLETTE PEAK LOOP",
+      "nearestMetres": 3.380059492726047,
+      "nearestId": "osm-14-2735-6250-4",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{DCD3B42A-05E1-4407-801B-8474677CBBFD}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        },
+        {
+          "id": "usfs-{FD9291CA-CF2F-4DD4-93EE-C2F4FC9CF00A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6251
+      ],
+      "pointMetres": [
+        6.628918000496924,
+        1510.9389629531652
+      ],
+      "id": "usfs-{D85CCF53-CD9A-44DA-B6B0-6FE7D838192E}",
+      "agency": "USFS",
+      "name": "MARLETTE TRAIL OR BEAR MTN",
+      "nearestMetres": 1.7495329217665847,
+      "nearestId": "osm-14-2734-6251-10",
+      "nearestName": "CHIMNEY BEACH PARKING",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{94AD8D5E-6408-416B-AC3F-2E6742C2927F}",
+          "agency": "USFS",
+          "name": "CHIMNEY BEACH PARKING"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6251
+      ],
+      "pointMetres": [
+        1237.5170486913994,
+        1794.6000196691602
+      ],
+      "id": "usfs-{C7839E44-072E-41C7-B0A6-716F0EDC9465}",
+      "agency": "USFS",
+      "name": "MARLETTE DAM",
+      "nearestMetres": 2.044984461545363,
+      "nearestId": "osm-14-2734-6251-5",
+      "nearestName": "Marlette Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{A5105C63-F9E1-467D-BB8F-1A36DEB0EFF0}",
+          "agency": "USFS",
+          "name": "MARLETTE TRAIL OR BEAR MTN"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6251
+      ],
+      "pointMetres": [
+        1251.4372371165082,
+        1767.485476706177
+      ],
+      "id": "usfs-{C7839E44-072E-41C7-B0A6-716F0EDC9465}",
+      "agency": "USFS",
+      "name": "MARLETTE DAM",
+      "nearestMetres": 3.4676155637527635,
+      "nearestId": "osm-14-2734-6251-7",
+      "nearestName": "MARLETTE DAM",
+      "formerPartners": [
+        {
+          "id": "usfs-{8ED51FC5-36AC-4FE5-9F26-E48F79DC2EDF}",
+          "agency": "USFS",
+          "name": "MARLETTE DAM"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2737,
+        6248
+      ],
+      "pointMetres": [
+        942.1372499130666,
+        584.1692716348916
+      ],
+      "id": "mvum_roads-{007E3B0F-CB9E-4D73-9FDC-9C371AF12773}",
+      "agency": "USFS",
+      "name": "MUSGROVE CANYON ROAD",
+      "nearestMetres": 1.2111285223202595,
+      "nearestId": "osm-14-2737-6248-5",
+      "nearestName": "Musgrove Canyon Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{C68D4229-507F-497B-9723-F5D5BC6C7B45}",
+          "agency": "USFS",
+          "name": "MUSGROVE CANYON ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2723,
+        6252
+      ],
+      "pointMetres": [
+        1404.8148246631026,
+        228.46836603619158
+      ],
+      "id": "mvum_roads-{2293382C-368F-48F7-A010-E9DA8ABED833}",
+      "agency": "USFS",
+      "name": "TRUCKEE RIVER ACCESS",
+      "nearestMetres": 3.743563818190702,
+      "nearestId": "osm-14-2723-6252-55",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{1ACA922A-54A8-47EF-B6ED-C28B0E8205DC}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6252
+      ],
+      "pointMetres": [
+        1438.7162768160924,
+        1645.0889037288725
+      ],
+      "id": "usfs-{AA946664-08DC-4FC0-AF2C-58E3BC52AFED}",
+      "agency": "USFS",
+      "name": "CHIMNEY BEACH",
+      "nearestMetres": 2.9664336892616823,
+      "nearestId": "osm-14-2733-6252-6",
+      "nearestName": "CHIMNEY BEACH",
+      "formerPartners": [
+        {
+          "id": "usfs-{524529D1-162C-472B-A595-CDDEDFD2831C}",
+          "agency": "USFS",
+          "name": "CHIMNEY BEACH TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6252
+      ],
+      "pointMetres": [
+        1362.7107295459136,
+        934.5341737028211
+      ],
+      "id": "usfs-{F8F48580-C47F-4AC2-9810-8FB395356C1C}",
+      "agency": "USFS",
+      "name": "CHIMNEY BEACH",
+      "nearestMetres": 2.0828707513863858,
+      "nearestId": "osm-14-2733-6252-6",
+      "nearestName": "CHIMNEY BEACH TRAIL",
+      "formerPartners": [
+        {
+          "id": "usfs-{524529D1-162C-472B-A595-CDDEDFD2831C}",
+          "agency": "USFS",
+          "name": "CHIMNEY BEACH TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "disconnectedNewCut",
+      "tile": [
+        14,
+        2737,
+        6252
+      ],
+      "pointMetres": [
+        869.4105579098687,
+        457.5704519562423
+      ],
+      "id": "usfs-{29B04456-D6A5-4338-9C5F-4293071D6483}",
+      "agency": "USFS",
+      "name": "CAPITAL TO TAHOE",
+      "nearestMetres": 50.33174488699809,
+      "nearestId": "osm-14-2737-6252-2",
+      "nearestName": "Capital to Tahoe Trail",
+      "formerPartners": []
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2738,
+        6253
+      ],
+      "pointMetres": [
+        1471.8329707058147,
+        439.7203355394304
+      ],
+      "id": "usfs-{8979FFEC-F26A-4D6A-8D94-BE4D2D5D4241}",
+      "agency": "USFS",
+      "name": "MOTORIZ C",
+      "nearestMetres": 7.0268704272729385,
+      "nearestId": "osm-14-2738-6253-1",
+      "nearestName": "Kings Canyon Road",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{1AC947C9-C6DD-4334-9E6A-0D1691DF2F0C}",
+          "agency": "USFS",
+          "name": "MOTORIZ C"
+        },
+        {
+          "id": "mvum_trails-{0B809DC0-674A-4333-974B-0E1B02A73504}",
+          "agency": "USFS",
+          "name": "MOTORIZ C"
+        },
+        {
+          "id": "mvum_trails-{8F215F5B-0E9D-4DFC-9346-02D4CD9395DF}",
+          "agency": "USFS",
+          "name": "MOTORIZ C"
+        },
+        {
+          "id": "mvum_trails-{011E436B-A9B0-4F6E-AE9C-4E7194890D6D}",
+          "agency": "USFS",
+          "name": "MOTORIZ C"
+        },
+        {
+          "id": "mvum_trails-{9ADE1086-9BD1-468C-8F69-2D3F10DAC661}",
+          "agency": "USFS",
+          "name": "MOTORIZ C"
+        },
+        {
+          "id": "mvum_trails-{3957FD2E-B020-42EF-90A1-33F5C588BC76}",
+          "agency": "USFS",
+          "name": "MOTORIZ C"
+        },
+        {
+          "id": "mvum_roads-{6C4B8075-161E-4547-AB00-8C1120A1E67A}",
+          "agency": "USFS",
+          "name": "KINGS CANYON ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2739,
+        6253
+      ],
+      "pointMetres": [
+        973.8345404760912,
+        678.4123185556382
+      ],
+      "id": "usfs-{33692390-890C-48C4-8775-C562D5EDF5AE}",
+      "agency": "USFS",
+      "name": "MOTORIZ D",
+      "nearestMetres": 1.0858895826114734,
+      "nearestId": "osm-14-2739-6253-1",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{54497827-FE73-49D1-BF84-CAC30D1B1396}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{3EF988F3-FFE3-4956-BE79-0B1AF65DDFC5}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{A90A4BCC-FAB7-499B-A362-1D52262344A9}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{B88A36B6-0345-49E3-9047-6E45FA638DEA}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{6584FDD2-3E25-4A73-B3E9-2D4A8E11DEA3}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        },
+        {
+          "id": "mvum_trails-{13F10637-2B51-4AFD-988E-011D7AB69861}",
+          "agency": "USFS",
+          "name": "MOTORIZ D"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2739,
+        6253
+      ],
+      "pointMetres": [
+        1737.0010361028835,
+        815.5057982299477
+      ],
+      "id": "usfs-{D6024F41-9814-4512-AD1A-492627D6DC5C}",
+      "agency": "USFS",
+      "name": "MOTORIZ E",
+      "nearestMetres": 1.86197113052501,
+      "nearestId": "osm-14-2739-6253-1",
+      "nearestName": "MOTORIZ E",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{909A2898-E1C4-472A-821C-DD8EFEFB5502}",
+          "agency": "USFS",
+          "name": "MOTORIZ E"
+        },
+        {
+          "id": "mvum_trails-{046EE414-1694-4EEA-9BDA-35E6434DB3CD}",
+          "agency": "USFS",
+          "name": "MOTORIZ E"
+        },
+        {
+          "id": "mvum_trails-{F08917CD-9D42-4CA1-999C-423FEB298808}",
+          "agency": "USFS",
+          "name": "MOTORIZ E"
+        },
+        {
+          "id": "mvum_trails-{E9795025-3D3D-4C61-99C2-38684BB647F0}",
+          "agency": "USFS",
+          "name": "MOTORIZ E"
+        },
+        {
+          "id": "mvum_trails-{A8045855-5D7B-4D85-BC09-50D282FD85C4}",
+          "agency": "USFS",
+          "name": "MOTORIZ E"
+        },
+        {
+          "id": "mvum_trails-{24C3A7A3-4431-475D-AA85-2F6A3DCFA8FB}",
+          "agency": "USFS",
+          "name": "MOTORIZ E"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2739,
+        6253
+      ],
+      "pointMetres": [
+        1048.6410720376298,
+        1252.1851460114121
+      ],
+      "id": "usfs-{DAA9F074-8606-4D7F-BCAA-D9CC94BF6F4C}",
+      "agency": "USFS",
+      "name": "FORK TRAIL /OPEN TO ALL",
+      "nearestMetres": 2.6298194064206397,
+      "nearestId": "osm-14-2739-6253-1",
+      "nearestName": "FORK TRAIL /OPEN TO ALL",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{74CB20F6-95F4-4A26-9F32-65549492FA80}",
+          "agency": "USFS",
+          "name": "FORK TRAIL /OPEN TO ALL"
+        },
+        {
+          "id": "mvum_trails-{F2B6560D-51A7-414D-B6B4-82D1066DB51B}",
+          "agency": "USFS",
+          "name": "FORK TRAIL /OPEN TO ALL"
+        },
+        {
+          "id": "mvum_trails-{390E3792-58A5-4E47-B781-6CC515988517}",
+          "agency": "USFS",
+          "name": "FORK TRAIL /OPEN TO ALL"
+        },
+        {
+          "id": "mvum_trails-{0FD71E5D-4573-4A57-9559-82B630AF9B1E}",
+          "agency": "USFS",
+          "name": "FORK TRAIL /OPEN TO ALL"
+        },
+        {
+          "id": "mvum_trails-{40126F5E-1155-4A5F-B2E7-9E0498A7A6E8}",
+          "agency": "USFS",
+          "name": "FORK TRAIL /OPEN TO ALL"
+        },
+        {
+          "id": "mvum_trails-{8FA99EC7-F903-419E-B82C-E6FB21FBA6F7}",
+          "agency": "USFS",
+          "name": "FORK TRAIL /OPEN TO ALL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2736,
+        6255
+      ],
+      "pointMetres": [
+        1559.6729997172952,
+        612.7806601133198
+      ],
+      "id": "usfs-{C650F537-4E52-4AE2-9E1B-1667A91DAA44}",
+      "agency": "USFS",
+      "name": "CLEAR CREEK CONNECTOR",
+      "nearestMetres": 2.5073943880784566,
+      "nearestId": "osm-14-2736-6255-4",
+      "nearestName": "Clear Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{30332937-9E92-41F5-907B-B1CD9BFBEF41}",
+          "agency": "USFS",
+          "name": "CLEAR CREEK TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2737,
+        6255
+      ],
+      "pointMetres": [
+        59.15062356553972,
+        919.8180979024619
+      ],
+      "id": "usfs-{8C186628-CD9C-49C1-A216-79E072FB89A2}",
+      "agency": "USFS",
+      "name": "OVERLOOK",
+      "nearestMetres": 2.343303848057985,
+      "nearestId": "osm-14-2737-6255-17",
+      "nearestName": "Clear Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{30332937-9E92-41F5-907B-B1CD9BFBEF41}",
+          "agency": "USFS",
+          "name": "CLEAR CREEK TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6257
+      ],
+      "pointMetres": [
+        1254.7360150003806,
+        1396.0019083470106
+      ],
+      "id": "usfs-{8E381F96-42FC-42E0-883E-77943B73BCC8}",
+      "agency": "USFS",
+      "name": "ELLIS PEAK TRAIL",
+      "nearestMetres": 81.57543870507818,
+      "nearestId": "mvum_roads-{C41A5F0B-0148-4AB7-8009-660377AA1809}",
+      "nearestName": "ELLIS PEAK ROAD",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{CB49D493-15EB-4B36-89A0-C195C874921D}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6257
+      ],
+      "pointMetres": [
+        921.9810369433835,
+        1351.5766987018287
+      ],
+      "id": "usfs-{16181486-995A-4755-B466-47A3826797CF}",
+      "agency": "USFS",
+      "name": "ELLIS LAKE OHV",
+      "nearestMetres": 5.315023882943643,
+      "nearestId": "osm-14-2721-6257-2",
+      "nearestName": "Ellis Lake",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{4D2EA1BE-771C-4072-B3DF-4785B7B1FDEF}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6258
+      ],
+      "pointMetres": [
+        634.1784309698269,
+        1786.4273219462484
+      ],
+      "id": "usfs-{A1048952-D17E-408A-A157-4F72E704A6C0}",
+      "agency": "USFS",
+      "name": "NORTH MILLER OHV",
+      "nearestMetres": 1.3198193209557951,
+      "nearestId": "osm-14-2720-6258-4",
+      "nearestName": "Bear Lake",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{807F7B65-88BB-4C62-9E6F-2549479C459B}",
+          "agency": "USFS",
+          "name": "NIEHAUS SP"
+        },
+        {
+          "id": "mvum_roads-{22583000-E7D7-48B0-A302-4E6CE0593D35}",
+          "agency": "USFS",
+          "name": "NIEHAUS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6258
+      ],
+      "pointMetres": [
+        558.0019838958979,
+        789.2256821319461
+      ],
+      "id": "mvum_roads-{0A6E9CAB-4233-457B-A588-B8E2F7E20FA8}",
+      "agency": "USFS",
+      "name": "NIEHAUS SP",
+      "nearestMetres": 1.1852304418019095,
+      "nearestId": "osm-14-2720-6258-4",
+      "nearestName": "Bear Lake",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{22583000-E7D7-48B0-A302-4E6CE0593D35}",
+          "agency": "USFS",
+          "name": "NIEHAUS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6258
+      ],
+      "pointMetres": [
+        668.0826553693041,
+        1071.7441093381494
+      ],
+      "id": "mvum_roads-{A03CB5A4-4F03-4AE5-9C44-1570BD85A22B}",
+      "agency": "USFS",
+      "name": "NIEHAUS SP",
+      "nearestMetres": 1.1811891341939307,
+      "nearestId": "osm-14-2720-6258-4",
+      "nearestName": "Bear Lake",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{22583000-E7D7-48B0-A302-4E6CE0593D35}",
+          "agency": "USFS",
+          "name": "NIEHAUS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6258
+      ],
+      "pointMetres": [
+        921.788930435665,
+        19.33119260892272
+      ],
+      "id": "usfs-{5255483A-9354-45C4-9EEA-3BC45074F7B2}",
+      "agency": "USFS",
+      "name": "ELLIS PEAK TRAIL",
+      "nearestMetres": 2.2416828208969646,
+      "nearestId": "usfs-{90971BA3-633B-48B3-A250-4FE37E885008}",
+      "nearestName": "ELLIS PEAK TRAIL",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{37BD69BF-44DC-4EB9-A95B-B2D674804DB4}",
+          "agency": "USFS",
+          "name": "ELLIS LAKE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6258
+      ],
+      "pointMetres": [
+        932.3785976693034,
+        32.86923331208527
+      ],
+      "id": "mvum_roads-{C41A5F0B-0148-4AB7-8009-660377AA1809}",
+      "agency": "USFS",
+      "name": "ELLIS PEAK ROAD",
+      "nearestMetres": 1.1924615047382277,
+      "nearestId": "usfs-{284BACE8-17A1-4450-AA2D-8B6F87DC791A}",
+      "nearestName": "ELLIS LAKE OHV TIE",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{37BD69BF-44DC-4EB9-A95B-B2D674804DB4}",
+          "agency": "USFS",
+          "name": "ELLIS LAKE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6259
+      ],
+      "pointMetres": [
+        637.6001088693738,
+        587.4428328704089
+      ],
+      "id": "mvum_roads-{4943F6E1-1214-4391-B403-1EC70CB87836}",
+      "agency": "USFS",
+      "name": "NIEHAUS SP",
+      "nearestMetres": 1.1433971446634057,
+      "nearestId": "osm-14-2720-6259-4",
+      "nearestName": "Niehaus Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{22583000-E7D7-48B0-A302-4E6CE0593D35}",
+          "agency": "USFS",
+          "name": "NIEHAUS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6259
+      ],
+      "pointMetres": [
+        1450.1875697933137,
+        756.4095281977206
+      ],
+      "id": "usfs-{C68C01F8-8D66-4BBF-AE3D-AD4AFA615834}",
+      "agency": "USFS",
+      "name": "RUBICON JEEP",
+      "nearestMetres": 1.4204191520830713,
+      "nearestId": "osm-14-2721-6259-2",
+      "nearestName": "Rubicon Trail",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{A5FE6223-5829-4932-A7F5-DE35832CB446}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6259
+      ],
+      "pointMetres": [
+        7.826898228377104,
+        800.2814966514707
+      ],
+      "id": "mvum_roads-{5D43D1BA-A2E4-4D3E-B287-5BF416524ABB}",
+      "agency": "USFS",
+      "name": "MEEKS BAY CG NORTH",
+      "nearestMetres": 3.42478745915632,
+      "nearestId": "osm-14-2725-6259-34",
+      "nearestName": "MEEKS BAY CG NORTH",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{9371806F-EC78-484A-BBDE-DE1E069ADAC2}",
+          "agency": "USFS",
+          "name": "MEEKS BAY CG NORTH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6259
+      ],
+      "pointMetres": [
+        192.15756613761187,
+        1043.1035744082183
+      ],
+      "id": "mvum_roads-{85D32D00-4473-45EB-A0AF-A8C9D6463732}",
+      "agency": "USFS",
+      "name": "MEEKS BAY POINT HOUSE",
+      "nearestMetres": 1.2657802578868806,
+      "nearestId": "osm-14-2725-6259-39",
+      "nearestName": "BEACH PARKING",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{557F4ECC-5DC7-4F53-A3C5-B28E21D32525}",
+          "agency": "USFS",
+          "name": "BEACH PARKING"
+        },
+        {
+          "id": "mvum_roads-{F6B9A295-095F-4CA7-A707-AB18A87AFC45}",
+          "agency": "USFS",
+          "name": "MEEKS BAY BEACH ACCESS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6257
+      ],
+      "pointMetres": [
+        1254.062977394089,
+        589.1626635119319
+      ],
+      "id": "mvum_roads-{6D83F8B0-9D69-4B23-BEDE-13005307E6A2}",
+      "agency": "USFS",
+      "name": "GENOA PEAK SPUR",
+      "nearestMetres": 3.346484695928266,
+      "nearestId": "osm-14-2735-6257-1",
+      "nearestName": "Genoa Peak Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{E9BC5332-DB07-4BA6-B5CE-285ADCD02AF9}",
+          "agency": "USFS",
+          "name": "GENOA PEAK ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6258
+      ],
+      "pointMetres": [
+        1375.7884957361966,
+        1441.8446962628514
+      ],
+      "id": "mvum_roads-{BDD026A6-021E-4E87-BA5A-0D29493DE449}",
+      "agency": "USFS",
+      "name": "JAMES CANYON ROAD",
+      "nearestMetres": 3.431902227795519,
+      "nearestId": "osm-14-2735-6258-3",
+      "nearestName": "Genoa Peak",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{E9BC5332-DB07-4BA6-B5CE-285ADCD02AF9}",
+          "agency": "USFS",
+          "name": "GENOA PEAK ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2739,
+        6256
+      ],
+      "pointMetres": [
+        1113.8774633193389,
+        655.638679780066
+      ],
+      "id": "mvum_roads-{7F62C444-2F0C-45B3-9140-091AB46E8E9A}",
+      "agency": "USFS",
+      "name": "JACKS V. ROAD",
+      "nearestMetres": 2.285579537181792,
+      "nearestId": "osm-14-2739-6256-2",
+      "nearestName": "WILDLIFE ROAD",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{A26F7EAB-F2BF-4AB5-B3A9-E28A33EA1A44}",
+          "agency": "USFS",
+          "name": "WILDLIFE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2736,
+        6259
+      ],
+      "pointMetres": [
+        1.5045283902436495,
+        136.11986981146038
+      ],
+      "id": "mvum_roads-{1FB6745D-3B35-49A8-9651-09E642C40310}",
+      "agency": "USFS",
+      "name": "GENOA PEAK ROAD C SPUR",
+      "nearestMetres": 14.357520339222111,
+      "nearestId": "osm-14-2736-6259-1",
+      "nearestName": "Genoa Peak",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{FDEC6EC2-CFD4-4866-A968-A0FBD5EDD60E}",
+          "agency": "USFS",
+          "name": "GENOA PK ELECTRONIC SITE"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6260
+      ],
+      "pointMetres": [
+        1234.8280109185725,
+        572.7247685845941
+      ],
+      "id": "usfs-{544296E1-E36E-4DC0-A9AC-E105108B4535}",
+      "agency": "USFS",
+      "name": "GENEVIEVE TRAIL",
+      "nearestMetres": 2.8994304081268427,
+      "nearestId": "osm-14-2721-6260-5",
+      "nearestName": "General Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{120FEEE7-E288-4D42-9E87-F3C19A28D9DC}",
+          "agency": "USFS",
+          "name": "GENERAL CREEK TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6261
+      ],
+      "pointMetres": [
+        81.66819804813713,
+        53.08446713723242
+      ],
+      "id": "usfs-{17E8A90B-CD15-49DD-82F2-F6CE8AA89F20}",
+      "agency": "USFS",
+      "name": "PACIFIC CREST TRAIL",
+      "nearestMetres": 36.775569448131535,
+      "nearestId": "osm-14-2721-6261-2",
+      "nearestName": "Pacific Crest Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{834F8C69-E483-4F7C-8D9A-DF90400B20C7}",
+          "agency": "USFS",
+          "name": "PACIFIC CREST TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2724,
+        6263
+      ],
+      "pointMetres": [
+        438.013443345204,
+        1811.2436935640872
+      ],
+      "id": "usfs-{C5027759-0ACE-4D3A-ADCD-37CEF73BD9B3}",
+      "agency": "USFS",
+      "name": "EAGLE MEADOWS TRAIL",
+      "nearestMetres": 36.382738965020884,
+      "nearestId": "osm-14-2724-6263-1",
+      "nearestName": "Tahoe Yosemite Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{EEE25879-DF21-413E-AF1A-1C35B4AC2C10}",
+          "agency": "USFS",
+          "name": "TAHOE YOSEMITE TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2724,
+        6263
+      ],
+      "pointMetres": [
+        975.043011595495,
+        1278.6423184163868
+      ],
+      "id": "usfs-{C5027759-0ACE-4D3A-ADCD-37CEF73BD9B3}",
+      "agency": "USFS",
+      "name": "EAGLE MEADOWS TRAIL",
+      "nearestMetres": 4.985441126678311,
+      "nearestId": "osm-14-2724-6263-3",
+      "nearestName": "Eagle Meadows Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{EEE25879-DF21-413E-AF1A-1C35B4AC2C10}",
+          "agency": "USFS",
+          "name": "TAHOE YOSEMITE TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        234.8516919175163,
+        442.3144008256495
+      ],
+      "id": "usfs-{5A50E68E-8373-499B-BB75-3D9AAC5EDAA7}",
+      "agency": "USFS",
+      "name": "ZEPHYR COVE CAMPGROUND",
+      "nearestMetres": 4.9433449633429465,
+      "nearestId": "osm-14-2733-6261-21",
+      "nearestName": "CAMPGROUND SPUR I",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{840157A2-75C6-4F70-99EC-AA9661569745}",
+          "agency": "USFS",
+          "name": "CAMPGROUND SPUR I"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        412.9994951756671,
+        505.8482768815011
+      ],
+      "id": "usfs-{5A50E68E-8373-499B-BB75-3D9AAC5EDAA7}",
+      "agency": "USFS",
+      "name": "ZEPHYR COVE CAMPGROUND",
+      "nearestMetres": 3.5666082167556534,
+      "nearestId": "osm-14-2733-6261-21",
+      "nearestName": "CAMPGROUND SPUR K",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{189C0795-4DCB-4E01-94E9-A9320C5772F0}",
+          "agency": "USFS",
+          "name": "CAMPGROUND SPUR K"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        114.90708490647376,
+        580.5363851245493
+      ],
+      "id": "mvum_roads-{C2737A41-D7A9-4F85-B539-0615FFF5C3C5}",
+      "agency": "USFS",
+      "name": "ZC CABIN SPUR",
+      "nearestMetres": 2.4339716726288065,
+      "nearestId": "osm-14-2733-6261-2",
+      "nearestName": "RUSTYS ROUNDABOUT",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{3F9EBB42-6BEB-41C6-A96A-AA0AB18C9320}",
+          "agency": "USFS",
+          "name": "RUSTYS ROUNDABOUT"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        97.98594164568931,
+        580.2246759049594
+      ],
+      "id": "mvum_roads-{5A87B990-FDB5-45CA-9BA4-08A7F802B959}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 2.3696713610560143,
+      "nearestId": "osm-14-2733-6261-2",
+      "nearestName": "RUSTYS ROUNDABOUT",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{3F9EBB42-6BEB-41C6-A96A-AA0AB18C9320}",
+          "agency": "USFS",
+          "name": "RUSTYS ROUNDABOUT"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        0.8969892850145698,
+        598.5264391880482
+      ],
+      "id": "mvum_roads-{5D77E0C2-C50F-4D15-B59F-45F96AE3CEB2}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 4.448474795041158,
+      "nearestId": "osm-14-2733-6261-2",
+      "nearestName": "ZEPHYR COVE RESORT A SPUR",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{88517294-0F82-425A-B36B-B7D628419068}",
+          "agency": "USFS",
+          "name": "ZEPHYR COVE RESORT A SPUR"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        283.8330381065607,
+        523.3709343634546
+      ],
+      "id": "mvum_roads-{598D0603-4B0D-49C1-AF1D-ECEA35564E9A}",
+      "agency": "USFS",
+      "name": "CAMPGROUND SPUR A",
+      "nearestMetres": 4.201672143977118,
+      "nearestId": "osm-14-2733-6261-21",
+      "nearestName": "ZEPHYR COVE CAMPGROUND",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{41FEF8B3-2EE3-4074-8CA4-483D7C901A6A}",
+          "agency": "USFS",
+          "name": "ZEPHYR COVE CAMPGROUND"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        212.93033352214843,
+        530.9188014939427
+      ],
+      "id": "mvum_roads-{49144EFC-8463-4436-ACE5-6B820F74FA58}",
+      "agency": "USFS",
+      "name": "CAMPGROUND SPUR B",
+      "nearestMetres": 3.9592941003525683,
+      "nearestId": "osm-14-2733-6261-21",
+      "nearestName": "CAMPGROUND SPUR A",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{598D0603-4B0D-49C1-AF1D-ECEA35564E9A}",
+          "agency": "USFS",
+          "name": "CAMPGROUND SPUR A"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        381.8389849383384,
+        513.2514374349266
+      ],
+      "id": "mvum_roads-{1CFF5414-5EA5-4812-9C1A-C3B7626DB2A2}",
+      "agency": "USFS",
+      "name": "CAMPGROUND SPUR G",
+      "nearestMetres": 1.3132463409997643,
+      "nearestId": "osm-14-2733-6261-21",
+      "nearestName": "CAMPGROUND SPUR F",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{BFD38C2B-59D2-4071-A444-E8469E561CDA}",
+          "agency": "USFS",
+          "name": "CAMPGROUND SPUR F"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6261
+      ],
+      "pointMetres": [
+        234.10771527141333,
+        470.37980510666966
+      ],
+      "id": "mvum_roads-{1CFF5414-5EA5-4812-9C1A-C3B7626DB2A2}",
+      "agency": "USFS",
+      "name": "CAMPGROUND SPUR G",
+      "nearestMetres": 2.407986198395272,
+      "nearestId": "osm-14-2733-6261-21",
+      "nearestName": "CAMPGROUND SPUR H",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{84142850-B4EE-4B42-8986-9606E1720988}",
+          "agency": "USFS",
+          "name": "CAMPGROUND SPUR H"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6261
+      ],
+      "pointMetres": [
+        92.50019523967057,
+        1499.301361432299
+      ],
+      "id": "usfs-{5AD696D3-EDB8-4622-A5DA-1FF2F5C6F2C0}",
+      "agency": "USFS",
+      "name": "TAHOE RIM TRAIL KBN T/H SPUR",
+      "nearestMetres": 6.480314166932503,
+      "nearestId": "osm-14-2735-6261-10",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{FD9291CA-CF2F-4DD4-93EE-C2F4FC9CF00A}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        },
+        {
+          "id": "usfs-{956B9A85-36B0-4D4E-B9EC-7DE55E49A3C2}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6261
+      ],
+      "pointMetres": [
+        709.2568351412192,
+        1118.7507458459586
+      ],
+      "id": "mvum_trails-{0BED053D-CEEB-4C2D-8C6E-59746DA65BFD}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 2.761902257409436,
+      "nearestId": "osm-14-2735-6261-5",
+      "nearestName": "Genoa Peak",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{C0887AB1-F1CF-45A7-A905-85A00ED54781}",
+          "agency": "USFS",
+          "name": "GENOA PEAK ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6262
+      ],
+      "pointMetres": [
+        1234.0840818779543,
+        311.031124426052
+      ],
+      "id": "mvum_roads-{6B3C3A27-5D9F-43A4-B367-FD1C79777B51}",
+      "agency": "USFS",
+      "name": "GENOA PEAK WATER TANK",
+      "nearestMetres": 6.260883081050485,
+      "nearestId": "osm-14-2735-6262-27",
+      "nearestName": "Genoa Peak",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{EE1ADA16-0DFB-4A7B-A757-CC6ED1D6BB4A}",
+          "agency": "USFS",
+          "name": "GENOA PEAK ALTERNATE ACCESS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6264
+      ],
+      "pointMetres": [
+        1381.875988538377,
+        1107.23859616369
+      ],
+      "id": "usfs-{B5241B5E-8C0F-4760-A502-B3C9DD897C07}",
+      "agency": "USFS",
+      "name": "RUBICON",
+      "nearestMetres": 2.218328490300655,
+      "nearestId": "osm-14-2721-6264-2",
+      "nearestName": "Rubicon Trail (16E30.2)",
+      "formerPartners": [
+        {
+          "id": "usfs-{EA880223-CFE8-45ED-9CA6-DEAE181D639D}",
+          "agency": "USFS",
+          "name": "RUBICON"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2722,
+        6264
+      ],
+      "pointMetres": [
+        272.3356615388766,
+        1772.5873697493225
+      ],
+      "id": "usfs-{E638727E-7232-4049-8A6D-911CEF8EC496}",
+      "agency": "USFS",
+      "name": "MCCONNELL LAKE LOOP",
+      "nearestMetres": 1.9165270884062229,
+      "nearestId": "osm-14-2722-6264-2",
+      "nearestName": "Rubicon Trail (16E30.2)",
+      "formerPartners": [
+        {
+          "id": "usfs-{B5241B5E-8C0F-4760-A502-B3C9DD897C07}",
+          "agency": "USFS",
+          "name": "RUBICON"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6265
+      ],
+      "pointMetres": [
+        1619.8446620311588,
+        1319.9727617539465
+      ],
+      "id": "usfs-{75A4A705-DE19-4619-A6FD-024A5C6D41EF}",
+      "agency": "USFS",
+      "name": "SCHMIDELL",
+      "nearestMetres": 1.883974833176681,
+      "nearestId": "osm-14-2721-6265-3",
+      "nearestName": "Blakely Trail (16E07)",
+      "formerPartners": [
+        {
+          "id": "usfs-{D125408E-C5D8-4352-8591-9F1BD657DD59}",
+          "agency": "USFS",
+          "name": "BLAKELY"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2722,
+        6265
+      ],
+      "pointMetres": [
+        580.6616255408153,
+        368.3897071890533
+      ],
+      "id": "usfs-{99B1C7B3-6848-42F9-87C4-CDFA30268BE2}",
+      "agency": "USFS",
+      "name": "VELMA",
+      "nearestMetres": 1.7225950037357518,
+      "nearestId": "osm-14-2722-6265-1",
+      "nearestName": "Rubicon Trail (16E30.2)",
+      "formerPartners": [
+        {
+          "id": "usfs-{B5241B5E-8C0F-4760-A502-B3C9DD897C07}",
+          "agency": "USFS",
+          "name": "RUBICON"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2721,
+        6266
+      ],
+      "pointMetres": [
+        927.3288158793002,
+        358.18847111053765
+      ],
+      "id": "usfs-{4E114F9C-BFEB-45A9-99FC-8132064D627B}",
+      "agency": "USFS",
+      "name": "RED PEAK STOCK TRAIL",
+      "nearestMetres": 2.0618177925338528,
+      "nearestId": "osm-14-2721-6266-3",
+      "nearestName": "Blakely Trail (16E07)",
+      "formerPartners": [
+        {
+          "id": "usfs-{D125408E-C5D8-4352-8591-9F1BD657DD59}",
+          "agency": "USFS",
+          "name": "BLAKELY"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6264
+      ],
+      "pointMetres": [
+        1604.29341922421,
+        1757.1489486005157
+      ],
+      "id": "usfs-{64C72B10-1E2A-4023-AA6E-3E82B0A0D87E}",
+      "agency": "USFS",
+      "name": "BAYVIEW TRAIL",
+      "nearestMetres": 3.8581681462557538,
+      "nearestId": "osm-14-2725-6264-8",
+      "nearestName": "Bayview Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{7E70FABB-28C2-4C8B-A41C-FC47E7610803}",
+          "agency": "USFS",
+          "name": "BAYVIEW TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2726,
+        6264
+      ],
+      "pointMetres": [
+        212.61645045876503,
+        1777.7186623793095
+      ],
+      "id": "usfs-{64C72B10-1E2A-4023-AA6E-3E82B0A0D87E}",
+      "agency": "USFS",
+      "name": "BAYVIEW TRAIL",
+      "nearestMetres": 2.8156433319652905,
+      "nearestId": "osm-14-2726-6264-9",
+      "nearestName": "Cascade Falls Trails",
+      "formerPartners": [
+        {
+          "id": "usfs-{7100D9B6-C01C-456C-9D3A-C604B83A45FC}",
+          "agency": "USFS",
+          "name": "CASCADE FALLS TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6265
+      ],
+      "pointMetres": [
+        306.8753746552393,
+        977.5291751418263
+      ],
+      "id": "mvum_roads-{8FDF0050-4278-44D8-AC17-BD7D0EAE12BE}",
+      "agency": "USFS",
+      "name": "SPRING CREEK ROAD",
+      "nearestMetres": 2.0245495815600556,
+      "nearestId": "osm-14-2727-6265-1",
+      "nearestName": "Emerald Bay Road",
+      "formerPartners": [
+        {
+          "id": "usfs-{84BEC26F-ACDA-464D-8B18-8528BC7A3C1B}",
+          "agency": "USFS",
+          "name": "POPE/BALDWIN NRT BIKE PATH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6265
+      ],
+      "pointMetres": [
+        1143.9901570836082,
+        1457.1775674987584
+      ],
+      "id": "mvum_roads-{613F02DE-4A88-46F2-8CD8-4C89B5C83808}",
+      "agency": "USFS",
+      "name": "ILLEAGAL CAMPING SPUR",
+      "nearestMetres": 1.0523088241029166,
+      "nearestId": "osm-14-2727-6265-27",
+      "nearestName": "Camp Shelly Campground Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{958CB204-9E32-45D6-AE5E-F6CD185CB7EE}",
+          "agency": "USFS",
+          "name": "CAMP SHELLY CAMPGROUND"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6265
+      ],
+      "pointMetres": [
+        1361.2072116602212,
+        1436.762854475528
+      ],
+      "id": "mvum_roads-{958CB204-9E32-45D6-AE5E-F6CD185CB7EE}",
+      "agency": "USFS",
+      "name": "CAMP SHELLY CAMPGROUND",
+      "nearestMetres": 1.0644710693182422,
+      "nearestId": "osm-14-2727-6265-4",
+      "nearestName": "Mount Tallac Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{AC34BDD7-D636-4830-9177-50154D2753C9}",
+          "agency": "USFS",
+          "name": "MT. TALLAC TRAILHEAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6265
+      ],
+      "pointMetres": [
+        121.68019242491573,
+        1104.7881691213697
+      ],
+      "id": "mvum_roads-{3C46AE2E-9922-4103-9DB9-1B6DD4D91F74}",
+      "agency": "USFS",
+      "name": "CAHUILLA ROAD",
+      "nearestMetres": 2.211374581819374,
+      "nearestId": "osm-14-2727-6265-8",
+      "nearestName": "Alliklik Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{6436D36E-1CF3-446C-8D14-F8C4192DFE1D}",
+          "agency": "USFS",
+          "name": "ALLIKLIK ROAD"
+        },
+        {
+          "id": "mvum_roads-{8FDF0050-4278-44D8-AC17-BD7D0EAE12BE}",
+          "agency": "USFS",
+          "name": "SPRING CREEK ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6266
+      ],
+      "pointMetres": [
+        132.77003026008606,
+        156.47095845639706
+      ],
+      "id": "mvum_roads-{F3CC5594-C847-4629-8D43-EF428240E406}",
+      "agency": "USFS",
+      "name": "WIYOT ROAD",
+      "nearestMetres": 3.100153798711848,
+      "nearestId": "osm-14-2727-6266-6",
+      "nearestName": "Spring Creek Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8FDF0050-4278-44D8-AC17-BD7D0EAE12BE}",
+          "agency": "USFS",
+          "name": "SPRING CREEK ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2726,
+        6267
+      ],
+      "pointMetres": [
+        1817.4337146906182,
+        1327.7554803974926
+      ],
+      "id": "usfs-{AF6F85E3-2564-47B2-96FD-FB716616D0B6}",
+      "agency": "USFS",
+      "name": "CATHEDRAL TRAIL",
+      "nearestMetres": 1.6877419864758847,
+      "nearestId": "osm-14-2726-6267-1",
+      "nearestName": "Floating Island / Mount Tallac Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{28B3E79B-E68E-42A0-B844-0939E420A7DA}",
+          "agency": "USFS",
+          "name": "FLOATING ISLAND TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6267
+      ],
+      "pointMetres": [
+        575.8230114160106,
+        1899.2107791211456
+      ],
+      "id": "usfs-{FB2EB5E0-60F8-4CF0-B8C2-E26529A2C1D6}",
+      "agency": "USFS",
+      "name": "CATHEDRAL SPUR",
+      "nearestMetres": 2.095912482907511,
+      "nearestId": "osm-14-2727-6267-5",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "usfs-{AF6F85E3-2564-47B2-96FD-FB716616D0B6}",
+          "agency": "USFS",
+          "name": "CATHEDRAL TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        1387.6043659290299,
+        827.8258013315499
+      ],
+      "id": "usfs-{8E42C091-E814-4CF1-B474-2DF411781014}",
+      "agency": "USFS",
+      "name": "TALLAC BICYCLE LOOP, NRT",
+      "nearestMetres": 2.959335165866245,
+      "nearestId": "osm-14-2728-6265-20",
+      "nearestName": "POPE/BALDWIN NRT BIKE PATH",
+      "formerPartners": [
+        {
+          "id": "usfs-{84BEC26F-ACDA-464D-8B18-8528BC7A3C1B}",
+          "agency": "USFS",
+          "name": "POPE/BALDWIN NRT BIKE PATH"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        550.8013161681592,
+        1741.7981394529343
+      ],
+      "id": "mvum_roads-{292D6254-CB8E-44AB-986B-CD6EFFB53273}",
+      "agency": "USFS",
+      "name": "FALLEN LEAF CG SPUR H",
+      "nearestMetres": 3.2627771775498626,
+      "nearestId": "osm-14-2728-6265-17",
+      "nearestName": "FALLEN LEAF CG SPUR G",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{8E0A11CB-7B7E-4231-8117-909F578D7AAC}",
+          "agency": "USFS",
+          "name": "FALLEN LEAF CG SPUR G"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        676.6893584039062,
+        1587.8238023314625
+      ],
+      "id": "mvum_roads-{3027A1D5-F0C3-4C50-AAE6-3D590D23B38A}",
+      "agency": "USFS",
+      "name": "FALLEN LEAF CG SPUR F",
+      "nearestMetres": 1.7941770210192642,
+      "nearestId": "osm-14-2728-6265-18",
+      "nearestName": "FALLEN LEAF CG SPUR B",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{2DCC9426-838D-46F7-8019-320E8BF3882A}",
+          "agency": "USFS",
+          "name": "FALLEN LEAF CG SPUR B"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        1498.5638770852238,
+        964.5938826389611
+      ],
+      "id": "mvum_roads-{9AE15B54-5A94-4FA2-A64C-B4E9EC6DBF23}",
+      "agency": "USFS",
+      "name": "HEARTWOOD WEST",
+      "nearestMetres": 1.0259179030521222,
+      "nearestId": "osm-14-2728-6265-18",
+      "nearestName": "CAMP RICHARDSON TRAILER CAMP",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{C2B07180-F3CD-46AA-917B-41250E7C050E}",
+          "agency": "USFS",
+          "name": "CAMP RICHARDSON TRAILER CAMP"
+        },
+        {
+          "id": "mvum_roads-{C2B07180-F3CD-46AA-917B-41250E7C050E}",
+          "agency": "USFS",
+          "name": "CAMP RICHARDSON TRAILER CAMP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        1876.6263288641348,
+        1066.5171793010086
+      ],
+      "id": "mvum_roads-{C5A1B710-ABE9-4568-994D-9441D77C206A}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 1.9054295145574698,
+      "nearestId": "osm-14-2728-6265-14",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{703C30C6-C36C-490D-A9B8-A313028D1CC8}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        1394.999357542023,
+        983.3288992401212
+      ],
+      "id": "mvum_roads-{130A631A-2A69-4FD8-A6D4-CD938846CF7B}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 3.6312390267766523,
+      "nearestId": "osm-14-2728-6265-18",
+      "nearestName": "CAMP RICHARDSON TRAILER CAMP",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{C2B07180-F3CD-46AA-917B-41250E7C050E}",
+          "agency": "USFS",
+          "name": "CAMP RICHARDSON TRAILER CAMP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6265
+      ],
+      "pointMetres": [
+        1394.999357542023,
+        1042.8732290063053
+      ],
+      "id": "mvum_roads-{51445215-514B-4FC1-A853-6ACEDFFBB9C4}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 2.2365762490250143,
+      "nearestId": "osm-14-2728-6265-18",
+      "nearestName": "CAMP RICHARDSON TRAILER CAMP",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{C2B07180-F3CD-46AA-917B-41250E7C050E}",
+          "agency": "USFS",
+          "name": "CAMP RICHARDSON TRAILER CAMP"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6266
+      ],
+      "pointMetres": [
+        172.18664895184338,
+        285.39085253328085
+      ],
+      "id": "usfs-{592A7C18-A185-4307-8D42-9552945DFEDB}",
+      "agency": "USFS",
+      "name": "CAMP RICHARDSON CORRAL TRAILS",
+      "nearestMetres": 12.087766544783266,
+      "nearestId": "osm-14-2729-6266-39",
+      "nearestName": "Panther",
+      "formerPartners": [
+        {
+          "id": "usfs-{25FCAC31-D00D-4921-A65F-0CC6F88C888C}",
+          "agency": "USFS",
+          "name": "TAHOE MOUNTAIN CONNECTOR"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2731,
+        6266
+      ],
+      "pointMetres": [
+        1745.7062520654872,
+        1888.5421543177217
+      ],
+      "id": "usfs-{59238021-8BFA-4DA8-AB3B-2A9455208C65}",
+      "agency": "USFS",
+      "name": "HARTOONIAN TRAILS",
+      "nearestMetres": 3.3105721523726386,
+      "nearestId": "osm-14-2731-6266-48",
+      "nearestName": "HARTOONIAN TRAILS",
+      "formerPartners": [
+        {
+          "id": "usfs-{E61E7EC5-8745-4EB4-9153-F11D277FA340}",
+          "agency": "USFS",
+          "name": "HARTOONIAN TRAILS"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6266
+      ],
+      "pointMetres": [
+        1490.359491323121,
+        1188.8732321429998
+      ],
+      "id": "usfs-{43C1A689-4774-468C-BBBA-2D68830EF2BD}",
+      "agency": "USFS",
+      "name": "TAHOE RIM TRAIL",
+      "nearestMetres": 21.081873289065964,
+      "nearestId": "osm-14-2735-6266-2",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{71973AD5-4B65-4ACA-BEFD-2A6F5A7FE8F0}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6269
+      ],
+      "pointMetres": [
+        1598.8489179443568,
+        1849.1834216620773
+      ],
+      "id": "usfs-{DFB83EA6-9D07-45DF-8248-6CF6650D0469}",
+      "agency": "USFS",
+      "name": "TWIN LAKES",
+      "nearestMetres": 21.49560411331201,
+      "nearestId": "osm-14-2720-6269-2",
+      "nearestName": "Twin Lakes Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{1BCB1344-28CB-4B0D-B53A-4DCF32CE075A}",
+          "agency": "USFS",
+          "name": "TWIN LAKES"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2720,
+        6270
+      ],
+      "pointMetres": [
+        1036.2858516909182,
+        169.07217733934522
+      ],
+      "id": "usfs-{2CC691AF-42DF-41F3-861A-2D6166A4CC17}",
+      "agency": "USFS",
+      "name": "TWIN LAKES TIE",
+      "nearestMetres": 3.1235065080725475,
+      "nearestId": "osm-14-2720-6270-7",
+      "nearestName": "Twin Lakes Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{DFB83EA6-9D07-45DF-8248-6CF6650D0469}",
+          "agency": "USFS",
+          "name": "TWIN LAKES"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6268
+      ],
+      "pointMetres": [
+        1001.2048410717398,
+        781.3765140045434
+      ],
+      "id": "usfs-{3642704D-FF94-454F-AB98-80A936394071}",
+      "agency": "USFS",
+      "name": "SUSIE LATERAL TRAIL",
+      "nearestMetres": 7.024161076675912,
+      "nearestId": "osm-14-2725-6268-1",
+      "nearestName": "Glen Alpine Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{714D3459-8E29-42C8-81D2-C4728A5649AF}",
+          "agency": "USFS",
+          "name": "GLEN ALPINE"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6268
+      ],
+      "pointMetres": [
+        630.642060207203,
+        336.32133013382554
+      ],
+      "id": "usfs-{714D3459-8E29-42C8-81D2-C4728A5649AF}",
+      "agency": "USFS",
+      "name": "GLEN ALPINE",
+      "nearestMetres": 5.296187211437478,
+      "nearestId": "osm-14-2725-6268-5",
+      "nearestName": "Pacific Crest Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{21FCE1D6-B061-4A98-AE71-AA8BD019B315}",
+          "agency": "USFS",
+          "name": "PACIFIC CREST TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2727,
+        6268
+      ],
+      "pointMetres": [
+        838.2143664648756,
+        1272.6470329724252
+      ],
+      "id": "mvum_roads-{E3D35D67-ADAA-479D-8336-23032276F11F}",
+      "agency": "USFS",
+      "name": "GLEN ALPINE TRAILHEAD",
+      "nearestMetres": 1.4777967426925898,
+      "nearestId": "osm-14-2727-6268-20",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "usfs-{A93A024B-C963-4EFD-B514-7EB40778D713}",
+          "agency": "USFS",
+          "name": "ANGORA LAKE TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2726,
+        6269
+      ],
+      "pointMetres": [
+        28.088395909406245,
+        26.189819930121303
+      ],
+      "id": "usfs-{3F38AD63-10CB-4FFE-BEE1-EA1BF556C4E0}",
+      "agency": "USFS",
+      "name": "GRASS LAKE TRAIL",
+      "nearestMetres": 6.375493632636289,
+      "nearestId": "osm-14-2726-6269-1",
+      "nearestName": "Glen Alpine Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{99F70FA3-914F-416E-9EFF-E0B4A05C157F}",
+          "agency": "USFS",
+          "name": "GLEN ALPINE"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2725,
+        6270
+      ],
+      "pointMetres": [
+        1831.972601460293,
+        415.35368931107223
+      ],
+      "id": "usfs-{BB2972AA-0C93-4739-A402-F3ACEC04629B}",
+      "agency": "USFS",
+      "name": "TAMARACK LAKE TRAIL",
+      "nearestMetres": 8.68557930575558,
+      "nearestId": "osm-14-2725-6270-7",
+      "nearestName": "Pacific Crest Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{21FCE1D6-B061-4A98-AE71-AA8BD019B315}",
+          "agency": "USFS",
+          "name": "PACIFIC CREST TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2726,
+        6270
+      ],
+      "pointMetres": [
+        1051.7839734656736,
+        228.44451281428337
+      ],
+      "id": "usfs-{7CCF2DFE-8E6D-4630-B2A3-D4F3919791C7}",
+      "agency": "USFS",
+      "name": "TRIANGLE LATERAL TRAIL",
+      "nearestMetres": 4.847589908261654,
+      "nearestId": "osm-14-2726-6270-1",
+      "nearestName": "Triangle Lake Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{13D8D9E2-AE89-4CE5-B28E-479EBDB5D9CB}",
+          "agency": "USFS",
+          "name": "TRIANGLE LAKE TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2726,
+        6270
+      ],
+      "pointMetres": [
+        1273.7449069106951,
+        80.3858007453382
+      ],
+      "id": "usfs-{F1E66468-3030-4D85-BAE7-CDE7CDC0F9B7}",
+      "agency": "USFS",
+      "name": "TAMARACK LAKE TRAIL",
+      "nearestMetres": 10.917660862007418,
+      "nearestId": "osm-14-2726-6270-2",
+      "nearestName": "Tamarack Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{BB2972AA-0C93-4739-A402-F3ACEC04629B}",
+          "agency": "USFS",
+          "name": "TAMARACK LAKE TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2726,
+        6270
+      ],
+      "pointMetres": [
+        616.7138413190842,
+        938.662555379793
+      ],
+      "id": "usfs-{C04B7D63-2502-48BB-BCD7-C2ADD0F83637}",
+      "agency": "USFS",
+      "name": "PCT RALSTON LAKE SPUR",
+      "nearestMetres": 19.715219239401335,
+      "nearestId": "osm-14-2726-6270-3",
+      "nearestName": "2000B",
+      "formerPartners": [
+        {
+          "id": "usfs-{21FCE1D6-B061-4A98-AE71-AA8BD019B315}",
+          "agency": "USFS",
+          "name": "PACIFIC CREST TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6268
+      ],
+      "pointMetres": [
+        1537.9350855182856,
+        289.95301675610244
+      ],
+      "id": "mvum_roads-{6CE97505-405F-4278-8C67-50479A3B3734}",
+      "agency": "USFS",
+      "name": "TWIN PEAKS ROCK CLIMB",
+      "nearestMetres": 1.687497227695845,
+      "nearestId": "osm-14-2729-6268-29",
+      "nearestName": "TWIN PEAKS ROAD",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{6273BE2B-0E38-4E61-85DE-A235E69C521B}",
+          "agency": "USFS",
+          "name": "TWIN PEAKS ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2730,
+        6268
+      ],
+      "pointMetres": [
+        126.90083305723965,
+        189.75645315274596
+      ],
+      "id": "mvum_roads-{C26D3B9D-57BA-405A-9A22-AD5FC44819EA}",
+      "agency": "USFS",
+      "name": "TWIN PEAKS LOWER LOOKOUT ROAD",
+      "nearestMetres": 2.7753605608095175,
+      "nearestId": "osm-14-2730-6268-19",
+      "nearestName": "TWIN PEAKS ROAD",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{6273BE2B-0E38-4E61-85DE-A235E69C521B}",
+          "agency": "USFS",
+          "name": "TWIN PEAKS ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2731,
+        6269
+      ],
+      "pointMetres": [
+        245.24772094748914,
+        615.8405338134617
+      ],
+      "id": "mvum_roads-{8D05D51B-ADF0-4713-99A3-7C3892636632}",
+      "agency": "USFS",
+      "name": "SAXON CREEK ROAD",
+      "nearestMetres": 1.9682293904599872,
+      "nearestId": "osm-14-2731-6269-4",
+      "nearestName": "Fountain Place Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{56E78C87-3587-4D52-AFDC-BFA76BE3AF85}",
+          "agency": "USFS",
+          "name": "FOUNTAIN PLACE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6270
+      ],
+      "pointMetres": [
+        1510.3218230437487,
+        1385.8099742662162
+      ],
+      "id": "usfs-{CD106B8F-36EE-43F0-92FD-0BDCCFAD7714}",
+      "agency": "USFS",
+      "name": "OSGOOD TRAIL CONNECTOR",
+      "nearestMetres": 3.7514117957982673,
+      "nearestId": "osm-14-2728-6270-13",
+      "nearestName": "GUNMOUNT TRAIL",
+      "formerPartners": [
+        {
+          "id": "usfs-{6DC59126-76ED-4506-BEF4-EA1E16130B83}",
+          "agency": "USFS",
+          "name": "GUNMOUNT TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2730,
+        6270
+      ],
+      "pointMetres": [
+        1791.9030046816915,
+        969.0193752963096
+      ],
+      "id": "usfs-{D68F0BA5-44F2-4B84-ACD4-7340DB869B4F}",
+      "agency": "USFS",
+      "name": "LOST LANE RD TO WATER TANK",
+      "nearestMetres": 1.1691386857449473,
+      "nearestId": "osm-14-2730-6270-32",
+      "nearestName": "Saxon Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{3B0EA75F-98EF-4A0A-9204-E7207BB9655A}",
+          "agency": "USFS",
+          "name": "SAXON TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2730,
+        6270
+      ],
+      "pointMetres": [
+        1688.707903095521,
+        792.0977018047124
+      ],
+      "id": "usfs-{CA927336-999E-419F-A0E4-72D7A4A6D751}",
+      "agency": "USFS",
+      "name": "LOWER SAXON CONNECTOR",
+      "nearestMetres": 4.279964762679921,
+      "nearestId": "osm-14-2730-6270-34",
+      "nearestName": "IROQUOIS TO WATER TANK",
+      "formerPartners": [
+        {
+          "id": "usfs-{8FD9D951-1152-40B5-A27F-36615CFF2C08}",
+          "agency": "USFS",
+          "name": "IROQUOIS TO WATER TANK"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2730,
+        6270
+      ],
+      "pointMetres": [
+        1090.1451030746102,
+        1397.6203171852976
+      ],
+      "id": "usfs-{20125E57-B514-466F-9E11-A49DB36FF001}",
+      "agency": "USFS",
+      "name": "COWBOY HAT TRAIL",
+      "nearestMetres": 5.005139447243225,
+      "nearestId": "osm-14-2730-6270-38",
+      "nearestName": "Cowboy Traverse",
+      "formerPartners": [
+        {
+          "id": "usfs-{45EB80CC-2943-4BB9-A178-F6DD20DBE917}",
+          "agency": "USFS",
+          "name": "COWBOY TRAVERSE"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2731,
+        6270
+      ],
+      "pointMetres": [
+        426.91034556459635,
+        56.86136669665575
+      ],
+      "id": "mvum_roads-{8D05D51B-ADF0-4713-99A3-7C3892636632}",
+      "agency": "USFS",
+      "name": "SAXON CREEK ROAD",
+      "nearestMetres": 5.53076558772595,
+      "nearestId": "osm-14-2731-6270-2",
+      "nearestName": "Saxon Creek Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{3B0EA75F-98EF-4A0A-9204-E7207BB9655A}",
+          "agency": "USFS",
+          "name": "SAXON TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6271
+      ],
+      "pointMetres": [
+        1776.2663392778486,
+        1339.4899829495698
+      ],
+      "id": "mvum_roads-{CDCFF84F-5482-4919-8ED5-A1A50F5C905E}",
+      "agency": "USFS",
+      "name": "ECHO LAKES ROAD B SPUR",
+      "nearestMetres": 1.2685230206727325,
+      "nearestId": "osm-14-2728-6271-6",
+      "nearestName": "Echo Lakes Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{7B1E2F26-1F4E-48E5-87AC-1F63436F00D9}",
+          "agency": "USFS",
+          "name": "ECHO LAKES ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2728,
+        6271
+      ],
+      "pointMetres": [
+        1758.3418175401166,
+        1306.2292727828026
+      ],
+      "id": "mvum_roads-{10C2F904-BB82-40C3-ACFA-49963649C5FC}",
+      "agency": "USFS",
+      "name": "ATWOOD",
+      "nearestMetres": 2.564544072357989,
+      "nearestId": "osm-14-2728-6271-23",
+      "nearestName": "Atwood Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{0C13977D-8642-48D7-AC36-B8749D5108D1}",
+          "agency": "USFS",
+          "name": "ATWOOD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6271
+      ],
+      "pointMetres": [
+        205.20791587326676,
+        1699.2265887279063
+      ],
+      "id": "mvum_roads-{7B1E2F26-1F4E-48E5-87AC-1F63436F00D9}",
+      "agency": "USFS",
+      "name": "ECHO LAKES ROAD",
+      "nearestMetres": 3.05707110491727,
+      "nearestId": "osm-14-2729-6271-16",
+      "nearestName": "Johnson Pass Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{E7AFF1ED-4949-4CB1-BE9F-73093FBB1990}",
+          "agency": "USFS",
+          "name": "ECHO SUMMIT"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2729,
+        6271
+      ],
+      "pointMetres": [
+        243.85793686192483,
+        1727.6103340797126
+      ],
+      "id": "mvum_roads-{B16642CB-60AE-4066-A66E-09FB4DC2439E}",
+      "agency": "USFS",
+      "name": "FIRS CAMPGROUND",
+      "nearestMetres": 1.909232412160305,
+      "nearestId": "osm-14-2729-6271-33",
+      "nearestName": "FIRS CAMPGROUND",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{E92D2BE5-BD21-444F-9C99-E1CBA9D7E17F}",
+          "agency": "USFS",
+          "name": "FIRS CAMPGROUND"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2732,
+        6268
+      ],
+      "pointMetres": [
+        181.92567551787943,
+        551.949898103252
+      ],
+      "id": "usfs-{86B7431F-CEEC-49FD-8E14-902336822496}",
+      "agency": "USFS",
+      "name": "TWISTED CEDAR TRAIL",
+      "nearestMetres": 4.159859549250977,
+      "nearestId": "osm-14-2732-6268-1",
+      "nearestName": "Powerline Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{DBDFAB6A-F21D-4962-A6F6-83035CC19E42}",
+          "agency": "USFS",
+          "name": "POWERLINE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2732,
+        6268
+      ],
+      "pointMetres": [
+        387.08139043394476,
+        429.41338723152876
+      ],
+      "id": "mvum_trails-{59DB3A97-6192-474D-930A-DAA84D0D2E65}",
+      "agency": "USFS",
+      "name": "",
+      "nearestMetres": 1.011247869080835,
+      "nearestId": "osm-14-2732-6268-1",
+      "nearestName": "Powerline Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{DBDFAB6A-F21D-4962-A6F6-83035CC19E42}",
+          "agency": "USFS",
+          "name": "POWERLINE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6268
+      ],
+      "pointMetres": [
+        1233.148866366595,
+        1512.5939611755311
+      ],
+      "id": "usfs-{9050B6C4-C68E-46E5-97C4-0FB67E6DADA5}",
+      "agency": "USFS",
+      "name": "STAR LAKE TRAIL",
+      "nearestMetres": 18.844615655260828,
+      "nearestId": "osm-14-2735-6268-2",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{A4CF945C-A97B-484B-B1AE-11BB60577A48}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        },
+        {
+          "id": "usfs-{4DF2A38C-672A-441B-80F7-40CFD63E713D}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2733,
+        6270
+      ],
+      "pointMetres": [
+        709.7139509050176,
+        24.875594839453697
+      ],
+      "id": "usfs-{6F283F8A-15E0-4373-9FE5-AF4CA34C5D17}",
+      "agency": "USFS",
+      "name": "ARMSTRONG PASS TRAIL",
+      "nearestMetres": 2.5117396980449596,
+      "nearestId": "osm-14-2733-6270-2",
+      "nearestName": "Fountain Place Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{CCFBAC5E-455F-499C-B3FB-5D94396FD4BF}",
+          "agency": "USFS",
+          "name": "FOUNTAIN PLACE ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2734,
+        6271
+      ],
+      "pointMetres": [
+        1283.447136554867,
+        836.5905082598329
+      ],
+      "id": "usfs-{8CBC33E1-6A5F-4875-B546-5A07D63E30EA}",
+      "agency": "USFS",
+      "name": "HORSE MEADOWS TRAIL",
+      "nearestMetres": 2.751399234502824,
+      "nearestId": "osm-14-2734-6271-4",
+      "nearestName": "Tahoe Rim Trail",
+      "formerPartners": [
+        {
+          "id": "usfs-{1BBFBC43-253B-4323-8D9F-A2163E7A72AA}",
+          "agency": "USFS",
+          "name": "TAHOE RIM TRAIL"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6271
+      ],
+      "pointMetres": [
+        336.85060711670667,
+        1100.8513134289533
+      ],
+      "id": "usfs-{8CBC33E1-6A5F-4875-B546-5A07D63E30EA}",
+      "agency": "USFS",
+      "name": "HORSE MEADOWS TRAIL",
+      "nearestMetres": 13.851770745793337,
+      "nearestId": "osm-14-2735-6271-1",
+      "nearestName": "Willow Creek Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{78F2E70B-291F-4100-9032-8396F259EB2F}",
+          "agency": "USFS",
+          "name": "HORSE MEADOWS ROAD"
+        }
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2735,
+        6271
+      ],
+      "pointMetres": [
+        1808.6125349048525,
+        443.49474332109094
+      ],
+      "id": "mvum_roads-{9F2BDE00-D11B-4CC6-BDFC-508FE13BE750}",
+      "agency": "USFS",
+      "name": "HORSE MEADOW SPUR B",
+      "nearestMetres": 5.04114008684251,
+      "nearestId": "osm-14-2735-6271-1",
+      "nearestName": "Willow Creek Road",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{78F2E70B-291F-4100-9032-8396F259EB2F}",
+          "agency": "USFS",
+          "name": "HORSE MEADOWS ROAD"
+        }
+      ]
+    }
+  ]
+}
