@@ -44,7 +44,7 @@ function MapApp(){
   else if(m.type==='mapNoteDraft'){const text=JSON.stringify(m.draft);noteWrites.current=noteWrites.current.catch(()=>{}).then(()=>FS.writeAsStringAsync(FS.documentDirectory+'map-note-draft.json',text)).catch(()=>{});}
   else if(m.type==='mapNotesLibrary'){const text=JSON.stringify(m.notes);noteWrites.current=noteWrites.current.catch(()=>{}).then(()=>FS.writeAsStringAsync(FS.documentDirectory+'map-notes.json',text)).catch(()=>send({type:'mapNotesStorageError'}));}
   else if(m.type==='noteDrawer'){setNoteOpen(m.open===true);if(m.open)setDownloadsOpen(false)}
-  else if(m.type==='infoDrawer')setInfoOpen(m.open===true);
+  else if(m.type==='infoDrawer'){setInfoOpen(m.open===true);if(m.open)setDownloadsOpen(false)}
   else if(m.type==='gridStatus')setGridVisible(m.visible);
   else if(m.type==='mapTap')setDownloadsOpen(false);
   else if(m.type==='cell')await store.toggle(m.id);
@@ -54,7 +54,7 @@ function MapApp(){
  return <View style={styles.root}>
   <StatusBar barStyle="dark-content"/>
   <WebView key={rendererKey} ref={web} source={{html}} contentInsetAdjustmentBehavior="never" originWhitelist={['*']} javaScriptEnabled onMessage={onMessage} style={styles.map} onShouldStartLoadWithRequest={r=>{if(r.url.startsWith('https://')){Linking.openURL(r.url);return false}return true}}/>
-  <View pointerEvents="box-none" style={[styles.overlay,{display:noteOpen?'none':'flex',top:insets.top,left:insets.left,right:insets.right}]}>
+  <View pointerEvents="box-none" style={[styles.overlay,{display:infoOpen||noteOpen?'none':'flex',top:insets.top,left:insets.left,right:insets.right}]}>
    <DownloadStatus open={downloadsOpen} setOpen={setDownloadsOpen} regions={store.regions} selecting={mode} gridVisible={gridVisible} onSelectingChange={setMode} onClear={clear} onToggleRegion={id=>store.toggle(id)}/>
    {loading&&<View style={styles.notice}><ActivityIndicator color="#1e6655"/><Text style={styles.noticeText}>Connecting to maps…</Text></View>}
    {!!location.error&&<Pressable accessibilityRole="button" accessibilityLabel="Dismiss location message" style={styles.notice} onPress={location.clearError}><Text style={styles.noticeText}>{location.error}{'\n'}Tap to dismiss.</Text></Pressable>}
