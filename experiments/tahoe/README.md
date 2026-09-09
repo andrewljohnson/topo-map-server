@@ -21,6 +21,12 @@ services/tiles/.venv/bin/python experiments/tahoe/serve.py
 With the existing web dev server on port 3000, open
 <http://localhost:3000/experiment>. Port 3012 serves the experiment's files only;
 it cannot generate tiles on demand. The viewer is constrained to the fixture.
+On a phone on the same Wi-Fi, use `http://<computer-LAN-IP>:3000/experiment`
+in Safari, not `localhost`. Start the web dev server with
+`pnpm dev --hostname 0.0.0.0 --port 3000` from `apps/web` (`--host` is not the
+vinext hostname option). The tile server must also be running on port 3012;
+the viewer uses the same hostname for it automatically.
+
 This route is a browser test; Expo and the public cloud map still use their
 existing datasets. No experiment tiles have been uploaded to R2.
 
