@@ -1,0 +1,53 @@
+[
+  {
+    "case": "boundary",
+    "bounds": [
+      -119.961276,
+      39.244481,
+      -119.879772,
+      39.380618
+    ],
+    "before": {
+      " | Mt. Rose Wilderness": 21293.9,
+      " | Humboldt-Toiyabe National Forest": 16237.0,
+      " | Lake Tahoe Basin Management Unit": 14190.2
+    },
+    "after": {
+      " | Mt. Rose Wilderness": 21293.9,
+      " | Humboldt-Toiyabe National Forest": 16237.0,
+      " | Lake Tahoe Basin Management Unit": 742.3
+    }
+  },
+  {
+    "case": "trt",
+    "bounds": [
+      -119.932433,
+      39.324598,
+      -119.931021,
+      39.326955
+    ],
+    "before": {
+      "OpenStreetMap | Rim to Rose": 357.0,
+      "USFS | TAHOE RIM TRAIL": 310.8
+    },
+    "after": {
+      "OpenStreetMap | Rim to Rose": 357.0
+    }
+  },
+  {
+    "case": "rose",
+    "bounds": [
+      -119.926469,
+      39.329809,
+      -119.920628,
+      39.337964
+    ],
+    "before": {
+      "OpenStreetMap | Rim to Rose": 1103.0,
+      "USFS | MT. ROSE PEAK": 1066.1
+    },
+    "after": {
+      "OpenStreetMap | Rim to Rose": 1103.0
+    }
+  }
+]

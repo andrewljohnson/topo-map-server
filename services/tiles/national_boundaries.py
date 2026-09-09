@@ -8,7 +8,7 @@ import mapbox_vector_tile
 from shapely import make_valid
 from shapely.geometry import shape, box, mapping
 from shapely.ops import transform, unary_union
-DATASET_ID='us-agency-boundaries-v2'
+DATASET_ID='us-agency-boundaries-v3'
 CACHE=Path(os.environ.get('TILE_DATA_DIR',Path(__file__).parent/'data'))/'national-boundaries'/'us-agency-boundaries-v1'
 SOURCES={
 'park':('https://services1.arcgis.com/fBc8EJBxQRMcHlei/arcgis/rest/services/NPS_Land_Resources_Division_Boundary_and_Tract_Data_Service/FeatureServer/2','UNIT_CODE','UNIT_NAME'),
@@ -83,6 +83,37 @@ def dedupe_outline(line,previous,park_lines,units_per_metre,kind):
   if not prior.is_empty:line=line.difference(prior.simplify(.5*units_per_metre).buffer(5*units_per_metre,quad_segs=2))
  return line
 
+def shared_forest_outline(line, polygon, neighbors, units_per_metre):
+ """One cartographic stroke for adjacent, overlapping forest administrations.
+
+ Retain all designation polygons. Distinct gaps, nested areas, crossings and
+ other designation types cannot qualify solely because their lines are close.
+ """
+ from shapely.geometry import Point
+ from shapely.ops import substring
+ for prior_line,prior_polygon in neighbors:
+  if not polygon.intersects(prior_polygon):continue
+  corridor=prior_line.buffer(250*units_per_metre,quad_segs=2)
+  for coherent in line_parts(line.intersection(corridor)):
+   if coherent.length<1000*units_per_metre:continue
+   chunks=max(1,int(coherent.length/(1500*units_per_metre)))
+   for chunk in range(chunks):
+    run=substring(coherent,coherent.length*chunk/chunks,coherent.length*(chunk+1)/chunks)
+    opposite=0;count=9
+    for i in range(count):
+     distance=run.length*(i+.5)/count
+     before=run.interpolate(max(0,distance-25*units_per_metre));after=run.interpolate(min(run.length,distance+25*units_per_metre))
+     dx,dy=after.x-before.x,after.y-before.y;length=math.hypot(dx,dy)
+     if not length:continue
+     center=run.interpolate(distance);offset=300*units_per_metre
+     left=Point(center.x-dy/length*offset,center.y+dx/length*offset)
+     right=Point(center.x+dy/length*offset,center.y-dx/length*offset)
+     if ((polygon.covers(left) and not polygon.covers(right) and prior_polygon.covers(right) and not prior_polygon.covers(left)) or
+         (polygon.covers(right) and not polygon.covers(left) and prior_polygon.covers(left) and not prior_polygon.covers(right))):opposite+=1
+    if opposite>=8:line=line.difference(run.buffer(.01*units_per_metre))
+ return line
+
+
 def area_geometry(raw):
  """Keep valid area components; collapsed repair lines have no land footprint."""
  geometry=make_valid(shape(raw))
@@ -109,7 +140,7 @@ def outline_features(feature,kind,z,x,y,outline=None,geometry=None):
 
 @lru_cache(maxsize=4)
 def prepared_cell(cx,cy):
- prepared=[];previous=[];parks=[]
+ prepared=[];previous=[];parks=[];forests=[]
  # Bound expensive buffer operations to the source cell plus a generous halo.
  # The halo exceeds the longest matching threshold, well outside visible tiles.
  cn=2**CELL_ZOOM;halo=.0005
@@ -125,13 +156,17 @@ def prepared_cell(cx,cy):
    if len(parts)>1:feature={**feature,'geometry':mapping(unary_union([area_geometry(p['geometry']) for p in parts]))}
    geometry=area_geometry(feature['geometry'])
    if geometry.is_empty:continue
-   line=transform(project,geometry.boundary).intersection(work_clip)
+   projected=transform(project,geometry)
+   line=projected.boundary.intersection(work_clip)
    latitude=geometry.centroid.y
    units_per_metre=1/(40075016.686*math.cos(math.radians(latitude)))
-   outline=dedupe_outline(line,previous,unary_union(parks),units_per_metre,kind)
+   # Match the coherent edge before narrow suppression can split long runs.
+   outline=shared_forest_outline(line,projected.intersection(work_clip),forests,units_per_metre) if kind=='forest' else line
+   outline=dedupe_outline(outline,previous,unary_union(parks),units_per_metre,kind)
    prepared.append((feature,kind,outline,geometry))
    previous.append(line)
    if kind=='park':parks.append(line)
+   if kind=='forest':forests.append((line,projected.intersection(work_clip)))
  return prepared
 
 def render_tile(z,x,y):

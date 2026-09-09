@@ -5,7 +5,7 @@ close but differently named paths do not match. All matched source records survi
 """
 import json, math, re, unicodedata
 from shapely.geometry import LineString
-from shapely.ops import unary_union, nearest_points
+from shapely.ops import unary_union, nearest_points, substring
 from shapely.strtree import STRtree
 
 
@@ -78,12 +78,12 @@ def compatible(a, b):
     return (ca in paths)==(cb in paths) or (a.get('kind')=='motorized_trail' and cb=='track') or (b.get('kind')=='motorized_trail' and ca=='track')
 
 
-def overlap_mask(incoming, reference, a, b, *, aligned_road=False):
+def overlap_mask(incoming, reference, a, b, *, aligned_road=False, confirmed_trail=False):
     if not compatible(a,b):return None
     na,nb=normalized_name(a.get('name')),normalized_name(b.get('name'))
     # A shared distinctive name supports moderate GPS alignment differences.
     same=bool(na and nb and na==nb) or bool(a.get('route_ref') and a.get('route_ref')==b.get('route_ref')) or shared_road_ref(a,b)
-    tolerance=15.0 if same else 8.0 if aligned_road else 2.5 if na and nb else 5.0
+    tolerance=50.0 if confirmed_trail else 15.0 if same else 8.0 if aligned_road else 2.5 if na and nb else 5.0
     if incoming.equals(reference):return incoming.buffer(.01)
     # A closed loop has no net start-to-end progress, so use whole-shape agreement.
     if any(g.is_ring for g in lines(incoming)) and .88 <= incoming.length/max(reference.length,.01) <= 1.12 and incoming.hausdorff_distance(reference)<=tolerance:
@@ -105,6 +105,24 @@ def overlap_mask(incoming, reference, a, b, *, aligned_road=False):
     return unary_union(parts) if parts else None
 
 
+def refine_trail_match(incoming, reference, a, b, seed):
+    """Refine this already established pair, never learn global name aliases.
+
+    A tight match away from a junction and substantial directional agreement
+    permit up to 50m of agency survey/generalization offset for the remainder.
+    The original source names and unmatched branches remain intact.
+    """
+    if a.get('kind') not in ('trail','long_distance_trail') or b.get('agency')!='OpenStreetMap':return seed
+    if not a.get('name') or not b.get('name') or reference.length<200:return seed
+    interiors=[substring(part,25,part.length-25) for part in lines(reference) if part.length>50]
+    if not interiors:return seed
+    interior=unary_union(interiors)
+    if incoming.intersection(seed).intersection(interior.buffer(2.5)).length<30:return seed
+    expanded=overlap_mask(incoming,reference,a,b,confirmed_trail=True)
+    if expanded is None or reference.intersection(expanded).length<max(150,reference.length*.6):return seed
+    return seed.union(expanded)
+
+
 def conflate(reference, additions):
     """Return one network, retaining unmatched tails/branches and source metadata.
 
@@ -121,13 +139,16 @@ def conflate(reference, additions):
         geometry=feature['geometry']
         candidates=([int(i) for i in tree.query(geometry.buffer(15))] if tree is not None else [])+list(range(fixed,len(result)))
         remaining=geometry
-        anchors=[]
+        anchors=[];anchor_limits=[]
         for index in sorted(candidates):
             existing=result[index]
             if index not in corridors:corridors[index]=existing['geometry'].buffer(15)
             if not remaining.intersects(corridors[index]):continue
             mask=overlap_mask(remaining,existing['geometry'],feature['properties'],existing['properties'])
             if mask is None:continue
+            refined=refine_trail_match(remaining,existing['geometry'],feature['properties'],existing['properties'],mask)
+            snap_limit=50.01 if refined is not mask else 15.01
+            mask=refined
             # Long, tightly aligned rural road overlap establishes a shared
             # segment even when agency/OSM names differ. Allow modest remaining
             # survey offsets only after that evidence; never widen service lanes
@@ -143,7 +164,7 @@ def conflate(reference, additions):
             if pavement:
                 existing['properties']['class']='unclassified'
                 existing['properties']['class_basis']='agency_explicit_pavement'
-            anchors.append(existing['geometry'])
+            anchors.append(existing['geometry']);anchor_limits.append(snap_limit)
             remaining=remaining.difference(mask)
             if remaining.is_empty:break
         parts=[]
@@ -156,8 +177,10 @@ def conflate(reference, additions):
                 if point is None:continue
                 original_end=any(point.distance(endpoint)<.01 for line in lines(geometry) for endpoint in getattr(line.boundary,'geoms',[]))
                 if not original_end and anchors:
-                    anchor=nearest_points(point,unary_union(anchors))[1]
-                    if point.distance(anchor)<=15.01:coords[end]=(anchor.x,anchor.y)
+                    candidates=[nearest_points(point,g)[1] for g in anchors]
+                    eligible=[p for p,limit in zip(candidates,anchor_limits) if point.distance(p)<=limit]
+                    if eligible:
+                        anchor=min(eligible,key=point.distance);coords[end]=(anchor.x,anchor.y)
             parts.append(LineString(coords))
         if parts:
             feature={**feature,'geometry':unary_union(parts)}

@@ -114,3 +114,36 @@ class TrailMatchingTest(unittest.TestCase):
   for ref in ['NF 73','NFSR 73','FR-73','FS73']:
    self.assertEqual(road_refs({'ref':ref}),{'73'})
   self.assertEqual(road_refs({'ref':'NF;FR'}),set())
+
+ def test_confirmed_named_agency_survey_refines_remaining_trace(self):
+  base=feature([(0,0),(600,0)],'Local name',agency='OpenStreetMap')
+  incoming=feature([(0,20),(80,20),(100,1),(180,1),(210,35),(600,35)],'Survey name','USFS','two',kind='trail')
+  result=conflate([base],[incoming]);self.assertEqual(len(result),1)
+  self.assertEqual(result[0]['geometry'].wkt,LineString([(0,0),(600,0)]).wkt)
+  self.assertEqual(result[0]['properties']['name'],'Local name')
+  self.assertEqual(result[0]['properties']['source_count'],2)
+ def test_parallel_trails_without_tight_seed_remain(self):
+  result=conflate([feature([(0,0),(600,0)],'First',agency='OpenStreetMap')],[feature([(0,20),(600,20)],'Second','USFS','two',kind='trail')])
+  self.assertEqual(len(result),2)
+ def test_trail_short_shared_junction_is_not_alias_evidence(self):
+  result=conflate([feature([(0,0),(600,0)],'First',agency='OpenStreetMap')],[feature([(0,1),(40,1),(60,20),(600,20)],'Second','USFS','two',kind='trail')])
+  self.assertEqual(len(result),2);self.assertGreater(result[1]['geometry'].length,500)
+ def test_refined_trail_extension_reconnects_without_moving_original_endpoint(self):
+  incoming=feature([(0,20),(80,20),(100,1),(180,1),(210,35),(750,35)],'Survey','USFS','two',kind='trail')
+  result=conflate([feature([(0,0),(600,0)],'Local',agency='OpenStreetMap')],[incoming])
+  self.assertEqual(len(result),2)
+  self.assertLess(result[1]['geometry'].distance(result[0]['geometry']),.001)
+  self.assertEqual(list(result[1]['geometry'].coords)[-1],(750,35))
+ def test_real_tahoe_reports_refine_only_the_established_pairs(self):
+  from pathlib import Path
+  from shapely.geometry import shape
+  from trail_matching import overlap_mask,refine_trail_match
+  fixtures=json.loads((Path(__file__).parent/'fixtures/tahoe-trail-alignment.json').read_text())
+  improved=0
+  for row in fixtures:
+   a,b=row['incoming'],row['reference'];g,h=shape(a['geometry']),shape(b['geometry'])
+   seed=overlap_mask(g,h,a['properties'],b['properties'])
+   if seed is None:continue
+   refined=refine_trail_match(g,h,a['properties'],b['properties'],seed)
+   if h.intersection(refined).length>h.intersection(seed).length+100:improved+=1
+  self.assertGreaterEqual(improved,3,'TRT and both Mt Rose child tiles need refinement')

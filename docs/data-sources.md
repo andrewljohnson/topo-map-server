@@ -322,3 +322,7 @@ protected. Explicit agency pavement fills missing OSM surface evidence only for
 fully matched track fragments; original classes and permission conflicts survive
 in source records. Rules, reproducible audits and Tahoe before/after proof are in
 [road matching validation](qa/road-merging/README.md).
+
+### Confirmed trail pairs and shared forest edges
+
+Official trails v6 extends only an already confirmed OSM/agency pair when a generalized agency survey diverges locally. Agency boundaries v3 suppresses a shared forest-administration stroke only after opposite-side polygon checks; original designation polygons remain intact. See [matching rules, safeguards, and Tahoe regression evidence](qa/systematic-conflation/README.md).

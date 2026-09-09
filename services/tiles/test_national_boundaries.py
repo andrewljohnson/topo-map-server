@@ -136,3 +136,29 @@ class PreparationConcurrencyTests(unittest.TestCase):
     self.assertEqual(calls.call_count,3)
     self.assertTrue(all(blob==results[0] for blob in results))
   finally:b.prepared_cell.cache_clear()
+
+class SharedForestEdgeTests(unittest.TestCase):
+ def test_overlapping_adjacent_forests_share_one_outline(self):
+  prior=box(-5000,-5000,0,5000);current=box(-100,-5000,5000,5000)
+  edge=LineString([(-100,-3000),(-100,3000)]);reference=LineString([(0,-4000),(0,4000)])
+  result=b.shared_forest_outline(edge,current,[(reference,prior)],1)
+  self.assertLess(result.length,.001)
+ def test_real_gap_is_not_suppressed(self):
+  prior=box(-5000,-5000,0,5000);current=box(100,-5000,5000,5000)
+  edge=LineString([(100,-3000),(100,3000)])
+  self.assertEqual(b.shared_forest_outline(edge,current,[(LineString([(0,-4000),(0,4000)]),prior)],1),edge)
+ def test_nested_designation_is_not_an_adjacent_administration(self):
+  prior=box(-5000,-5000,5000,5000);current=box(-4900,-3000,-3000,3000)
+  edge=LineString([(-4900,-3000),(-4900,3000)])
+  self.assertEqual(b.shared_forest_outline(edge,current,[(LineString([(-5000,-4000),(-5000,4000)]),prior)],1),edge)
+ def test_short_crossing_and_distant_branch_remain(self):
+  prior=box(-5000,-5000,0,5000);current=box(-100,-5000,5000,5000)
+  reference=LineString([(0,-4000),(0,4000)])
+  for edge in [LineString([(-1500,0),(1500,0)]),LineString([(500,-3000),(500,3000)]),LineString([(-100,0),(-100,500)])]:
+   self.assertEqual(b.shared_forest_outline(edge,current,[(reference,prior)],1),edge)
+ def test_normalized_coordinate_substrings_subtract_robustly(self):
+  from shapely.affinity import scale,translate
+  def normalized(g):return translate(scale(g,xfact=1e-8,yfact=1e-8,origin=(0,0)),xoff=.16685623,yoff=.38142197)
+  prior=normalized(box(-5000,-5000,0,5000));current=normalized(box(-100,-5000,5000,5000))
+  line=normalized(LineString([(-100,-3500),(-100,3500)]));ref=normalized(LineString([(0,-4000),(0,4000)]))
+  self.assertLess(b.shared_forest_outline(line,current,[(ref,prior)],1e-8).length,1e-10)
