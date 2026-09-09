@@ -94,8 +94,15 @@ def pack_parent(task):
  atomic(Path(output)/'base/12'/str(x)/f'{y}.pbf',compressed)
  return {'key':f'12/{x}/{y}','bytes':len(blob),'gzipBytes':len(compressed),'packSeconds':time.monotonic()-start,'sourceFeatureCounts':counts,'sha256':hashlib.sha256(blob).hexdigest()}
 
+def recreation_cell(parents):
+ """Prepare each shared source cell once, independently of other cells."""
+ module=importlib.import_module(SOURCES['recreation']);x,y=parents[0]
+ start=time.monotonic();prepared=module.prepare_cell(14,x//4,y//4)
+ seconds=time.monotonic()-start
+ return [(x,y,module.render_tile(12,x,y,detail_zoom=14,extent=EXTENT,prepared=prepared)) for x,y in parents],seconds
+
 def main():
- p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=4);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');p.add_argument('--executor',choices=('threads','processes'),default='processes');p.add_argument('--region',choices=tuple(REGIONS),default='tahoe');p.add_argument('--serial-pack',action='store_true');p.add_argument('--spatial-order',choices=('row','morton'),default='row');p.add_argument('--task-chunksize',type=int,choices=(1,4,16,64),default=1);p.add_argument('--dem-executor',choices=('threads','processes'),default='processes');p.add_argument('--dem-prefetch-workers',type=int,choices=range(0,33),default=16);p.add_argument('--dem-workers',type=int,choices=range(1,33));p.add_argument('--dem-compression',type=int,choices=range(1,10),default=3);p.add_argument('--parent-file',type=Path);p.add_argument('--output',type=Path);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,choices=range(1,33),default=4);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');p.add_argument('--executor',choices=('threads','processes'),default='processes');p.add_argument('--region',choices=tuple(REGIONS),default='tahoe');p.add_argument('--serial-pack',action='store_true');p.add_argument('--serial-recreation',action='store_true',help='Benchmark serial source-cell preparation');p.add_argument('--spatial-order',choices=('row','morton'),default='row');p.add_argument('--task-chunksize',type=int,choices=(1,4,16,64),default=1);p.add_argument('--dem-executor',choices=('threads','processes'),default='processes');p.add_argument('--dem-prefetch-workers',type=int,choices=range(0,33),default=16);p.add_argument('--dem-workers',type=int,choices=range(1,33));p.add_argument('--dem-compression',type=int,choices=range(1,10),default=3);p.add_argument('--parent-file',type=Path);p.add_argument('--output',type=Path);a=p.parse_args()
  out=OUT if a.region=='tahoe' else OUT.parent/(a.region+'-z12-v1')
  parents=sorted(REGIONS[a.region],key=morton_key) if a.spatial_order=='morton' else REGIONS[a.region]
  if a.parent_file:
@@ -107,21 +114,20 @@ def main():
   out.parent.mkdir(parents=True,exist_ok=True)
  if shutil.disk_usage(out.parent).free<50*10**9:raise RuntimeError('Experiment requires 60 GiB free disk reserve; release only expendable experiment outputs before continuing')
  if a.clean_derived and out.exists():shutil.rmtree(out)
- out.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(8,a.workers)),'executor':a.executor,'region':a.region,'taskChunksize':a.task_chunksize,'spatialOrder':a.spatial_order,'vectorParents':len(parents),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time(),'loadAverageStart':os.getloadavg(),'pipeline':{'directRecreation':not a.legacy_recreation,'rawDemMosaic':not a.legacy_dem,'reuseTrailBasemap':not a.legacy_trail_basemap,'parallelPacking':a.executor=='processes' and not a.serial_pack}}
+ out.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':a.workers,'executor':a.executor,'region':a.region,'taskChunksize':a.task_chunksize,'spatialOrder':a.spatial_order,'vectorParents':len(parents),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time(),'loadAverageStart':os.getloadavg(),'pipeline':{'directRecreation':not a.legacy_recreation,'rawDemMosaic':not a.legacy_dem,'reuseTrailBasemap':not a.legacy_trail_basemap,'parallelPacking':a.executor=='processes' and not a.serial_pack}}
  parent_children={xy:[] for xy in parents}
  executor=ThreadPoolExecutor if a.executor=='threads' else ProcessPoolExecutor
  options={} if a.executor=='threads' else {'mp_context':multiprocessing.get_context('spawn')}
- with executor(max_workers=max(1,min(8,a.workers)),**options) as pool:
+ with executor(max_workers=a.workers,**options) as pool:
   for source in SOURCES:
    if source=='recreation' and not a.legacy_recreation:
-    t=time.monotonic();module=importlib.import_module(SOURCES[source]);cells={};prepare_seconds=0
-    for x,y in parents:
-     key=(x//4,y//4)
-     if key not in cells:
-      prepared_start=time.monotonic();cells[key]=module.prepare_cell(14,*key);prepare_seconds+=time.monotonic()-prepared_start
-     blob=module.render_tile(12,x,y,detail_zoom=14,extent=EXTENT,prepared=cells[key])
-     parent_children[(x,y)].append((source,None,None,blob))
-    report['sources'][source]={'seconds':time.monotonic()-t,'preparedCells':len(cells),'prepareSeconds':prepare_seconds,'parentTiles':len(parents),'childTiles':0,'derivedCacheHits':0}
+    t=time.monotonic();cells={};prepare_seconds=0
+    for x,y in parents:cells.setdefault((x//4,y//4),[]).append((x,y))
+    prepared=map(recreation_cell,cells.values()) if a.serial_recreation else pool.map(recreation_cell,cells.values())
+    for encoded,seconds in prepared:
+     prepare_seconds+=seconds
+     for x,y,blob in encoded:parent_children[(x,y)].append((source,None,None,blob))
+    report['sources'][source]={'seconds':time.monotonic()-t,'preparedCells':len(cells),'prepareSeconds':prepare_seconds,'parentTiles':len(parents),'childTiles':0,'derivedCacheHits':0,'parallelCells':not a.serial_recreation}
     atomic(out/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True);continue
    t=time.monotonic();hits=0;prepare_seconds=0
    tasks=[(source,14,x*4+dx,y*4+dy) for x,y in parents for dy in range(4) for dx in range(4)]
@@ -137,7 +143,7 @@ def main():
   packed=pool.map(pack_parent,packing_tasks) if a.executor=='processes' and not a.serial_pack else map(pack_parent,packing_tasks)
   report['parents']=list(packed);report['packingWallSeconds']=time.monotonic()-packing_start
  parent_children.clear();del packing_tasks
- dem_workers=a.dem_workers or (16 if a.dem_executor=='threads' else min(8,a.workers))
+ dem_workers=a.dem_workers or min(16,a.workers)
  dem_executor=ThreadPoolExecutor if a.dem_executor=='threads' else ProcessPoolExecutor
  dem_options={} if a.dem_executor=='threads' else {'mp_context':multiprocessing.get_context('spawn')}
  dem_start=time.monotonic()

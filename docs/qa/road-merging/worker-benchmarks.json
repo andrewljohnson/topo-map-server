@@ -1,0 +1,1243 @@
+{
+  "conditions": "Retained source inputs; regenerated derived vectors; same host with training paused. Times exclude upload.",
+  "workerSweepBeforePipelineChanges": [
+    {
+      "workers": 8,
+      "totalSeconds": 52.42553167999722,
+      "sources": {
+        "osm": {
+          "seconds": 5.8610295238904655,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.48822070308960974,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 1.6837400197982788,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 6.335107485065237,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 8.548487026011571,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.3764099259860814,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 9.854033553041518,
+          "preparedCells": 8,
+          "prepareSeconds": 9.835969323525205,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0
+        }
+      },
+      "packingWallSeconds": 15.117343083955348,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.889598017092794,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 8,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 7.201451808214188e-07,
+        "generationSeconds": 2.8872326931450516,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 13.2398,
+        "systemCpuSeconds": 0.269708,
+        "peakRssKiB": 221196,
+        "childUserCpuSeconds": 257.664578,
+        "childSystemCpuSeconds": 3.672365,
+        "maxChildPeakRssKiB": 424176,
+        "loadAverageEnd": [
+          3.375,
+          1.68994140625,
+          4.849609375
+        ]
+      },
+      "taskChunksize": 1,
+      "vectorParents": 80
+    },
+    {
+      "workers": 16,
+      "totalSeconds": 47.88630394311622,
+      "sources": {
+        "osm": {
+          "seconds": 5.032602102961391,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.5471897299867123,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 1.265821130014956,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 7.647917976835743,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 8.57809325796552,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.160936855012551,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 9.831910039996728,
+          "preparedCells": 8,
+          "prepareSeconds": 9.813902813009918,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0
+        }
+      },
+      "packingWallSeconds": 11.150013207923621,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.160935302032158,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 7.119961082935333e-07,
+        "generationSeconds": 2.1585081031080335,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 13.432311,
+        "systemCpuSeconds": 0.273372,
+        "peakRssKiB": 220076,
+        "childUserCpuSeconds": 415.311252,
+        "childSystemCpuSeconds": 7.38962,
+        "maxChildPeakRssKiB": 417424,
+        "loadAverageEnd": [
+          6.263671875,
+          2.77294921875,
+          5.05517578125
+        ]
+      },
+      "taskChunksize": 1,
+      "vectorParents": 80
+    },
+    {
+      "workers": 24,
+      "totalSeconds": 48.76123280101456,
+      "sources": {
+        "osm": {
+          "seconds": 4.8435573449824005,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.5920645180158317,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 0.9940750009845942,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 9.98805787297897,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 8.08970668213442,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.1916943138930947,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 9.818677532952279,
+          "preparedCells": 8,
+          "prepareSeconds": 9.801080952398479,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0
+        }
+      },
+      "packingWallSeconds": 10.347974783973768,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.221044027013704,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 1.085922122001648e-06,
+        "generationSeconds": 2.2186448639258742,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 13.671607,
+        "systemCpuSeconds": 0.29056499999999996,
+        "peakRssKiB": 221124,
+        "childUserCpuSeconds": 594.422769,
+        "childSystemCpuSeconds": 13.557331,
+        "maxChildPeakRssKiB": 423916,
+        "loadAverageEnd": [
+          8.732421875,
+          3.97216796875,
+          5.35546875
+        ]
+      },
+      "taskChunksize": 1,
+      "vectorParents": 80
+    },
+    {
+      "workers": 32,
+      "totalSeconds": 53.04170875297859,
+      "sources": {
+        "osm": {
+          "seconds": 5.195461725117639,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.7673935580532998,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 0.9695951230823994,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 14.159243687987328,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 8.140588791109622,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.2097777188755572,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 9.842330118874088,
+          "preparedCells": 8,
+          "prepareSeconds": 9.823912531603128,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0
+        }
+      },
+      "packingWallSeconds": 9.70629134005867,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.192162320949137,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 5.559995770454407e-07,
+        "generationSeconds": 2.1898901348467916,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 13.766445,
+        "systemCpuSeconds": 0.33791299999999996,
+        "peakRssKiB": 219972,
+        "childUserCpuSeconds": 854.05051,
+        "childSystemCpuSeconds": 20.132023,
+        "maxChildPeakRssKiB": 418144,
+        "loadAverageEnd": [
+          36.60693359375,
+          11.07568359375,
+          7.6298828125
+        ]
+      },
+      "taskChunksize": 1,
+      "vectorParents": 80
+    },
+    {
+      "workers": 16,
+      "totalSeconds": 48.301829871023074,
+      "sources": {
+        "osm": {
+          "seconds": 5.069423279957846,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.5416243709623814,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 1.2559045210946351,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 7.469747261842713,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 8.403077782131732,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.1802333761006594,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 9.911622627871111,
+          "preparedCells": 8,
+          "prepareSeconds": 9.89374138484709,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0
+        }
+      },
+      "packingWallSeconds": 11.77966541191563,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.174785289913416,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 7.189810276031494e-07,
+        "generationSeconds": 2.172435357933864,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 13.475315,
+        "systemCpuSeconds": 0.28017,
+        "peakRssKiB": 220324,
+        "childUserCpuSeconds": 417.282258,
+        "childSystemCpuSeconds": 8.037514,
+        "maxChildPeakRssKiB": 422588,
+        "loadAverageEnd": [
+          21.22802734375,
+          10.8271484375,
+          7.72802734375
+        ]
+      },
+      "taskChunksize": 1,
+      "vectorParents": 80
+    },
+    {
+      "workers": 8,
+      "totalSeconds": 52.459586740937084,
+      "sources": {
+        "osm": {
+          "seconds": 5.990535140968859,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.47117427503690124,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 1.6808767791371793,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 6.222494243178517,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 8.730212894035503,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.3010497600771487,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 9.82042233995162,
+          "preparedCells": 8,
+          "prepareSeconds": 9.8026678415481,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0
+        }
+      },
+      "packingWallSeconds": 15.129352378891781,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.8351667399983853,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 8,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 7.459893822669983e-07,
+        "generationSeconds": 2.831834514858201,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 13.19724,
+        "systemCpuSeconds": 0.27219,
+        "peakRssKiB": 221380,
+        "childUserCpuSeconds": 257.368648,
+        "childSystemCpuSeconds": 4.159349,
+        "maxChildPeakRssKiB": 416864,
+        "loadAverageEnd": [
+          12.08154296875,
+          9.96533203125,
+          7.60009765625
+        ]
+      },
+      "taskChunksize": 1,
+      "vectorParents": 80
+    }
+  ],
+  "finalPilot": [
+    {
+      "workers": 8,
+      "totalSeconds": 46.92643640190363,
+      "sources": {
+        "osm": {
+          "seconds": 7.495548384031281,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.35961246909573674,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 2.3507055880036205,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 7.425073743099347,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 3.0628087201621383,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.7999794189818203,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 6.296978875994682,
+          "preparedCells": 8,
+          "prepareSeconds": 10.106890400638804,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 14.993632363155484,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.8619468309916556,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 8,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 6.970949470996857e-07,
+        "generationSeconds": 2.8594928379170597,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 2.808853,
+        "systemCpuSeconds": 0.077885,
+        "peakRssKiB": 117340,
+        "childUserCpuSeconds": 258.737029,
+        "childSystemCpuSeconds": 3.8696669999999997,
+        "maxChildPeakRssKiB": 416004,
+        "loadAverageEnd": [
+          2.64453125,
+          3.02978515625,
+          4.98388671875
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 80,
+      "identicalOutputFiles": 220
+    },
+    {
+      "workers": 16,
+      "totalSeconds": 42.09272878500633,
+      "sources": {
+        "osm": {
+          "seconds": 6.957571753067896,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.29882533801719546,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 1.7895380009431392,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 8.287999625084922,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 2.9618094752077013,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.6474402730818838,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 6.395468540024012,
+          "preparedCells": 8,
+          "prepareSeconds": 10.292478427290916,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 11.086183844134212,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.1893110868986696,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 6.558839231729507e-07,
+        "generationSeconds": 2.1862906760070473,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 2.841335,
+        "systemCpuSeconds": 0.06616999999999999,
+        "peakRssKiB": 117332,
+        "childUserCpuSeconds": 379.032579,
+        "childSystemCpuSeconds": 7.145678,
+        "maxChildPeakRssKiB": 405476,
+        "loadAverageEnd": [
+          21.57373046875,
+          7.22412109375,
+          6.27099609375
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 80,
+      "identicalOutputFiles": 220
+    },
+    {
+      "workers": 16,
+      "totalSeconds": 43.06393768498674,
+      "sources": {
+        "osm": {
+          "seconds": 8.103846966987476,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.28342585801146924,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 1.759097170084715,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 8.54891033587046,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 2.94466654304415,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.614465391030535,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 6.3246324229985476,
+          "preparedCells": 8,
+          "prepareSeconds": 10.223467136034742,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 10.816308841109276,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.182148942956701,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 8.149072527885437e-07,
+        "generationSeconds": 2.1791256279684603,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 2.8333209999999998,
+        "systemCpuSeconds": 0.06752999999999999,
+        "peakRssKiB": 117120,
+        "childUserCpuSeconds": 384.439908,
+        "childSystemCpuSeconds": 7.469173,
+        "maxChildPeakRssKiB": 409140,
+        "loadAverageEnd": [
+          14.81689453125,
+          7.4033203125,
+          6.37548828125
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 80,
+      "identicalOutputFiles": 220
+    },
+    {
+      "workers": 8,
+      "totalSeconds": 47.62339606694877,
+      "sources": {
+        "osm": {
+          "seconds": 7.581611474975944,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 0.4323893638793379,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 2.3558345320634544,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 7.398302992805839,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 1280
+        },
+        "amenities": {
+          "seconds": 3.19107820908539,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.9285392130259424,
+          "childTiles": 1280,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 6.435697509208694,
+          "preparedCells": 8,
+          "prepareSeconds": 10.362554892897606,
+          "parentTiles": 80,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 15.164730821968988,
+      "dem": {
+        "tiles": 140,
+        "bytes": 177157615,
+        "seconds": 2.8593752440065145,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 8,
+        "requiredNativeChunks": 119,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 6.379559636116028e-07,
+        "generationSeconds": 2.856686923885718,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 2.783354,
+        "systemCpuSeconds": 0.070301,
+        "peakRssKiB": 116736,
+        "childUserCpuSeconds": 260.492529,
+        "childSystemCpuSeconds": 4.145351,
+        "maxChildPeakRssKiB": 421524,
+        "loadAverageEnd": [
+          9.681640625,
+          7.10693359375,
+          6.3251953125
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 80,
+      "identicalOutputFiles": 220
+    }
+  ],
+  "finalSierra": [
+    {
+      "workers": 8,
+      "totalSeconds": 61.83526970096864,
+      "sources": {
+        "osm": {
+          "seconds": 5.190157084027305,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 3.5319162199739367,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 7.8823221060447395,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 11.019721542019397,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.2728164959698915,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.3242594650946558,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.6261058580130339,
+          "preparedCells": 25,
+          "prepareSeconds": 4.627907164860517,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 19.172158723929897,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 10.440373840974644,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 8,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 7.560010999441147e-07,
+        "generationSeconds": 10.432259002001956,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.117687,
+        "systemCpuSeconds": 0.114657,
+        "peakRssKiB": 173052,
+        "childUserCpuSeconds": 462.618971,
+        "childSystemCpuSeconds": 7.351966,
+        "maxChildPeakRssKiB": 446564,
+        "loadAverageEnd": [
+          8.41650390625,
+          7.2392578125,
+          6.42578125
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 400,
+      "identicalOutputFiles": 884
+    },
+    {
+      "workers": 16,
+      "totalSeconds": 49.46639358997345,
+      "sources": {
+        "osm": {
+          "seconds": 4.307029128074646,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 3.8112581628374755,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 5.580463635036722,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 10.579299279954284,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.1924734110943973,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.1062108911573887,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.5352165498770773,
+          "preparedCells": 25,
+          "prepareSeconds": 5.969099319539964,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 13.370048634009436,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 7.3664459029678255,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 8.880160748958588e-07,
+        "generationSeconds": 7.358868461102247,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.105038,
+        "systemCpuSeconds": 0.141864,
+        "peakRssKiB": 172180,
+        "childUserCpuSeconds": 700.054353,
+        "childSystemCpuSeconds": 12.320669,
+        "maxChildPeakRssKiB": 440200,
+        "loadAverageEnd": [
+          11.78955078125,
+          8.29443359375,
+          6.82666015625
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 400,
+      "identicalOutputFiles": 884
+    },
+    {
+      "workers": 24,
+      "totalSeconds": 49.259133578976616,
+      "sources": {
+        "osm": {
+          "seconds": 5.093024605885148,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 3.8418309858534485,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 5.244374735979363,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 12.1337461899966,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.1744764090981334,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 0.9461326859891415,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.6770473339129239,
+          "preparedCells": 25,
+          "prepareSeconds": 6.745174068026245,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 10.846274340059608,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 7.507073811022565,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 1.1320225894451141e-06,
+        "generationSeconds": 7.499468306079507,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.147995,
+        "systemCpuSeconds": 0.132243,
+        "peakRssKiB": 172408,
+        "childUserCpuSeconds": 897.972688,
+        "childSystemCpuSeconds": 21.837956,
+        "maxChildPeakRssKiB": 422544,
+        "loadAverageEnd": [
+          14.6728515625,
+          9.498046875,
+          7.3388671875
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 400,
+      "identicalOutputFiles": 884
+    },
+    {
+      "workers": 32,
+      "totalSeconds": 53.26314504304901,
+      "sources": {
+        "osm": {
+          "seconds": 5.145015351008624,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "boundaries": {
+          "seconds": 3.7901365300640464,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "landcover": {
+          "seconds": 5.436596682993695,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "trails": {
+          "seconds": 16.81073659704998,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 6400
+        },
+        "amenities": {
+          "seconds": 2.256960980128497,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "waterways": {
+          "seconds": 1.110666829859838,
+          "childTiles": 6400,
+          "derivedCacheHits": 0,
+          "prepareSeconds": 0,
+          "reusedBasemapTiles": 0
+        },
+        "recreation": {
+          "seconds": 0.5702938758768141,
+          "preparedCells": 25,
+          "prepareSeconds": 6.550939297303557,
+          "parentTiles": 400,
+          "childTiles": 0,
+          "derivedCacheHits": 0,
+          "parallelCells": true
+        }
+      },
+      "packingWallSeconds": 9.742620956152678,
+      "dem": {
+        "tiles": 484,
+        "bytes": 839018201,
+        "seconds": 7.414791843155399,
+        "tileSize": 1024,
+        "compressionLevel": 3,
+        "executor": "processes",
+        "workers": 16,
+        "requiredNativeChunks": 374,
+        "missingNativeChunks": 0,
+        "prefetchWorkers": 16,
+        "prefetchSeconds": 9.280629456043243e-07,
+        "generationSeconds": 7.40737852989696,
+        "intermediateChildPngs": 0
+      },
+      "resources": {
+        "userCpuSeconds": 3.158622,
+        "systemCpuSeconds": 0.127518,
+        "peakRssKiB": 170952,
+        "childUserCpuSeconds": 1246.819375,
+        "childSystemCpuSeconds": 27.569614,
+        "maxChildPeakRssKiB": 422560,
+        "loadAverageEnd": [
+          20.24365234375,
+          12.0859375,
+          8.3583984375
+        ]
+      },
+      "taskChunksize": 64,
+      "vectorParents": 400,
+      "identicalOutputFiles": 884
+    }
+  ]
+}

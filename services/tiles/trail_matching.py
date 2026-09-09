@@ -17,6 +17,8 @@ def lines(geometry):
 
 def normalized_name(value):
     value = unicodedata.normalize('NFKD', str(value or '')).encode('ascii', 'ignore').decode().lower()
+    aliases={'mt':'mount','mtn':'mountain','blvd':'boulevard','sp':'spur','hwy':'highway'}
+    value = re.sub(r'\b(mt|mtn|blvd|sp|hwy)\b',lambda m:aliases[m[0]],value)
     value = re.sub(r'\b(trail|trl|road|rd)\b', '', value)
     return re.sub(r'[^a-z0-9]', '', value)
 
@@ -39,6 +41,32 @@ def merge_properties(target, incoming):
             target[key] = value
 
 
+def original_properties(props):
+    # Never use a reference copied from a previous agency match as independent
+    # evidence for another match.
+    if props.get('source_records'):
+        for record in records(props):
+            if record['id']==str(props.get('id','')) and record['agency']==props.get('agency','OpenStreetMap'):
+                return record['details']
+    return props
+
+
+def road_refs(props):
+    value=str(original_properties(props).get('ref','')).upper()
+    values={re.sub(r'^(?:NFSR|NF|FR|FS)\s*[- ]?\s*(?=\d)','',v.strip()) for v in value.split(';') if v.strip()}
+    return {v for v in values if re.search(r'\d',v)}
+
+
+def shared_road_ref(a,b):
+    if not any(p.get('kind')=='forest_road' for p in (a,b)):return False
+    return bool(road_refs(a)&road_refs(b))
+
+
+def paved_surface(value):
+    value=str(value or '').strip().upper()
+    return value in ('ASPHALT','PAVED','CONCRETE') or value.startswith(('AC -','BST -','PCC -'))
+
+
 def compatible(a, b):
     # A nearby bridge/tunnel is not the same at-grade path.
     for key in ('is_bridge','is_tunnel'):
@@ -50,12 +78,12 @@ def compatible(a, b):
     return (ca in paths)==(cb in paths) or (a.get('kind')=='motorized_trail' and cb=='track') or (b.get('kind')=='motorized_trail' and ca=='track')
 
 
-def overlap_mask(incoming, reference, a, b):
+def overlap_mask(incoming, reference, a, b, *, aligned_road=False):
     if not compatible(a,b):return None
     na,nb=normalized_name(a.get('name')),normalized_name(b.get('name'))
     # A shared distinctive name supports moderate GPS alignment differences.
-    same=bool(na and nb and na==nb) or bool(a.get('route_ref') and a.get('route_ref')==b.get('route_ref'))
-    tolerance=15.0 if same else 2.5 if na and nb else 5.0
+    same=bool(na and nb and na==nb) or bool(a.get('route_ref') and a.get('route_ref')==b.get('route_ref')) or shared_road_ref(a,b)
+    tolerance=15.0 if same else 8.0 if aligned_road else 2.5 if na and nb else 5.0
     if incoming.equals(reference):return incoming.buffer(.01)
     # A closed loop has no net start-to-end progress, so use whole-shape agreement.
     if any(g.is_ring for g in lines(incoming)) and .88 <= incoming.length/max(reference.length,.01) <= 1.12 and incoming.hausdorff_distance(reference)<=tolerance:
@@ -100,7 +128,21 @@ def conflate(reference, additions):
             if not remaining.intersects(corridors[index]):continue
             mask=overlap_mask(remaining,existing['geometry'],feature['properties'],existing['properties'])
             if mask is None:continue
-            merge_properties(existing['properties'],feature['properties'])
+            # Long, tightly aligned rural road overlap establishes a shared
+            # segment even when agency/OSM names differ. Allow modest remaining
+            # survey offsets only after that evidence; never widen service lanes
+            # or use proximity alone to merge parallel campground roads.
+            rural={'track','unclassified'}
+            if feature['properties'].get('kind')=='forest_road' and existing['properties'].get('class') in rural and remaining.intersection(mask).length>=100:
+                extended=overlap_mask(remaining,existing['geometry'],feature['properties'],existing['properties'],aligned_road=True)
+                if extended is not None:mask=mask.union(extended)
+            original=original_properties(existing['properties'])
+            incoming=feature['properties']
+            pavement=(original.get('class')=='track' and not original.get('surface') and incoming.get('kind')=='forest_road' and paved_surface(incoming.get('surface')) and existing['geometry'].difference(mask).length<=existing['geometry'].length*.05)
+            merge_properties(existing['properties'],incoming)
+            if pavement:
+                existing['properties']['class']='unclassified'
+                existing['properties']['class_basis']='agency_explicit_pavement'
             anchors.append(existing['geometry'])
             remaining=remaining.difference(mask)
             if remaining.is_empty:break

@@ -60,3 +60,57 @@ class TrailMatchingTest(unittest.TestCase):
  def test_shared_long_route_identity_matches_name_variants(self):
   result=conflate([feature([(0,0),(200,0)],'Pacific Crest National Scenic Trail',route_ref='PCT')],[feature([(0,8),(200,8)],'PACIFIC CREST (PCT)','USFS','two',route_ref='PCT')])
   self.assertEqual(len(result),1)
+
+ def test_forest_road_name_abbreviations(self):
+  for first,second in [('MT. WATSON BLVD','Mount Watson Boulevard'),('JACKASS SP','Jackass Spur')]:
+   result=conflate([feature([(0,0),(200,0)],first,**{'class':'track'})],[feature([(0,9),(200,9)],second,'USFS','two',kind='forest_road',**{'class':'track'})])
+   self.assertEqual(len(result),1)
+ def test_explicit_forest_ref_handles_different_names(self):
+  base=feature([(0,0),(200,0)],'Willow Creek Road',ref='FR 31051',**{'class':'track'})
+  agency=feature([(0,9),(200,9)],'Horse Meadows Road','USFS','two',ref='31051',kind='forest_road',**{'class':'track'})
+  self.assertEqual(len(conflate([base],[agency])),1)
+ def test_forest_ref_suffix_and_spur_are_not_discarded(self):
+  for ref in ['73A','73-1','41073']:
+   base=feature([(0,0),(200,0)],'Upper Road',ref='NF 73',**{'class':'track'})
+   agency=feature([(0,9),(200,9)],'Lower Road','USFS','two',ref=ref,kind='forest_road',**{'class':'track'})
+   self.assertEqual(len(conflate([base],[agency])),2)
+ def test_inherited_ref_is_not_independent_evidence(self):
+  from trail_matching import road_refs,merge_properties
+  base=feature([(0,0),(200,0)],'First Road',**{'class':'track'})['properties']
+  incoming=feature([(0,0),(200,0)],'Agency','USFS','two',ref='73',kind='forest_road')['properties']
+  merge_properties(base,incoming)
+  self.assertEqual(base['ref'],'73');self.assertEqual(road_refs(base),set())
+ def test_explicit_pavement_promotes_fully_matched_track_and_keeps_provenance(self):
+  base=feature([(0,0),(200,0)],'Mount Watson Boulevard',ref='NF 73',**{'class':'track'})
+  agency=feature([(0,9),(200,9)],'MT. WATSON BOULEVARD','USFS','two',surface='BST - BITUMINOUS SURFACE TREATMENT',kind='forest_road',ref='73',**{'class':'unclassified'})
+  result=conflate([base],[agency]);p=result[0]['properties']
+  self.assertEqual(len(result),1);self.assertEqual(p['class'],'unclassified')
+  self.assertEqual(json.loads(p['source_records'])[0]['details']['class'],'track')
+ def test_partial_or_conflicting_pavement_does_not_promote_whole_road(self):
+  for surface,length in [('',100),('gravel',200)]:
+   base=feature([(0,0),(200,0)],'Example',surface=surface,**{'class':'track'})
+   agency=feature([(0,0),(length,0)],'Example','USFS','two',surface='AC - ASPHALT',kind='forest_road',**{'class':'unclassified'})
+   result=conflate([base],[agency]);self.assertEqual(result[0]['properties']['class'],'track')
+
+ def test_long_aligned_rural_road_seed_handles_name_disagreement(self):
+  base=feature([(0,0),(500,0)],'National Forest Development Road 039',**{'class':'track'})
+  agency=feature([(0,1),(200,1),(250,6),(500,6)],'Kings Canyon Road','USFS','two',kind='forest_road',**{'class':'track'})
+  self.assertEqual(len(conflate([base],[agency])),1)
+ def test_parallel_roads_without_shared_alignment_remain(self):
+  base=feature([(0,0),(500,0)],'Upper',**{'class':'track'})
+  agency=feature([(0,6),(500,6)],'Lower','USFS','two',kind='forest_road',**{'class':'track'})
+  self.assertEqual(len(conflate([base],[agency])),2)
+ def test_short_shared_junction_does_not_swallow_different_road(self):
+  base=feature([(0,0),(500,0)],'Upper',**{'class':'track'})
+  agency=feature([(0,1),(40,1),(50,6),(500,6)],'Lower','USFS','two',kind='forest_road',**{'class':'track'})
+  result=conflate([base],[agency]);self.assertEqual(len(result),2);self.assertGreater(result[1]['geometry'].length,400)
+ def test_service_lane_does_not_get_rural_alignment_expansion(self):
+  base=feature([(0,0),(500,0)],'Campground Loop A',**{'class':'service'})
+  agency=feature([(0,1),(200,1),(250,6),(500,6)],'Campground Loop B','USFS','two',kind='forest_road',**{'class':'track'})
+  result=conflate([base],[agency]);self.assertEqual(len(result),2);self.assertGreater(result[1]['geometry'].length,200)
+
+ def test_forest_reference_prefixes_and_missing_numbers(self):
+  from trail_matching import road_refs
+  for ref in ['NF 73','NFSR 73','FR-73','FS73']:
+   self.assertEqual(road_refs({'ref':ref}),{'73'})
+  self.assertEqual(road_refs({'ref':'NF;FR'}),set())

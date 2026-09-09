@@ -1,0 +1,934 @@
+{
+  "scope": "40 Tahoe z12 parents / 640 z14 source children",
+  "threshold": "Review pairs with >=30 metres and >=70% of the shorter fragment within 15 metres; this is not proof of duplication.",
+  "before": {
+    "roadFragments": 6555,
+    "candidatePairs": 239
+  },
+  "after": {
+    "roadFragments": 6499,
+    "candidatePairs": 151
+  },
+  "changedPairs": [
+    {
+      "names": [
+        "MT. WATSON BOULEVARD",
+        "Mount Watson Boulevard"
+      ],
+      "before": {
+        "fragments": 20,
+        "overlapMetres": 9957.799999999996
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 31.5
+      }
+    },
+    {
+      "names": [
+        "KINGS CANYON ROAD",
+        "National Forest Development Road 039"
+      ],
+      "before": {
+        "fragments": 6,
+        "overlapMetres": 7379.6
+      },
+      "after": {
+        "fragments": 3,
+        "overlapMetres": 331.6
+      }
+    },
+    {
+      "names": [
+        "HORSE MEADOWS ROAD",
+        "Willow Creek Road"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 3211.7999999999997
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "NIEHAUS SP",
+        "West Miller Creek"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 1711.8
+      },
+      "after": {
+        "fragments": 2,
+        "overlapMetres": 181.3
+      }
+    },
+    {
+      "names": [
+        "LOGAN HOUSE LOOP",
+        "LOGAN HOUSE LOOP"
+      ],
+      "before": {
+        "fragments": 6,
+        "overlapMetres": 1376.9
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 96.9
+      }
+    },
+    {
+      "names": [
+        "INCLINE ROAD",
+        "Old Mount Rose Highway"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 1300.3999999999999
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 92.9
+      }
+    },
+    {
+      "names": [
+        "VOLTAIRE -",
+        "Voltaire Canyon Road"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 1176.6
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 428.6
+      }
+    },
+    {
+      "names": [
+        "JACKASS",
+        "JACKASS POINT"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 1142.8
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 301.2
+      }
+    },
+    {
+      "names": [
+        "GAS LINE ROAD",
+        "RIDGE VIEW ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 1091.5
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "ELLIS LAKE ROAD",
+        "Buck Lake"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 1068.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "RICHARDSON LAKE 4WD",
+        "Richardson Lake Road"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 1043.0
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 145.0
+      }
+    },
+    {
+      "names": [
+        "GENOA PEAK ALTERNATE ACCESS",
+        "Genoa Peak Road"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 987.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "MT. WATSON ACCESS",
+        "Mount Watson Access Road"
+      ],
+      "before": {
+        "fragments": 5,
+        "overlapMetres": 909.3
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "JACKASS SP",
+        "Jackass Spur"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 837.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "TWIN PEAKS ROAD",
+        "TWIN PEAKS ROCK CLIMB"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 704.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "SAWTOOTH SP",
+        "SAWTOOTH SP"
+      ],
+      "before": {
+        "fragments": 5,
+        "overlapMetres": 682.5
+      },
+      "after": {
+        "fragments": 3,
+        "overlapMetres": 207.29999999999998
+      }
+    },
+    {
+      "names": [
+        "GENOA PEAK ROAD C SPUR",
+        "Genoa Peak"
+      ],
+      "before": {
+        "fragments": 3,
+        "overlapMetres": 625.5
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 33.2
+      }
+    },
+    {
+      "names": [
+        "TWIN PEAKS ROAD",
+        "TWIN PEAKS LOWER LOOKOUT ROAD"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 510.79999999999995
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 88.5
+      }
+    },
+    {
+      "names": [
+        "WHITE HILL",
+        "LOGAN HOUSE LOOP"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 510.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "WELLS",
+        "Western States Trail"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 476.7
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 32.0
+      }
+    },
+    {
+      "names": [
+        "JV WMA ROAD",
+        "WILDLIFE ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 470.5
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "HELLHOLE",
+        "HELLHOLE"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 450.0
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "JV WMA ROAD",
+        "MANAGEMENT ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 433.1
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "NIEHAUS SP",
+        "North Miller Creek East"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 402.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "MARTIS SLOPE SEC. 6 RD.",
+        "16N54"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 392.7
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "KINGSBURY SEWERLINE",
+        "KINGSBURY SEWERLINE"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 356.70000000000005
+      },
+      "after": {
+        "fragments": 2,
+        "overlapMetres": 122.0
+      }
+    },
+    {
+      "names": [
+        "GLEN ALPINE TRAILHEAD",
+        "Glen Alpine Road"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 280.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "GAS LINE ROAD",
+        "GAS LINE ROAD"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 271.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "HIGH MEADOWS ROAD",
+        "High Meadows Road (12N21)"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 253.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "NIEHAUS",
+        "Bear Lake"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 226.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "MT. TALLAC TRAILHEAD",
+        "Mount Tallac Road"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 217.0
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "JACKASS POINT SP",
+        "JACKASS POINT"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 215.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "WRIGHTS LAKE SPUR",
+        "US Forest Service Road 4"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 215.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "MARTIS TIE",
+        "MARTIS TIE"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 204.8
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "SAXON TIE ROAD",
+        "POWERLINE ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 175.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "SAWTOOTH SP",
+        "Sawtooth Spur"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 161.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "VOLTAIRE CANYON ROAD",
+        "MOTORIZ B"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 161.3
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "ECHO SUMMIT",
+        "Johnson Pass Road"
+      ],
+      "before": {
+        "fragments": 2,
+        "overlapMetres": 159.0
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "NIEHAUS SP",
+        "Niehaus Spur"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 146.8
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "BALD MTN",
+        "BALD MTN"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 136.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "BALDWIN BEACH PARKING SPUR B",
+        "BALDWIN BEACH PARKING SPUR A"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 135.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "POLE CREEK EAST",
+        "POLE CREEK EAST"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 125.9
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 77.3
+      }
+    },
+    {
+      "names": [
+        "MARTIS SLOPE",
+        "MARTIS SLOPE"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 123.1
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "POLE CREEK SPUR",
+        "POLE CREEK SPUR 04-01"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 116.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "TWIN PEAKS LOWER LOOKOUT ROAD",
+        "TWIN PEAKS LOWER LOOKOUT ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 105.9
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 72.1
+      }
+    },
+    {
+      "names": [
+        "PROSSER LAKE VIEW",
+        "PROSSER LAKE VIEW"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 90.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "NIEHAUS SP",
+        "NIEHAUS SP"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 89.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "BELL",
+        "BELL"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 73.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "BARKER MDW CK",
+        "Barker Meadow"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 58.6
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "BLACKWOOD CREEK OHV STAGING AR",
+        "BLACKWOOD CREEK OHV STAGING AR"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 58.5
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "JAMESON BEACH ROAD",
+        "Jamison Beach Road"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 58.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "73",
+        "Mount Watson Boulevard"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 52.2
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "RAINBOW TRACT A SPUR",
+        ""
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 51.1
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "MANAGEMENT ROAD",
+        "MANAGEMENT ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 50.9
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "JACKASS POINT",
+        "SAWTOOTH SP"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 42.1
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    },
+    {
+      "names": [
+        "SUMMIT (LTBMU NFSR)",
+        "Mount Watson Boulevard"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 40.6
+      },
+      "after": {
+        "fragments": 1,
+        "overlapMetres": 191.8
+      }
+    },
+    {
+      "names": [
+        "RIDGE VIEW ROAD",
+        "RIDGE VIEW ROAD"
+      ],
+      "before": {
+        "fragments": 1,
+        "overlapMetres": 31.4
+      },
+      "after": {
+        "fragments": 0,
+        "overlapMetres": 0
+      }
+    }
+  ],
+  "remainingExamples": [
+    {
+      "names": [
+        "WILLIAM KENT CAMPGROUND",
+        "WM KENT SPUR A"
+      ],
+      "tile": [
+        2723,
+        6253
+      ]
+    },
+    {
+      "names": [
+        "TALLAC HISTORIC SITE",
+        "Heritage Way"
+      ],
+      "tile": [
+        2728,
+        6265
+      ]
+    },
+    {
+      "names": [
+        "CAMP RICHARDSON TRAILER CAMP",
+        "POPE ESTATE SERVICE ROAD"
+      ],
+      "tile": [
+        2728,
+        6265
+      ]
+    },
+    {
+      "names": [
+        "CAMP RICHARDSON CEDAR LOOP",
+        "CAMP RICH WILLOW LOOP"
+      ],
+      "tile": [
+        2729,
+        6265
+      ]
+    },
+    {
+      "names": [
+        "VOLTAIRE -",
+        "Voltaire Canyon Road"
+      ],
+      "tile": [
+        2738,
+        6254
+      ]
+    },
+    {
+      "names": [
+        "WRIGHTS LAKE CAMPGROUND",
+        "WRIGHTS LAKE CAMPGROUND"
+      ],
+      "tile": [
+        2720,
+        6270
+      ]
+    },
+    {
+      "names": [
+        "TAYLOR CREEK PARKING LOT",
+        "POPE ESTATE SERVICE ROAD"
+      ],
+      "tile": [
+        2728,
+        6265
+      ]
+    },
+    {
+      "names": [
+        "FALLEN LEAF CG SPUR G",
+        "FALLEN LEAF CG SPUR C"
+      ],
+      "tile": [
+        2728,
+        6265
+      ]
+    },
+    {
+      "names": [
+        "ZEPHYR COVE CAMPGROUND",
+        "ZEPHYR COVE RESORT PARK LOOP"
+      ],
+      "tile": [
+        2733,
+        6261
+      ]
+    },
+    {
+      "names": [
+        "JACKASS",
+        "JACKASS POINT"
+      ],
+      "tile": [
+        2720,
+        6243
+      ]
+    },
+    {
+      "names": [
+        "FALLEN LEAF CG SPUR F",
+        "FALLEN LEAF CG SPUR C"
+      ],
+      "tile": [
+        2728,
+        6265
+      ]
+    },
+    {
+      "names": [
+        "CAMP RICH ASPEN LOOP",
+        "FALLEN LEAF CG SPUR C"
+      ],
+      "tile": [
+        2728,
+        6265
+      ]
+    }
+  ]
+}

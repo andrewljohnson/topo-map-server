@@ -1,0 +1,1881 @@
+{
+  "finePavementCorrections": [
+    {
+      "tile": [
+        2727,
+        6245
+      ],
+      "name": "Martis Peak Road",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2723,
+        6250
+      ],
+      "name": "Mount Watson Boulevard",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2723,
+        6249
+      ],
+      "name": "Mount Watson Boulevard",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2723,
+        6248
+      ],
+      "name": "Mount Watson Boulevard",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2729,
+        6245
+      ],
+      "name": "Martis Peak Road",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2729,
+        6244
+      ],
+      "name": "Martis Peak Road",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2722,
+        6250
+      ],
+      "name": "Mount Watson Boulevard",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2722,
+        6249
+      ],
+      "name": "Mount Watson Boulevard",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2722,
+        6248
+      ],
+      "name": "Mount Watson Boulevard",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2728,
+        6245
+      ],
+      "name": "Martis Peak Road",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2728,
+        6244
+      ],
+      "name": "Martis Peak Road",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    },
+    {
+      "tile": [
+        2720,
+        6244
+      ],
+      "name": "Rocky Spur",
+      "class": "unclassified",
+      "surface": "BST - BITUMINOUS SURFACE TREATMENT"
+    }
+  ],
+  "coarsePavedRoads": [
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "MT. WATSON BOULEVARD",
+      "class": "unclassified",
+      "fineClasses": [
+        "track",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "MARTIS PEAK ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "GRANITE FLAT CG, CS 1-15",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "GRANITE FLAT CG, CS 25-34, 66",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "GRANITE FLAT CG, CS 39-46, 55",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "0089-025-01",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "TKRD OFC. - PUBLIC PARKING",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "ROCKY SPUR",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "GRANITE FLAT CG",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "MARTIS PEAK",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "SAWTOOTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "POLE CREEK",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "PROSSER DAM BOAT RAMP",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "GRANITE FLAT CG, CS 69-75",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        780
+      ],
+      "name": "GRANITE FLAT CG, CS 57-65",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "STATELINE LOOKOUT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "BEAVER STREET EXTENSION",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "MARTIS PEAK ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "MT ROSE CAMPGROUND ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "TAHOE MEADOWS TRAILHEAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "MT ROSE SUMMIT PARKING LOT",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        780
+      ],
+      "name": "MT ROSE CAMPGROUND WALKIN",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "TRUCKEE RIVER ACCESS",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "MT. WATSON ACCESS",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "MT. WATSON ACCESS",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "MT. WATSON ACCESS",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "MT. WATSON BOULEVARD",
+      "class": "unclassified",
+      "fineClasses": [
+        "track",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "SAWMILL FLAT",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "WM KENT SPUR A",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "WM KENT SPUR C",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "WM KENT SPUR B",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "BARKER PASS ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "BARKER PASS ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "KASPIAN CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "SAWMILL FLAT",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "WILLIAM KENT CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "TWIN CRAGS",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "WATSON LAKE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "WM KENT SPUR D",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "SILVER CREEK CG (CS13-)",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "SILVER CREEK CG (CS1-8)",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "SILVER CREEK TRACT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "SILVER CREEK TRACT SPUR",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        781
+      ],
+      "name": "POLE CREEK",
+      "class": "unclassified",
+      "fineClasses": [
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        781
+      ],
+      "name": "SPOONER GUARD STATION",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        781
+      ],
+      "name": "SECRET HARBOR PARKING",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        781
+      ],
+      "name": "STATELINE LOOKOUT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "track"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        781
+      ],
+      "name": "CHIMNEY BEACH PARKING",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        781
+      ],
+      "name": "SPOONER ROADSIDE REST",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        342,
+        781
+      ],
+      "name": "CARSON DISTRICT OFFICE PARKING",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "BEACH PARKING",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS CG SOUTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY CG NORTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY CG NORTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "BARKER PASS ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS CG SOUTH",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS CG SOUTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS CG SOUTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY CG NORTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY CG NORTH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY BEACH ACCESS",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY RESORT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "MEEKS BAY RESORT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        782
+      ],
+      "name": "BARKER PASS",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "RUSTYS ROUNDABOUT",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "NEVADA BEACH CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "NEVADA BEACH CG SPUR C",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "NEVADA BEACH PICNIC SPUR A",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "NEVADA BEACH PICNIC SPUR B",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZC CABIN SPUR",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "NEVADA BEACH PICNIC SPUR C",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZEPHYR COVE RESORT PARK LOOP",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZEPHYR COVE RESORT PARKING LOT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "PARK LOT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZEPHYR COVE RESORT",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "SPOONER GUARD STATION",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZEPHYR COVE RESORT B SPUR",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZEPHYR COVE RESORT A SPUR",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ZEPHYR COVE CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR A",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR C",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR D",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR E",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR F",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR G",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR H",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "NEVADA BEACH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR J",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR K",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR L",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "CAMPGROUND SPUR I",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "BOAT PARKING",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        782
+      ],
+      "name": "ROUNDHILL PINES RESORT D SPUR",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "BALDWIN BEACH",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "SPRING CREEK ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "KAROK ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "ALLIKLIK ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "CATHEDRAL ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "NICOLENO ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "BALDWIN BEACH PARKING SPUR A",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "MT. TALLAC TRAILHEAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "BAYVIEW  CAMPGR A SPUR",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "CAMP SHELLY CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "BALDWIN BEACH PARKING SPUR B",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "ANGORA RIDGE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "CAMP CONCORD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "HUPA ROAD",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "YUROK ROAD",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WIYOT ROAD",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "INSPIRATION POINT VISTA",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "BAYVIEW CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "GLEN ALPINE TRAILHEAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "POMO ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "TAYLOR CREEK PARKING LOT",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "CATHEDRAL ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "GAUGE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "MATTOLE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WRIGHTS LAKE EAST CG",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WRIGHTS LAKE CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WRIGHTS LAKE",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WRIGHTS LOOP B",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WRIGHTS LOOP",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        340,
+        783
+      ],
+      "name": "WRIGHTS LOOP C",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "TALLAC HISTORIC SITE",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "POPE ESTATE SERVICE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential",
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR B",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR C",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR G",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CATHEDRAL ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "VISITOR PARKING SPUR A",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR A",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR H",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR F",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FALLEN LEAF CG SPUR D",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FOUNTAIN PLACE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FOUNTAIN PLACE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "VISITOR PARKING SPUR B",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "VISITOR PARKING SPUR C",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CAMP RICHARDSON CAMPGROUND - S",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CAMP RICHARDSON CAMPGROUND - S",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "RAINBOW TRACT C SPUR",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "POPE BEACH",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CAMP RICH WILLOW LOOP",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "LAKE TAHOE VISITORS CENTER",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "ECHO LAKES ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "ANGORA RIDGE ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "TALLAC POINT",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "JAMESON BEACH ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CAMP RICH ASPEN LOOP",
+      "class": "unclassified",
+      "fineClasses": [
+        "service",
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CAMP RICHARDSON CORRAL",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CAMP RICH SUGAR PINE LOOP",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "TAYLOR CREEK PARKING LOT",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "CATHEDRAL ROAD",
+      "class": "unclassified",
+      "fineClasses": [
+        "residential"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "ECHO SUMMIT",
+      "class": "unclassified",
+      "fineClasses": [
+        "unclassified"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "ATWOOD",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "ATWOOD",
+      "class": "unclassified",
+      "fineClasses": []
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FIRS CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": [
+        "service"
+      ]
+    },
+    {
+      "tile": [
+        341,
+        783
+      ],
+      "name": "FIRS CAMPGROUND",
+      "class": "unclassified",
+      "fineClasses": []
+    }
+  ]
+}

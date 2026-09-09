@@ -7,7 +7,7 @@ zooms retain their native source extent. Static symbols/borders remain bundled.
 
 ## Pilot scope
 
-`topo-z12-pilot-20260909` contains 80 detailed base tiles around Tahoe and San
+`topo-z12-pilot-20260909-r2` contains 80 detailed base tiles around Tahoe and San
 Francisco, 140 DEM tiles including halos, and 132 native overview tiles. The
 worldwide portion is z0–3 for this pilot; regional ancestors extend through z11.
 Outside those exact published regions, the broad overview remains visible.
@@ -21,8 +21,8 @@ contract records its content fingerprint, Git revision, source datasets and exac
 coverage plan. Reusing a release ID with changed processing code is rejected.
 
 ```sh
-services/tiles/.venv/bin/python services/tiles/publish_combined.py plan --release topo-z12-pilot-20260909
-services/tiles/.venv/bin/python services/tiles/publish_combined.py publish --release topo-z12-pilot-20260909
+services/tiles/.venv/bin/python services/tiles/publish_combined.py plan --release topo-z12-pilot-20260909-r2
+services/tiles/.venv/bin/python services/tiles/publish_combined.py publish --release topo-z12-pilot-20260909-r2
 ```
 
 Repeat the same publication command to resume. A candidate manifest appears only
@@ -40,9 +40,9 @@ keep their existing manifest until promotion. Code releases still use
 After online/offline validation:
 
 ```sh
-services/tiles/.venv/bin/python services/tiles/publish_combined.py promote --release topo-z12-pilot-20260909
+services/tiles/.venv/bin/python services/tiles/publish_combined.py promote --release topo-z12-pilot-20260909-r2
 # Restore the saved previous manifest if needed:
-services/tiles/.venv/bin/python services/tiles/publish_combined.py rollback --release topo-z12-pilot-20260909
+services/tiles/.venv/bin/python services/tiles/publish_combined.py rollback --release topo-z12-pilot-20260909-r2
 ```
 
 Promotion changes only the current manifest pointer, with up to 30 seconds of
@@ -54,7 +54,7 @@ still clears only its map cache as requested previously.
 
 ## Bounded processing and recovery
 
-- Eight CPU processes generate spatial shards of up to 512 z12 parents (default
+- Sixteen CPU processes by default (configurable from 1–32) generate spatial shards of up to 512 z12 parents (default
   256), with separate sixteen-thread native DEM prefetch.
 - One upload shard overlaps generation of the next. Uploads have eight threads;
   an upload backlog blocks further generation. At most two shards are in flight.
@@ -97,3 +97,11 @@ track styling. The combined renderer uses the conflated network starting at z12,
 removing the unnecessary z13 geometry handoff. Same-name trail/track/service
 segments remain separate where the data describes different segments; no blanket
 name-based merging or removal is used.
+
+## Additional road and CPU validation
+
+The v5 road processor and the refreshed pilot cover name/reference matching and
+conservative rural alignment correction across all 640 fine Tahoe source tiles.
+See [road and worker proof](qa/road-merging/README.md) for rules, residual review
+candidates, before/after geometry and measured CPU scaling. No nationwide run
+is started by these changes.

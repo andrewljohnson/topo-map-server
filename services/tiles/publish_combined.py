@@ -173,5 +173,5 @@ def run(args):
  print('Candidate API: /releases/'+args.release+'/metadata',flush=True)
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('plan','publish','promote','rollback'));p.add_argument('--release',required=True);p.add_argument('--scope',choices=('pilot','conus'),default='pilot');p.add_argument('--workers',type=int,choices=range(1,9),default=8);p.add_argument('--shard-size',type=int,choices=range(1,513),default=256);p.add_argument('--max-bytes',type=int,default=500000000000);run(p.parse_args())
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('plan','publish','promote','rollback'));p.add_argument('--release',required=True);p.add_argument('--scope',choices=('pilot','conus'),default='pilot');p.add_argument('--workers',type=int,choices=range(1,33),default=16);p.add_argument('--shard-size',type=int,choices=range(1,513),default=256);p.add_argument('--max-bytes',type=int,default=500000000000);run(p.parse_args())
 if __name__=='__main__':main()

@@ -311,3 +311,14 @@ source provenance and uses exact offline coverage. Trail processing v4 distingui
 explicitly paved MVUM roads from tracks; Angora Ridge Road's asphalt overview now
 matches its already-conflated OSM/USFS detail representation. MVUM access dates are
 published designations, not a real-time opening guarantee.
+
+### Road conflation v5
+
+Official road/trail dataset `us-official-trails-v5` normalizes common name
+abbreviations and explicit forest-road references, and handles rural survey
+misalignment only after sustained close agreement. OSM geometry remains the
+reference; branches, crossings, grade separation and close campground lanes are
+protected. Explicit agency pavement fills missing OSM surface evidence only for
+fully matched track fragments; original classes and permission conflicts survive
+in source records. Rules, reproducible audits and Tahoe before/after proof are in
+[road matching validation](qa/road-merging/README.md).

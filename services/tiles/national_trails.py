@@ -12,11 +12,11 @@ import mapbox_vector_tile
 from shapely.geometry import shape, box
 from shapely.ops import transform, unary_union
 from shapely.affinity import affine_transform
-from trail_matching import conflate, lines
+from trail_matching import conflate, lines, paved_surface
 from shapely import make_valid
 from national_boundaries import cached, bounds, project
 
-DATASET_ID = 'us-official-trails-v4'
+DATASET_ID = 'us-official-trails-v5'
 RAW_CACHE_VERSION = 'us-official-trails-v1'
 MIN_ZOOM, MAX_ZOOM = 5, 14
 BOUNDS = [-180, 18, -60, 72]
@@ -132,9 +132,7 @@ def osm_network(z,x,y,blob=None):
 def agency_road_class(props):
  # MVUM includes paved passenger-car roads as well as tracks. Preserve the
  # raw agency surface in provenance, and never infer pavement from access.
- surface=str(props.get('surface','')).strip().upper()
- paved=surface in ('ASPHALT','PAVED','CONCRETE') or surface.startswith(('AC -','BST -','PCC -'))
- return 'unclassified' if paved else 'track'
+ return 'unclassified' if paved_surface(props.get('surface')) else 'track'
 
 
 @lru_cache(maxsize=32)
