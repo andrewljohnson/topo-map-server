@@ -1,0 +1,93 @@
+{
+  "release": "topo-z12-pilot-20260909-r3",
+  "cells": [
+    "681/1566",
+    "655/1582"
+  ],
+  "tiles": 37,
+  "regions": {
+    "681/1566": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 14848969
+    },
+    "655/1582": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 11352857
+    }
+  },
+  "seconds": 3.669954628,
+  "offlineReload": true,
+  "demPixels": 1024,
+  "notesAndGpsPreserved": true,
+  "calls": [
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/metadata",
+      "status": 200,
+      "headersMs": 149.99533599999998
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/dem-batch",
+      "status": 200,
+      "headersMs": 508.07393700000006
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/dem-batch",
+      "status": 200,
+      "headersMs": 666.630281
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/dem-batch",
+      "status": 200,
+      "headersMs": 523.495285
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/tile-batch",
+      "status": 200,
+      "headersMs": 167.7867779999999
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/tile-batch",
+      "status": 200,
+      "headersMs": 173.21644400000014
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/tile-batch",
+      "status": 200,
+      "headersMs": 207.37359800000013
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/tile-batch",
+      "status": 200,
+      "headersMs": 211.01165899999978
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/dem-batch",
+      "status": 200,
+      "headersMs": 354.50498100000004
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/dem-batch",
+      "status": 200,
+      "headersMs": 232.61664999999994
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/tile-batch",
+      "status": 200,
+      "headersMs": 350.43486699999994
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/metadata",
+      "status": 200,
+      "headersMs": 94.53051499999992
+    },
+    {
+      "path": "/releases/topo-z12-pilot-20260909-r3/tiles/12/682/1566.pbf",
+      "status": 200,
+      "headersMs": 81.66238599999997
+    }
+  ]
+}

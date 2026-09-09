@@ -1,0 +1,25 @@
+[
+  {
+    "case": "boundary",
+    "release": "topo-z12-pilot-20260909-r3",
+    "lineMetres": {
+      "('', 'Mt. Rose Wilderness')": 17824.0,
+      "('', 'Humboldt-Toiyabe National Forest')": 16237.0,
+      "('', 'Lake Tahoe Basin Management Unit')": 742.3
+    }
+  },
+  {
+    "case": "trt",
+    "release": "topo-z12-pilot-20260909-r3",
+    "lineMetres": {
+      "('OpenStreetMap', 'Rim to Rose')": 357.0
+    }
+  },
+  {
+    "case": "rose",
+    "release": "topo-z12-pilot-20260909-r3",
+    "lineMetres": {
+      "('OpenStreetMap', 'Rim to Rose')": 1032.0
+    }
+  }
+]

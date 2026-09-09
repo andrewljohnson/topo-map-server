@@ -26,3 +26,13 @@ All designation polygons are retained. Only the redundant stroke is suppressed. 
 [Before/after geometry proof](before-after.png) is a data-level drawing, not a renderer screenshot. [Reported viewport measurements](reported-views.json) and [Tahoe-wide audit](tahoe-audit.json) accompany it.
 
 Re-run `experiments/tahoe/audit_conflation.py --help` for the baseline/candidate geometry audit. The real trail pairs are checked into `services/tiles/fixtures/tahoe-trail-alignment.json`; ordinary trail-matching tests require no network or large source cache. These checks cover this Tahoe build and matching safeguards, not every duplicate nationwide.
+
+## Published and verified
+
+`topo-z12-pilot-20260909-r3` is the default cloud/Expo release. All 352 objects (212 base, 140 DEM) were uploaded and body-hash verified in 113.8 seconds. The 80-parent Tahoe/San Francisco detail build took approximately 46 seconds using retained raw sources and 16 workers. No national generation was started.
+
+The real mobile TileStore, using an in-memory filesystem adapter, downloaded 37 unique tiles for Tahoe and San Francisco in 4.61 seconds on the first test and 3.67 seconds on the cached test. Both tests verified direct and batch MVT decoding, 1024-pixel DEMs, offline reopening, and unchanged simulated notes/GPS files. These are automated queue tests on this computer, not measured iPhone timings.
+
+The actual cloud-served combined tiles were decoded at all three reported views. No secondary USFS trail remains in either trail viewport. The retained forest outline measures 16,237 m and the remaining basin branches 742 m. Cloud measurements can differ from unrestricted fine-source measurements because the pilot's published coverage and combined-tile clipping are bounded; no coverage expansion is implied.
+
+The live browser was visually checked at the TRT and Mt. Rose zooms: each now shows one trail, with TRT badges retained where appropriate. Reload Expo to fetch the new release metadata; no native rebuild is required.
