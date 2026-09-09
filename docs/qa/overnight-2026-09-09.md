@@ -180,3 +180,8 @@ New source-cache, style-snapshot and terrain patch changes are still uncommitted
 The final benchmark and connectivity audit completed before the observed session gap: 4,000 parents in 323 seconds, 8,264 valid unique files / 6.91 GB; 64,000 source tiles audited with zero disconnected new cuts and five review candidates. Do not claim continuous work between the last ~13:08 observation and this resume. The authorized 14:05 deadline has passed. Heartbeat paused; only our temporary 3002/3003/3005 servers stopped (3004 was already absent). Browser inventory is empty, so there are no QA tabs or viewport overrides to restore. Original services remain untouched.
 
 Unverified badge changes reverted. Final status fix has nine passing Worker tests and remains local. All proven work and current publication gate are summarized in [the morning report](overnight-2026-09-09-morning.md). Public push/deployment approval is still pending; do not bypass automatic review. No nationwide run or paid compute. Do not resume the expired overnight improvement loop; await the publishing decision.
+
+
+### Approved publication completed
+
+User approved publishing and requested Expo testing. Main89c0260 pushed and deployed, Cloudflare db095d7d-4978-4253-81a7-8c3cbbaa4ce9. Fresh immutable r13 verified352 objects in148.36s; actual TileStore two-region/37-object offline test10.94s with notes/GPS fixtures preserved. Browser r13 Desolation terrain/lake/PCT render verified. Promoted r13; live metadata and publication status both report it,212 base and140 DEM objects. Expo restarted on free8081 (other app8082 untouched), signed in; LAN iOS manifest and bundle200. No native production build. Publication blocker resolved; overnight heartbeat remains paused.

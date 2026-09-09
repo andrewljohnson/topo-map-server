@@ -1,5 +1,16 @@
 # Overnight map work — September 9
 
+**Approved publication follow-up:** the user approved the push and deployment.
+Commit `89c0260` is deployed (Cloudflare version
+`db095d7d-4978-4253-81a7-8c3cbbaa4ce9`); `topo-z12-pilot-20260909-r13`
+is now promoted. All 352 objects were read-back verified in 148.4 seconds.
+The actual mobile TileStore downloaded 37 unique tiles for Tahoe/SF in 10.94
+seconds and reopened them offline with personal-data fixtures intact. Expo was
+restarted on LAN port 8081, signed in, and its iOS manifest and bundle returned
+200. Browser verification shows terrain, lake labels and PCT styling on r13.
+No native production build was requested or cut. The report below preserves the
+earlier overnight state and its session-gap disclosure.
+
 ## What you can use now
 
 The [live map](https://topo-map.andrewljohnson.workers.dev/) serves

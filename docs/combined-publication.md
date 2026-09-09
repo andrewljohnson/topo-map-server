@@ -7,7 +7,7 @@ zooms retain their native source extent. Static symbols/borders remain bundled.
 
 ## Pilot scope
 
-The current pilot (`topo-z12-pilot-20260909-r12`) contains 80 detailed base tiles around Tahoe and San
+The current pilot (`topo-z12-pilot-20260909-r13`) contains 80 detailed base tiles around Tahoe and San
 Francisco, 140 DEM tiles including halos, and 132 native overview tiles. The
 worldwide portion is z0–3 for this pilot; regional ancestors extend through z11.
 Outside those exact published regions, the broad overview remains visible.
@@ -118,4 +118,4 @@ release ID, completion/scope and exact base/DEM object counts. The pinned
 `/releases/RELEASE/publication` endpoint describes that candidate. It does not
 reuse a retired legacy publisher's global warming status. In-progress local
 candidate generation remains in its own `status.json`; promotion is separate.
-This status correction is locally tested and awaits the next approved deployment.
+This status correction is deployed and verified against the promoted r13 manifest.
