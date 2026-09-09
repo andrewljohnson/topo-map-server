@@ -34,6 +34,13 @@ def morton_key(xy):
 def atomic(path,blob):
  path.parent.mkdir(parents=True,exist_ok=True);temp=path.with_suffix(path.suffix+'.tmp');temp.write_bytes(blob);temp.replace(path)
 def merge_tiles(children):
+ def atomic_geometries(geometry):
+  # A designation's fill and stroke intentionally share IDs and properties.
+  # Union only like geometry families: polygon union otherwise eats its outline
+  # (and any enclosed point) before the renderer can draw the separate symbol.
+  if geometry.geom_type in ('Point','LineString','Polygon'):yield geometry
+  else:
+   for part in getattr(geometry,'geoms',[]):yield from atomic_geometries(part)
  groups={};counts={}
  for source,dx,dy,blob in children:
   for name,layer in mvt.decode(blob,default_options={'y_coord_down':True}).items():
@@ -45,9 +52,9 @@ def merge_tiles(children):
     if g.is_empty:continue
     if not direct:g=affine_transform(g,[1,0,0,1,dx*4096,dy*4096])
     props=f['properties'];key=(target,f.get('id',0),json.dumps(props,sort_keys=True,separators=(',',':')))
-    groups.setdefault(key,[]).append(g)
+    for part in atomic_geometries(g):groups.setdefault((*key,part.geom_type),[]).append(part)
  layers={}
- for (name,ident,props),parts in groups.items():
+ for (name,ident,props,family),parts in groups.items():
   g=unary_union(parts)
   if g.geom_type=='MultiLineString':g=linemerge(g)
   pieces=list(g.geoms) if g.geom_type in ('GeometryCollection','MultiPoint') else [g]

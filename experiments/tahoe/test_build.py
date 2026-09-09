@@ -15,6 +15,24 @@ class PackingTests(unittest.TestCase):
    g=shape(f['geometry']);self.assertEqual(g.bounds[2],8192)
    self.assertEqual(g.geom_type,geometry.geom_type)
    if geometry.geom_type=='Polygon':self.assertEqual(g.area,2*4096*4096)
+ def test_shared_id_preserves_polygon_outline_and_point(self):
+  geometries=[box(0,0,4096,4096),LineString([(0,2048),(4096,2048)]),Point(2048,2048)]
+  children=[('boundaries',0,0,self.tile(g)) for g in geometries]
+  result,_=merge_tiles(children)
+  features=mvt.decode(result,default_options={'y_coord_down':True})['boundaries__test']['features']
+  self.assertEqual(sorted(f['geometry']['type'] for f in features),['LineString','Point','Polygon'])
+  bytype={f['geometry']['type']:shape(f['geometry']) for f in features}
+  for g in geometries:self.assertTrue(bytype[g.geom_type].equals(g))
+ def test_shared_outline_survives_polygon_merge_across_child_seam(self):
+  children=[]
+  for x in (0,1):
+   children.extend([('boundaries',x,0,self.tile(box(0,0,4096,4096))),('boundaries',x,0,self.tile(LineString([(0,2048),(4096,2048)])))])
+  result,_=merge_tiles(children)
+  features=mvt.decode(result,default_options={'y_coord_down':True})['boundaries__test']['features']
+  bytype={f['geometry']['type']:shape(f['geometry']) for f in features}
+  self.assertEqual(len(features),2)
+  self.assertEqual(bytype['Polygon'].area,8192*4096)
+  self.assertEqual(bytype['LineString'].length,8192)
  def test_distinct_points_stay_points(self):
   result,_=merge_tiles([('osm',0,0,self.tile(Point(20,30))),('osm',1,0,self.tile(Point(20,30)))])
   features=mvt.decode(result)['osm__test']['features']
