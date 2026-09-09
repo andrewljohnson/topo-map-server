@@ -13,3 +13,7 @@ User authorized full California on public website and new distributable iOS app,
 - Hourly heartbeat `map-publication-progress` resumed for this release and build; no national generation/rented compute.
 
 Complete representative QA at Tahoe, Yosemite, SF, Los Angeles, San Diego, north coast, Shasta, and desert; verify two tile sets and downloads. Promote from frozen checkout using same scope/release. Deliver public map + iOS install link and pause heartbeat once done. Future app/cartography edits happen on main and cannot mutate this release; use new immutable IDs for processing changes.
+
+## iOS build submitted
+
+EAS internal preview build `a87dcaeb-9864-4691-9f54-4d26c5af9a80` submitted successfully from main after 131 tests/typecheck. Existing signing profile verified both registered phones. Build URL: https://expo.dev/accounts/andrewljohnson/projects/topo-map-server/builds/a87dcaeb-9864-4691-9f54-4d26c5af9a80 . Log `/tmp/topo-california-eas-build.log`. Query this ID before starting another build. Full California data is not yet promoted; the build uses the current live manifest and will pick it up after promotion. First two publication overview batches uploaded successfully; disk free roughly 72 GiB.
