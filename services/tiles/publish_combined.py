@@ -71,6 +71,10 @@ def validate_combined(blob,source):
   tile=mapbox_vector_tile.decode(raw)
   if any('__' not in name or name.split('__')[0] not in SOURCES for name in tile):raise ValueError('Unnamespaced vector layer')
 
+def initialize_overview(scratch):
+ # Each process pool belongs to one shard; the parent environment stays intact.
+ os.environ['TOPO_SCRATCH_ROOT']=scratch
+
 def generate_overview(task):
  z,x,y,path=task
  from coverage_policy import allowed
@@ -149,7 +153,7 @@ def run(args):
       # Process pool keeps native source geometry preparation parallel and bounded.
       import multiprocessing
       from concurrent.futures import ProcessPoolExecutor
-      with ProcessPoolExecutor(max_workers=args.workers,mp_context=multiprocessing.get_context('spawn')) as pool:list(pool.map(generate_overview,[(z,x,y,str(out/'base'/str(z)/str(x)/(str(y)+'.pbf'))) for z,x,y in keys],chunksize=8))
+      with ProcessPoolExecutor(max_workers=args.workers,mp_context=multiprocessing.get_context('spawn'),initializer=initialize_overview,initargs=(str(out/'raw'),)) as pool:list(pool.map(generate_overview,[(z,x,y,str(out/'base'/str(z)/str(x)/(str(y)+'.pbf'))) for z,x,y in keys],chunksize=8))
      else:
       atomic(out/'parents.json',compact(keys))
       command=[sys.executable,str(ROOT/'experiments/tahoe/build.py'),'--parent-file',str(out/'parents.json'),'--output',str(out),'--workers',str(args.workers),'--spatial-order','morton','--task-chunksize','64']

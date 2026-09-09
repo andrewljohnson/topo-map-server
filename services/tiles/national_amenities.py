@@ -1,6 +1,7 @@
 """Durable, on-demand OSM facility groups, independent of the basemap cache."""
 import fcntl, hashlib, json, math, os, tempfile, time
 from pathlib import Path
+from cache_paths import working_path
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 import mapbox_vector_tile
@@ -59,7 +60,7 @@ def fetch(query):
                 if attempt==2:raise
                 time.sleep(2**attempt*3)
 def cell_data(x,y):
-    path=CACHE/'cells'/str(x)/(str(y)+'.json')
+    path=working_path(CACHE/'cells'/str(x)/(str(y)+'.json'))
     path.parent.mkdir(parents=True,exist_ok=True)
     with path.with_suffix('.lock').open('a+') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX)

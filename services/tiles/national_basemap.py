@@ -5,6 +5,7 @@ Requested archive blocks persist locally and normalized tiles use the server cac
 See https://docs.protomaps.com/basemaps/downloads for extraction and attribution.
 """
 from functools import lru_cache
+import fcntl
 import gzip
 import hashlib
 import io
@@ -12,6 +13,7 @@ import json
 import math
 import os
 from pathlib import Path
+from cache_paths import working_path
 import re
 import tempfile
 import threading
@@ -90,18 +92,25 @@ class RangeSource:
         raise RuntimeError('Archive range retries exhausted')
 
     def _read_block(self,index):
-        path=self.cache_dir/f'{index:012x}.bin'
+        path=working_path(self.cache_dir/f'{index:012x}.bin')
         with self.locks[index%len(self.locks)]:
             try:return path.read_bytes()
             except FileNotFoundError:pass
-            blob=self._fetch(index*self.block_size)
-            if not blob:
-                raise IOError('Empty archive range')
             path.parent.mkdir(parents=True,exist_ok=True)
-            with tempfile.NamedTemporaryFile(dir=path.parent,delete=False) as temporary:
-                temporary.write(blob)
-            Path(temporary.name).replace(path)
-            return blob
+            # Thread locks cover one RangeSource instance. The generation pool
+            # has separate processes/instances, so cold blocks also need a shared
+            # file lock. Cache hits above stay lock-free across processes.
+            with path.with_suffix('.lock').open('a+') as lock:
+                fcntl.flock(lock,fcntl.LOCK_EX)
+                try:return path.read_bytes()
+                except FileNotFoundError:pass
+                blob=self._fetch(index*self.block_size)
+                if not blob:
+                    raise IOError('Empty archive range')
+                with tempfile.NamedTemporaryFile(dir=path.parent,delete=False) as temporary:
+                    temporary.write(blob)
+                Path(temporary.name).replace(path)
+                return blob
 
     def get_bytes(self,offset,length):
         if offset<0 or not 0<=length<=MAX_READ:

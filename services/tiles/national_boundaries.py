@@ -1,6 +1,7 @@
 """Detailed agency outlines. Extract true boundaries before tile clipping."""
 import fcntl, hashlib, json, math, os, tempfile, time, threading
 from pathlib import Path
+from cache_paths import working_path
 from functools import lru_cache
 from urllib.request import Request, urlopen
 from urllib.parse import urlencode
@@ -33,6 +34,7 @@ def query(kind,params):
    time.sleep(2**attempt)
 
 def cached(path,build):
+ path=working_path(path)
  path.parent.mkdir(parents=True,exist_ok=True)
  with path.with_suffix('.lock').open('a+') as lock:
   fcntl.flock(lock,fcntl.LOCK_EX)

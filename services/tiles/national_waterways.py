@@ -1,6 +1,7 @@
 """Independent hydrology overlay preserving OSM flow flags and clipping lake interiors."""
 import fcntl, json, os, time
 from pathlib import Path
+from cache_paths import working_path
 import mapbox_vector_tile
 from shapely import make_valid
 from shapely.geometry import shape
@@ -20,7 +21,7 @@ def stream_tags(ids):
     # Writers replace JSON atomically, so a complete cache hit needs no writer lock.
     cached={}
     for ident in sorted(set(ids)):
-        path=CACHE/'ways'/str(ident//100000)/(str(ident)+'.json')
+        path=working_path(CACHE/'ways'/str(ident//100000)/(str(ident)+'.json'))
         if not path.exists():break
         cached[ident]=json.loads(path.read_text())['tags']
     else:return cached
@@ -30,7 +31,7 @@ def stream_tags(ids):
         result = {}
         missing = []
         for ident in sorted(set(ids)):
-            path=CACHE/'ways'/str(ident//100000)/(str(ident)+'.json')
+            path=working_path(CACHE/'ways'/str(ident//100000)/(str(ident)+'.json'))
             if path.exists(): result[ident]=json.loads(path.read_text())['tags']
             else: missing.append(ident)
         for start in range(0,len(missing),200):
@@ -40,7 +41,7 @@ def stream_tags(ids):
             for ident in batch:
                 tags=found.get(ident,{})
                 # Missing/deleted objects are explicitly unknown, never perennial.
-                atomic_json(CACHE/'ways'/str(ident//100000)/(str(ident)+'.json'),{'tags':tags,'found':ident in found,'source':data.get('_endpoint',URL),'osm_timestamp':data.get('osm3s',{}).get('timestamp_osm_base'),'retrieved':time.time()})
+                atomic_json(working_path(CACHE/'ways'/str(ident//100000)/(str(ident)+'.json')),{'tags':tags,'found':ident in found,'source':data.get('_endpoint',URL),'osm_timestamp':data.get('osm3s',{}).get('timestamp_osm_base'),'retrieved':time.time()})
                 result[ident]=tags
         return result
 

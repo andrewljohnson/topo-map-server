@@ -8,8 +8,25 @@ and distinguish retained-input generation from cold acquisition. The36–60hour
 CONUS estimate remains a planning range; it has not been revalidated nationwide
 after the cartographic/conflation changes. Nationwide generation has not resumed.
 See [overnight QA](overnight-2026-09-09.md) for current correctness and delivery proof.
-A bounded, evictable cache for **new working source windows** remains a national
-prerequisite; a rolling output spool alone does not bound raw-input growth.
+A per-shard cache for **new working source windows** is now implemented locally:
+PMTiles ranges, agency JSON, amenity cells and stream tags join the existing DEM
+and NLCD scratch handling. Already-retained canonical inputs are reused and
+preserved. New inputs are removed only with their own verified publication shard.
+Eight simultaneous cold range readers now issue one fetch instead of eight.
+Fixtures cover cache misses and preservation; a warm 220-file pilot is byte-identical.
+This closes the main raw-input growth gap, but a bounded cold regional publication
+run is still needed to measure peak disk use, retries and cross-shard refetch costs.
+
+The current retained-source Sierra repeat is **57.9 / 69.1 / 58.0 seconds** for
+400 base parents and 484 DEMs at **16 / 8 / 16 workers**, with identical outputs.
+Use 16 vector workers for the next regional benchmark on the now-available CPUs;
+keep native acquisition at 16 I/O threads and DEM rendering at 8 processes.
+The older national arithmetic below has not been multiplied by this warm speedup:
+remote source acquisition, overview work and publication remain separate costs.
+The next step is a geographically varied cold 4,000-parent trial with the rolling
+source/output spool and existing 50 GB free-space floor, after the local changes
+are approved for publication. Do not resume nationwide generation from this
+report alone.
 
 
 Measured September 8, 2026 PDT on the existing i9-13900KS machine, with both AI
