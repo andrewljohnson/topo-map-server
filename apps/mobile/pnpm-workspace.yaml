@@ -1,0 +1,2 @@
+patchedDependencies:
+  maplibre-contour@0.1.0: patches/maplibre-contour@0.1.0.patch

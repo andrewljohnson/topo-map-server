@@ -1,0 +1,210 @@
+diff --git a/dist/index.cjs b/dist/index.cjs
+index 5ec8829bcc314b032e67d85d6684112778a3036d..5591a59b793de80c4fc902d09c29d1ca9b5db925 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -519,6 +519,7 @@ class AsyncCache {
+     constructor(maxSize = 100) {
+         this.size = () => this.items.size;
+         this.get = (key, supplier, abortController) => {
++            if (abortController && abortController.signal.aborted) return Promise.reject(new Error("aborted"));
+             let result = this.items.get(key);
+             if (!result) {
+                 const sharedAbortController = new AbortController();
+@@ -537,22 +538,29 @@ class AsyncCache {
+                 result.waiting++;
+             }
+             const items = this.items;
+-            const value = result.item.then((r) => r, (e) => {
+-                items.delete(key);
+-                return Promise.reject(e);
+-            });
+             let canceled = false;
+-            onAbort(abortController, () => {
+-                var _a;
++            const cancel = () => {
+                 if (result && result.abortController && !canceled) {
+                     canceled = true;
+                     if (--result.waiting <= 0) {
+-                        (_a = result.abortController) === null || _a === void 0 ? void 0 : _a.abort();
+-                        items.delete(key);
++                        result.abortController.abort();
++                        if (items.get(key) === result) items.delete(key);
+                     }
+                 }
++            };
++            const cleanup = () => {
++                canceled = true;
++                if (abortController) abortController.signal.removeEventListener("abort", cancel);
++            };
++            onAbort(abortController, cancel);
++            return result.item.then((value) => {
++                cleanup();
++                return value;
++            }, (error) => {
++                cleanup();
++                if (items.get(key) === result) items.delete(key);
++                throw error;
+             });
+-            return value;
+         };
+         this.clear = () => this.items.clear();
+         this.maxSize = maxSize;
+diff --git a/dist/index.js b/dist/index.js
+index af9a4e4abb5d29174b5e2045fd42e644739e48e3..d566c37398345f2801582526e972a2251c756918 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -523,6 +523,7 @@
+         constructor(maxSize = 100) {
+             this.size = () => this.items.size;
+             this.get = (key, supplier, abortController) => {
++                if (abortController && abortController.signal.aborted) return Promise.reject(new Error("aborted"));
+                 let result = this.items.get(key);
+                 if (!result) {
+                     const sharedAbortController = new AbortController();
+@@ -541,22 +542,29 @@
+                     result.waiting++;
+                 }
+                 const items = this.items;
+-                const value = result.item.then((r) => r, (e) => {
+-                    items.delete(key);
+-                    return Promise.reject(e);
+-                });
+                 let canceled = false;
+-                onAbort(abortController, () => {
+-                    var _a;
++                const cancel = () => {
+                     if (result && result.abortController && !canceled) {
+                         canceled = true;
+                         if (--result.waiting <= 0) {
+-                            (_a = result.abortController) === null || _a === void 0 ? void 0 : _a.abort();
+-                            items.delete(key);
++                            result.abortController.abort();
++                            if (items.get(key) === result) items.delete(key);
+                         }
+                     }
++                };
++                const cleanup = () => {
++                    canceled = true;
++                    if (abortController) abortController.signal.removeEventListener("abort", cancel);
++                };
++                onAbort(abortController, cancel);
++                return result.item.then((value) => {
++                    cleanup();
++                    return value;
++                }, (error) => {
++                    cleanup();
++                    if (items.get(key) === result) items.delete(key);
++                    throw error;
+                 });
+-                return value;
+             };
+             this.clear = () => this.items.clear();
+             this.maxSize = maxSize;
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 6e19b7ef05bad4ef49e7b6fd1dd955f3b0ae2024..eae5923cfa21ed6e98142dff3c28b4709bfb424a 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -517,6 +517,7 @@ class AsyncCache {
+     constructor(maxSize = 100) {
+         this.size = () => this.items.size;
+         this.get = (key, supplier, abortController) => {
++            if (abortController && abortController.signal.aborted) return Promise.reject(new Error("aborted"));
+             let result = this.items.get(key);
+             if (!result) {
+                 const sharedAbortController = new AbortController();
+@@ -535,22 +536,29 @@ class AsyncCache {
+                 result.waiting++;
+             }
+             const items = this.items;
+-            const value = result.item.then((r) => r, (e) => {
+-                items.delete(key);
+-                return Promise.reject(e);
+-            });
+             let canceled = false;
+-            onAbort(abortController, () => {
+-                var _a;
++            const cancel = () => {
+                 if (result && result.abortController && !canceled) {
+                     canceled = true;
+                     if (--result.waiting <= 0) {
+-                        (_a = result.abortController) === null || _a === void 0 ? void 0 : _a.abort();
+-                        items.delete(key);
++                        result.abortController.abort();
++                        if (items.get(key) === result) items.delete(key);
+                     }
+                 }
++            };
++            const cleanup = () => {
++                canceled = true;
++                if (abortController) abortController.signal.removeEventListener("abort", cancel);
++            };
++            onAbort(abortController, cancel);
++            return result.item.then((value) => {
++                cleanup();
++                return value;
++            }, (error) => {
++                cleanup();
++                if (items.get(key) === result) items.delete(key);
++                throw error;
+             });
+-            return value;
+         };
+         this.clear = () => this.items.clear();
+         this.maxSize = maxSize;
+diff --git a/src/cache.ts b/src/cache.ts
+index eacfc309fb2e1c4a1b9793f2eb89e87e8a6ad711..c1a3bf18458a9b384efaa70dc38e07f86cdbcd52 100644
+--- a/src/cache.ts
++++ b/src/cache.ts
+@@ -29,6 +29,7 @@ export default class AsyncCache<K, V> {
+     supplier: (key: K, abortController: AbortController) => Promise<V>,
+     abortController: AbortController,
+   ): Promise<V> => {
++    if (abortController?.signal.aborted) return Promise.reject(new Error("aborted"));
+     let result: CacheItem<V> | undefined = this.items.get(key);
+     if (!result) {
+       const sharedAbortController = new AbortController();
+@@ -46,24 +47,32 @@ export default class AsyncCache<K, V> {
+       result.waiting++;
+     }
+     const items = this.items;
+-    const value = result.item.then(
+-      (r) => r,
+-      (e) => {
+-        items.delete(key);
+-        return Promise.reject(e);
+-      },
+-    );
+     let canceled = false;
+-    onAbort(abortController, () => {
++    const cancel = () => {
+       if (result && result.abortController && !canceled) {
+         canceled = true;
+         if (--result.waiting <= 0) {
+-          result.abortController?.abort();
+-          items.delete(key);
++          result.abortController.abort();
++          if (items.get(key) === result) items.delete(key);
+         }
+       }
+-    });
+-    return value;
++    };
++    const cleanup = () => {
++      canceled = true;
++      abortController?.signal.removeEventListener("abort", cancel);
++    };
++    onAbort(abortController, cancel);
++    return result.item.then(
++      (value) => {
++        cleanup();
++        return value;
++      },
++      (error) => {
++        cleanup();
++        if (items.get(key) === result) items.delete(key);
++        throw error;
++      },
++    );
+   };
+ 
+   prune() {

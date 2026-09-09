@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  maplibre-contour@0.1.0: 4080674a42808d733c9574e40931daed04d36e67edd935dfdcc3795fc3aee225
+
 importers:
 
   .:
@@ -31,7 +34,7 @@ importers:
         version: 57.0.16(expo@57.0.20)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))
       maplibre-contour:
         specifier: 0.1.0
-        version: 0.1.0
+        version: 0.1.0(patch_hash=4080674a42808d733c9574e40931daed04d36e67edd935dfdcc3795fc3aee225)
       maplibre-gl:
         specifier: ^5.0.0
         version: 5.24.0
@@ -3959,7 +3962,7 @@ snapshots:
     dependencies:
       tmpl: 1.0.5
 
-  maplibre-contour@0.1.0: {}
+  maplibre-contour@0.1.0(patch_hash=4080674a42808d733c9574e40931daed04d36e67edd935dfdcc3795fc3aee225): {}
 
   maplibre-gl@5.24.0:
     dependencies:

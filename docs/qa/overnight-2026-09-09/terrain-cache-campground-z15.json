@@ -1,0 +1,316 @@
+{
+  "capturedAt": "2026-09-09T12:51:34.240Z",
+  "release": null,
+  "bounds": [
+    -120.05421643257138,
+    38.91988845340339,
+    -120.04578356742853,
+    38.93411083374511
+  ],
+  "center": [
+    -120.05,
+    38.927
+  ],
+  "zoom": 15,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "5536d05ddfb8c7cc6417089d414108811f1a0d19b0a4148fb11f62342d3f7474",
+  "candidatePeaks": [],
+  "renderedPeaks": [],
+  "renderedSymbols": [
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 2265352962633007,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05306839942932,
+        38.92397703473722
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3032905746356129,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05440413951874,
+        38.92445280205325
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 7143980913327334,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05306839942932,
+        38.925287473846396
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3546840068165269,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.0470119714737,
+        38.92538763380168
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 5301111844932819,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04877150058746,
+        38.92550031358232
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 4443578829220879,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.0514966249466,
+        38.92553370014963
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 706780398793728,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05080997943878,
+        38.92557126001907
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 8885072280569803,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05366384983063,
+        38.9256296864431
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 4069371903742217,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04765570163727,
+        38.92589260475583
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3652318079049714,
+      "name": "Fallen Leaf Campground",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05031108856201,
+        38.926259854101204
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 5055098204861860,
+      "name": "Ranger Station",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04700660705566,
+        38.92636418595481
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 1385414027585511,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04718363285065,
+        38.926385052307126
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3940483493799612,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04708170890808,
+        38.92670222010659
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 230493514285884,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05232274532318,
+        38.927194662037806
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3928823460791734,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.0502198934555,
+        38.927244740686774
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 2934657875568892,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04880368709564,
+        38.927570251043335
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3429696690089804,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05141079425812,
+        38.92766623458127
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 1352313260844116,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04830479621887,
+        38.92834646201979
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 3967512192538300,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05253732204437,
+        38.92854677315108
+      ]
+    },
+    {
+      "layer": "amenity-group-members",
+      "sourceLayer": "amenities__amenities",
+      "id": 593784873535839,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.05056321620941,
+        38.92916439557837
+      ]
+    },
+    {
+      "layer": "amenity-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 1848352482440483,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -120.04551529884338,
+        38.93342918204249
+      ]
+    },
+    {
+      "layer": "trail-labels",
+      "sourceLayer": "trails__network",
+      "id": 26,
+      "name": "15th Street Bike",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "trail-labels",
+      "sourceLayer": "trails__network",
+      "id": 25,
+      "name": "Fallen Leaf Path",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 10,
+      "name": "Smokey Bear Circle",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 6,
+      "name": "Fallen Leaf Road",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    }
+  ]
+}

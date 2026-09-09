@@ -1,0 +1,102 @@
+{
+  "note": "Synthetic flat 1024px DEMs through actual bundled contour worker; transferred arrays; Node GC memory, not a phone measurement.",
+  "samples": [
+    {
+      "jobs": 0,
+      "type": "memory",
+      "id": 1,
+      "gc": true,
+      "memory": {
+        "rss": 65900544,
+        "heapTotal": 10481664,
+        "heapUsed": 5345928,
+        "external": 3073819,
+        "arrayBuffers": 71835
+      }
+    },
+    {
+      "jobs": 8,
+      "requests": 72,
+      "type": "memory",
+      "id": 10,
+      "gc": true,
+      "memory": {
+        "rss": 382992384,
+        "heapTotal": 10219520,
+        "heapUsed": 4321448,
+        "external": 313503304,
+        "arrayBuffers": 72859
+      }
+    },
+    {
+      "jobs": 16,
+      "requests": 144,
+      "type": "memory",
+      "id": 19,
+      "gc": true,
+      "memory": {
+        "rss": 693829632,
+        "heapTotal": 10481664,
+        "heapUsed": 4568376,
+        "external": 615493720,
+        "arrayBuffers": 73115
+      }
+    },
+    {
+      "jobs": 24,
+      "requests": 216,
+      "type": "memory",
+      "id": 28,
+      "gc": true,
+      "memory": {
+        "rss": 996876288,
+        "heapTotal": 11005952,
+        "heapUsed": 4752368,
+        "external": 917484120,
+        "arrayBuffers": 8520207
+      }
+    },
+    {
+      "jobs": 32,
+      "requests": 288,
+      "type": "memory",
+      "id": 37,
+      "gc": true,
+      "memory": {
+        "rss": 1064488960,
+        "heapTotal": 15200256,
+        "heapUsed": 4755016,
+        "external": 963678972,
+        "arrayBuffers": 74651
+      }
+    },
+    {
+      "jobs": 40,
+      "requests": 360,
+      "type": "memory",
+      "id": 46,
+      "gc": true,
+      "memory": {
+        "rss": 1085595648,
+        "heapTotal": 15200256,
+        "heapUsed": 4757184,
+        "external": 963678956,
+        "arrayBuffers": 16967331
+      }
+    },
+    {
+      "jobs": 48,
+      "requests": 432,
+      "type": "memory",
+      "id": 55,
+      "gc": true,
+      "memory": {
+        "rss": 1085661184,
+        "heapTotal": 14938112,
+        "heapUsed": 4770336,
+        "external": 963678972,
+        "arrayBuffers": 75675
+      }
+    }
+  ]
+}

@@ -51,3 +51,14 @@ The new local pilot passes [all1280 source-tile geometry checks](junction-v12-pi
 `proof_server.py --tiles <local-combined-root> --metadata <compatible-public-metadata.json> --candidate-id <unique-id>` optionally serves a z12-only local candidate, including gzip MVTs and1024 DEMs, without uploading it. The server remains bound to127.0.0.1. Three candidate flags are required together; routes are restricted to the selected base/DEM XYZ paths. HTTP metadata/encoding/dimensions and invalid-path checks pass.
 
 To reproduce the earlier POI speed comparison after later intentional visibility changes, pass `--baseline-ref c84402e --candidate-ref 1e9e224` to `benchmark_poi_matching.mjs`. Both local Git revisions are pinned; matching source hashes are recorded.
+
+## Bounded source and client caches
+
+- [Working-source equivalence](working-cache-equivalence.json): the retained-input pilot takes 52.8 seconds and all 220 base/DEM files match. No real source misses occurred in that run; eight dedicated tests exercise source miss routing, canonical preservation, disposable cleanup and cross-process range locking. Eight simultaneous cold range readers fetch once instead of eight times.
+- [POI style-snapshot equivalence](poi-style-snapshot-equivalence.json): the matcher reads one coherent style snapshot per refresh, down from 33 in the Tahoe fixture. All 12 actual-tile/zoom outputs match. This avoids repeated MapLibre style serialization; the fake-map benchmark does not measure that browser CPU saving.
+- Terrain memory [before](terrain-memory-before.json) / [after](terrain-memory-after.json): 48 synthetic, nonoverlapping z12 views through the actual bundled worker. At the end, worker external memory drops from 919 to 107 MiB and remains bounded. This is a Node/GC memory probe with transferred 1024px DEMs, not an iPhone measurement.
+- [Post-patch real contour seams](real-contour-seams-after-cache.json): all 950 crossings across 24 pairs still match exactly. Three actual-worker contour tests and five cache lifecycle regressions pass; each new lifecycle regression fails against the original dependency.
+
+The pinned `maplibre-contour` patch releases settled abort listeners, prevents stale cancellation/failure from evicting a replacement entry, and avoids starting work for already-cancelled callers. Both clients embed the same patched ESM worker. Full mobile suite: 131 tests; both typechecks and static web build pass. Public deployment approval remains pending.
+
+[Campground after the terrain-cache fix](terrain-cache-campground-z15.png) confirms detailed contours and separated facilities in the rebuilt shared client.

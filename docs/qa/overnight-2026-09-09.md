@@ -162,3 +162,14 @@ All29,438 amenity occurrences across1280 fine tiles match exactly apart from the
 Newoptionalcandidate mode inproof_server.py serves only selectedlocalbase/DEMXYZfilesplusadaptedpublicmetadata,z12only,Cache-Control:no-store,gzipmetadata,and127.0.0.1binding. Metadata,1024DEMs,MVTdecode,andfiveinvalidroutechecks passed. Additionalownpreviewserveron3005,currentexecsession23261(log/tmp/topo-candidate-proof-server.log);stopitatthe14:05deadlinealongwith3002/3003/3004. CurrentIABtab12ishttp://localhost:3005/?proof=1#15/38.927/-120.05,portrait393×852. StaticwebbuildnowusesoriginAPI;3004doesnothavecandidatemetadata,so use3005forfurtherreloads.3000/originalExpo/servicesunchanged.
 
 Publicpush/deployapprovalstillpending.Allnewchangesremainlocal.Next:reviewnew-sourceworking-cachegrowth(PMTilesrangesandagencysourcewindowscurrentlyescapeper-shardspool)andboundedlocalverification.NoCONUSrolloutorpaidcompute.Continueuntil14:05 UTC.
+
+
+### 12:52 UTC bounded source acquisition and terrain memory
+
+Newly acquired PMTiles ranges, agency JSON, amenity cells and stream tags now use the explicitly disposable per-shard scratch directory. Canonical existing inputs always win and remain intact. Overview child processes receive their own scratch root without changing the parent environment. Eight spawned cold range readers previously made eight fetches; a cross-process file lock reduces that to one. Eight cache tests, 109 national tests and three publication tests pass. A warm 52.807-second pilot has all 220 files byte-identical; actual misses were absent, so cold routing is proven by fixtures rather than claimed as a national measurement.
+
+POI refresh now takes one style snapshot instead of 33 in the Tahoe fixture. All 12 real-tile/zoom output comparisons remain exact; browser style-serialization CPU is not measured by the fake-map benchmark.
+
+A long-pan audit of the actual bundled contour worker confirmed retained abort listeners holding older 1024px DEMs: after 48 disjoint views, worker external memory reached 919 MiB. A pinned maplibre-contour ESM/CJS/source patch removes listeners on settlement and guards stale request deletion by entry identity. The same probe now levels at 107 MiB (about 88% lower). Five lifecycle regressions fail before and pass after, including late cancellation/rejection of an evicted request and pre-aborted consumers. All 131 mobile tests, both typechecks and static web build pass. Real DEM seam audit still matches 950 crossings exactly across 24 pairs; browser campground view renders detailed terrain and separated facilities. These are not physical-phone benchmarks.
+
+New source-cache, style-snapshot and terrain patch changes are still uncommitted at this checkpoint. Public main remains 186b4d3/r12 and public approval remains pending. Continue local improvement until 14:05 UTC; next hourly summary around 13:05. Preserve original services and user data.
