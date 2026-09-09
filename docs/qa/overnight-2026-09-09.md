@@ -102,3 +102,33 @@ Major-water names now use stronger typography while reconstructing the importer�
 Legend review found feature-dependent local-road widths becoming NaN, so white fill obscured its casing. Legend paint now evaluates feature properties; all current line/fill expressions are compared against MapLibre across classes, surfaces, tunnel flags and zooms. The drawer visibly restores local-road casing and aligned column headings.
 
 Batch includes compatible combined-release selection preservation, independently abortable native downloads with late-file cleanup, stronger major-water typography, upright rotated lake names, and removal of one redundant DEM copy. Automatic review requested verified GitHub ownership and a secret scan before commit/push: authenticated account and repository owner are bothandrewljohnson,main is the default branch,push/admin permissions confirmed. Secret scan/publication follow. Data remains r12. Continue until14:05 UTC.
+
+### 10:10 UTC publication approval pending — continue local work
+
+Local main commit6706795 contains the fifth client batch; it is NOT pushed or deployed. Public main remains186b4d3,Cloudflare97cc0ca7,r12 tiles. Automatic review rejected the public push twice,including after gh verified authenticated user/ownerandrewljohnson with push/admin permissions and Gitleaks scanned all38 changed/new files with zero findings. The second rejection said that evidence was insufficiently trusted. Do not bypass or retry public publication until the user answers the pending async approval question. Local work/commits are permitted and continue. This does not block map QA or local candidates.
+
+Pending question: “Approve publishing the verified overnight client changes and map-proof images to your public topo-map-server GitHub repo on main, then deploying the website?” No response yet. Secret scan evidence:/tmp/topo-overnight-secret-scan.json (empty findings),file manifest:/tmp/topo-overnight-publication-files.json.
+
+SF640-source-tile connectivity audit is running locally:/tmp/overnight-sf-junctions-current.log/json; parents:/tmp/topo-sf-parents.json. No nationwide expansion.
+
+### 10:35 UTC local packing optimization and wider connectivity proof
+
+The strict SF audit now completes: 640 source tiles, 1,300 output endpoint observations, 135 original source dead ends and nine duplicate termini; zero lost-source-junction or new-cut warnings. The same R10 baseline has 37 and three warnings respectively. Original source gaps remain unchanged. Reports are saved alongside Tahoe evidence.
+
+A local packing prototype replaces Python polygon-ring reconstruction with equivalent NumPy rounding and GEOS orientation. All 80 Tahoe/SF parents are byte-identical to the previous encoder; summed packing-task elapsed time fell from 121.1 to 101.9 seconds across parallel tasks (about 16%). The first complete-pipeline pair was 55.5 versus 50.5 seconds, packing wall time 11.7 versus 9.9 seconds. Reverse-order repeats are underway to separate source timing noise. Ten packing tests pass, including half-integer rounding, reversed rings, holes, tiny collapsed polygons and multipart geometry. Existing immutable releases remain unchanged; publication approval is still pending.
+
+Alternative compression levels and dropping unused waterline payload were measured but not adopted: gzip level 6 saves only about one CPU second across 83 tiles at a small byte penalty; raw waterline removal saves 0–2.5% in three samples. Original road layers remain for overview/zoom-transition compatibility.
+
+### 11:05 UTC local verification checkpoint
+
+All new work remains local: public r12/client186b4d3 is unchanged; public push approval remains pending. Local6706795 plus the uncommitted sixth batch are ready for further review, not published.
+
+Packing repeat: baseline full runs55.475/53.529s; optimized50.539/51.876s (about6% average improvement). Packing wall time11.723/11.266s becomes9.948/9.694s. All220 outputs (80 base,140 DEM) are byte-identical. The reproducible paired packing benchmark separately measures actual CPU:125.352s before,102.636s after (18.1% less), all80 parent bytes identical. This is retained-input local cutting, not a cloud-publication or cold-CONUS timing. `experiments/tahoe/benchmark_packing.py` saves the exact comparison.
+
+New terrain-worker recovery restarts once after a fatal worker error and replays still-needed contour jobs. A second failure settles requests without a restart loop; retired replies and reused DEM request IDs cannot contaminate the replacement. Cancellation and failed replay are covered. Handled errors prevent default reporting.121 mobile tests, both typechecks, and static build pass.
+
+Actual local production DEMs were audited using the bundled device contour worker:24 pairs across six Tahoe/SF parent boundaries,zooms12–15,both seam directions.950 contour crossings matched exactly (zero MVT-unit error),using50 DEMs. Reproducible script:`experiments/tahoe/audit_contour_seams.mjs`; timings include audit transport and are not phone measurements.
+
+A suspected native-zoom label issue was NOT confirmed: installed MapLibre sets reparseOverscaled=true and supplies overscaledZ to workers. Church Peak renders both on a close-zoom load and after loading the same area atz12 then zooming to15.5. No workaround added. All1,280 raw source tiles also contain zero supported features excluded by the min_zoom>15 guard. Corrected an inaccurate old code comment. A single TRT collision box confirms the apparent stacked badge was its internal rule, not duplicate route geometry.
+
+Root/mobile documentation now explains the current two-dataset pilot, cloud-default Expo and development cache reset, native background scheduling, source preservation and immutable releases. Removed obsolete instructions claiming precomputed contour downloads, fixed tile counts, removed Explore Areas UI, and no background service. Internal documentation links pass. Continue substantive local work until14:05 UTC.

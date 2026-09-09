@@ -1,0 +1,493 @@
+{
+  "pairs": 24,
+  "matchedCrossings": 950,
+  "maxErrorTileUnits": 0,
+  "failurePairs": 0,
+  "demKeys": [
+    "12/653/1581",
+    "12/653/1582",
+    "12/653/1583",
+    "12/653/1584",
+    "12/653/1585",
+    "12/654/1581",
+    "12/654/1582",
+    "12/654/1583",
+    "12/654/1584",
+    "12/654/1585",
+    "12/655/1581",
+    "12/655/1582",
+    "12/655/1583",
+    "12/655/1584",
+    "12/655/1585",
+    "12/656/1581",
+    "12/656/1582",
+    "12/656/1583",
+    "12/656/1584",
+    "12/656/1585",
+    "12/679/1565",
+    "12/679/1566",
+    "12/679/1567",
+    "12/680/1565",
+    "12/680/1566",
+    "12/680/1567",
+    "12/680/1568",
+    "12/681/1559",
+    "12/681/1560",
+    "12/681/1561",
+    "12/681/1565",
+    "12/681/1566",
+    "12/681/1567",
+    "12/681/1568",
+    "12/682/1559",
+    "12/682/1560",
+    "12/682/1561",
+    "12/682/1565",
+    "12/682/1566",
+    "12/682/1567",
+    "12/682/1568",
+    "12/683/1559",
+    "12/683/1560",
+    "12/683/1561",
+    "12/683/1565",
+    "12/683/1566",
+    "12/683/1567",
+    "12/684/1559",
+    "12/684/1560",
+    "12/684/1561"
+  ],
+  "rows": [
+    {
+      "name": "south-tahoe",
+      "z": 12,
+      "axis": "x",
+      "a": [
+        681,
+        1566
+      ],
+      "b": [
+        682,
+        1566
+      ],
+      "matches": 5,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 1918.704604,
+      "rightMs": 651.5635960000002
+    },
+    {
+      "name": "south-tahoe",
+      "z": 13,
+      "axis": "x",
+      "a": [
+        1363,
+        3133
+      ],
+      "b": [
+        1364,
+        3133
+      ],
+      "matches": 3,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 64.00012900000002,
+      "rightMs": 38.21078800000032
+    },
+    {
+      "name": "south-tahoe",
+      "z": 14,
+      "axis": "x",
+      "a": [
+        2727,
+        6266
+      ],
+      "b": [
+        2728,
+        6266
+      ],
+      "matches": 7,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 16.398971000000074,
+      "rightMs": 8.35047399999985
+    },
+    {
+      "name": "south-tahoe",
+      "z": 15,
+      "axis": "x",
+      "a": [
+        5455,
+        12532
+      ],
+      "b": [
+        5456,
+        12532
+      ],
+      "matches": 7,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 2.7418659999998454,
+      "rightMs": 1.832727999999861
+    },
+    {
+      "name": "desolation",
+      "z": 12,
+      "axis": "x",
+      "a": [
+        680,
+        1566
+      ],
+      "b": [
+        681,
+        1566
+      ],
+      "matches": 56,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 694.5715519999999,
+      "rightMs": 0.1564690000000155
+    },
+    {
+      "name": "desolation",
+      "z": 13,
+      "axis": "x",
+      "a": [
+        1361,
+        3133
+      ],
+      "b": [
+        1362,
+        3133
+      ],
+      "matches": 77,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 33.30823999999984,
+      "rightMs": 45.71954000000005
+    },
+    {
+      "name": "desolation",
+      "z": 14,
+      "axis": "x",
+      "a": [
+        2723,
+        6266
+      ],
+      "b": [
+        2724,
+        6266
+      ],
+      "matches": 57,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 11.244009000000005,
+      "rightMs": 11.624007999999776
+    },
+    {
+      "name": "desolation",
+      "z": 15,
+      "axis": "x",
+      "a": [
+        5447,
+        12532
+      ],
+      "b": [
+        5448,
+        12532
+      ],
+      "matches": 37,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 4.366633000000093,
+      "rightMs": 2.996556000000055
+    },
+    {
+      "name": "mount-rose",
+      "z": 12,
+      "axis": "x",
+      "a": [
+        682,
+        1560
+      ],
+      "b": [
+        683,
+        1560
+      ],
+      "matches": 69,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 1837.2222070000003,
+      "rightMs": 708.1090800000002
+    },
+    {
+      "name": "mount-rose",
+      "z": 13,
+      "axis": "x",
+      "a": [
+        1365,
+        3121
+      ],
+      "b": [
+        1366,
+        3121
+      ],
+      "matches": 91,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 30.463506000000052,
+      "rightMs": 38.367787000000135
+    },
+    {
+      "name": "mount-rose",
+      "z": 14,
+      "axis": "x",
+      "a": [
+        2731,
+        6242
+      ],
+      "b": [
+        2732,
+        6242
+      ],
+      "matches": 110,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 16.409096999999747,
+      "rightMs": 13.082517999999254
+    },
+    {
+      "name": "mount-rose",
+      "z": 15,
+      "axis": "x",
+      "a": [
+        5463,
+        12484
+      ],
+      "b": [
+        5464,
+        12484
+      ],
+      "matches": 46,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 3.559491999999409,
+      "rightMs": 3.8890150000006543
+    },
+    {
+      "name": "sf-coast",
+      "z": 12,
+      "axis": "x",
+      "a": [
+        654,
+        1582
+      ],
+      "b": [
+        655,
+        1582
+      ],
+      "matches": 8,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 1893.9207130000004,
+      "rightMs": 675.8668390000003
+    },
+    {
+      "name": "sf-coast",
+      "z": 13,
+      "axis": "x",
+      "a": [
+        1309,
+        3165
+      ],
+      "b": [
+        1310,
+        3165
+      ],
+      "matches": 16,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 19.955368999999337,
+      "rightMs": 21.18706799999927
+    },
+    {
+      "name": "sf-coast",
+      "z": 14,
+      "axis": "x",
+      "a": [
+        2619,
+        6330
+      ],
+      "b": [
+        2620,
+        6330
+      ],
+      "matches": 4,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 4.265171999999438,
+      "rightMs": 4.46051400000033
+    },
+    {
+      "name": "sf-coast",
+      "z": 15,
+      "axis": "x",
+      "a": [
+        5239,
+        12660
+      ],
+      "b": [
+        5240,
+        12660
+      ],
+      "matches": 0,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 1.213490999998612,
+      "rightMs": 1.1995909999986907
+    },
+    {
+      "name": "sf-hills",
+      "z": 12,
+      "axis": "x",
+      "a": [
+        654,
+        1584
+      ],
+      "b": [
+        655,
+        1584
+      ],
+      "matches": 36,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 1230.182952000001,
+      "rightMs": 455.4156160000002
+    },
+    {
+      "name": "sf-hills",
+      "z": 13,
+      "axis": "x",
+      "a": [
+        1309,
+        3169
+      ],
+      "b": [
+        1310,
+        3169
+      ],
+      "matches": 39,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 24.24137299999893,
+      "rightMs": 30.545137999999497
+    },
+    {
+      "name": "sf-hills",
+      "z": 14,
+      "axis": "x",
+      "a": [
+        2619,
+        6338
+      ],
+      "b": [
+        2620,
+        6338
+      ],
+      "matches": 70,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 7.5440250000010565,
+      "rightMs": 13.468512999999803
+    },
+    {
+      "name": "sf-hills",
+      "z": 15,
+      "axis": "x",
+      "a": [
+        5239,
+        12676
+      ],
+      "b": [
+        5240,
+        12676
+      ],
+      "matches": 42,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 3.1627669999998034,
+      "rightMs": 3.5373209999997925
+    },
+    {
+      "name": "tahoe-south-edge",
+      "z": 12,
+      "axis": "y",
+      "a": [
+        681,
+        1566
+      ],
+      "b": [
+        681,
+        1567
+      ],
+      "matches": 43,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 1934.1596019999997,
+      "rightMs": 727.6446699999997
+    },
+    {
+      "name": "tahoe-south-edge",
+      "z": 13,
+      "axis": "y",
+      "a": [
+        1363,
+        3133
+      ],
+      "b": [
+        1363,
+        3134
+      ],
+      "matches": 60,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 61.47580799999923,
+      "rightMs": 42.205479000000196
+    },
+    {
+      "name": "tahoe-south-edge",
+      "z": 14,
+      "axis": "y",
+      "a": [
+        2726,
+        6267
+      ],
+      "b": [
+        2726,
+        6268
+      ],
+      "matches": 56,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 26.079854999999952,
+      "rightMs": 20.517377000000124
+    },
+    {
+      "name": "tahoe-south-edge",
+      "z": 15,
+      "axis": "y",
+      "a": [
+        5452,
+        12535
+      ],
+      "b": [
+        5452,
+        12536
+      ],
+      "matches": 11,
+      "maxErrorTileUnits": 0,
+      "failures": [],
+      "leftMs": 2.9035079999994196,
+      "rightMs": 2.413999000000331
+    }
+  ],
+  "note": "Actual local 1024px DEMs, current bundled contour worker, z12–15 seam samples. Task timings include audit transport/decoding and are not phone benchmarks."
+}

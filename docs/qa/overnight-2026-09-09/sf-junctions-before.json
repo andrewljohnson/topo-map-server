@@ -1,0 +1,1209 @@
+{
+  "tiles": 640,
+  "counts": {
+    "agencyEnds": 1310,
+    "sourceDeadEnds": 135,
+    "lostSourceJunction": 37,
+    "disconnectedNewCut": 3,
+    "duplicateTermini": 9
+  },
+  "findings": [
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2612,
+        6325
+      ],
+      "pointMetres": [
+        1036.959560056217,
+        1098.3357155881822
+      ],
+      "id": "nps-{B2BA7DC4-4CA8-4E23-9362-5E4CA48EEE35}",
+      "agency": "NPS",
+      "name": "Stapelveldt Trail",
+      "nearestMetres": 2.210920400972709,
+      "nearestId": "osm-14-2612-6325-12",
+      "nearestName": "Ben Johnson Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{7B386ED1-E320-4D24-A3A8-A6CE0E616CB0}",
+          "agency": "NPS",
+          "name": "Ben Johnson Trail"
+        },
+        {
+          "id": "nps-{777160F5-E740-450C-B464-EC4CC6FA96B0}",
+          "agency": "NPS",
+          "name": "Ben Johnson Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5956167,
+        37.8996676
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2613,
+        6325
+      ],
+      "pointMetres": [
+        318.99923392012715,
+        972.1116263847798
+      ],
+      "id": "nps-{718D5CE2-DDFB-45E1-83A1-166DAD3F5BE5}",
+      "agency": "NPS",
+      "name": "Hillside Trail",
+      "nearestMetres": 1.0129089310081612,
+      "nearestId": "osm-14-2613-6325-34",
+      "nearestName": "Ben Johnson Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{94827170-A2F5-4358-AB16-3F19399D5EEC}",
+          "agency": "NPS",
+          "name": "Ben Johnson Trail"
+        },
+        {
+          "id": "nps-{7B386ED1-E320-4D24-A3A8-A6CE0E616CB0}",
+          "agency": "NPS",
+          "name": "Ben Johnson Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5818176,
+        37.9008015
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2613,
+        6325
+      ],
+      "pointMetres": [
+        1139.3929343987256,
+        1868.4731500018388
+      ],
+      "id": "nps-{1C404CBB-0CEE-491A-9FB9-41C38D615285}",
+      "agency": "NPS",
+      "name": "Muir Woods Annex Trail",
+      "nearestMetres": 1.671907801382791,
+      "nearestId": "osm-14-2613-6325-29",
+      "nearestName": "Redwood Creek Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{EDA85842-5563-4521-AEE6-5B1464FED764}",
+          "agency": "NPS",
+          "name": "Redwood Creek Trail"
+        },
+        {
+          "id": "nps-{49B689B9-446D-4318-839C-812D2645DB6C}",
+          "agency": "NPS",
+          "name": "Redwood Creek Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5724779,
+        37.8927489
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2613,
+        6325
+      ],
+      "pointMetres": [
+        886.1167910583317,
+        1318.4968642313033
+      ],
+      "id": "nps-{3F68FAA0-8718-4041-A67A-3E283BB6477C}",
+      "agency": "NPS",
+      "name": "Bohemian Grove Trail",
+      "nearestMetres": 1.9692103989109337,
+      "nearestId": "osm-14-2613-6325-61",
+      "nearestName": "Bohemian Grove Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{8215C183-26C7-4A8E-88EA-4A96CB6B0832}",
+          "agency": "NPS",
+          "name": "Bohemian Grove Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5753613,
+        37.897689799999995
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2613,
+        6325
+      ],
+      "pointMetres": [
+        897.1582043962553,
+        1310.0480750259012
+      ],
+      "id": "nps-{3F68FAA0-8718-4041-A67A-3E283BB6477C}",
+      "agency": "NPS",
+      "name": "Bohemian Grove Trail",
+      "nearestMetres": 2.4471009927250584,
+      "nearestId": "osm-14-2613-6325-36",
+      "nearestName": "Redwood Creek Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{E36000B3-5D1A-4AD9-B697-73F02D2F84A8}",
+          "agency": "NPS",
+          "name": "Redwood Creek Trail"
+        },
+        {
+          "id": "nps-{BA5A8154-EAA1-4006-BAA4-19A55CB47DDB}",
+          "agency": "NPS",
+          "name": "Redwood Creek Trail"
+        }
+      ],
+      "lonlat": [
+        -122.57523559999998,
+        37.8977657
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2613,
+        6325
+      ],
+      "pointMetres": [
+        1054.9353455025703,
+        1819.687051501125
+      ],
+      "id": "nps-{80717343-2D6C-4DC3-ABF4-E7400452EED1}",
+      "agency": "NPS",
+      "name": "Bohemian Grove Trail",
+      "nearestMetres": 2.5626193956633543,
+      "nearestId": "osm-14-2613-6325-44",
+      "nearestName": "Bohemian Grove Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{D6B43407-3798-46E5-AE04-B1BA27F7A41A}",
+          "agency": "NPS",
+          "name": "Bohemian Grove Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5734394,
+        37.8931872
+      ]
+    },
+    {
+      "kind": "disconnectedNewCut",
+      "tile": [
+        14,
+        2614,
+        6328
+      ],
+      "pointMetres": [
+        999.5770753165707,
+        1656.8576168399304
+      ],
+      "id": "nps-{CBC77DE7-78EB-4684-9192-2C86CEFA1B83}",
+      "agency": "NPS",
+      "name": "Tennessee Beach Overlook Trail",
+      "nearestMetres": 2.747934424845727,
+      "nearestId": "osm-14-2614-6328-7",
+      "nearestName": "",
+      "formerPartners": [],
+      "lonlat": [
+        -122.552105,
+        37.842623600000024
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2615,
+        6329
+      ],
+      "pointMetres": [
+        919.1827024091035,
+        1471.7779617067426
+      ],
+      "id": "nps-{96375A50-9BA0-415E-9E16-7D8CFA2740FD}",
+      "agency": "NPS",
+      "name": "Battery Smith-Guthrie Trail",
+      "nearestMetres": 1.3108310941418262,
+      "nearestId": "osm-14-2615-6329-25",
+      "nearestName": "Batteries Loop Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{ACCCE0D9-35A2-4AFA-8F0F-BD2C449AAD81}",
+          "agency": "NPS",
+          "name": "Batteries Loop Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5310494,
+        37.826936000000025
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2615,
+        6329
+      ],
+      "pointMetres": [
+        457.1605784194544,
+        954.469592416659
+      ],
+      "id": "nps-{DDB4BBC4-705E-4EF1-BCED-32ADC0DD521B}",
+      "agency": "NPS",
+      "name": "Lagoon Trail",
+      "nearestMetres": 1.2032885372784063,
+      "nearestId": "osm-14-2615-6329-29",
+      "nearestName": "Coastal Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{DF4DC486-A009-4CDA-ABCE-29B64621149A}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5363043,
+        37.8315832
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2615,
+        6329
+      ],
+      "pointMetres": [
+        1423.97895403672,
+        1048.7679234556854
+      ],
+      "id": "nps-{8671640B-B861-41F8-8EA6-E63EFA6282D9}",
+      "agency": "NPS",
+      "name": "Coastal Trail",
+      "nearestMetres": 1.5753491794141732,
+      "nearestId": "osm-14-2615-6329-30",
+      "nearestName": "Coastal Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{DF4DC486-A009-4CDA-ABCE-29B64621149A}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.525308,
+        37.83073609999999
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2616,
+        6327
+      ],
+      "pointMetres": [
+        863.6440312890336,
+        918.241387180984
+      ],
+      "id": "nps-{114CAC96-0505-413E-A0F2-14CA09D44F77}",
+      "agency": "NPS",
+      "name": "Orchard Trail",
+      "nearestMetres": 18.49425617514124,
+      "nearestId": "osm-14-2616-6327-101",
+      "nearestName": "Orchard Fire Road",
+      "formerPartners": [
+        {
+          "id": "nps-{934AFF15-846E-4457-873B-5FFE0903CCE0}",
+          "agency": "NPS",
+          "name": "Orchard Trail"
+        }
+      ],
+      "lonlat": [
+        -122.50970379999998,
+        37.86660520000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6330
+      ],
+      "pointMetres": [
+        434.2034436715767,
+        1595.7901766691357
+      ],
+      "id": "nps-{E0559ED3-E832-45A3-818E-E277F654E1A6}",
+      "agency": "NPS",
+      "name": "Bay Trail",
+      "nearestMetres": 1.6176587832400564,
+      "nearestId": "osm-14-2618-6330-39",
+      "nearestName": "Bay Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{1F8A06DB-9A81-4D70-9593-75C10783B0DF}",
+          "agency": "NPS",
+          "name": "Bay Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4706486,
+        37.80846749999998
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2617,
+        6331
+      ],
+      "pointMetres": [
+        1727.5499679250643,
+        374.28595665842295
+      ],
+      "id": "nps-{D4E697EC-09E9-4FDB-8BA0-DF13C0FA8180}",
+      "agency": "NPS",
+      "name": "Batteries to Bluffs Trail",
+      "nearestMetres": 1.7969914017745912,
+      "nearestId": "osm-14-2617-6331-77",
+      "nearestName": "Batteries to Bluffs Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{A21766A8-C6A4-4F3D-B9D3-340621C2A79F}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4779192,
+        37.802082000000006
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2617,
+        6331
+      ],
+      "pointMetres": [
+        1569.6114894319326,
+        600.1774976961315
+      ],
+      "id": "nps-{C23C3343-8FF9-4868-B004-AD113314B9B5}",
+      "agency": "NPS",
+      "name": "Batteries to Bluffs Trail",
+      "nearestMetres": 1.4931631544485409,
+      "nearestId": "osm-14-2617-6331-77",
+      "nearestName": "Batteries to Bluffs Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{D4E697EC-09E9-4FDB-8BA0-DF13C0FA8180}",
+          "agency": "NPS",
+          "name": "Batteries to Bluffs Trail"
+        }
+      ],
+      "lonlat": [
+        -122.47971469999999,
+        37.800052900000004
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2617,
+        6331
+      ],
+      "pointMetres": [
+        1772.52570953127,
+        267.3551911767572
+      ],
+      "id": "nps-{8EE65DB2-1EA7-49B6-9E8A-43A9BEAD5257}",
+      "agency": "NPS",
+      "name": "  Trail",
+      "nearestMetres": 1.4237612612866908,
+      "nearestId": "osm-14-2617-6331-74",
+      "nearestName": "Coastal Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{5F1ED52D-FAB1-4F7A-BF8A-69E34CAE88AD}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        },
+        {
+          "id": "nps-{466DEB40-FB05-40C9-B069-28CFB1DE141B}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4774079,
+        37.8030425
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2617,
+        6331
+      ],
+      "pointMetres": [
+        1325.697478284128,
+        1406.2383225169033
+      ],
+      "id": "nps-{80031848-0518-477F-887D-8966B4C2FA50}",
+      "agency": "NPS",
+      "name": "",
+      "nearestMetres": 1.7892322803185836,
+      "nearestId": "osm-14-2617-6331-73",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{F51EEC7B-E358-406F-808C-974B0C712A0E}",
+          "agency": "NPS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -122.48248760000001,
+        37.792811900000004
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        738.2898170622066,
+        887.1112574283034
+      ],
+      "id": "nps-{232C8F71-6359-4A52-B723-C3C644C34C50}",
+      "agency": "NPS",
+      "name": "Cemetery Trail",
+      "nearestMetres": 5.97712911002643,
+      "nearestId": "osm-14-2618-6331-179",
+      "nearestName": "Park Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{7114101F-898D-4D44-A548-FC286898880F}",
+          "agency": "NPS",
+          "name": "Park Trail"
+        }
+      ],
+      "lonlat": [
+        -122.46719280000002,
+        37.79747540000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        978.632509787567,
+        955.1167088169605
+      ],
+      "id": "nps-{232C8F71-6359-4A52-B723-C3C644C34C50}",
+      "agency": "NPS",
+      "name": "Cemetery Trail",
+      "nearestMetres": 4.088655922937557,
+      "nearestId": "osm-14-2618-6331-162",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{05EA2775-CB8B-43AB-8A91-B5A769AD308D}",
+          "agency": "NPS",
+          "name": "Bay Area Ridge Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4644605,
+        37.79686449999999
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        1571.6297021657228,
+        1707.324798213318
+      ],
+      "id": "nps-{48039738-6D45-4031-9279-829877584FDB}",
+      "agency": "NPS",
+      "name": "Ecology to MtnLake Trail",
+      "nearestMetres": 4.573039182545755,
+      "nearestId": "osm-14-2618-6331-184",
+      "nearestName": "Mountain Lake Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{DE47E45E-8DFA-4D66-A501-F9B5E7095109}",
+          "agency": "NPS",
+          "name": "Mountain Lake Trail"
+        },
+        {
+          "id": "nps-{A5BAFD90-2BDE-4E2B-B353-E6B16E3CAE58}",
+          "agency": "NPS",
+          "name": "Mountain Lake Trail"
+        }
+      ],
+      "lonlat": [
+        -122.45771910000002,
+        37.79010699999999
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        1887.7001788709313,
+        1553.137485716492
+      ],
+      "id": "nps-{F8000887-10A8-4CB7-8595-BFA48B4FAC86}",
+      "agency": "NPS",
+      "name": "Julius Kahn Trail",
+      "nearestMetres": 1.0581498464935912,
+      "nearestId": "osm-14-2618-6331-162",
+      "nearestName": "Julius Kahn Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{20AB18C5-C87C-4E9F-BD92-CD8ABC521507}",
+          "agency": "NPS",
+          "name": "Julius Kahn Trail"
+        }
+      ],
+      "lonlat": [
+        -122.45412590000001,
+        37.79149219999999
+      ]
+    },
+    {
+      "kind": "disconnectedNewCut",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        724.2948229508474,
+        815.3871052246541
+      ],
+      "id": "nps-{7114101F-898D-4D44-A548-FC286898880F}",
+      "agency": "NPS",
+      "name": "Park Trail",
+      "nearestMetres": 6.702473789554107,
+      "nearestId": "nps-{7114101F-898D-4D44-A548-FC286898880F}",
+      "nearestName": "Park Trail",
+      "formerPartners": [],
+      "lonlat": [
+        -122.4673519,
+        37.79811970000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        378.39592070598155,
+        1695.125272091478
+      ],
+      "id": "nps-{5A5FDF4A-FB44-452B-8AE1-925E88BB1F65}",
+      "agency": "NPS",
+      "name": "Mountain Lake Trail & Anza Trail",
+      "nearestMetres": 1.7176963682720061,
+      "nearestId": "osm-14-2618-6331-161",
+      "nearestName": "Park Boulevard Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{48E95530-C83E-4173-AA36-3857F8A9FF68}",
+          "agency": "NPS",
+          "name": "Park Trail"
+        },
+        {
+          "id": "nps-{162D75C5-BF56-4A49-97B4-A351E8562D2B}",
+          "agency": "NPS",
+          "name": "Anza Trail & Park Trail"
+        }
+      ],
+      "lonlat": [
+        -122.47128420000001,
+        37.7902166
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        141.18472886364907,
+        1753.3400012291968
+      ],
+      "id": "nps-{25F73990-9A8C-4637-A78D-B96C5FBA4423}",
+      "agency": "NPS",
+      "name": "Moutain Trail",
+      "nearestMetres": 1.1456074160576544,
+      "nearestId": "osm-14-2618-6331-193",
+      "nearestName": "Cemetery Overlook Path",
+      "formerPartners": [
+        {
+          "id": "nps-{F890440C-09EC-4D84-ABE3-7F2318FD1427}",
+          "agency": "NPS",
+          "name": "Moutain Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4739809,
+        37.7896936
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2618,
+        6331
+      ],
+      "pointMetres": [
+        1926.1842135917395,
+        536.3104136046022
+      ],
+      "id": "nps-{F492AB97-0ADD-4579-8C24-B883B3DF8C08}",
+      "agency": "NPS",
+      "name": "Presidio Promenade Trail",
+      "nearestMetres": 2.551091174726318,
+      "nearestId": "nps-{52401B85-C531-4BE2-B541-4EC68D8BD189}",
+      "nearestName": "Tennessee Hollow Trail & Presidio Promenade Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{FD73ADBD-6A2C-4F01-B287-2B34DBC622A5}",
+          "agency": "NPS",
+          "name": "Presidio Promenade Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4536884,
+        37.800626599999994
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2619,
+        6331
+      ],
+      "pointMetres": [
+        88.3576944032684,
+        105.25863565504551
+      ],
+      "id": "nps-{228E74D6-0B98-4F50-AD85-CA43186F52E3}",
+      "agency": "NPS",
+      "name": "Mason Street Bike Path",
+      "nearestMetres": 1.518269446572981,
+      "nearestId": "osm-14-2619-6331-176",
+      "nearestName": "Bay Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{81012370-9FF8-4CAD-8C94-27E17E63B352}",
+          "agency": "NPS",
+          "name": "Bay Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4526088,
+        37.80449850000003
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2619,
+        6331
+      ],
+      "pointMetres": [
+        92.28086685668677,
+        104.64631431363523
+      ],
+      "id": "nps-{228E74D6-0B98-4F50-AD85-CA43186F52E3}",
+      "agency": "NPS",
+      "name": "Mason Street Bike Path",
+      "nearestMetres": 1.1499926708638668,
+      "nearestId": "osm-14-2619-6331-150",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{FC32C889-0709-4B42-8F6A-1578A42F0579}",
+          "agency": "NPS",
+          "name": "Bay Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4525642,
+        37.804503999999994
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2616,
+        6332
+      ],
+      "pointMetres": [
+        662.71884257067,
+        1281.1470928732306
+      ],
+      "id": "nps-{0D01E5C8-2815-4DF8-96D7-580FF4A6D026}",
+      "agency": "NPS",
+      "name": "Coastal Trail",
+      "nearestMetres": 1.312125317261153,
+      "nearestId": "osm-14-2616-6332-108",
+      "nearestName": "The Esplanade",
+      "formerPartners": [
+        {
+          "id": "nps-{4CC044A1-3F84-472C-AD48-73B7CBA74306}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.511999,
+        37.7765731
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2616,
+        6332
+      ],
+      "pointMetres": [
+        721.6946386704221,
+        521.9866913724691
+      ],
+      "id": "nps-{F877FD21-B67B-4ADF-8692-36BD2ACEF0EC}",
+      "agency": "NPS",
+      "name": "Memorial Stairs",
+      "nearestMetres": 3.001575938754423,
+      "nearestId": "osm-14-2616-6332-57",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{01D3D4A6-CDDF-4195-8CFA-B40CCBF6C326}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.5113287,
+        37.78339270000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2616,
+        6332
+      ],
+      "pointMetres": [
+        732.9126216676086,
+        552.757003782317
+      ],
+      "id": "nps-{F877FD21-B67B-4ADF-8692-36BD2ACEF0EC}",
+      "agency": "NPS",
+      "name": "Memorial Stairs",
+      "nearestMetres": 1.0442203494665399,
+      "nearestId": "osm-14-2616-6332-57",
+      "nearestName": "El Camino del Mar Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{22DE9D1F-1470-4181-AC69-20F804D2F185}",
+          "agency": "NPS",
+          "name": "El Camino del Mar Trail"
+        }
+      ],
+      "lonlat": [
+        -122.51120119999999,
+        37.78311630000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2616,
+        6335
+      ],
+      "pointMetres": [
+        1374.4668775005266,
+        1209.5404139310122
+      ],
+      "id": "nps-{9C858B9E-11E9-4DAB-A334-F149A62CEB75}",
+      "agency": "NPS",
+      "name": "Funston Horse Trail",
+      "nearestMetres": 1.087201189214152,
+      "nearestId": "osm-14-2616-6335-37",
+      "nearestName": "Coastal Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{0558B3EC-DF34-4B48-99BE-97E1B120D814}",
+          "agency": "NPS",
+          "name": "Coastal Trail"
+        }
+      ],
+      "lonlat": [
+        -122.50392050000002,
+        37.72510420000002
+      ]
+    },
+    {
+      "kind": "disconnectedNewCut",
+      "tile": [
+        14,
+        2617,
+        6341
+      ],
+      "pointMetres": [
+        109.28627060633153,
+        1244.2540031149983
+      ],
+      "id": "nps-{E34BA581-B16B-42D8-A556-5636026AB62B}",
+      "agency": "NPS",
+      "name": "Bootlegger's Steps",
+      "nearestMetres": 1.826184784708485,
+      "nearestId": "osm-14-2617-6341-80",
+      "nearestName": "Bootlegger's Steps",
+      "formerPartners": [],
+      "lonlat": [
+        -122.4963191,
+        37.62045789999999
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2617,
+        6346
+      ],
+      "pointMetres": [
+        749.8983770329505,
+        693.2297010514885
+      ],
+      "id": "nps-{0369B238-B4E7-4A95-B2AD-0EAACF79F2CA}",
+      "agency": "NPS",
+      "name": "San Vicente Trail",
+      "nearestMetres": 1.0050287314153978,
+      "nearestId": "osm-14-2617-6346-15",
+      "nearestName": "San Vicente Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{75CAACD3-22FF-4628-8C40-C7CD71F15475}",
+          "agency": "NPS",
+          "name": "San Vicente Trail"
+        }
+      ],
+      "lonlat": [
+        -122.48906340000002,
+        37.5383504
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2623,
+        6325
+      ],
+      "pointMetres": [
+        1324.9481896692887,
+        102.60535335727036
+      ],
+      "id": "nps-{EE5C9A59-7304-41A8-A0BA-C45E73FF246C}",
+      "agency": "NPS",
+      "name": "",
+      "nearestMetres": 1.7842710245422368,
+      "nearestId": "osm-14-2623-6325-9",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{6EA1D53E-EB16-4C95-8FB4-CDD0CFB38E8B}",
+          "agency": "NPS",
+          "name": ""
+        },
+        {
+          "id": "nps-{492AD718-1A42-4749-864B-49DE8CBE66BF}",
+          "agency": "NPS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -122.3506389,
+        37.908612
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2623,
+        6325
+      ],
+      "pointMetres": [
+        1294.863193104975,
+        137.8416057266295
+      ],
+      "id": "nps-{B3203EBE-0F15-443B-88EE-A06E606067BE}",
+      "agency": "NPS",
+      "name": "",
+      "nearestMetres": 1.8763474165712417,
+      "nearestId": "osm-14-2623-6325-9",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{AD2D991C-F9ED-4A6A-B11E-F56D4F4A4C88}",
+          "agency": "NPS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -122.3509814,
+        37.90829550000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2623,
+        6325
+      ],
+      "pointMetres": [
+        1341.8748432118446,
+        85.89452159963548
+      ],
+      "id": "nps-{F236F316-0508-4881-9DCE-EF96D79A6C82}",
+      "agency": "NPS",
+      "name": "",
+      "nearestMetres": 1.9427364718890467,
+      "nearestId": "osm-14-2623-6325-9",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{5C262ED3-8C79-4C0A-865B-34C9EAB829B9}",
+          "agency": "NPS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -122.3504462,
+        37.90876210000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2620,
+        6330
+      ],
+      "pointMetres": [
+        180.4520961260423,
+        1781.9890472572297
+      ],
+      "id": "nps-{B92B7334-FFDD-46B0-931F-A7698C764E72}",
+      "agency": "NPS",
+      "name": "Fort Mason Bay Trail",
+      "nearestMetres": 4.010561986012162,
+      "nearestId": "osm-14-2620-6330-54",
+      "nearestName": "Fort Mason Bay Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{12785181-7CAE-4A3E-AACE-C4ACFEF3309C}",
+          "agency": "NPS",
+          "name": "Fort Mason Bay Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4295887,
+        37.8067947
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2620,
+        6330
+      ],
+      "pointMetres": [
+        965.6232912885025,
+        1685.561978423968
+      ],
+      "id": "nps-{3AD8108F-CDC6-4438-8AED-85651C3CC754}",
+      "agency": "NPS",
+      "name": "Bay Trail",
+      "nearestMetres": 1.5382328597562052,
+      "nearestId": "osm-14-2620-6330-81",
+      "nearestName": "Bay Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{8C8A3378-F3AE-4BFA-9A09-A9EDE56EB5C7}",
+          "agency": "NPS",
+          "name": "Bay Trail"
+        }
+      ],
+      "lonlat": [
+        -122.4206605,
+        37.807660999999975
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2620,
+        6330
+      ],
+      "pointMetres": [
+        190.7941732024774,
+        1840.7151714339852
+      ],
+      "id": "nps-{C7389879-300C-40AC-8708-11F7DAAF5EFD}",
+      "agency": "NPS",
+      "name": "Parade Ground Stairs",
+      "nearestMetres": 1.6382562531148925,
+      "nearestId": "osm-14-2620-6330-55",
+      "nearestName": "",
+      "formerPartners": [
+        {
+          "id": "nps-{8AEECB8E-F5C5-45DC-9E1E-330D0625B5B1}",
+          "agency": "NPS",
+          "name": "Great Meadow Paths"
+        },
+        {
+          "id": "nps-{F387FFE4-EA3E-4039-BF3C-85D21DC4D641}",
+          "agency": "NPS",
+          "name": "Great Meadow Paths"
+        }
+      ],
+      "lonlat": [
+        -122.4294711,
+        37.806267099999985
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2620,
+        6330
+      ],
+      "pointMetres": [
+        204.97055776417255,
+        1927.5791999455541
+      ],
+      "id": "nps-{3C8B825B-FDBA-4182-A16E-C75D51D53D3F}",
+      "agency": "NPS",
+      "name": "Great Meadow Paths",
+      "nearestMetres": 1.0787082856301626,
+      "nearestId": "osm-14-2620-6330-55",
+      "nearestName": "Great Meadow Paths",
+      "formerPartners": [
+        {
+          "id": "nps-{5CBA826B-D8D3-4CF0-BAF3-6DC13E70E499}",
+          "agency": "NPS",
+          "name": "Great Meadow Paths"
+        },
+        {
+          "id": "nps-{85B2F707-7B49-4159-A5D1-9A9B2DDB425D}",
+          "agency": "NPS",
+          "name": "Great Meadow Paths"
+        }
+      ],
+      "lonlat": [
+        -122.42930990000002,
+        37.8054867
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2625,
+        6351
+      ],
+      "pointMetres": [
+        1573.252850458026,
+        630.9531699027866
+      ],
+      "id": "nps-{724EC7AA-382B-4E18-B38D-C0ADC5FAA705}",
+      "agency": "NPS",
+      "name": "Mount Redondo Trail",
+      "nearestMetres": 3.011081491410387,
+      "nearestId": "osm-14-2625-6351-7",
+      "nearestName": "Raymundo Trail",
+      "formerPartners": [
+        {
+          "id": "nps-{CAB1103D-BDFA-43CE-B401-312AC7F63B4E}",
+          "agency": "NPS",
+          "name": "Raymundo Trail"
+        },
+        {
+          "id": "nps-{23A5395E-C38E-46F3-B30A-CDBEDD4080DA}",
+          "agency": "NPS",
+          "name": "Miramontes Trail"
+        }
+      ],
+      "lonlat": [
+        -122.3039756,
+        37.45175060000001
+      ]
+    }
+  ]
+}

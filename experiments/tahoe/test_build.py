@@ -2,7 +2,7 @@ import unittest
 import mapbox_vector_tile as mvt
 import numpy as np
 from shapely.geometry import box,LineString,Point,shape
-from build import merge_tiles,decode_png,encode_png
+from build import merge_tiles,decode_png,encode_png,encode_merged_layers,EXTENT
 class PackingTests(unittest.TestCase):
  def tile(self,geometry):
   return mvt.encode({'name':'test','features':[{'id':7,'geometry':geometry,'properties':{'name':'continuous'}}]},default_options={'extents':4096,'y_coord_down':True})
@@ -59,6 +59,24 @@ class PackingTests(unittest.TestCase):
  def test_source_namespaces(self):
   result,_=merge_tiles([(source,0,0,self.tile(Point(20,30))) for source in ('osm','recreation')])
   self.assertEqual(set(mvt.decode(result)),{'osm__test','recreation__test'})
+ def test_native_polygon_orientation_matches_encoder_quantization(self):
+  from shapely.geometry import Polygon,MultiPolygon
+  from shapely import reverse
+  import copy
+  # Holes, reversed rings, disconnected islands, half-integer ties and
+  # collapsed slivers exercise the exact encoding boundary, not just area.
+  outer=[(-.5,-.5),(12.5,-.5),(12.5,12.5),(-.5,12.5)]
+  hole=[(2.5,2.5),(2.5,8.5),(8.5,8.5),(8.5,2.5)]
+  polygon=Polygon(outer,[hole])
+  geometries=[polygon,reverse(polygon),MultiPolygon([polygon,box(20.5,20.5,30.5,30.5)]),
+   Polygon([(0,0),(.4,.4),(.2,.3)]),Polygon([(0,0),(5.4,0),(5.4,.4),(0,.4)]),
+   Polygon([(0,0),(10,0),(10,10),(0,10)],[[(3.1,3.1),(3.4,3.1),(3.4,3.4)]]),
+   LineString([(0.5,0.5),(10.5,12.5)]),Point(3.5,5.5)]
+  for geometry in geometries:
+   layers={'test':[{'id':7,'geometry':geometry,'properties':{'name':'retained','value':3}}]}
+   expected=mvt.encode([{'name':'test','features':layers['test']}],default_options={'extents':EXTENT,'y_coord_down':True})
+   actual=encode_merged_layers(copy.deepcopy(layers))
+   self.assertEqual(actual,expected,geometry.wkt)
  def test_raw_dem_mosaic_matches_child_png_roundtrips(self):
   rng=np.random.default_rng(42)
   values=rng.uniform(-430,8849,(128,128)).astype('float32')

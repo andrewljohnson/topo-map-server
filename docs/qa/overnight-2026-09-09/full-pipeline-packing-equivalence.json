@@ -1,0 +1,88 @@
+{
+  "filesCompared": 220,
+  "byteIdentical": 220,
+  "failures": [],
+  "runs": {
+    "before": [
+      {
+        "totalSeconds": 55.47499062912539,
+        "packingWallSeconds": 11.722709053894505,
+        "startedAt": 1788949852.6172547,
+        "finishedAt": 1788949908.092246,
+        "resources": {
+          "userCpuSeconds": 2.830962,
+          "systemCpuSeconds": 0.057282,
+          "peakRssKiB": 120368,
+          "childUserCpuSeconds": 502.846604,
+          "childSystemCpuSeconds": 8.19071,
+          "maxChildPeakRssKiB": 505668,
+          "loadAverageEnd": [
+            7.25390625,
+            4.61962890625,
+            2.22265625
+          ]
+        }
+      },
+      {
+        "totalSeconds": 53.5286488099955,
+        "packingWallSeconds": 11.265980735886842,
+        "startedAt": 1788950273.828024,
+        "finishedAt": 1788950327.356673,
+        "resources": {
+          "userCpuSeconds": 2.843801,
+          "systemCpuSeconds": 0.066298,
+          "peakRssKiB": 121364,
+          "childUserCpuSeconds": 500.96208,
+          "childSystemCpuSeconds": 8.468377,
+          "maxChildPeakRssKiB": 513888,
+          "loadAverageEnd": [
+            6.541015625,
+            4.6650390625,
+            3.04931640625
+          ]
+        }
+      }
+    ],
+    "after": [
+      {
+        "totalSeconds": 50.53894784394652,
+        "packingWallSeconds": 9.948298401199281,
+        "startedAt": 1788949954.9598088,
+        "finishedAt": 1788950005.4987566,
+        "resources": {
+          "userCpuSeconds": 2.804497,
+          "systemCpuSeconds": 0.082837,
+          "peakRssKiB": 120560,
+          "childUserCpuSeconds": 479.690597,
+          "childSystemCpuSeconds": 8.383569,
+          "maxChildPeakRssKiB": 501536,
+          "loadAverageEnd": [
+            7.81298828125,
+            5.04833984375,
+            2.58837890625
+          ]
+        }
+      },
+      {
+        "totalSeconds": 51.8762467270717,
+        "packingWallSeconds": 9.693625301122665,
+        "startedAt": 1788950083.992691,
+        "finishedAt": 1788950135.868938,
+        "resources": {
+          "userCpuSeconds": 2.8447199999999997,
+          "systemCpuSeconds": 0.071765,
+          "peakRssKiB": 120584,
+          "childUserCpuSeconds": 486.238329,
+          "childSystemCpuSeconds": 8.550064,
+          "maxChildPeakRssKiB": 499376,
+          "loadAverageEnd": [
+            10.41455078125,
+            5.60107421875,
+            3.02978515625
+          ]
+        }
+      }
+    ]
+  },
+  "note": "Retained local raw inputs; all derived vectors regenerated. Includes detailed vectors and DEM halo, not global overview cutting or cloud upload."
+}

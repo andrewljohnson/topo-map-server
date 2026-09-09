@@ -1,13 +1,13 @@
 # Combined base map / DEM releases
 
-The production candidate uses one namespaced vector dataset and one Terrarium
+The combined publication uses one namespaced vector dataset and one Terrarium
 DEM dataset. Detailed vectors stop at z12 (extent 16384); DEMs are 1024×1024 at
 z12. The client overzooms these and computes contours/relief locally. Lower vector
 zooms retain their native source extent. Static symbols/borders remain bundled.
 
 ## Pilot scope
 
-`topo-z12-pilot-20260909-r2` contains 80 detailed base tiles around Tahoe and San
+The current pilot (`topo-z12-pilot-20260909-r12`) contains 80 detailed base tiles around Tahoe and San
 Francisco, 140 DEM tiles including halos, and 132 native overview tiles. The
 worldwide portion is z0–3 for this pilot; regional ancestors extend through z11.
 Outside those exact published regions, the broad overview remains visible.
@@ -21,8 +21,9 @@ contract records its content fingerprint, Git revision, source datasets and exac
 coverage plan. Reusing a release ID with changed processing code is rejected.
 
 ```sh
-services/tiles/.venv/bin/python services/tiles/publish_combined.py plan --release topo-z12-pilot-20260909-r2
-services/tiles/.venv/bin/python services/tiles/publish_combined.py publish --release topo-z12-pilot-20260909-r2
+RELEASE=topo-z12-pilot-20260909-next  # Choose a new, unused lowercase ID.
+services/tiles/.venv/bin/python services/tiles/publish_combined.py plan --release "$RELEASE"
+services/tiles/.venv/bin/python services/tiles/publish_combined.py publish --release "$RELEASE"
 ```
 
 Repeat the same publication command to resume. A candidate manifest appears only
@@ -40,17 +41,19 @@ keep their existing manifest until promotion. Code releases still use
 After online/offline validation:
 
 ```sh
-services/tiles/.venv/bin/python services/tiles/publish_combined.py promote --release topo-z12-pilot-20260909-r2
+services/tiles/.venv/bin/python services/tiles/publish_combined.py promote --release "$RELEASE"
 # Restore the saved previous manifest if needed:
-services/tiles/.venv/bin/python services/tiles/publish_combined.py rollback --release topo-z12-pilot-20260909-r2
+services/tiles/.venv/bin/python services/tiles/publish_combined.py rollback --release "$RELEASE"
 ```
 
 Promotion changes only the current manifest pointer, with up to 30 seconds of
 metadata caching. Old release-pinned tile URLs continue working. Mobile reloads
 metadata, uses new dataset IDs to separate tile files, and retains notes/GPS in
-separate files. Old saved map selections may reset for this incompatible format;
-old binary caches are not reused as new-format tiles. Expo development reload
-still clears only its map cache as requested previously.
+separate files. A transition from the legacy format may reset selections; old
+binary caches are not reused as new-format tiles. Compatible combined revisions
+with unchanged coverage and physical formats preserve selections and refresh both
+base and DEM. This is not an atomic offline rollback during a partial refresh.
+Expo development reload still clears map tiles and selections, retaining notes/GPS.
 
 ## Bounded processing and recovery
 

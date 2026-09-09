@@ -1,74 +1,122 @@
-# Standalone app distribution
-
-EAS profiles in `eas.json` build a real app with embedded JavaScript and MapLibre.
-`preview` produces an iOS ad hoc install or Android APK; `production` produces an
-App Store/TestFlight or Play Store binary. Both default to the public cloud map and
-need neither Metro nor Expo Go. Expo development also defaults to the cloud server and ignores saved connection overrides on launch. Tile caches are separated by server origin, so LAN tiles cannot mask missing cloud coverage. Each full Expo reload clears the complete map cache and download selections before loading cloud metadata. Fast Refresh does not repeatedly erase an active session. Notes and GPS recordings are retained; installed release builds retain offline maps. Set EXPO_PUBLIC_TILE_SERVER explicitly to test a local server.
-
-Run from this directory after sourcing `../../scripts/env.sh`:
-
-```
-pnpm dlx eas-cli device:create
-pnpm dlx eas-cli build --platform ios --profile preview
-```
-
-For iOS, first use an active Apple Developer Program membership and register both
-phones through the device-registration link. EAS can manage signing credentials;
-complete Apple sign-in yourself when prompted. Adding a phone later requires a new
-provisioning profile and a rebuilt/re-signed install. Keep Apple passwords and signing
-keys out of Git and chat. A family member need not buy a developer membership.
-
-For TestFlight, build with `--profile production`, then submit with
-`pnpm dlx eas-cli submit --platform ios --profile production`. External testers need
-Apple beta review; TestFlight builds expire after 90 days. App Store publication is
-not required to use TestFlight. App Store Connect app setup/signing remain required.
-
-Android can use `pnpm dlx eas-cli build --platform android --profile preview` to
-produce an APK. No Play Store listing is needed for direct APK installs.
-
-Build status: profiles and asset generation are configured, and the project is linked
-to https://expo.dev/accounts/andrewljohnson/projects/topo-map-server. A signed install
-is not available until platform credentials and a native build succeed. Native builds require separate device acceptance for offline maps, background
-location, background downloads and rotation; a JS export is not a signed native build.
-
-Cloud builds regenerate the ignored MapLibre asset module after dependency install.
-Other generated map modules are tracked in Git and should be regenerated locally
-with `pnpm bundle:map` before committing a release.
-
----
-
 # Topo mobile
 
-Expo Go app for iOS and Android. Opens straight to your local map, with a bottom-right Download button. Download mode overlays a zoom-12 grid. Tap cells to enqueue, tap again to cancel/deselect. Amber is queued/downloading, green is saved. Failed cells remain selectable for retry. Downloads use two concurrent requests of up to eight tiles each, retry missing tiles up to three times, save queue metadata after each batch, and resume when the app opens.
+The Expo app opens directly on the map. It shares the web cartography and embeds
+MapLibre, workers, icons, and local font rendering for offline use. The default
+server is the [public cloud map](https://topo-map.andrewljohnson.workers.dev/), whose
+current detailed coverage is the Tahoe/San Francisco pilot.
+
+## Development
+
+From the repository root:
 
 ```sh
-pnpm install
-pnpm exec expo install --fix
-EXPO_PUBLIC_TILE_SERVER=http://YOUR_LAN_IP:3001 pnpm start
+./scripts/mobile.sh
+# Explicitly use the local on-demand tile server instead of published cloud tiles:
+EXPO_PUBLIC_TILE_SERVER=http://YOUR_LAN_IP:3001 ./scripts/mobile.sh
 ```
 
-Scan the Expo QR code with Expo Go on Android or Camera on iOS. Phone and computer must be on the same Wi-Fi; allow inbound ports 8081 and 3001. The default tile-server hostname is inferred from Expo's LAN host, so the environment setting is optional for the usual setup. Never use localhost for a physical phone.
+Use Expo Go matching the SDK in `package.json`, signed into the same Expo account
+as the CLI. The phone must reach the Expo development server; local tile testing
+also requires access to port 3001. Never use `localhost` as a physical phone's
+server address. If another Expo project is running, select a different Metro port.
 
-Use the Expo Go version matching this project's SDK (see package.json); https://expo.dev/go lists downloads. SDK compatibility must match the installed Expo Go app.
+Full Expo development reloads clear map caches and download selections so stale
+LAN or cloud tiles cannot mask loading problems. Fast Refresh does not repeatedly
+erase the active session. Notes and GPS files are retained. Installed release
+builds retain offline maps. An explicit `EXPO_PUBLIC_TILE_SERVER` overrides the
+cloud default; saved connection overrides are ignored on development launch.
 
-## Offline behavior
+## Download behavior
 
-The app embeds MapLibre GL JS, CSS, and its worker in its bundle; it does not load a CDN, public OSM tile server, or external map style. Native persistent document storage holds downloaded binary protobuf vector tiles. A WebView bridge reads these files as base64, then a custom MapLibre protocol decodes them into ArrayBuffers; all network requests run through native code exclusively to the configured server. Selected cells include low-zoom ancestors and descendants through zoom 14 (display overzooms through 18), clipped to dataset bounds. A full cell contains 33 basemap tiles and 22 contour tiles with the current zoom ranges; disk use depends on vector tile size. Downloading neighboring cells reuses shared tiles. A separate vector tile source supplies USGS 3DEP elevation contours: 20-foot lines from zoom 13, with 100-foot index lines from zoom 11 and labels from zoom 12. The renderer composes basemap and contour sources. Grid selections download both through compressed batches, with independent cache namespaces and dataset versions. Download regions again after a dataset update; unchanged source tiles are reused.
+The small map button opens the selection grid. Entering download mode moves to the
+grid's useful zoom once; selecting a cell does not change zoom. Select cells to
+queue them, tap again to remove a selection, and use the panel to see progress
+and downloaded size. The icon shimmers while phone downloads are active.
 
-Deselecting a region cancels its remaining queue work and removes its selection. Already downloaded tiles and tiles loaded while browsing stay cached because adjacent regions share them. Use Clear device storage to reclaim all tiles after cancelling active queues. Downloads run while the app is open; mobile OS suspension pauses work, and queued regions resume on reopening. Expo Go itself must have loaded the JavaScript bundle at least once; for a dependable offline cold launch after restarting the phone, create a development/production build later.
+Current combined releases have **two physical datasets**: one base vector MVT
+and one raw DEM. Each selected z12 cell includes its detailed base, published
+low-zoom ancestors, and DEM neighbors needed for terrain continuity. Shared tiles
+are downloaded once. Counts depend on the exact coverage manifest and neighboring
+selections; the old fixed “33 base plus 22 contour tiles” calculation does not
+apply. Contours and shading are generated on the device from the DEM.
 
-The first launch requires the tile server to fetch metadata. Later launches can use saved metadata and tiles without the tile server. Uncached areas show a neutral background when offline. Each source cache is versioned by its own datasetId. A changed source invalidates saved selections for the composition, while unchanged source tiles stay reusable. This initial version has no background download service or regional cache eviction.
+Native document storage holds versioned tile files. The WebView bridge reads them
+as base64 and hands ArrayBuffers to MapLibre; network requests go through native
+code to the configured server. Selected maps reopen offline after metadata and
+all required tiles have been saved. An uncached area cannot supply missing detail
+without a connection. Use an installed build for offline cold-launch acceptance;
+Expo Go also depends on having its development bundle available.
 
-## Checks
+Deselecting a cell cancels remaining work but retains shared cached files. Clear
+map storage is available when loading and queued work have stopped. Notes and GPS
+are separate. Compatible combined releases with unchanged format/coverage preserve
+selected regions and refresh their base/DEM data; incompatible coverage or format
+changes may reset selections. This is not an atomic offline rollback guarantee
+while a release refresh is only partially downloaded.
 
-`pnpm test` tests tile enumeration, deduplication, bounds, persisted queue state, cache reuse, and cancellation during a download using a mocked filesystem. `pnpm typecheck` checks TypeScript. `pnpm export` builds iOS and Android bundles. Physical phone acceptance: download one cell, wait for green, disconnect Wi-Fi/cellular while keeping Expo Go open, pan and zoom inside the cell, then reconnect and test queue cancellation/retry.
+## Scheduling and background work
 
-Map labels use built-in device fonts; the style omits a glyph URL, so glyphs are generated locally, including offline. The CSP worker is bundled into a Blob URL and does not require a worker CDN. WebGL support is required in the device WebView; renderer errors are shown in the app.
+Published combined metadata requests batches of four tiles; the generic client
+supports up to eight when advertised. Foreground offline work has two batch lanes.
+Visible base and DEM requests each reserve two direct lanes, and offline batches
+yield to them. Reservations deduplicate viewport and saved-region requests.
+Completed files remain reusable; partial responses retry only missing tiles.
 
-## Batched downloads
+Leaving the foreground submits selected work to native background transfers. A
+persisted journal recovers completed batches after relaunch, and returning to the
+foreground restores the bounded scheduler. Platform scheduling determines when
+background transfers run. See [background behavior and physical-device acceptance](../../docs/background-downloads.md).
 
-When metadata advertises `batchUrl`, the offline queue uses two concurrent HTTP batches with at most eight tiles each. A full zoom-12 national cell downloads 33 basemap tiles and 22 contour tiles, using five basemap and three contour batches when uncached. Successful tiles are written immediately even when other tiles in the response fail; retries request only missing tiles. Cached tiles are skipped. The map viewport and downloads share per-tile reservations, so an interactive request joins an existing queued or in-flight request instead of duplicating traffic. Fresh viewport requests use a separate lane of up to two direct tile requests, which the server can prioritize over offline rendering; they do not wait behind the offline queue. The combined network limit is four requests (two interactive plus two offline). Servers without batching use at most two concurrent individual requests.
+Contour rendering uses a separate worker. One transient worker crash is retried
+with a fresh worker; persistent failure stops retrying and settles requests rather
+than creating an endless restart or wait. Stale worker replies cannot populate a
+replacement worker's requests. This does not change the base-map or raw-DEM cache.
 
-Cancellation prevents new chunks from being scheduled and aborts an in-flight batch when none of its tiles have an active owner. An interactive map request keeps a shared batch alive. Completed files remain reusable. Native filesystem writes happen sequentially within each worker (at most two offline and two interactive workers), and queue metadata writes are serialized separately. UI progress refreshes at most every 150 ms while tiles arrive. Batches group tiles by source, and each source dataset identifier is checked before writing results.
+## Standalone distribution
 
-`pnpm test` includes delayed-network checks for the two-request cap, four-round-trip cell downloads, partial retry isolation, viewport/queue deduplication, cancellation, restored queues, and the individual-download fallback.
+`eas.json` provides `preview` (internal iOS build / Android APK) and `production`
+(store distribution). Both embed the JavaScript and MapLibre and default to the
+cloud API, so they do not need Metro or Expo Go.
+
+From this directory, after `source ../../scripts/env.sh`:
+
+```sh
+pnpm dlx eas-cli device:create
+pnpm dlx eas-cli build --platform ios --profile preview
+# Android APK:
+pnpm dlx eas-cli build --platform android --profile preview
+```
+
+For iOS internal distribution, use the registered phones and active developer
+membership. EAS handles signing prompts; keep account passwords and signing keys
+out of Git and chat. The build dashboard provides installation links after a build
+succeeds. Adding another device can require refreshed provisioning and a new or
+re-signed build.
+
+[Project/build dashboard](https://expo.dev/accounts/andrewljohnson/projects/topo-map-server)
+
+For store/TestFlight distribution, use `--profile production` and the corresponding
+EAS submit command. Follow the current platform enrollment, signing, and review
+requirements. Native builds still need real-device checks for rotation, background
+location, offline cold launch, and lock-screen transfers; a JS export is not a
+signed build or proof of OS background scheduling.
+
+## Checks and generated assets
+
+```sh
+pnpm bundle:map
+pnpm test
+pnpm typecheck
+pnpm export
+```
+
+The tests cover queue ownership/priority, cancellation, batch recovery, release
+migration, contour transport, style contracts, POI handoff/matching, notes, and GPS.
+Typechecks and web map renders complement them. Physical acceptance includes
+saving a cell, disconnecting all networking, reopening and browsing it, then
+reconnecting and checking cancellation/resume and background behavior.
+
+Cloud builds regenerate the ignored MapLibre asset module after dependency install.
+Other generated map helpers are tracked; run `pnpm bundle:map` before committing.
+Full [source attribution](../../docs/data-sources.md) remains available from the
+map's circular information button together with the viewport legend.

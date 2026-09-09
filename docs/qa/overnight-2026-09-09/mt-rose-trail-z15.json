@@ -1,0 +1,24 @@
+{
+  "capturedAt": "2026-09-09T10:29:37.240Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -119.926480501864,
+    39.329783582252446,
+    -119.92064149813689,
+    39.337954179042185
+  ],
+  "center": [
+    -119.923561,
+    39.333869
+  ],
+  "zoom": 15.86,
+  "bearing": 7,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "7e637944e5bee8d99677423f9ffa338e73efe475f56d11864b701dad853b11d3",
+  "candidatePeaks": [],
+  "renderedPeaks": []
+}

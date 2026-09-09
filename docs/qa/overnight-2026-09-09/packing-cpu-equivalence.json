@@ -1,0 +1,1053 @@
+{
+  "baselineCommit": "6706795",
+  "parents": 80,
+  "workers": 16,
+  "wallSeconds": 32.540947627974674,
+  "byteIdentical": 80,
+  "beforeTaskSeconds": 125.3729310000781,
+  "afterTaskSeconds": 102.64893317362294,
+  "beforeCpuSeconds": 125.352063171,
+  "afterCpuSeconds": 102.635510059,
+  "rows": [
+    {
+      "key": [
+        680,
+        1560
+      ],
+      "bytes": 644902,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.6014286810532212,
+      "afterTaskSeconds": 1.3124347710981965,
+      "beforeCpuSeconds": 1.6013930299999997,
+      "afterCpuSeconds": 1.312366334
+    },
+    {
+      "key": [
+        681,
+        1560
+      ],
+      "bytes": 238194,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.6576181319542229,
+      "afterTaskSeconds": 0.5240696009714156,
+      "beforeCpuSeconds": 0.657470139,
+      "afterCpuSeconds": 0.5239611680000003
+    },
+    {
+      "key": [
+        682,
+        1560
+      ],
+      "bytes": 113876,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.34619412501342595,
+      "afterTaskSeconds": 0.2885718729812652,
+      "beforeCpuSeconds": 0.34619169699999985,
+      "afterCpuSeconds": 0.28856594699999993
+    },
+    {
+      "key": [
+        683,
+        1560
+      ],
+      "bytes": 236807,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.35783867607824504,
+      "afterTaskSeconds": 0.3015981081407517,
+      "beforeCpuSeconds": 0.357833941,
+      "afterCpuSeconds": 0.30154185499999997
+    },
+    {
+      "key": [
+        684,
+        1560
+      ],
+      "bytes": 303266,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.7995523989666253,
+      "afterTaskSeconds": 1.437454781960696,
+      "beforeCpuSeconds": 1.7995086300000005,
+      "afterCpuSeconds": 1.437430366
+    },
+    {
+      "key": [
+        680,
+        1561
+      ],
+      "bytes": 290235,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.7799918740056455,
+      "afterTaskSeconds": 0.38225148408673704,
+      "beforeCpuSeconds": 0.7799562829999998,
+      "afterCpuSeconds": 0.38223373900000013
+    },
+    {
+      "key": [
+        681,
+        1561
+      ],
+      "bytes": 284311,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.6495743808336556,
+      "afterTaskSeconds": 0.5441227268893272,
+      "beforeCpuSeconds": 0.649568763,
+      "afterCpuSeconds": 0.5438158380000002
+    },
+    {
+      "key": [
+        682,
+        1561
+      ],
+      "bytes": 401952,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.6964714771602303,
+      "afterTaskSeconds": 1.4058677440043539,
+      "beforeCpuSeconds": 1.6964397979999999,
+      "afterCpuSeconds": 1.4058324889999998
+    },
+    {
+      "key": [
+        683,
+        1561
+      ],
+      "bytes": 390982,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 2.764889633981511,
+      "afterTaskSeconds": 1.9903645410668105,
+      "beforeCpuSeconds": 2.764828575,
+      "afterCpuSeconds": 1.990328428
+    },
+    {
+      "key": [
+        684,
+        1561
+      ],
+      "bytes": 158669,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.7317265060264617,
+      "afterTaskSeconds": 0.3841710251290351,
+      "beforeCpuSeconds": 0.7316908239999997,
+      "afterCpuSeconds": 0.38417122300000006
+    },
+    {
+      "key": [
+        680,
+        1562
+      ],
+      "bytes": 397400,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.4535279218107462,
+      "afterTaskSeconds": 1.166518151992932,
+      "beforeCpuSeconds": 1.4534983700000006,
+      "afterCpuSeconds": 1.1664909680000002
+    },
+    {
+      "key": [
+        681,
+        1562
+      ],
+      "bytes": 235164,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.46135712997056544,
+      "afterTaskSeconds": 0.39206083305180073,
+      "beforeCpuSeconds": 0.46127639200000004,
+      "afterCpuSeconds": 0.3919784220000002
+    },
+    {
+      "key": [
+        682,
+        1562
+      ],
+      "bytes": 29451,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.21474858815781772,
+      "afterTaskSeconds": 0.1786752068437636,
+      "beforeCpuSeconds": 0.214717308,
+      "afterCpuSeconds": 0.17866922399999985
+    },
+    {
+      "key": [
+        683,
+        1562
+      ],
+      "bytes": 131138,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.22978846915066242,
+      "afterTaskSeconds": 0.19625140307471156,
+      "beforeCpuSeconds": 0.22965227500000007,
+      "afterCpuSeconds": 0.19618716800000002
+    },
+    {
+      "key": [
+        684,
+        1562
+      ],
+      "bytes": 186192,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.5780413360334933,
+      "afterTaskSeconds": 0.8036794969812036,
+      "beforeCpuSeconds": 0.5780218069999998,
+      "afterCpuSeconds": 0.8036381859999999
+    },
+    {
+      "key": [
+        680,
+        1563
+      ],
+      "bytes": 299106,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.434955813921988,
+      "afterTaskSeconds": 1.1381328729912639,
+      "beforeCpuSeconds": 1.4349250070000001,
+      "afterCpuSeconds": 1.138108759
+    },
+    {
+      "key": [
+        681,
+        1563
+      ],
+      "bytes": 16884,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.08530914806760848,
+      "afterTaskSeconds": 0.07191689382307231,
+      "beforeCpuSeconds": 0.08531203399999976,
+      "afterCpuSeconds": 0.07191633200000025
+    },
+    {
+      "key": [
+        682,
+        1563
+      ],
+      "bytes": 429,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.0074533200822770596,
+      "afterTaskSeconds": 0.007097798865288496,
+      "beforeCpuSeconds": 0.007452343999999833,
+      "afterCpuSeconds": 0.007099388000000317
+    },
+    {
+      "key": [
+        683,
+        1563
+      ],
+      "bytes": 130880,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.433542693965137,
+      "afterTaskSeconds": 0.3623024688567966,
+      "beforeCpuSeconds": 0.43353962400000023,
+      "afterCpuSeconds": 0.36228106199999965
+    },
+    {
+      "key": [
+        684,
+        1563
+      ],
+      "bytes": 315349,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.833221583859995,
+      "afterTaskSeconds": 0.5180688828695565,
+      "beforeCpuSeconds": 0.8332076539999997,
+      "afterCpuSeconds": 0.5180500960000001
+    },
+    {
+      "key": [
+        680,
+        1564
+      ],
+      "bytes": 268861,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.3412758649792522,
+      "afterTaskSeconds": 0.2973755488637835,
+      "beforeCpuSeconds": 0.34124383400000013,
+      "afterCpuSeconds": 0.29716578800000004
+    },
+    {
+      "key": [
+        681,
+        1564
+      ],
+      "bytes": 137066,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.24630835303105414,
+      "afterTaskSeconds": 0.20196305611170828,
+      "beforeCpuSeconds": 0.24628948200000034,
+      "afterCpuSeconds": 0.2019626630000002
+    },
+    {
+      "key": [
+        682,
+        1564
+      ],
+      "bytes": 862,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.007231920957565308,
+      "afterTaskSeconds": 0.007348298095166683,
+      "beforeCpuSeconds": 0.007232978999999862,
+      "afterCpuSeconds": 0.00734784200000016
+    },
+    {
+      "key": [
+        683,
+        1564
+      ],
+      "bytes": 164293,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.22603176604025066,
+      "afterTaskSeconds": 0.186116857919842,
+      "beforeCpuSeconds": 0.22602936200000023,
+      "afterCpuSeconds": 0.18611732799999992
+    },
+    {
+      "key": [
+        684,
+        1564
+      ],
+      "bytes": 213217,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.8583474769257009,
+      "afterTaskSeconds": 0.6833938241470605,
+      "beforeCpuSeconds": 0.8583276869999996,
+      "afterCpuSeconds": 0.6833810809999998
+    },
+    {
+      "key": [
+        680,
+        1565
+      ],
+      "bytes": 131532,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.4643566240556538,
+      "afterTaskSeconds": 0.38796425703912973,
+      "beforeCpuSeconds": 0.464351556,
+      "afterCpuSeconds": 0.3879531319999998
+    },
+    {
+      "key": [
+        681,
+        1565
+      ],
+      "bytes": 109257,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.2522520578932017,
+      "afterTaskSeconds": 0.1980461380444467,
+      "beforeCpuSeconds": 0.252210131,
+      "afterCpuSeconds": 0.19804333399999985
+    },
+    {
+      "key": [
+        682,
+        1565
+      ],
+      "bytes": 429,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.007272035116329789,
+      "afterTaskSeconds": 0.006959619000554085,
+      "beforeCpuSeconds": 0.007272232000000045,
+      "afterCpuSeconds": 0.006961039999999752
+    },
+    {
+      "key": [
+        683,
+        1565
+      ],
+      "bytes": 426106,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.6919168729800731,
+      "afterTaskSeconds": 0.5774558719713241,
+      "beforeCpuSeconds": 0.6919086380000001,
+      "afterCpuSeconds": 0.577444496
+    },
+    {
+      "key": [
+        684,
+        1565
+      ],
+      "bytes": 162210,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.4466375941410661,
+      "afterTaskSeconds": 0.3800949368160218,
+      "beforeCpuSeconds": 0.4466332089999998,
+      "afterCpuSeconds": 0.3800853670000004
+    },
+    {
+      "key": [
+        680,
+        1566
+      ],
+      "bytes": 170648,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.40761986398138106,
+      "afterTaskSeconds": 0.27529648202471435,
+      "beforeCpuSeconds": 0.40758760400000016,
+      "afterCpuSeconds": 0.27529325800000004
+    },
+    {
+      "key": [
+        681,
+        1566
+      ],
+      "bytes": 247211,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.4090614099986851,
+      "afterTaskSeconds": 0.32636470603756607,
+      "beforeCpuSeconds": 0.4090409020000001,
+      "afterCpuSeconds": 0.32635804799999946
+    },
+    {
+      "key": [
+        682,
+        1566
+      ],
+      "bytes": 571577,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.236122454982251,
+      "afterTaskSeconds": 0.9540190249681473,
+      "beforeCpuSeconds": 1.2349780930000005,
+      "afterCpuSeconds": 0.95392996
+    },
+    {
+      "key": [
+        683,
+        1566
+      ],
+      "bytes": 354189,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.8635178778786212,
+      "afterTaskSeconds": 0.7638374390080571,
+      "beforeCpuSeconds": 0.8625630700000002,
+      "afterCpuSeconds": 0.7627630649999997
+    },
+    {
+      "key": [
+        684,
+        1566
+      ],
+      "bytes": 136534,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.7023989718873054,
+      "afterTaskSeconds": 0.7043413838837296,
+      "beforeCpuSeconds": 0.7023555620000002,
+      "afterCpuSeconds": 0.7042406939999997
+    },
+    {
+      "key": [
+        680,
+        1567
+      ],
+      "bytes": 158927,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.3490292630158365,
+      "afterTaskSeconds": 0.27554501220583916,
+      "beforeCpuSeconds": 0.3490287280000004,
+      "afterCpuSeconds": 0.2755311040000006
+    },
+    {
+      "key": [
+        681,
+        1567
+      ],
+      "bytes": 217288,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.9738439528737217,
+      "afterTaskSeconds": 0.7521827858872712,
+      "beforeCpuSeconds": 0.9738253760000006,
+      "afterCpuSeconds": 0.7521641050000003
+    },
+    {
+      "key": [
+        682,
+        1567
+      ],
+      "bytes": 428736,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.9489423299673945,
+      "afterTaskSeconds": 1.015831126831472,
+      "beforeCpuSeconds": 0.9487927020000004,
+      "afterCpuSeconds": 1.015759235
+    },
+    {
+      "key": [
+        683,
+        1567
+      ],
+      "bytes": 158953,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.24311969988048077,
+      "afterTaskSeconds": 0.2168813378084451,
+      "beforeCpuSeconds": 0.24305819200000034,
+      "afterCpuSeconds": 0.21688004000000038
+    },
+    {
+      "key": [
+        684,
+        1567
+      ],
+      "bytes": 111486,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.6230461171362549,
+      "afterTaskSeconds": 0.5088953871745616,
+      "beforeCpuSeconds": 0.623028176,
+      "afterCpuSeconds": 0.5088823760000007
+    },
+    {
+      "key": [
+        653,
+        1580
+      ],
+      "bytes": 962619,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.3695683910045773,
+      "afterTaskSeconds": 2.9157701630610973,
+      "beforeCpuSeconds": 3.3694045989999992,
+      "afterCpuSeconds": 2.9157042739999977
+    },
+    {
+      "key": [
+        653,
+        1581
+      ],
+      "bytes": 684188,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.895556232891977,
+      "afterTaskSeconds": 3.3773102909326553,
+      "beforeCpuSeconds": 3.8954800270000014,
+      "afterCpuSeconds": 3.377214983000002
+    },
+    {
+      "key": [
+        653,
+        1582
+      ],
+      "bytes": 125740,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.33422645390965044,
+      "afterTaskSeconds": 0.28472217288799584,
+      "beforeCpuSeconds": 0.33422357399999925,
+      "afterCpuSeconds": 0.2846649610000007
+    },
+    {
+      "key": [
+        653,
+        1583
+      ],
+      "bytes": 475,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.005044550867751241,
+      "afterTaskSeconds": 0.005110732978209853,
+      "beforeCpuSeconds": 0.005045870000000008,
+      "afterCpuSeconds": 0.005110346000000376
+    },
+    {
+      "key": [
+        653,
+        1584
+      ],
+      "bytes": 110,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.00561167998239398,
+      "afterTaskSeconds": 0.005148431984707713,
+      "beforeCpuSeconds": 0.005613335999999691,
+      "afterCpuSeconds": 0.005150416999999408
+    },
+    {
+      "key": [
+        653,
+        1585
+      ],
+      "bytes": 1425,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.019904640037566423,
+      "afterTaskSeconds": 0.01879960810765624,
+      "beforeCpuSeconds": 0.019907931000000545,
+      "afterCpuSeconds": 0.018778804000000093
+    },
+    {
+      "key": [
+        653,
+        1586
+      ],
+      "bytes": 2524,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.011720801005139947,
+      "afterTaskSeconds": 0.010317376116290689,
+      "beforeCpuSeconds": 0.011716696999999776,
+      "afterCpuSeconds": 0.010298841000000003
+    },
+    {
+      "key": [
+        653,
+        1587
+      ],
+      "bytes": 613,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.007552660070359707,
+      "afterTaskSeconds": 0.007464357186108828,
+      "beforeCpuSeconds": 0.007548779000000394,
+      "afterCpuSeconds": 0.007463688999999718
+    },
+    {
+      "key": [
+        654,
+        1580
+      ],
+      "bytes": 431807,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.4804306058213115,
+      "afterTaskSeconds": 1.240725226001814,
+      "beforeCpuSeconds": 1.4802155229999983,
+      "afterCpuSeconds": 1.2406658869999987
+    },
+    {
+      "key": [
+        654,
+        1581
+      ],
+      "bytes": 563196,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 2.031561895040795,
+      "afterTaskSeconds": 1.694146485067904,
+      "beforeCpuSeconds": 2.0315145060000006,
+      "afterCpuSeconds": 1.6940569230000015
+    },
+    {
+      "key": [
+        654,
+        1582
+      ],
+      "bytes": 853162,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.4288879269734025,
+      "afterTaskSeconds": 1.3101452339906245,
+      "beforeCpuSeconds": 1.4286113100000009,
+      "afterCpuSeconds": 1.3100257679999991
+    },
+    {
+      "key": [
+        654,
+        1583
+      ],
+      "bytes": 1890377,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 7.6667895971331745,
+      "afterTaskSeconds": 5.887013599975035,
+      "beforeCpuSeconds": 7.664953990999999,
+      "afterCpuSeconds": 5.886535472999999
+    },
+    {
+      "key": [
+        654,
+        1584
+      ],
+      "bytes": 941959,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.322566838003695,
+      "afterTaskSeconds": 2.8448638000991195,
+      "beforeCpuSeconds": 3.322364457000001,
+      "afterCpuSeconds": 2.844469050999999
+    },
+    {
+      "key": [
+        654,
+        1585
+      ],
+      "bytes": 634771,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 2.169707567198202,
+      "afterTaskSeconds": 1.8723599701188505,
+      "beforeCpuSeconds": 2.169645849,
+      "afterCpuSeconds": 1.8723165270000006
+    },
+    {
+      "key": [
+        654,
+        1586
+      ],
+      "bytes": 320197,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.8840359561145306,
+      "afterTaskSeconds": 0.739926481153816,
+      "beforeCpuSeconds": 0.8839003600000002,
+      "afterCpuSeconds": 0.7397639680000001
+    },
+    {
+      "key": [
+        654,
+        1587
+      ],
+      "bytes": 197313,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.6650536099914461,
+      "afterTaskSeconds": 0.5569559689611197,
+      "beforeCpuSeconds": 0.6650072600000003,
+      "afterCpuSeconds": 0.5568345949999998
+    },
+    {
+      "key": [
+        655,
+        1580
+      ],
+      "bytes": 440254,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.5474981570150703,
+      "afterTaskSeconds": 2.763496493920684,
+      "beforeCpuSeconds": 3.5474188379999987,
+      "afterCpuSeconds": 2.7634304410000006
+    },
+    {
+      "key": [
+        655,
+        1581
+      ],
+      "bytes": 228706,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.6285521229729056,
+      "afterTaskSeconds": 0.9576322429347783,
+      "beforeCpuSeconds": 0.6284940039999984,
+      "afterCpuSeconds": 0.9575340459999993
+    },
+    {
+      "key": [
+        655,
+        1582
+      ],
+      "bytes": 587801,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.5833444660529494,
+      "afterTaskSeconds": 2.828681107144803,
+      "beforeCpuSeconds": 3.582938416000001,
+      "afterCpuSeconds": 2.828149404999998
+    },
+    {
+      "key": [
+        655,
+        1583
+      ],
+      "bytes": 1268497,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 4.214378387201577,
+      "afterTaskSeconds": 6.301110240863636,
+      "beforeCpuSeconds": 4.213691752999999,
+      "afterCpuSeconds": 6.300627616
+    },
+    {
+      "key": [
+        655,
+        1584
+      ],
+      "bytes": 525266,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.056109858909622,
+      "afterTaskSeconds": 2.187959421891719,
+      "beforeCpuSeconds": 3.055780566000001,
+      "afterCpuSeconds": 2.187897499
+    },
+    {
+      "key": [
+        655,
+        1585
+      ],
+      "bytes": 828174,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 5.3850235908757895,
+      "afterTaskSeconds": 2.8337784190662205,
+      "beforeCpuSeconds": 5.38477318,
+      "afterCpuSeconds": 2.8334577139999997
+    },
+    {
+      "key": [
+        655,
+        1586
+      ],
+      "bytes": 420635,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 1.7043653631117195,
+      "afterTaskSeconds": 1.3722486281767488,
+      "beforeCpuSeconds": 1.7042196379999996,
+      "afterCpuSeconds": 1.372177000999999
+    },
+    {
+      "key": [
+        655,
+        1587
+      ],
+      "bytes": 215050,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.7047993389423937,
+      "afterTaskSeconds": 0.5731024700216949,
+      "beforeCpuSeconds": 0.7046008359999991,
+      "afterCpuSeconds": 0.5730867990000004
+    },
+    {
+      "key": [
+        656,
+        1580
+      ],
+      "bytes": 841291,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.0766907820943743,
+      "afterTaskSeconds": 2.797061203047633,
+      "beforeCpuSeconds": 3.0765013900000007,
+      "afterCpuSeconds": 2.796279707
+    },
+    {
+      "key": [
+        656,
+        1581
+      ],
+      "bytes": 1223619,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 7.343037966173142,
+      "afterTaskSeconds": 3.77459668321535,
+      "beforeCpuSeconds": 7.342634840999999,
+      "afterCpuSeconds": 3.774115224999999
+    },
+    {
+      "key": [
+        656,
+        1582
+      ],
+      "bytes": 956915,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.1468148161657155,
+      "afterTaskSeconds": 4.2526444350369275,
+      "beforeCpuSeconds": 3.1465027720000016,
+      "afterCpuSeconds": 4.251977256
+    },
+    {
+      "key": [
+        656,
+        1583
+      ],
+      "bytes": 288681,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.997662243898958,
+      "afterTaskSeconds": 0.8839325339067727,
+      "beforeCpuSeconds": 0.9972751829999993,
+      "afterCpuSeconds": 0.8833784830000013
+    },
+    {
+      "key": [
+        656,
+        1584
+      ],
+      "bytes": 110,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.012216652045026422,
+      "afterTaskSeconds": 0.012449260102584958,
+      "beforeCpuSeconds": 0.012218804999999833,
+      "afterCpuSeconds": 0.01242557099999786
+    },
+    {
+      "key": [
+        656,
+        1585
+      ],
+      "bytes": 92755,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.27009511296637356,
+      "afterTaskSeconds": 0.2339424428064376,
+      "beforeCpuSeconds": 0.26998748000000106,
+      "afterCpuSeconds": 0.23392686500000082
+    },
+    {
+      "key": [
+        656,
+        1586
+      ],
+      "bytes": 1473294,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 5.638875694014132,
+      "afterTaskSeconds": 5.203882643021643,
+      "beforeCpuSeconds": 5.637539218999997,
+      "afterCpuSeconds": 5.203157904000001
+    },
+    {
+      "key": [
+        656,
+        1587
+      ],
+      "bytes": 681947,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 4.201797831105068,
+      "afterTaskSeconds": 2.023954306030646,
+      "beforeCpuSeconds": 4.201176375000003,
+      "afterCpuSeconds": 2.0238497210000013
+    },
+    {
+      "key": [
+        657,
+        1580
+      ],
+      "bytes": 351161,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 2.2716235159896314,
+      "afterTaskSeconds": 1.2963077230378985,
+      "beforeCpuSeconds": 2.271451743,
+      "afterCpuSeconds": 1.2962192819999991
+    },
+    {
+      "key": [
+        657,
+        1581
+      ],
+      "bytes": 712647,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 3.753029233077541,
+      "afterTaskSeconds": 1.667840647045523,
+      "beforeCpuSeconds": 3.7524233799999998,
+      "afterCpuSeconds": 1.6674593099999981
+    },
+    {
+      "key": [
+        657,
+        1582
+      ],
+      "bytes": 1354601,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 5.745791473891586,
+      "afterTaskSeconds": 4.454107071040198,
+      "beforeCpuSeconds": 5.738393966,
+      "afterCpuSeconds": 4.4539619670000015
+    },
+    {
+      "key": [
+        657,
+        1583
+      ],
+      "bytes": 1182598,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 4.875931720947847,
+      "afterTaskSeconds": 4.9448271279688925,
+      "beforeCpuSeconds": 4.875615546999999,
+      "afterCpuSeconds": 4.942182831
+    },
+    {
+      "key": [
+        657,
+        1584
+      ],
+      "bytes": 146789,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.5515089691616595,
+      "afterTaskSeconds": 0.8009638520888984,
+      "beforeCpuSeconds": 0.5514607359999992,
+      "afterCpuSeconds": 0.8008978360000008
+    },
+    {
+      "key": [
+        657,
+        1585
+      ],
+      "bytes": 3932,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.015864369925111532,
+      "afterTaskSeconds": 0.014324954943731427,
+      "beforeCpuSeconds": 0.015865915999999203,
+      "afterCpuSeconds": 0.014324703999999855
+    },
+    {
+      "key": [
+        657,
+        1586
+      ],
+      "bytes": 263944,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 0.7645998818334192,
+      "afterTaskSeconds": 0.7071190881542861,
+      "beforeCpuSeconds": 0.7645709939999996,
+      "afterCpuSeconds": 0.7068014640000015
+    },
+    {
+      "key": [
+        657,
+        1587
+      ],
+      "bytes": 1311646,
+      "byteIdentical": true,
+      "decodedIdentical": true,
+      "beforeTaskSeconds": 5.169535647844896,
+      "afterTaskSeconds": 4.866666520014405,
+      "beforeCpuSeconds": 5.169131514000004,
+      "afterCpuSeconds": 4.866205957000002
+    }
+  ]
+}

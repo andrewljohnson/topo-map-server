@@ -1,0 +1,152 @@
+{
+  "capturedAt": "2026-09-09T10:54:42.241Z",
+  "release": "topo-z12-pilot-20260909-r12",
+  "bounds": [
+    -119.92628146806345,
+    39.34650167801638,
+    -119.9203185319361,
+    39.35649796445972
+  ],
+  "center": [
+    -119.9233,
+    39.3515
+  ],
+  "zoom": 15.5,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "74b4258cf4736956355e444b1a9b55744eb631a38352771639c86960fb046b7c",
+  "candidatePeaks": [
+    {
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "coordinates": [
+        -119.92324948310852,
+        39.35185450263003
+      ],
+      "properties": {
+        "class": "peak",
+        "min_zoom": 14,
+        "name": "Church Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain"
+      }
+    },
+    {
+      "sourceLayer": "recreation__recreation",
+      "id": 65861868563141,
+      "coordinates": [
+        -119.92330312728882,
+        39.3520577604902
+      ],
+      "properties": {
+        "agency": "USGS GNIS",
+        "alternate_names": "",
+        "county": "Washoe",
+        "elevation_ft": 10614,
+        "elevation_m": 3235,
+        "geonames_id": "5501775",
+        "gnis_id": "862226",
+        "higher_peak_km": 1.03,
+        "id": "gnis:862226",
+        "isolation_km": 1.03,
+        "kind": "summit",
+        "label_minzoom": 13,
+        "label_rank": 41292,
+        "license": "Public domain",
+        "map_name": "Mount Rose",
+        "match_reason": "name_kind_distance",
+        "min_zoom": 13,
+        "name": "Church Peak",
+        "poi_frame": "circle",
+        "poi_icon": "mountain",
+        "poi_image": "poi-circle-mountain",
+        "poi_importance": 184.035,
+        "rank_elevation_m": 3235,
+        "rank_family": "summit",
+        "source_class": "Summit",
+        "source_count": 2,
+        "source_records": "[{\"id\":\"gnis:862226\",\"agency\":\"USGS GNIS\",\"name\":\"Church Peak\",\"coordinates\":[-119.9233057,39.3520582],\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"details\":{\"id\":\"gnis:862226\",\"gnis_id\":\"862226\",\"agency\":\"USGS GNIS\",\"name\":\"Church Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names\",\"license\":\"Public domain\",\"source_class\":\"Summit\",\"state\":\"Nevada\",\"county\":\"Washoe\",\"map_name\":\"Mount Rose\",\"updated\":\"08/11/2026\"}},{\"id\":\"geonames:5501775\",\"agency\":\"GeoNames\",\"name\":\"Church Peak\",\"coordinates\":[-119.92325,39.35185],\"source_url\":\"https://www.geonames.org/5501775\",\"details\":{\"id\":\"geonames:5501775\",\"geonames_id\":\"5501775\",\"agency\":\"GeoNames\",\"name\":\"Church Peak\",\"kind\":\"summit\",\"poi_icon\":\"mountain\",\"poi_frame\":\"circle\",\"poi_image\":\"poi-circle-mountain\",\"min_zoom\":13,\"source_url\":\"https://www.geonames.org/5501775\",\"license\":\"CC BY 4.0\",\"source_class\":\"T.MT\",\"state\":\"NV\",\"county\":\"031\",\"updated\":\"2006-01-15\",\"alternate_names\":\"\",\"elevation_m\":3235.0,\"elevation_ft\":10614}}]",
+        "source_url": "https://edits.nationalmap.gov/apps/gaz-domestic/public/search/names",
+        "state": "Nevada",
+        "updated": "08/11/2026"
+      }
+    }
+  ],
+  "renderedPeaks": [
+    {
+      "name": "Church Peak",
+      "layer": "peak-labels",
+      "coordinates": [
+        -119.92324948310852,
+        39.35185450263003
+      ]
+    }
+  ],
+  "renderedSymbols": [
+    {
+      "layer": "peak-labels",
+      "sourceLayer": "osm__poi",
+      "id": 1,
+      "name": "Church Peak",
+      "geometryType": "Point",
+      "coordinates": [
+        -119.92324948310852,
+        39.35185450263003
+      ]
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "contour-labels-region-0",
+      "sourceLayer": "contour",
+      "geometryType": "MultiLineString"
+    }
+  ]
+}

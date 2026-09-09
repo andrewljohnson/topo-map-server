@@ -1,0 +1,29 @@
+[
+  {
+    "key": "12/681/1566",
+    "rawBytes": 247211,
+    "waterlineBytes": 2979,
+    "originalRoadBytes": 16254,
+    "gzipBefore": 107526,
+    "gzipWithoutWaterline": 104865,
+    "savingPercent": 2.47
+  },
+  {
+    "key": "12/655/1582",
+    "rawBytes": 587801,
+    "waterlineBytes": 138,
+    "originalRoadBytes": 82887,
+    "gzipBefore": 326451,
+    "gzipWithoutWaterline": 326360,
+    "savingPercent": 0.03
+  },
+  {
+    "key": "12/654/1582",
+    "rawBytes": 853162,
+    "waterlineBytes": 2819,
+    "originalRoadBytes": 81541,
+    "gzipBefore": 337230,
+    "gzipWithoutWaterline": 335273,
+    "savingPercent": 0.58
+  }
+]

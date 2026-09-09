@@ -172,8 +172,8 @@ function applyDensity(style:any) {
  if(trails)style.layers.push(trails);
  style.layers.push(peaks);
  style.layers.push(...[{"id":"amenity-details","type":"symbol","source":"amenities","minzoom":14,"filter":["all",["==",["get","kind"],"amenity"],["any",[">=",["zoom"],15],["==",["get","group_id"],""]]],"layout":{"icon-image":["concat","poi-",["get","poi_frame"],"-",["get","poi_icon"]],"icon-size":0.85,"icon-padding":5,"text-field":["get","name"],"text-font":["Arial","sans-serif"],"text-size":10,"text-anchor":"top","text-offset":[0,1.4],"text-optional":true},"paint":{"text-color":"#374d3d","text-halo-color":"#fffdf5","text-halo-width":1.5}},{"id":"amenity-groups","type":"symbol","source":"amenities","minzoom":10,"maxzoom":15,"filter":["all",["==",["get","kind"],"group"],[">=",["zoom"],["max",["coalesce",["get","min_zoom"],10],["case",["in",",",["get","grid_image"]],10,13]]]],"layout":{"icon-image":["get","grid_image"],"icon-padding":12,"icon-allow-overlap":false,"text-field":["get","name"],"text-font":["Arial","sans-serif"],"text-size":11,"text-max-width":12,"text-anchor":"top","text-offset":["get","text_offset"],"text-padding":6,"text-optional":false},"paint":{"text-color":"#304e3b","text-halo-color":"#fffdf5","text-halo-width":1.7}}]);
- // Keep the cluster handoff in layer zoom ranges: vector features are filtered at
- // source tile zoom (max 14), so a zoom >= 15 feature filter discards members.
+ // Keep cluster handoff explicit in layer zoom ranges, independent of the
+ // zoom supplied during feature filtering or reuse of already parsed tiles.
  const amenityDetails=layer('amenity-details');
  amenityDetails.layout['icon-image']=['coalesce',['get','grid_image'],amenityDetails.layout['icon-image']];
  amenityDetails.filter=['all',['==',['get','kind'],'amenity'],['==',['coalesce',['get','group_id'],''],'']];

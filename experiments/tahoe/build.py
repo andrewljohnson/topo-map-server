@@ -10,7 +10,7 @@ import numpy as np
 from shapely.geometry import shape,box,GeometryCollection
 from shapely.affinity import affine_transform
 from shapely.ops import unary_union,linemerge
-from shapely import make_valid
+from shapely import make_valid,transform,orient_polygons
 from national_boundaries import bounds
 from national_dem import decode_png,encode_png
 SOURCES={'osm':'national_basemap','boundaries':'national_boundaries','landcover':'national_landcover','trails':'national_trails','amenities':'national_amenities','waterways':'national_waterways','recreation':'national_recreation'}
@@ -61,7 +61,19 @@ def merge_tiles(children):
   for piece in pieces:
    if piece.is_empty:continue
    layers.setdefault(name,[]).append({'geometry':piece,'properties':json.loads(props),'id':ident})
- return mvt.encode([{'name':name,'features':features} for name,features in sorted(layers.items())],default_options={'extents':EXTENT,'y_coord_down':True}),counts
+ return encode_merged_layers(layers),counts
+
+def encode_merged_layers(layers):
+ # Match the MVT encoder's round-then-orient operation, using GEOS/NumPy
+ # instead of rebuilding every ring in Python. Screen coordinates require
+ # positive exterior ring area. Rounding must precede orientation, including
+ # tiny rings and holes that collapse during integer quantization.
+ for features in layers.values():
+  for feature in features:
+   geometry=feature['geometry']
+   if geometry.geom_type in ('Polygon','MultiPolygon'):
+    feature['geometry']=orient_polygons(transform(geometry,np.rint),exterior_cw=False)
+ return mvt.encode([{'name':name,'features':features} for name,features in sorted(layers.items())],default_options={'extents':EXTENT,'y_coord_down':True,'check_winding_order':False})
 
 def acquire(task):
  source,z,x,y,regenerate,legacy_base,output=task

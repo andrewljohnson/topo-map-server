@@ -11,6 +11,7 @@ export function profileMapGraphics(){
  return {calls,dispose(){for(const fn of restore)fn()}};
 }
 export function installMapDiagnostics(map:any,start:number,bootstrap:any[],graphics:any){
+ if(new URLSearchParams(location.search).has('collisions'))map.showCollisionBoxes=true;
  const output=document.createElement('output');output.setAttribute('aria-label','Map rendering diagnostics');
  Object.assign(output.style,{position:'absolute',top:'70px',left:'10px',right:'10px',maxHeight:'250px',overflow:'auto',background:'#fffffff2',font:'10px monospace',whiteSpace:'pre-wrap',zIndex:'50',padding:'8px',pointerEvents:'none'});map.getContainer().appendChild(output);
  const exportButton=document.createElement('button');exportButton.textContent='Save map proof';exportButton.setAttribute('aria-label','Save map proof');
@@ -26,8 +27,10 @@ export function installMapDiagnostics(map:any,start:number,bootstrap:any[],graph
    const bounds=map.getBounds(),center=map.getCenter();const view={capturedAt:new Date().toISOString(),release:new URLSearchParams(location.search).get('release'),bounds:[bounds.getWest(),bounds.getSouth(),bounds.getEast(),bounds.getNorth()],center:[center.lng,center.lat],zoom:map.getZoom(),bearing:map.getBearing(),pitch:map.getPitch(),viewport:{width:map.getContainer().clientWidth,height:map.getContainer().clientHeight}};
    const candidatePeaks=['osm__poi','recreation__recreation'].flatMap(sourceLayer=>map.querySourceFeatures('osm',{sourceLayer}).filter((f:any)=>f.geometry.type==='Point'&&bounds.contains(f.geometry.coordinates)&&(f.properties.poi_icon==='mountain'||f.properties.kind==='summit')).map((f:any)=>({sourceLayer,id:f.id,coordinates:f.geometry.coordinates,properties:f.properties})));
    const renderedPeaks=map.queryRenderedFeatures({layers:['peak-labels','ranked-peaks'].filter(id=>map.getLayer(id))}).map((f:any)=>({name:f.properties.name,layer:f.layer.id,coordinates:f.geometry.coordinates}));
+   const symbolLayers=map.getStyle().layers.filter((l:any)=>l.type==='symbol').map((l:any)=>l.id);
+   const renderedSymbols=map.queryRenderedFeatures({layers:symbolLayers}).map((f:any)=>({layer:f.layer.id,sourceLayer:f.sourceLayer,id:f.id,name:f.properties.name,badge:f.properties.badge,kind:f.properties.kind,geometryType:f.geometry.type,...(f.geometry.type==='Point'?{coordinates:f.geometry.coordinates}:{})}));
    const styleSha256=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(map.getStyle()))))).map(b=>b.toString(16).padStart(2,'0')).join('');
-   const response=await fetch('/__proof',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:copy.toDataURL('image/png'),view:{...view,styleSha256,candidatePeaks,renderedPeaks},label:'z'+view.zoom.toFixed(2)+'-'+center.lat.toFixed(4)+'-'+center.lng.toFixed(4)})});
+   const response=await fetch('/__proof',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:copy.toDataURL('image/png'),view:{...view,styleSha256,candidatePeaks,renderedPeaks,renderedSymbols},label:'z'+view.zoom.toFixed(2)+'-'+center.lat.toFixed(4)+'-'+center.lng.toFixed(4)})});
    if(!response.ok)throw Error('Local proof server required');const result=await response.json() as {saved:string};exportButton.textContent='Map proof saved';exportButton.title=result.saved;
   }catch(e){exportButton.textContent=String(e)}finally{exportButton.disabled=false}});map.triggerRepaint();
  };

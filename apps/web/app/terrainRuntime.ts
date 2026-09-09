@@ -1,10 +1,9 @@
 /** Raw DEM transport is shared by GPU relief and a local contour worker. */
 export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,c:AbortController)=>Promise<ArrayBuffer>,workerSource:string){
  if(!spec)return null;
- const blob=URL.createObjectURL(new Blob([workerSource],{type:'text/javascript'})),worker=new Worker(blob);URL.revokeObjectURL(blob);
+ let worker:any=null;
  const cache=new Map<string,any>(),requests=new Map<number,any>(),demRequests=new Map<number,AbortController>();let sequence=0,disposed=false;
- worker.postMessage({type:'configure',maxZoom:spec.maxZoom??13,minZoom:spec.minZoom??3});
- const stats={generated:0,cancelled:0,failed:0,demRequests:0,demBytes:0,totalMs:0,maxMs:0,worker:true};
+ const stats={generated:0,cancelled:0,failed:0,demRequests:0,demBytes:0,totalMs:0,maxMs:0,worker:true,restarts:0};
  function raw(key:string,signal:AbortSignal):Promise<ArrayBuffer>{
   if(signal.aborted)return Promise.reject(Error('Cancelled'));
   let entry=cache.get(key);
@@ -20,15 +19,33 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
   for(let i=0;i<values.length;i++)values[i]=rgba[i*4]*256+rgba[i*4+1]+rgba[i*4+2]/256-32768;
   return {width:canvas.width,height:canvas.height,data:values};
  }
- worker.onmessage=async(event:any)=>{const m=event.data;if(disposed)return;
+ async function onMessage(own:any,event:any){const m=event.data;if(disposed||own!==worker)return;
   if(m.type==='cancelDem'){demRequests.get(m.id)?.abort();return}
-  if(m.type==='dem'){const controller=new AbortController();demRequests.set(m.id,controller);try{const bytes=await raw(m.key,controller.signal);if(controller.signal.aborted||disposed)return;if(m.decodeInWorker){const buffer=bytes;worker.postMessage({type:'demResult',id:m.id,buffer},[buffer])}else{const tile=await decode(bytes);if(!controller.signal.aborted&&!disposed)worker.postMessage({type:'demResult',id:m.id,tile},[tile.data.buffer])}}catch(e){if(!disposed)worker.postMessage({type:'demResult',id:m.id,error:String(e)})}finally{demRequests.delete(m.id)}return}
+  if(m.type==='dem'){const controller=new AbortController();demRequests.set(m.id,controller);try{const bytes=await raw(m.key,controller.signal);if(controller.signal.aborted||disposed||own!==worker)return;if(m.decodeInWorker){const buffer=bytes;own.postMessage({type:'demResult',id:m.id,buffer},[buffer])}else{const tile=await decode(bytes);if(!controller.signal.aborted&&!disposed&&own===worker)own.postMessage({type:'demResult',id:m.id,tile},[tile.data.buffer])}}catch(e){if(!disposed&&own===worker)own.postMessage({type:'demResult',id:m.id,error:String(e)})}finally{if(demRequests.get(m.id)===controller)demRequests.delete(m.id)}return}
   const p=requests.get(m.id);if(!p)return;requests.delete(m.id);p.signal.removeEventListener('abort',p.cancel);if(m.error){stats.failed++;p.reject(Error(m.error))}else{stats.generated++;stats.totalMs+=m.ms;stats.maxMs=Math.max(stats.maxMs,m.ms);p.resolve({data:m.buffer})}
  };
- worker.onerror=()=>{for(const p of requests.values()){p.signal.removeEventListener('abort',p.cancel);p.reject(Error('Terrain worker failed'))}for(const c of demRequests.values())c.abort();requests.clear();stats.failed++};
+ function startWorker(){
+  const url=URL.createObjectURL(new Blob([workerSource],{type:'text/javascript'}));let own:any;
+  try{own=new Worker(url);own.onmessage=(event:any)=>onMessage(own,event);own.onerror=(event:any)=>{event.preventDefault?.();workerFailure(own)};own.postMessage({type:'configure',maxZoom:spec.maxZoom??13,minZoom:spec.minZoom??3});return own}
+  catch(error){own?.terminate();throw error}finally{URL.revokeObjectURL(url)}
+ }
+ function workerFailure(own:any){
+  if(disposed||own!==worker)return;
+  own.terminate();worker=null;stats.failed++;
+  for(const controller of demRequests.values())controller.abort();demRequests.clear();
+  // A fresh worker can recover a transient crash. Bound retries per map so a
+  // persistent script/platform failure cannot create a restart loop.
+  if(stats.restarts<1){
+   stats.restarts++;
+   try{worker=startWorker();for(const [id,p] of requests)worker.postMessage({type:'contour',id,z:p.z,x:p.x,y:p.y});return}catch{worker?.terminate();worker=null}
+  }
+  stats.worker=false;
+  for(const p of requests.values()){p.signal.removeEventListener('abort',p.cancel);p.reject(Error('Terrain worker failed'))}requests.clear();
+ }
+ worker=startWorker();
  const key=(url:string)=>url.split('://')[1].split('?')[0].replace(/\.(png|pbf)$/,'');
  gl.addProtocol('topodem',(p:any,c:AbortController)=>raw(key(p.url),c.signal).then(data=>({data})));
- gl.addProtocol('topocontour',(p:any,c:AbortController)=>new Promise((resolve,reject)=>{if(c.signal.aborted){reject(Error('Cancelled'));return}const id=++sequence,[z,x,y]=key(p.url).split('/').map(Number);const cancel=()=>{requests.delete(id);worker.postMessage({type:'cancel',id});stats.cancelled++;reject(Error('Cancelled'))};requests.set(id,{resolve,reject,signal:c.signal,cancel});c.signal.addEventListener('abort',cancel,{once:true});worker.postMessage({type:'contour',id,z,x,y})}));
+ gl.addProtocol('topocontour',(p:any,c:AbortController)=>new Promise((resolve,reject)=>{if(disposed||!worker){reject(Error('Terrain worker unavailable'));return}if(c.signal.aborted){reject(Error('Cancelled'));return}const id=++sequence,[z,x,y]=key(p.url).split('/').map(Number);const cancel=()=>{requests.delete(id);stats.cancelled++;reject(Error('Cancelled'));try{worker?.postMessage({type:'cancel',id})}catch{}};requests.set(id,{resolve,reject,signal:c.signal,cancel,z,x,y});c.signal.addEventListener('abort',cancel,{once:true});try{worker.postMessage({type:'contour',id,z,x,y})}catch{workerFailure(worker)}}));
  style.sources.dem={type:'raster-dem',tiles:['topodem://{z}/{x}/{y}'],encoding:'terrarium',tileSize:spec.tileSize??512,minzoom:spec.minZoom??3,maxzoom:spec.maxZoom??13,bounds:spec.bounds,attribution:spec.attribution};
  style.sources.contours={type:'vector',tiles:['topocontour://{z}/{x}/{y}'],minzoom:Math.max(11,spec.minZoom??3),maxzoom:15,bounds:spec.bounds};
  const insert=style.layers.findIndex((l:any)=>l.id==='contours'||l.id==='waterways-perennial');
@@ -76,5 +93,5 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
   }};map.on('style.load',add);map.on('styleimagemissing',(e:any)=>{if(textures[e.id])add()});if(map.isStyleLoaded())add();
  }
 
- return {stats,attach,dispose(){disposed=true;for(const p of requests.values()){p.signal.removeEventListener('abort',p.cancel);p.reject(Error('Map closed'))}for(const c of demRequests.values())c.abort();for(const e of cache.values())e.controller.abort();worker.terminate();requests.clear();demRequests.clear();cache.clear();gl.removeProtocol('topodem');gl.removeProtocol('topocontour')}};
+ return {stats,attach,dispose(){disposed=true;for(const p of requests.values()){p.signal.removeEventListener('abort',p.cancel);p.reject(Error('Map closed'))}for(const c of demRequests.values())c.abort();for(const e of cache.values())e.controller.abort();worker?.terminate();worker=null;requests.clear();demRequests.clear();cache.clear();gl.removeProtocol('topodem');gl.removeProtocol('topocontour')}};
 }
