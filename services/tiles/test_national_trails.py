@@ -45,6 +45,16 @@ class OfficialTrailsTest(unittest.TestCase):
   with patch.object(t,'cell_features',return_value=[raw]):
    d=mapbox_vector_tile.decode(t.render_tile(7,34,50))
    self.assertFalse(d['routes']['features'])
+ def test_prepared_basemap_preserves_network_without_archive_read(self):
+  blob=mapbox_vector_tile.encode({'name':'road','features':[{'id':73,'geometry':LineString([(100,200),(3000,3500)]),'properties':{'name':'Test Trail','class':'path'}}]},default_options={'y_coord_down':True})
+  with patch('national_basemap.archive') as archive,patch('national_basemap.normalize_tile',return_value=blob) as normalize:
+   reference=t.osm_network(14,2724,6264)
+   archive.reset_mock();normalize.reset_mock()
+   actual=t.osm_network(14,2724,6264,blob)
+   archive.assert_not_called();normalize.assert_not_called()
+  self.assertEqual(len(actual),1)
+  self.assertEqual(actual[0]['properties'],reference[0]['properties']);self.assertEqual(actual[0]['id'],reference[0]['id'])
+  self.assertTrue(actual[0]['geometry'].equals_exact(reference[0]['geometry'],0))
  def test_bad_tile_rejected(self):
   for args in [(4,0,0),(15,0,0),(8,-1,2),(8,0,256)]:
    with self.assertRaises(ValueError):t.render_tile(*args)

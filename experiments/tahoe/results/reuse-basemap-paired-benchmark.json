@@ -1,0 +1,31 @@
+{
+  "workers": 2,
+  "pctInitialization": "before timing",
+  "inputReading": "before timing for reused blobs; full-build timing includes reads",
+  "runs": [
+    {
+      "round": 1,
+      "reuse": false,
+      "seconds": 7.090253714937717,
+      "identicalTiles": 64
+    },
+    {
+      "round": 1,
+      "reuse": true,
+      "seconds": 5.330099249025807,
+      "identicalTiles": 64
+    },
+    {
+      "round": 2,
+      "reuse": true,
+      "seconds": 5.4975973221007735,
+      "identicalTiles": 64
+    },
+    {
+      "round": 2,
+      "reuse": false,
+      "seconds": 7.380838074954227,
+      "identicalTiles": 64
+    }
+  ]
+}

@@ -115,9 +115,9 @@ def clipped_feature(geometry, props, clip, n):
  if geom.is_empty or geom.geom_type not in ('LineString','MultiLineString'):return None
  return {'geometry':geom,'id':int.from_bytes(hashlib.sha256(props['id'].encode()).digest()[:6],'big'),'properties':props}
 
-def osm_network(z,x,y):
+def osm_network(z,x,y,blob=None):
  from national_basemap import archive, normalize_tile
- blob=normalize_tile(archive().get(z,x,y),z)
+ if blob is None:blob=normalize_tile(archive().get(z,x,y),z)
  layer=mapbox_vector_tile.decode(blob,default_options={'y_coord_down':True}).get('road',{})
  extent=layer.get('extent',4096);n=2**z
  result=[]
@@ -128,7 +128,7 @@ def osm_network(z,x,y):
  return result
 
 
-def render_tile(z,x,y):
+def render_tile(z,x,y,*,basemap_tile=None):
  if not MIN_ZOOM<=z<=MAX_ZOOM or not 0<=x<2**z or not 0<=y<2**z:raise ValueError('Invalid official trails tile')
  n=2**z;pad=8/512/n;clip=box(x/n-pad,y/n-pad,(x+1)/n+pad,(y+1)/n+pad)
  # Match before final clipping so tile-edge fragments have enough context.
@@ -166,7 +166,7 @@ def render_tile(z,x,y):
  for f in layers['routes']:route_groups.setdefault(f['properties'].get('route_ref',''),[]).append(metres(f))
  layers['routes']=[world(f) for group in route_groups.values() for f in conflate([],group)]
  if not overview:
-  base=osm_network(z,x,y)
+  base=osm_network(z,x,y,basemap_tile)
   network=[world(f) for f in conflate([metres(f) for f in base],[metres(f) for f in additions])]
   layers['network']=network if z>=13 else []
   # Below z13 only overview routes and nonduplicated MVUM road additions draw.

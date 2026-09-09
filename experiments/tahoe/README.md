@@ -198,3 +198,36 @@ one-time PCT preparation), DEM 8.30 s. All 64 trail child hashes and all 16 DEM
 PNG hashes still match the pre-optimization reference; the full parent feature
 comparison also passes. This is about 19% faster than the preceding 39.07 s run,
 and about 56% below the original 71.63 s two-worker baseline, for this fixture.
+
+## Iteration 4 — reuse the normalized OSM input for trails
+
+Trail generation formerly read and normalized the pinned OSM basemap a second
+time. The experiment now supplies the already-built OSM child to the trail
+stage. `--legacy-trail-basemap` retains the old path for comparisons. Ordinary
+trail API calls still normalize their own input when no prepared tile is supplied.
+No feature filtering, matching rules or output schema changed.
+
+In a paired two-thread, 64-tile benchmark (PCT prepared before timing), old/new
+trail times were 7.09/5.33 s and 7.38/5.50 s with reversed second-round order:
+about **25% faster** for this stage. Every output tile was byte-identical to its
+pre-optimization reference. Reused input file reads were outside that small
+paired benchmark, but included in the full-build runs.
+
+Full builds took **16.90 s and 29.09 s**, including input reads, PCT setup,
+regeneration of all vector stages, packing and DEM. Other unchanged stages also
+varied significantly with machine load, so the 16.90 s observation is not evidence
+that this code change halved end-to-end time. Future reports include process CPU,
+peak RSS and system load alongside wall time to help distinguish these effects.
+They also identify the selected pipeline options explicitly.
+
+25 trail regression tests pass, including prepared-input geometry/metadata
+identity and ensuring it does not perform another archive read. All 64 trail tile
+hashes match, and the full vector reference comparison passes. The output remains
+approximately 649 KB combined vectors and 24 MB raw DEM including the halo. The
+existing Wi-Fi sample remains accessible; nationwide warming is disabled.
+
+The instrumented final run took **28.77 s**, used 34.13 process CPU-seconds and
+peaked at about **419 MiB RSS**. A nearby full-build control with independent OSM
+normalization took 29.46 s. The isolated paired-stage comparison is stronger
+evidence for the 25% trail improvement than these noisy end-to-end differences.
+The final run again matched all 64 reference trail hashes and all 16 DEM hashes.

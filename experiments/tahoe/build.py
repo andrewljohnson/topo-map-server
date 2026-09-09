@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Tahoe-only correctness baseline: finest vector children -> combined z12; raw DEM mosaic."""
-import argparse,gzip,hashlib,importlib,json,os,sys,time,shutil
+import argparse,gzip,hashlib,importlib,json,os,sys,time,shutil,resource
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'services/tiles'))
@@ -44,15 +44,17 @@ def merge_tiles(children):
  return mvt.encode([{'name':name,'features':features} for name,features in sorted(layers.items())],default_options={'extents':EXTENT,'y_coord_down':True}),counts
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');a=p.parse_args()
  if a.clean_derived and OUT.exists():shutil.rmtree(OUT)
- OUT.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(4,a.workers)),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time()}
+ OUT.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(4,a.workers)),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time(),'loadAverageStart':os.getloadavg(),'pipeline':{'directRecreation':not a.legacy_recreation,'rawDemMosaic':not a.legacy_dem,'reuseTrailBasemap':not a.legacy_trail_basemap}}
  def acquire(task):
   source,z,x,y=task;path=OUT/'derived'/source/str(z)/str(x)/f'{y}.pbf';t=time.monotonic()
   hit=path.exists() and not a.regenerate_vectors
   if hit:blob=path.read_bytes()
   else:
-   blob=importlib.import_module(SOURCES[source]).render_tile(z,x,y);atomic(path,blob)
+   module=importlib.import_module(SOURCES[source])
+   options={'basemap_tile':(OUT/'derived/osm'/str(z)/str(x)/f'{y}.pbf').read_bytes()} if source=='trails' and not a.legacy_trail_basemap else {}
+   blob=module.render_tile(z,x,y,**options);atomic(path,blob)
   return (x%4,y%4,blob,time.monotonic()-t,hit)
  parent_children={xy:[] for xy in PARENTS}
  with ThreadPoolExecutor(max_workers=max(1,min(4,a.workers))) as pool:
@@ -75,7 +77,7 @@ def main():
     importlib.import_module(SOURCES[source]).pct_features();prepare_seconds=time.monotonic()-t
    for task,result in zip(tasks,pool.map(acquire,tasks)):
     dx,dy,blob,seconds,hit=result;hits+=int(hit);parent_children[(task[2]//4,task[3]//4)].append((source,dx,dy,blob))
-   report['sources'][source]={'seconds':time.monotonic()-t,'childTiles':len(tasks),'derivedCacheHits':hits,'prepareSeconds':prepare_seconds}
+   report['sources'][source]={'seconds':time.monotonic()-t,'childTiles':len(tasks),'derivedCacheHits':hits,'prepareSeconds':prepare_seconds,'reusedBasemapTiles':len(tasks)-hits if source=='trails' and not a.legacy_trail_basemap else 0}
    atomic(OUT/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True)
   for (x,y),children in parent_children.items():
    t=time.monotonic();blob,counts=merge_tiles(children);compressed=gzip.compress(blob,mtime=0)
@@ -92,5 +94,5 @@ def main():
   report['dem']={'tiles':len(dem_keys),'bytes':sum(pool.map(dem_parent,dem_keys)),'seconds':time.monotonic()-dem_start,'tileSize':1024,'intermediateChildPngs':64 if a.legacy_dem else 0}
  w,s,_,_=bounds(12,681,1567);_,_,e,n=bounds(12,682,1566)
  metadata={'name':'Tahoe zoom-12 experiment','publicAccess':True,'bounds':[w,s,e,n],'center':[-120.035,38.905],'initialZoom':12.5,'minZoom':12,'maxZoom':12,'datasetId':'tahoe-combined-v1','tileUrl':'/base/{z}/{x}/{y}.pbf','combined':True,'tilesets':{'dem':{'datasetId':'tahoe-dem-v1','tileUrl':'/dem/{z}/{x}/{y}.png','bounds':[w,s,e,n],'minZoom':12,'maxZoom':12,'tileSize':1024,'attribution':'Elevation: USGS 3DEP · Mapzen terrain'}}}
- report['totalSeconds']=time.monotonic()-start;report['finishedAt']=time.time();atomic(OUT/'metadata.json',json.dumps(metadata).encode());atomic(OUT/'report.json',json.dumps(report,indent=2).encode());atomic(OUT/'reports'/f'{time.time_ns()}.json',json.dumps(report,indent=2).encode());print(json.dumps(report),flush=True)
+ usage=resource.getrusage(resource.RUSAGE_SELF);report['resources']={'userCpuSeconds':usage.ru_utime,'systemCpuSeconds':usage.ru_stime,'peakRssKiB':usage.ru_maxrss,'loadAverageEnd':os.getloadavg()};report['totalSeconds']=time.monotonic()-start;report['finishedAt']=time.time();atomic(OUT/'metadata.json',json.dumps(metadata).encode());atomic(OUT/'report.json',json.dumps(report,indent=2).encode());atomic(OUT/'reports'/f'{time.time_ns()}.json',json.dumps(report,indent=2).encode());print(json.dumps(report),flush=True)
 if __name__=='__main__':main()
