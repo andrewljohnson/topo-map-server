@@ -56,7 +56,7 @@ def run(key):
     near=[(p.distance(g),ff['properties']) for j in aftertree.query(p.buffer(60)) if int(j)!=index for ff,g in [after[int(j)]]]
     distance,closest=min(near,key=lambda v:v[0]) if near else (None,{})
     counts[kind]+=1
-    findings.append({'kind':kind,'tile':[14,x,y],'pointMetres':list(xy),'id':props['id'],'agency':props.get('agency'),'name':props.get('name'),'nearestMetres':distance,'nearestId':closest.get('id'),'nearestName':closest.get('name'),'formerPartners':[{'id':p['id'],'agency':p.get('agency'),'name':p.get('name')} for p in partners]})
+    findings.append({'kind':kind,'tile':[14,x,y],'pointMetres':list(xy),'id':props['id'],'agency':props.get('agency'),'name':props.get('name'),'nearestMetres':distance,'nearestId':closest.get('id'),'nearestName':closest.get('name'),'retainedSourcePartners':[{'id':r['id'],'agency':r['agency']} for r in json.loads(props.get('source_records','[]')) if any(r.get('id')==p['id'] and r.get('agency')==p.get('agency') for p in partners)],'formerPartners':[{'id':p['id'],'agency':p.get('agency'),'name':p.get('name')} for p in partners]})
   return result
  nt.conflate=audited
  try:nt.render_tile(14,x,y,basemap_tile=(base/str(x)/f'{y}.pbf').read_bytes())

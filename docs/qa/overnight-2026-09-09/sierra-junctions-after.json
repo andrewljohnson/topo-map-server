@@ -1,0 +1,116 @@
+{
+  "tiles": 6400,
+  "counts": {
+    "agencyEnds": 39576,
+    "sourceDeadEnds": 3373,
+    "duplicateTermini": 305,
+    "lostSourceJunction": 3
+  },
+  "findings": [
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2697,
+        6215
+      ],
+      "pointMetres": [
+        1311.2027875538915,
+        270.7279638685286
+      ],
+      "id": "usfs-{1A269194-38BF-4916-A7FE-3BD9790EDBCA}",
+      "agency": "USFS",
+      "name": "SQUIRREL MINE",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "retainedSourcePartners": [
+        {
+          "id": "mvum_trails-{F30C80B3-B9A7-484A-80F9-00CFFA85EC5E}",
+          "agency": "USFS"
+        }
+      ],
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{F30C80B3-B9A7-484A-80F9-00CFFA85EC5E}",
+          "agency": "USFS",
+          "name": "SQUIRREL MINE"
+        }
+      ],
+      "lonlat": [
+        -120.7244186,
+        39.7892231
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2689,
+        6218
+      ],
+      "pointMetres": [
+        490.87587967701256,
+        819.3743560835719
+      ],
+      "id": "usfs-{955493B8-2AB6-463B-9DA4-77B978E92F2E}",
+      "agency": "USFS",
+      "name": "GIBSON",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "retainedSourcePartners": [
+        {
+          "id": "mvum_trails-{8BFF423F-C55F-45B8-99C4-B112E37D4C82}",
+          "agency": "USFS"
+        }
+      ],
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{8BFF423F-C55F-45B8-99C4-B112E37D4C82}",
+          "agency": "USFS",
+          "name": "GIBSON"
+        }
+      ],
+      "lonlat": [
+        -120.90979340000001,
+        39.7336263
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2707,
+        6223
+      ],
+      "pointMetres": [
+        1166.7542927665636,
+        505.27410180307925
+      ],
+      "id": "usfs-{59211E29-283B-4A23-B9C6-924D284CBE47}",
+      "agency": "USFS",
+      "name": "CHAPMAN",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "retainedSourcePartners": [
+        {
+          "id": "mvum_trails-{3BBC8D4F-2BB9-497F-B8B0-74AE3F3351ED}",
+          "agency": "USFS"
+        }
+      ],
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{3BBC8D4F-2BB9-497F-B8B0-74AE3F3351ED}",
+          "agency": "USFS",
+          "name": "CHAPMAN"
+        }
+      ],
+      "lonlat": [
+        -120.5064073,
+        39.65191750000001
+      ]
+    }
+  ]
+}

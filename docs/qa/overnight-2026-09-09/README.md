@@ -33,3 +33,11 @@ These are desktop/local measurements and browser map renders. Physical Expo/back
 - [Golden Gate Park z15](golden-gate-park-z15.png), [view and rendered-symbol metadata](golden-gate-park-z15.json): actual browser map render after POI indexing; exported canvas does not include app controls.
 - [POI matching equivalence](poi-matching-equivalence.json): nine actual z12 parents per SF/Tahoe fixture, six zooms, three repeats. All hidden-marker filters, sort expressions, merged detail records and matching statistics exactly equal the previous matcher. Median Node refresh CPU: SF1070.8→56.3ms; Tahoe26.7→4.1ms. These are not physical-phone timings. Reproduce with `experiments/tahoe/benchmark_poi_matching.mjs`.
 - [Current Sierra worker comparison](sierra-current-worker-comparison.json):400 base parents plus484 DEMs,58/69/58seconds at16/8/16workers;884 byte-identical outputs. Sources retained; zero missing native DEM chunks. This is not cold nationwide throughput.
+
+## Wider source-junction review
+
+[Before](sierra-junctions-before.json) and [after](sierra-junctions-after.json) cover6400 source tiles. Six source-connected gaps and one false collapsed spur are repaired; all3373 original source dead-end observations remain. Three warnings remain for duplicate surveys at the same physical dead end, with matching source records attached. Counts are endpoint observations, not unique physical junctions.
+
+[Geometry review](sierra-junction-review.png):blue is the original subject,green its original source partner,thin black the retained pre-repair result,red the flagged point;10m grid. These are local ground-metre source plots, not map screenshots. Source data:OpenStreetMap contributors,USFS and MVUM. Squirrel Mine,Gibson and Chapman remain unchanged after review.
+
+The new local pilot passes [all1280 source-tile geometry checks](junction-v12-pilot-geometry.json):44,703 OSM feature occurrences exactly unchanged,27 designation polygons and22 nonforest outlines unchanged. [217 of220 physical files match](junction-v12-pilot-equivalence.json); the three base differences remove small collapsed terminal remnants on Cathedral Spur,Middle Meadow Loop and Campground Spur H. The public r12 data remains unchanged while publication approval is pending.43 matching and109 national-source tests pass.

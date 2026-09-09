@@ -254,3 +254,39 @@ class TerminalOffsetTests(unittest.TestCase):
   result=preserve_source_junctions([road,branch],[branch,duplicate],[match])
   self.assertTrue(result[1]['geometry'].equals(branch['geometry']))
   self.assertNotIn('junction_basis',result[1]['properties'])
+
+class RetainedPartnerJunctionTests(unittest.TestCase):
+ def test_real_source_junctions_follow_the_retained_partner_near_a_trimmed_mask(self):
+  from pathlib import Path
+  from shapely.geometry import shape,Point
+  from shapely.ops import unary_union
+  from trail_matching import preserve_source_junctions
+  rows=json.loads((Path(__file__).parent/'fixtures/sierra-retained-junctions.json').read_text())
+  for row in rows:
+   result=[{**f,'geometry':shape(f['geometry'])} for f in row['result']]
+   additions=[{**f,'geometry':shape(f['geometry'])} for f in row['additions']]
+   matches=[(shape(g),shape(mask),shape(target),limit,tuple(key),props) for g,mask,target,limit,key,props in row['matches']]
+   updated=preserve_source_junctions(result,additions,matches);point=Point(row['point'])
+   subject=unary_union([f['geometry'] for f in updated if f['properties']['id']==row['subjectId']])
+   self.assertLess(subject.distance(point),.001,row['name'])
+   self.assertGreater(subject.boundary.distance(point),.05,row['name']+' retains a dangling original junction')
+   for old,new in zip(result,updated):
+    self.assertLess(old['geometry'].difference(new['geometry'].buffer(.000001)).length,.000001,row['name']+' removed retained source geometry')
+    if old['properties'].get('agency')=='OpenStreetMap':self.assertTrue(old['geometry'].equals(new['geometry']))
+ def test_real_collapsed_three_vertex_excursion_does_not_become_an_out_and_back(self):
+  from pathlib import Path
+  from shapely.geometry import shape,Point
+  from shapely.ops import unary_union
+  from trail_matching import lines
+  row=json.loads((Path(__file__).parent/'fixtures/sierra-mar-det.json').read_text())
+  for f in row['reference']+row['additions']:f['geometry']=shape(f['geometry'])
+  result=conflate(row['reference'],row['additions']);segments=[(f,g) for f in result for g in lines(f['geometry'])];focus=Point(row['point'])
+  original_ends=[Point(c) for f in row['additions'] for g in lines(f['geometry']) for c in (g.coords[0],g.coords[-1])]
+  for index,(f,g) in enumerate(segments):
+   if f['properties'].get('agency')!='USFS':continue
+   for c in (g.coords[0],g.coords[-1]):
+    p=Point(c)
+    if p.distance(focus)>10 or any(p.distance(q)<.01 for q in original_ends):continue
+    self.assertTrue(any(index!=j and p.distance(other)<1 for j,(_,other) in enumerate(segments)),'collapsed excursion creates a false spur')
+  before=unary_union([f['geometry'] for f in row['reference']]);after=unary_union([f['geometry'] for f in result if f['properties'].get('agency')=='OpenStreetMap'])
+  self.assertLess(before.hausdorff_distance(after),.000001);self.assertAlmostEqual(before.length,after.length,places=5)

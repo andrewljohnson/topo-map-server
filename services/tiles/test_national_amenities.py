@@ -31,7 +31,7 @@ class AmenitiesTests(unittest.TestCase):
    def __enter__(self):return self
    def __exit__(self,*args):pass
    def read(self):return b'{"elements":[],"remark":"runtime error: timeout"}'
-  with patch.object(a,'urlopen',return_value=Response()) as call,patch.object(a.time,'sleep'):
+  with patch('osm_bulk.query_local',return_value=None),patch.object(a,'urlopen',return_value=Response()) as call,patch.object(a.time,'sleep'):
    with self.assertRaises(RuntimeError):a.fetch('query')
    self.assertEqual(call.call_count,3)
  def test_half_open_boundary_and_stable_identifier(self):
@@ -59,7 +59,7 @@ class AmenitiesTests(unittest.TestCase):
    def __enter__(self):return self
    def __exit__(self,*args):pass
    def read(self):return b'{"elements":[]}'
-  with patch.object(a,'urlopen',side_effect=[ConnectionRefusedError(),Response()]) as call,patch.object(a.time,'sleep'):
+  with patch('osm_bulk.query_local',return_value=None),patch.object(a,'urlopen',side_effect=[ConnectionRefusedError(),Response()]) as call,patch.object(a.time,'sleep'):
    result=a.fetch('query')
   self.assertEqual(call.call_args_list[0].args[0].full_url,a.URL)
   self.assertTrue(call.call_args_list[1].args[0].full_url.startswith(a.FALLBACK_URL+'?data='))

@@ -1,0 +1,10 @@
+{
+  "fineTiles": 1280,
+  "osmFeatureOccurrencesUnchanged": 44703,
+  "osmFeatureOccurrencesWithinSplitRounding": 0,
+  "maximumDeviationTileUnits": 0.0,
+  "splitRoundingToleranceTileUnits": 0.7071067911865476,
+  "sourceCells": 5,
+  "designationPolygonsUnchanged": 27,
+  "nonForestOutlinesUnchanged": 22
+}

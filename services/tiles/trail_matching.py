@@ -137,6 +137,8 @@ def preserve_source_junctions(result, additions, matches):
         key=(f['properties'].get('agency'),f['properties'].get('id'))
         original_shapes.setdefault(key,[]).append(f['geometry'])
         original_ends.setdefault(key,[]).extend(Point(c) for g in lines(f['geometry']) for c in (g.coords[0],g.coords[-1]))
+    retained_by_key={}
+    for index,f in enumerate(result):retained_by_key.setdefault((f['properties'].get('agency'),f['properties'].get('id')),[]).append(index)
     match_tree=STRtree([m[0] for m in matches]);output=[]
     for index,f in enumerate(result):
         props=f['properties'];key=(props.get('agency'),props.get('id'))
@@ -152,14 +154,21 @@ def preserve_source_junctions(result, additions, matches):
                 eligible=[]
                 for j in match_tree.query(point.buffer(.05)):
                     original,mask,target,limit,other_key,other_props=matches[int(j)]
-                    if other_key==key or point.distance(original)>.05 or not mask.buffer(1).covers(point):continue
+                    # A trim can move the adjoining retained tail just outside
+                    # its mask. Require the original shared node and a nearby
+                    # established match; never infer a junction from proximity.
+                    if other_key==key or point.distance(original)>.05 or mask.distance(point)>limit:continue
                     if any(bool(props.get(k,False))!=bool(other_props.get(k,False)) for k in ('is_bridge','is_tunnel')):continue
                     if key not in source_corridors:source_corridors[key]=unary_union(original_shapes[key]).buffer(1)
                     # Duplicate surveys sharing a terminal segment do not prove
                     # a junction; the source partner must actually branch away.
                     if original.intersection(point.buffer(20)).difference(source_corridors[key]).length<5:continue
-                    anchor=nearest_points(point,target)[1];distance=point.distance(anchor)
-                    if .05<distance<=limit:eligible.append((distance,anchor))
+                    # Prefer the closest retained part of that exact source
+                    # partner over a more distant replacement centerline.
+                    targets=[geometries[k] for k in retained_by_key.get(other_key,[]) if k!=index]+[target]
+                    for candidate in targets:
+                        anchor=nearest_points(point,candidate)[1];distance=point.distance(anchor)
+                        if .05<distance<=limit:eligible.append((distance,anchor))
                 if eligible:
                     anchor=min(eligible,key=lambda item:item[0])[1]
                     opposite=Point(coords[-1 if end==0 else 0])
@@ -243,7 +252,11 @@ def conflate(reference, additions):
             # Tiny survey excursions can have both cut ends project to the same
             # reference point. Keeping their middle vertex creates a false spike
             # (or apparent disconnected spur) longer than the source excursion.
-            if len(cut_ends)==2 and all(cut_ends) and part.length<15 and Point(coords[0]).distance(Point(coords[-1]))<.01:continue
+            if len(cut_ends)==2 and all(cut_ends) and Point(coords[0]).distance(Point(coords[-1]))<.01:
+                # A three-vertex remainder can collapse to an exact retraced
+                # line even when slightly longer than the tiny-loop cutoff.
+                # Both ends were cuts; original dead ends and actual loops stay.
+                if part.length<15 or (part.length<50 and len(set(coords))<=2):continue
             parts.append(LineString(coords))
         if parts:
             feature={**feature,'geometry':unary_union(parts)}

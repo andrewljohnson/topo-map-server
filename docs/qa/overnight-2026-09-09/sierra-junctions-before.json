@@ -1,0 +1,296 @@
+{
+  "tiles": 6400,
+  "counts": {
+    "agencyEnds": 39574,
+    "sourceDeadEnds": 3373,
+    "duplicateTermini": 305,
+    "lostSourceJunction": 9,
+    "disconnectedNewCut": 1
+  },
+  "findings": [
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2693,
+        6211
+      ],
+      "pointMetres": [
+        181.9583577318117,
+        1381.6414059102535
+      ],
+      "id": "usfs-{E36414F7-E22C-4FDF-93F5-4EF1A52F09EB}",
+      "agency": "USFS",
+      "name": "10M12",
+      "nearestMetres": 2.333021798639451,
+      "nearestId": "mvum_roads-{31154AF8-887A-4B8B-BD11-071BBE547805}",
+      "nearestName": "RIDGE BACK",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{31154AF8-887A-4B8B-BD11-071BBE547805}",
+          "agency": "USFS",
+          "name": "RIDGE BACK"
+        }
+      ],
+      "lonlat": [
+        -120.82550759999998,
+        39.846743699999976
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2723,
+        6209
+      ],
+      "pointMetres": [
+        1189.7127010477707,
+        1217.3757910709828
+      ],
+      "id": "mvum_trails-{049534A7-6C58-41EF-B4A7-DFD9D045DC7D}",
+      "agency": "USFS",
+      "name": "GALEPPI",
+      "nearestMetres": 5.746898916838178,
+      "nearestId": "mvum_roads-{F4605FBE-9270-442F-B5DF-E361A3E208D1}",
+      "nearestName": "GALEPPI CREEK",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{F4605FBE-9270-442F-B5DF-E361A3E208D1}",
+          "agency": "USFS",
+          "name": "GALEPPI CREEK"
+        }
+      ],
+      "lonlat": [
+        -120.15452919999998,
+        39.88194449999999
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2697,
+        6215
+      ],
+      "pointMetres": [
+        1311.2027875538915,
+        270.7279638685286
+      ],
+      "id": "usfs-{1A269194-38BF-4916-A7FE-3BD9790EDBCA}",
+      "agency": "USFS",
+      "name": "SQUIRREL MINE",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{F30C80B3-B9A7-484A-80F9-00CFFA85EC5E}",
+          "agency": "USFS",
+          "name": "SQUIRREL MINE"
+        }
+      ],
+      "lonlat": [
+        -120.7244186,
+        39.7892231
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2689,
+        6218
+      ],
+      "pointMetres": [
+        490.87587967701256,
+        819.3743560835719
+      ],
+      "id": "usfs-{955493B8-2AB6-463B-9DA4-77B978E92F2E}",
+      "agency": "USFS",
+      "name": "GIBSON",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{8BFF423F-C55F-45B8-99C4-B112E37D4C82}",
+          "agency": "USFS",
+          "name": "GIBSON"
+        }
+      ],
+      "lonlat": [
+        -120.90979340000001,
+        39.7336263
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2707,
+        6223
+      ],
+      "pointMetres": [
+        1166.7542927665636,
+        505.27410180307925
+      ],
+      "id": "usfs-{59211E29-283B-4A23-B9C6-924D284CBE47}",
+      "agency": "USFS",
+      "name": "CHAPMAN",
+      "nearestMetres": null,
+      "nearestId": null,
+      "nearestName": null,
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{3BBC8D4F-2BB9-497F-B8B0-74AE3F3351ED}",
+          "agency": "USFS",
+          "name": "CHAPMAN"
+        }
+      ],
+      "lonlat": [
+        -120.5064073,
+        39.65191750000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2732,
+        6225
+      ],
+      "pointMetres": [
+        1496.214619857259,
+        1024.8800722695887
+      ],
+      "id": "mvum_roads-{973BB6E4-7AF5-4D7B-946E-99B59A963BE0}",
+      "agency": "USFS",
+      "name": "PEAVINE NORTH BRANCH A SPUR",
+      "nearestMetres": 5.808085344158675,
+      "nearestId": "mvum_roads-{06F55D39-67E2-4C1A-AC60-6A281108D7A7}",
+      "nearestName": "RED METAL MINE ROAD",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{06F55D39-67E2-4C1A-AC60-6A281108D7A7}",
+          "agency": "USFS",
+          "name": "RED METAL MINE ROAD"
+        }
+      ],
+      "lonlat": [
+        -119.9532557,
+        39.61340880000001
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2696,
+        6253
+      ],
+      "pointMetres": [
+        1057.5358958756551,
+        1681.182104865089
+      ],
+      "id": "usfs-{C73C603B-AC64-48A6-94AE-A799A470712F}",
+      "agency": "USFS",
+      "name": "PARKER FLAT (LOOP 1)",
+      "nearestMetres": 3.0556723378311896,
+      "nearestId": "usfs-{24B85C2F-653E-42D2-8BB5-18E8D4687142}",
+      "nearestName": "FORBES CREEK (LOOP 2)",
+      "formerPartners": [
+        {
+          "id": "mvum_trails-{7E8EA7C5-B18B-4B95-B21D-92B2DFA73A38}",
+          "agency": "USFS",
+          "name": ""
+        }
+      ],
+      "lonlat": [
+        -120.7494705,
+        39.1320006
+      ]
+    },
+    {
+      "kind": "disconnectedNewCut",
+      "tile": [
+        14,
+        2695,
+        6267
+      ],
+      "pointMetres": [
+        562.2474417947233,
+        935.6971582770348
+      ],
+      "id": "usfs-{59AEBC60-F826-422F-8BDE-D14C31537BA1}",
+      "agency": "USFS",
+      "name": "MAR DET",
+      "nearestMetres": 1.6123115807156538,
+      "nearestId": "usfs-{59AEBC60-F826-422F-8BDE-D14C31537BA1}",
+      "nearestName": "MAR DET",
+      "formerPartners": [],
+      "lonlat": [
+        -120.7772015,
+        38.89972800000002
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2763,
+        6278
+      ],
+      "pointMetres": [
+        1569.1608766047284,
+        502.93496636487544
+      ],
+      "id": "mvum_roads-{34448516-AF5E-451D-AD44-A289243CC87C}",
+      "agency": "USFS",
+      "name": "SHORT ROAD A",
+      "nearestMetres": 4.651137615620326,
+      "nearestId": "mvum_roads-{D0185670-16E1-408A-BFC1-6D66647ED737}",
+      "nearestName": "SMITH VALLEY\\JACKPOT MINES RD",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{D0185670-16E1-408A-BFC1-6D66647ED737}",
+          "agency": "USFS",
+          "name": "SMITH VALLEY\\JACKPOT MINES RD"
+        }
+      ],
+      "lonlat": [
+        -119.2714861,
+        38.71528719999999
+      ]
+    },
+    {
+      "kind": "lostSourceJunction",
+      "tile": [
+        14,
+        2711,
+        6286
+      ],
+      "pointMetres": [
+        151.45022505056113,
+        1911.9300380889326
+      ],
+      "id": "usfs-{5D6C874B-75BB-4FDA-8A04-7B5B192E3B7A}",
+      "agency": "USFS",
+      "name": "PIPI INTERPRETIVE",
+      "nearestMetres": 1.963027328817886,
+      "nearestId": "mvum_roads-{0153B70E-2338-4B17-8425-044488729537}",
+      "nearestName": "PIPI C.G.",
+      "formerPartners": [
+        {
+          "id": "mvum_roads-{0153B70E-2338-4B17-8425-044488729537}",
+          "agency": "USFS",
+          "name": "PIPI C.G."
+        }
+      ],
+      "lonlat": [
+        -120.43038870000001,
+        38.56535100000001
+      ]
+    }
+  ]
+}
