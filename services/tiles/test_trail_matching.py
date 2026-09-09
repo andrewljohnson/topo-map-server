@@ -290,3 +290,43 @@ class RetainedPartnerJunctionTests(unittest.TestCase):
     self.assertTrue(any(index!=j and p.distance(other)<1 for j,(_,other) in enumerate(segments)),'collapsed excursion creates a false spur')
   before=unary_union([f['geometry'] for f in row['reference']]);after=unary_union([f['geometry'] for f in result if f['properties'].get('agency')=='OpenStreetMap'])
   self.assertLess(before.hausdorff_distance(after),.000001);self.assertAlmostEqual(before.length,after.length,places=5)
+
+class UnnamedSurveyTests(unittest.TestCase):
+ def test_unnamed_component_refines_without_absorbing_other_components(self):
+  from shapely.geometry import MultiLineString
+  from shapely.ops import unary_union
+  base=feature([(0,0),(600,0)],agency='OpenStreetMap')
+  base['geometry']=MultiLineString([[(0,0),(600,0)],[(0,1000),(3000,1000)]])
+  incoming=feature([(0,20),(80,20),(100,1),(180,1),(210,35),(600,35)],'Survey','USFS','two',kind='trail')
+  result=conflate([base],[incoming])
+  self.assertTrue(unary_union([f['geometry'] for f in result]).equals(base['geometry']))
+  other=[f for f in result if f['geometry'].bounds[1]>500]
+  self.assertTrue(other)
+  self.assertTrue(all(not f['properties'].get('name') for f in other))
+ def test_distinct_trail_numbers_do_not_get_wide_refinement(self):
+  base=feature([(0,0),(600,0)],agency='OpenStreetMap',ref='17E05')
+  incoming=feature([(0,20),(80,20),(100,1),(180,1),(210,35),(600,35)],'Spur','USFS','two',kind='trail',ref='17E05A')
+  result=conflate([base],[incoming])
+  self.assertGreater(sum(f['geometry'].length for f in result if f['properties']['agency']=='USFS'),350)
+ def test_unnamed_parallel_paths_and_short_junctions_remain(self):
+  for coords in [[(0,20),(600,20)],[(0,1),(40,1),(60,20),(600,20)]]:
+   result=conflate([feature([(0,0),(600,0)],agency='OpenStreetMap')],[feature(coords,'Survey','USFS','two',kind='trail')])
+   self.assertGreater(sum(f['geometry'].length for f in result if f['properties']['agency']=='USFS'),500)
+ def test_cathedral_sources_preserve_osm_and_reduce_duplicate_main_trail(self):
+  from pathlib import Path
+  from shapely.geometry import shape
+  from shapely.ops import unary_union
+  rows=json.loads((Path(__file__).parent/'fixtures/cathedral-trail-alignment.json').read_text())
+  for row in rows:
+   for f in row['reference']+row['additions']:f['geometry']=shape(f['geometry'])
+   result=conflate(row['reference'],row['additions'])
+   original=unary_union([f['geometry'] for f in row['reference']])
+   retained=unary_union([f['geometry'] for f in result if f['properties'].get('agency')=='OpenStreetMap'])
+   self.assertLess(original.difference(retained.buffer(.000001)).length,.001)
+   self.assertLess(retained.difference(original.buffer(.000001)).length,.001)
+   remaining=sum(f['geometry'].length for f in result if f['properties'].get('agency')=='USFS' and f['properties'].get('name')=='CATHEDRAL TRAIL')
+   self.assertLess(remaining,350,row['name'])
+   # The spur has no sustained tight alignment: proximity is insufficient.
+   spur=unary_union([f['geometry'] for f in row['additions'] if f['properties'].get('name')=='CATHEDRAL SPUR'])
+   kept=unary_union([f['geometry'] for f in result if f['properties'].get('name')=='CATHEDRAL SPUR'])
+   self.assertLess(spur.difference(kept.buffer(.01)).length,1)

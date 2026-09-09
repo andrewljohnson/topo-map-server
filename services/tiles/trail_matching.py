@@ -113,14 +113,22 @@ def refine_trail_match(incoming, reference, a, b, seed):
     The original source names and unmatched branches remain intact.
     """
     if a.get('kind') not in ('trail','long_distance_trail') or b.get('agency')!='OpenStreetMap':return seed
-    if not a.get('name') or not b.get('name') or reference.length<200:return seed
-    interiors=[substring(part,25,part.length-25) for part in lines(reference) if part.length>50]
-    if not interiors:return seed
-    interior=unary_union(interiors)
-    if incoming.intersection(seed).intersection(interior.buffer(2.5)).length<30:return seed
-    expanded=overlap_mask(incoming,reference,a,b,confirmed_trail=True)
-    if expanded is None or reference.intersection(expanded).length<max(150,reference.length*.6):return seed
-    return seed.union(expanded)
+    # OSM batches disconnected unnamed paths into MultiLineStrings. Evidence
+    # belongs to one connected line, not the total length of that batch; a
+    # missing name must not prevent a geometrically established survey match.
+    # Distinct explicit trail numbers, however, are evidence against widening.
+    ar,br=road_refs(a),road_refs(b)
+    if ar and br and not ar.intersection(br):return seed
+    masks=[]
+    for part in lines(reference):
+        if part.length<200:continue
+        interior=substring(part,25,part.length-25)
+        if incoming.intersection(seed).intersection(interior.buffer(2.5)).length<30:continue
+        expanded=overlap_mask(incoming,part,a,b,confirmed_trail=True)
+        if expanded is None or part.intersection(expanded).length<max(150,part.length*.6):continue
+        masks.append(expanded)
+    return seed.union(unary_union(masks)) if masks else seed
+
 
 
 def preserve_source_junctions(result, additions, matches):

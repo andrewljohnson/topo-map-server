@@ -372,3 +372,5 @@ canonical existing inputs and source indexes remain intact. The device contour
 worker uses a pinned cache-lifecycle patch to release settled abort listeners and
 prevent late cancelled requests from evicting replacements. Actual-worker tests
 show bounded DEM memory without changing contour geometry; see the overnight QA.
+
+Official trails v13 refines proven survey matches against individual connected OSM lines, including unnamed paths, instead of using a whole batched MultiLineString as the coverage denominator. Tight interior alignment and substantial directional coverage remain required; conflicting explicit trail numbers prohibit widening. The [Cathedral regression](qa/cathedral-2026-09-09/README.md) retains unconfirmed spur geometry and verifies original OSM geometry is unchanged.
