@@ -21,7 +21,10 @@ test('missing requests deduplicate and operator queue cannot be read with a clie
 test('public map allows anonymous metadata and tiles but keeps quotas and operator auth',async()=>{const s=setup();s.env.PUBLIC_MAP='1';assert.equal((await(await s.run('/metadata',null)).json()).publicAccess,true);assert.equal(await(await s.run('/tiles/0/0/0.pbf',null)).text(),'vector-test');assert.equal((await s.run('/operator/jobs',null)).status,401);s.env.REQUEST_LIMIT='2';assert.equal((await s.run('/metadata',null)).status,429)});
 
 import {gzipSync} from 'node:zlib';
-test('pinned combined release keeps gzip HTTP bytes, decodes batches and respects exact coverage',async()=>{
+test('pinned combined release keeps gzip HTTP bytes, decodes cached batches and respects exact coverage',async(t)=>{
+ t.after(()=>{globalThis.caches=savedCaches});
+ const savedCaches=globalThis.caches, entries=new Map();
+ globalThis.caches={default:{match:async key=>entries.get(key)?.clone(),put:async(key,response)=>{assert.equal(response.headers.has('Content-Encoding'),false,'cache stores opaque bytes');entries.set(key,response.clone())}}};
  const s=setup();s.env.DOWNLOAD_BYTES='100000000';
  const meta={combined:true,tilesets:{osm:{datasetId:'pilot-base',minZoom:0,maxZoom:12,coverage:{'12':[[681,1566,681,1566]]}}}};
  const compressed=gzipSync(Buffer.from('combined-test'));

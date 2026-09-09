@@ -31,13 +31,24 @@ async function meter(env,values){return env.USAGE.get(env.USAGE.idFromName('owne
 async function object(env,key,ctx,ttl=86400){
  // Version the cache after correcting precompressed response handling; old entries
  // may contain gzip bytes without Content-Encoding.
- const url='https://tile-cache.invalid/manual-gzip-v2/'+key,cache=globalThis.caches?.default;
+ const url='https://tile-cache.invalid/opaque-gzip-v3/'+key,cache=globalThis.caches?.default;
  const cached=cache?await cache.match(url):null;
- if(cached)return cached.status===404?null:cached;
+ if(cached){
+  if(cached.status===404)return null;
+  const headers=new Headers(cached.headers),encoding=headers.get('X-Topo-Stored-Encoding');
+  if(encoding){headers.set('Content-Encoding',encoding);headers.delete('X-Topo-Stored-Encoding');}
+  return new Response(cached.body,{headers,encodeBody:'manual'});
+ }
  const item=await env.TILES.get(key);
  if(!item){if(cache)ctx.waitUntil(cache.put(url,new Response(null,{status:404,headers:{'Cache-Control':'public,max-age=30'}})));return null}
  const response=new Response(item.body,{encodeBody:'manual',headers:{'Content-Type':item.httpMetadata?.contentType||'application/octet-stream','Content-Length':String(item.size),'Cache-Control':'public,max-age='+ttl,'ETag':item.httpEtag,...(item.httpMetadata?.contentEncoding?{'Content-Encoding':item.httpMetadata.contentEncoding}:{})}});
- if(cache)ctx.waitUntil(cache.put(url,response.clone()));return response;
+ if(cache){
+  // Store opaque bytes so Cache API transport normalization cannot strip the
+  // encoding needed by both direct responses and server-side batch decoding.
+  const copy=response.clone(),headers=new Headers(copy.headers);
+  if(headers.has('Content-Encoding')){headers.set('X-Topo-Stored-Encoding',headers.get('Content-Encoding'));headers.delete('Content-Encoding');}
+  ctx.waitUntil(cache.put(url,new Response(copy.body,{headers,encodeBody:'manual'})));
+ }return response;
 }
 function valid(spec,z,x,y){return spec&&Number.isInteger(z)&&z>=spec.minZoom&&z<=spec.maxZoom&&Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<2**z&&y<2**z}
 export async function api(request,env,ctx){
