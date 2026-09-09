@@ -36,6 +36,12 @@ def rectangles(keys):
 
 def plan(scope):
  if scope=='pilot':parents=sorted(set(REGIONS['tahoe-10x']+REGIONS['sf-10x']),key=morton_key);world=3
+ elif scope=='california':
+  from precache import boundary
+  from warm_us import coordinates
+  from shapely.prepared import prep
+  region=prep(boundary(ROOT/'services/tiles/regions/california.poly'))
+  parents=sorted({(x,y) for _,x,y in coordinates(region,12)} | set(REGIONS['tahoe-10x']+REGIONS['sf-10x']),key=morton_key);world=3
  else:
   from coverage_policy import geometry
   from warm_us import coordinates
@@ -55,7 +61,7 @@ def metadata(release,work):
  world=[-180,-85.0511,180,85.0511]
  base={'datasetId':base_id,'tileUrl':prefix+'/tiles/{z}/{x}/{y}.pbf?datasetId='+base_id,'batchUrl':prefix+'/tile-batch','batchSize':4,'minZoom':0,'maxZoom':12,'bounds':world,'coverage':coverage,'format':'mvt','encoding':'gzip','extent':16384}
  dem={'datasetId':dem_id,'tileUrl':prefix+'/dem/{z}/{x}/{y}.png?datasetId='+dem_id,'batchUrl':prefix+'/dem-batch','batchSize':4,'minZoom':12,'maxZoom':12,'bounds':[min(b[0] for b in render),min(b[1] for b in render),max(b[2] for b in render),max(b[3] for b in render)],'renderBounds':render,'coverage':dem_coverage,'format':'png','encoding':'terrarium','tileSize':1024,'halo':1,'attribution':'Elevation: USGS 3DEP · Mapzen terrain'}
- return {'name':'Topo · '+('Tahoe and San Francisco pilot' if work['scope']=='pilot' else 'United States'),'releaseId':release,'combined':True,'logicalSources':list(SOURCES),'overviewMaxZoom':work['worldMaxZoom'],'datasetId':base_id,'tileUrl':base['tileUrl'],'batchUrl':base['batchUrl'],'batchSize':4,'bounds':world,'center':[-120.05,38.92626],'initialZoom':12.5,'minZoom':0,'maxZoom':12,'gridZoom':12,'tilesets':{'osm':base,'dem':dem},'publication':{'status':'pilot-complete' if work['scope']=='pilot' else 'complete','detailRegion':'Tahoe and San Francisco' if work['scope']=='pilot' else 'CONUS','worldMaxZoom':work['worldMaxZoom']}}
+ return {'name':'Topo · '+('Tahoe and San Francisco pilot' if work['scope']=='pilot' else 'California' if work['scope']=='california' else 'United States'),'releaseId':release,'combined':True,'logicalSources':list(SOURCES),'overviewMaxZoom':work['worldMaxZoom'],'datasetId':base_id,'tileUrl':base['tileUrl'],'batchUrl':base['batchUrl'],'batchSize':4,'bounds':world,'center':[-120.05,38.92626],'initialZoom':12.5,'minZoom':0,'maxZoom':12,'gridZoom':12,'tilesets':{'osm':base,'dem':dem},'publication':{'status':'pilot-complete' if work['scope']=='pilot' else 'complete','detailRegion':'Tahoe and San Francisco' if work['scope']=='pilot' else 'California' if work['scope']=='california' else 'CONUS','worldMaxZoom':work['worldMaxZoom']}}
 
 def validate_combined(blob,source):
  if len(blob)>4000000:raise ValueError('Tile exceeds four MB delivery ceiling')
@@ -177,5 +183,5 @@ def run(args):
  print('Candidate API: /releases/'+args.release+'/metadata',flush=True)
 
 def main():
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('plan','publish','promote','rollback'));p.add_argument('--release',required=True);p.add_argument('--scope',choices=('pilot','conus'),default='pilot');p.add_argument('--workers',type=int,choices=range(1,33),default=16);p.add_argument('--shard-size',type=int,choices=range(1,513),default=256);p.add_argument('--max-bytes',type=int,default=500000000000);run(p.parse_args())
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=('plan','publish','promote','rollback'));p.add_argument('--release',required=True);p.add_argument('--scope',choices=('pilot','california','conus'),default='pilot');p.add_argument('--workers',type=int,choices=range(1,33),default=16);p.add_argument('--shard-size',type=int,choices=range(1,513),default=256);p.add_argument('--max-bytes',type=int,default=500000000000);run(p.parse_args())
 if __name__=='__main__':main()

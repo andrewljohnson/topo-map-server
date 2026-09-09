@@ -22,6 +22,20 @@ class CombinedPublicationTests(unittest.TestCase):
   for kind,keys in [('osm',[(12,x,y) for x,y in p['parents']]),('dem',[(12,x,y) for x,y in p['dem']])]:
    rects=m['tilesets'][kind]['coverage']['12'];actual={(12,x,y) for a,b,c,d in rects for x in range(a,c+1) for y in range(b,d+1)}
    self.assertEqual(actual,set(keys))
+ def test_california_covers_state_and_preserves_existing_pilot(self):
+  from precache import boundary
+  from warm_us import coordinates
+  from shapely.prepared import prep
+  p=plan('california');pilot=plan('pilot')
+  expected={(x,y) for _,x,y in coordinates(prep(boundary(Path(__file__).parent/'regions/california.poly')),12)}
+  self.assertEqual(set(p['parents']),expected|set(pilot['parents']))
+  self.assertTrue(set(pilot['dem']).issubset(set(p['dem'])))
+  self.assertLess(len(p['parents']),15000)
+  self.assertGreater(len(p['parents']),13000)
+  m=metadata('ca-test',p)
+  self.assertEqual(m['publication']['detailRegion'],'California')
+  self.assertEqual(m['publication']['status'],'complete')
+  self.assertEqual(set(m['tilesets']),{'osm','dem'})
  def test_validation_accepts_1024_dem_and_rejects_wrong_size_and_layers(self):
   def png(size):
    out=io.BytesIO();Image.new('RGB',(size,size)).save(out,format='PNG');return out.getvalue()

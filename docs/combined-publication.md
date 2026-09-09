@@ -119,3 +119,7 @@ release ID, completion/scope and exact base/DEM object counts. The pinned
 reuse a retired legacy publisher's global warming status. In-progress local
 candidate generation remains in its own `status.json`; promotion is separate.
 This status correction is deployed and verified against the promoted r13 manifest.
+
+## California demo
+
+`--scope california` publishes detailed z12 base/DEM coverage for every tile intersecting `regions/california.poly`, plus the existing Tahoe/San Francisco pilot (including Tahoe's Nevada side). Worldwide z0–3 and all regional ancestors through z11 remain available. The default scope stays the pilot. Use a fresh immutable release ID and run publication from a frozen checkout so parallel cartography development cannot alter its inputs.
