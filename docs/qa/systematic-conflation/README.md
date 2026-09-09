@@ -50,3 +50,9 @@ The captured metric-coordinate fixture reproduces 668.4 m of leftover geometry w
 End-to-end verification found a second issue: `merge_tiles` grouped polygons and outlines with the same ID/properties into a single geometric union. A polygon absorbs its boundary (and enclosed points), so legitimate strokes disappeared while offset remnants could survive. The packer now groups by geometry family as well as source, layer, ID, and properties. It preserves separate polygon, line and point representations while still dissolving same-family child-tile seams. Two regression tests cover coincident IDs and outlines across adjacent children; all nine packing tests, the overview test, and three publication tests pass.
 
 The exact viewport re-packed locally now retains more than 2,700 m of Humboldt-Toiyabe outline and no detached basin fragment. Candidate r4 was deliberately not promoted because it lacked the packing correction. Both fixes ship together in candidate r5.
+
+### r5 publication verification
+
+r5 is now the default cloud/Expo release. All 352 objects were uploaded and verified in 103.5 seconds. Decoding the actual published combined tile in the reported viewport confirms 2,722.4 m of continuous Humboldt-Toiyabe outline and zero detached basin outline. A mobile TileStore delivery check downloaded 37 unique Tahoe/San Francisco tiles in 4.55 seconds and reopened them offline; 1024px DEMs and simulated notes/GPS preservation passed. These are automated checks on this computer, not iPhone timings.
+
+Across the full Tahoe source cell, the new shared-edge rule removes six bounded remnants (one Tahoe National Forest and five basin segments), with no added geometry; all designation polygons and non-forest outlines remain unchanged. The larger source cell extends beyond the published pilot.
