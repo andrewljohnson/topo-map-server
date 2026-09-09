@@ -1,0 +1,116 @@
+{
+  "parents": 80,
+  "workers": 8,
+  "retainedSourceInputs": true,
+  "freshDerivedOutputs": true,
+  "beforeSeconds": 85.76923978398554,
+  "afterSeconds": 53.195044359890744,
+  "timeReductionPercent": 37.97887856547949,
+  "beforeSources": {
+    "osm": {
+      "seconds": 17.310404896037653,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 0.6871189679950476,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 4.272800218081102,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 12.165740064810961,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 1280
+    },
+    "amenities": {
+      "seconds": 5.801063903840259,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 2.4408032919745892,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 13.280727970181033,
+      "preparedCells": 8,
+      "prepareSeconds": 13.260425270767882,
+      "parentTiles": 80,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "afterSources": {
+    "osm": {
+      "seconds": 5.987892847042531,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "boundaries": {
+      "seconds": 0.5041954452171922,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "landcover": {
+      "seconds": 1.6703462058212608,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "trails": {
+      "seconds": 6.4865566350054,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 1280
+    },
+    "amenities": {
+      "seconds": 8.77649026690051,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "waterways": {
+      "seconds": 1.364130700007081,
+      "childTiles": 1280,
+      "derivedCacheHits": 0,
+      "prepareSeconds": 0,
+      "reusedBasemapTiles": 0
+    },
+    "recreation": {
+      "seconds": 9.950070078019053,
+      "preparedCells": 8,
+      "prepareSeconds": 9.93204295868054,
+      "parentTiles": 80,
+      "childTiles": 0,
+      "derivedCacheHits": 0
+    }
+  },
+  "beforePackingSeconds": 25.271075817989185,
+  "afterPackingSeconds": 15.289832701906562,
+  "note": "Single before/after observation; OS caches and resource availability may both affect results. Not an end-to-end cold-source forecast."
+}
