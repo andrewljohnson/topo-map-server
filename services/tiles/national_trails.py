@@ -16,7 +16,7 @@ from trail_matching import conflate, lines, paved_surface
 from shapely import make_valid
 from national_boundaries import cached, bounds, project
 
-DATASET_ID = 'us-official-trails-v7'
+DATASET_ID = 'us-official-trails-v9'
 RAW_CACHE_VERSION = 'us-official-trails-v1'
 MIN_ZOOM, MAX_ZOOM = 5, 14
 BOUNDS = [-180, 18, -60, 72]
@@ -194,6 +194,11 @@ def render_tile(z,x,y,*,basemap_tile=None):
   for f in features:
    geometry=unary_union(lines(f['geometry'].intersection(clip)))
    if not geometry.is_empty:
-    output.append({**f,'geometry':geometry})
-  layers[name]=output
+    from cartographic_names import display_name
+    props=dict(f['properties']);display=display_name(props.get('name',''))
+    if display!=props.get('name',''):props['display_name']=display
+    output.append({**f,'geometry':geometry,'properties':props})
+  # Presentation context must never split reference features before matching.
+  from path_context import annotate
+  layers[name]=annotate(output,z,x,y,world=True)[0] if name=='network' else output
  return mapbox_vector_tile.encode([{'name':name,'features':features} for name,features in layers.items()],default_options={'extents':4096,'y_coord_down':True,'quantize_bounds':(x/n,y/n,(x+1)/n,(y+1)/n)})

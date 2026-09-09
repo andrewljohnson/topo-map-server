@@ -30,8 +30,8 @@ PINNED_SIZE = 137295889397
 PINNED_BLAKE3 = 'b2aa7f4b1858ec873bd2fb6aff1393ce330ad4d236f2b4f9ad1875e910c1eb8e'
 PINNED_ETAG = '"e4343a15fa4bf60f81112ba7784a3f73-512"'
 SOURCE_URL = os.environ.get('NATIONAL_PMTILES_URL', PINNED_URL)
-DATASET_ID = 'osm-us-pm20260811-b2aa7f4b1858-v7'
-SOURCE_INFO = {'provider':'Protomaps','source':'OpenStreetMap and Natural Earth via Protomaps v4 basemap','snapshot':'2026-08-11','version':'4.15.1','url':PINNED_URL,'blake3':PINNED_BLAKE3,'archiveBytes':PINNED_SIZE,'etag':PINNED_ETAG,'attribution':'© OpenStreetMap contributors · Protomaps · Natural Earth','license':'ODbL Produced Work; OpenStreetMap attribution required','schemaVersion':'national-osm-v7','documentation':'https://docs.protomaps.com/basemaps/downloads'}
+DATASET_ID = 'osm-us-pm20260811-b2aa7f4b1858-v9'
+SOURCE_INFO = {'provider':'Protomaps','source':'OpenStreetMap and Natural Earth via Protomaps v4 basemap','snapshot':'2026-08-11','version':'4.15.1','url':PINNED_URL,'blake3':PINNED_BLAKE3,'archiveBytes':PINNED_SIZE,'etag':PINNED_ETAG,'attribution':'© OpenStreetMap contributors · Protomaps · Natural Earth','license':'ODbL Produced Work; OpenStreetMap attribution required','schemaVersion':'national-osm-v9','documentation':'https://docs.protomaps.com/basemaps/downloads'}
 DATA = Path(os.environ.get('TILE_DATA_DIR',Path(__file__).resolve().parent/'data'))
 LAYERS = ('land','residential','grass','forest','rock','water','waterline','building','rail','road','label','water_label','poi','area')
 BLOCK_SIZE = 256*1024
@@ -293,6 +293,9 @@ def normalize_tile(blob,z):
                     output['min_zoom']=minimum if isinstance(minimum,(int,float)) else 14
                 if target=='road':
                     output.update(road_properties(props))
+                    from cartographic_names import display_name
+                    display=display_name(name)
+                    if display!=name:output['display_name']=display
                 if target=='water_label':
                     # Upstream uses the full polygon's point-on-surface and area-based
                     # zoom priority, avoiding new anchors on every clipped tile fragment.
@@ -387,7 +390,11 @@ def orient_lake_labels(blob,z,x,y):
         point=shape(feature['geometry']);wx=(x+point.x/4096)/2**z;wy=(y+point.y/4096)/2**z
         if not owns_name(feature['properties']['name'],wx,wy):local.append(feature)
     area_features=local+features_for_tile(z,x,y)
-    if not decoded.get('water_label',{}).get('features') and not area_features and not decoded.get('area',{}).get('features'):
+    from path_context import annotate
+    # Fine reference geometry stays aggregated until agency matching is complete.
+    roads,paths_changed=annotate(decoded.get('road',{}).get('features',[]),z,x,y) if z==12 else ([],False)
+    if paths_changed:decoded['road']={'features':roads}
+    if not decoded.get('water_label',{}).get('features') and not area_features and not decoded.get('area',{}).get('features') and not paths_changed:
         return blob
     decoded['area']={'features':area_features}
     for feature in decoded.get('water_label',{}).get('features',[]):

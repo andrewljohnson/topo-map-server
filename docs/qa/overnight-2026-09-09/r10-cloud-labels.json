@@ -1,0 +1,326 @@
+[
+  {
+    "view": "fallen-leaf",
+    "tile": [
+      11,
+      340,
+      783
+    ],
+    "labels": {
+      "osm__water_label": [
+        {
+          "class": "water",
+          "name": "Fontanillis Lake",
+          "min_zoom": 12,
+          "sort_rank": 200,
+          "label_angle": 44.4,
+          "label_elongated": true,
+          "label_horizontal_zoom": 17.4,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              1887,
+              1148
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "name": "Dicks Lake",
+          "min_zoom": 12,
+          "sort_rank": 200,
+          "label_angle": 70.8,
+          "label_elongated": true,
+          "label_horizontal_zoom": 14.2,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              2135,
+              1431
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "name": "Fallen Leaf Lake",
+          "min_zoom": 12,
+          "sort_rank": 200,
+          "label_angle": -69.9,
+          "label_elongated": true,
+          "label_horizontal_zoom": 13.0,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              4002,
+              1766
+            ]
+          }
+        }
+      ],
+      "osm__area": [
+        {
+          "id": "wilderness-155",
+          "name": "Desolation Wilderness",
+          "kind": "wilderness",
+          "min_zoom": 7,
+          "priority": 1.9999557035075,
+          "label_source": "agency",
+          "class": "wilderness",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              1462,
+              1162
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "view": "fallen-leaf",
+    "tile": [
+      12,
+      681,
+      1566
+    ],
+    "labels": {
+      "osm__water_label": [
+        {
+          "class": "water",
+          "label_angle": 54.5,
+          "label_elongated": true,
+          "label_horizontal_zoom": 16.7,
+          "min_zoom": 13,
+          "name": "Lower Velma Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              899,
+              4967
+            ]
+          }
+        },
+        {
+          "class": "lake",
+          "label_angle": 70.8,
+          "label_elongated": true,
+          "label_horizontal_zoom": 14.2,
+          "min_zoom": 12,
+          "name": "Dicks Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              698,
+              11449
+            ]
+          }
+        },
+        {
+          "class": "lake",
+          "label_angle": -69.9,
+          "label_elongated": true,
+          "label_horizontal_zoom": 13,
+          "min_zoom": 12,
+          "name": "Fallen Leaf Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              15633,
+              14127
+            ]
+          }
+        }
+      ],
+      "osm__area": []
+    }
+  },
+  {
+    "view": "desolation",
+    "tile": [
+      12,
+      680,
+      1566
+    ],
+    "labels": {
+      "osm__water_label": [
+        {
+          "class": "lake",
+          "label_angle": 0.0,
+          "label_elongated": false,
+          "label_horizontal_zoom": 0.0,
+          "min_zoom": 13,
+          "name": "Middle Velma Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              15631,
+              5406
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "label_angle": 0.0,
+          "label_elongated": false,
+          "label_horizontal_zoom": 0.0,
+          "min_zoom": 13,
+          "name": "Upper Velma Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              16082,
+              7469
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "label_angle": 44.4,
+          "label_elongated": true,
+          "label_horizontal_zoom": 17.4,
+          "min_zoom": 12,
+          "name": "Fontanillis Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              15093,
+              9182
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "label_angle": -70.0,
+          "label_elongated": true,
+          "label_horizontal_zoom": 16.3,
+          "min_zoom": 14,
+          "name": "Fontanillis Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              14606,
+              9718
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "label_angle": -85.4,
+          "label_elongated": true,
+          "label_horizontal_zoom": 17.3,
+          "min_zoom": 14,
+          "name": "Fontanillis Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              14888,
+              10044
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "label_angle": 0.0,
+          "label_elongated": false,
+          "label_horizontal_zoom": 0.0,
+          "min_zoom": 15,
+          "name": "Fontanillis Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              14869,
+              9756
+            ]
+          }
+        },
+        {
+          "class": "water",
+          "label_angle": 24.6,
+          "label_elongated": true,
+          "label_horizontal_zoom": 18.6,
+          "min_zoom": 15,
+          "name": "Fontanillis Lake",
+          "sort_rank": 200,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              15648,
+              10286
+            ]
+          }
+        }
+      ],
+      "osm__area": [
+        {
+          "class": "wilderness",
+          "id": "wilderness-155",
+          "kind": "wilderness",
+          "label_source": "agency",
+          "min_zoom": 7,
+          "name": "Desolation Wilderness",
+          "priority": 1.9999557035075,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              11693,
+              9299
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "view": "golden-gate",
+    "tile": [
+      12,
+      654,
+      1583
+    ],
+    "labels": {
+      "osm__water_label": [],
+      "osm__area": [
+        {
+          "class": "park",
+          "kind": "park",
+          "label_source": "osm",
+          "min_zoom": 12,
+          "name": "Golden Gate Park",
+          "priority": 3,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              6962,
+              4414
+            ]
+          }
+        },
+        {
+          "class": "park",
+          "kind": "park",
+          "label_source": "osm",
+          "min_zoom": 15,
+          "name": "Golden Gate Heights Park",
+          "priority": 3,
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              9314,
+              8982
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+ "environment":"Codex in-app browser,393x852 viewport; not physical Expo",
+ "release":"topo-z12-pilot-20260909-r10",
+ "view":{"zoom":12,"center":[-122.465,37.77]},
+ "beforeLazyIcons":{"firstBaseTileMsRange":[53000,76000]},
+ "afterLazyIcons":{"firstBaseTileMs":10755,"iconsCreated":11,"iconDrawingTotalMs":2,"loadMs":52013},
+ "afterWorkerDecode":{"firstBaseTileMs":13625,"loadMs":57992,"maxMainThreadLongTaskMs":32503},
+ "graphicsProfile":{"slowGetShaderParameter":{"count":28,"totalMs":25445,"maxMs":1019},"slowGetProgramParameter":{"count":9,"totalMs":8002,"maxMs":1003}},
+ "conclusion":"Eager icon startup work improved; remaining browser stall is dominated by synchronous graphics shader status checks. Worker DEM decoding does not eliminate that graphics stall. Do not extrapolate these timings to phones."
+}

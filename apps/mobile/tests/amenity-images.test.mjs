@@ -5,13 +5,13 @@ import vm from 'node:vm';
 test('amenity grid is a single offline image with three columns and correct rows',()=>{
  const literal=fs.readFileSync(new URL('../src/amenityImages.ts',import.meta.url),'utf8');
  const code=JSON.parse(literal.slice(literal.indexOf('=')+1).trim().replace(/;$/,''));
- const events={},images=new Map(),draws=[];
+ const events={},images=new Map(),draws=[],prepared=new Set();
  const ctx={putImageData(){},drawImage(...args){draws.push(args.slice(1))},getImageData(x,y,width,height){return {width,height}}};
  const context=vm.createContext({Uint8ClampedArray,ImageData:class{},document:{createElement:()=>({getContext:()=>ctx})}});
  vm.runInContext(code,context);
- context.installAmenityImages({hasImage:id=>images.has(id),getImage:()=>({data:{width:48,height:48,data:new Uint8ClampedArray(48*48*4)}}),addImage:(id,image,options)=>images.set(id,{image,options}),on:(event,fn)=>events[event]=fn});
+ context.installAmenityImages({hasImage:id=>images.has(id),__topoEnsurePoiImage:id=>prepared.add(id),getImage:id=>prepared.has(id)?({data:{width:48,height:48,data:new Uint8ClampedArray(48*48*4)}}):undefined,addImage:(id,image,options)=>images.set(id,{image,options}),on:(event,fn)=>events[event]=fn});
  const id='amenity-grid:campsite,drinking-water,toilet,parking';events.styleimagemissing({id});
- assert.equal(images.get(id).image.width,132);assert.equal(images.get(id).image.height,88);assert.equal(images.get(id).options.pixelRatio,2);assert.equal(draws.length,4);
+ assert.equal(images.get(id).image.width,132);assert.equal(images.get(id).image.height,88);assert.equal(images.get(id).options.pixelRatio,2);assert.equal(draws.length,4);assert.equal(prepared.size,4,'grid requests its member icons before composing');
  events.styleimagemissing({id});events.styleimagemissing({id:'shield-us'});assert.equal(draws.length,4);
  assert.ok(!code.includes('fetch('));assert.ok(!code.includes('exports.'));
 });

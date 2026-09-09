@@ -1,3 +1,4 @@
+import {installMapDiagnostics,profileMapGraphics} from './mapDiagnostics';
 import {logicalMap} from './combinedMap';
 "use client";
 import {installDeviceTerrain} from './terrainRuntime';
@@ -35,6 +36,8 @@ export default function Home() {
     let disposed = false;
     let resizeObserver: ResizeObserver | undefined;
     const controller = new AbortController();
+    const diagnosticsStart=performance.now(),bootstrap:any[]=[];
+    const stamp=(stage:string)=>bootstrap.push({stage,ms:Math.round(performance.now()-diagnosticsStart)});
     (async () => {
       try {
         setError(''); setLoaded(false);
@@ -48,14 +51,19 @@ export default function Home() {
         if(response.status===429)throw new Error('Map allowance reached. Check the server usage limits.');
 
         if (!response.ok) throw new Error('Tile service is unavailable.');
-        const info: Metadata = await response.json();
+        const info: Metadata = await response.json();stamp('metadata');
         setPublicAccess(info.publicAccess===true);
-        const L = await import('maplibre-gl');
+        const L = await import('maplibre-gl');stamp('map-library');
         if (disposed || !root.current) return;
         const mapStyle=createStyle(info, tileTemplateUrl(info.tileUrl,api), info.tilesets?.dem ? 'topocontour://{z}/{x}/{y}' : info.tilesets?.contours ? tileTemplateUrl(info.tilesets.contours.tileUrl,api) : undefined, info.tilesets?.amenities ? tileTemplateUrl(info.tilesets.amenities.tileUrl,api) : undefined, info.tilesets?.boundaries ? tileTemplateUrl(info.tilesets.boundaries.tileUrl,api) : undefined, info.tilesets?.waterways ? tileTemplateUrl(info.tilesets.waterways.tileUrl,api) : undefined, info.tilesets?.landcover ? tileTemplateUrl(info.tilesets.landcover.tileUrl,api) : undefined, info.tilesets?.trails ? tileTemplateUrl(info.tilesets.trails.tileUrl,api) : undefined, info.tilesets?.recreation ? tileTemplateUrl(info.tilesets.recreation.tileUrl,api) : undefined);
+        stamp('style-created');
         const terrain=installDeviceTerrain(L,mapStyle,info.tilesets?.dem,async(key,c)=>{const [z,x,y]=key.split('/');const template=tileTemplateUrl(info.tilesets!.dem!.tileUrl,api);const response=await fetch(template.replace('{z}',z).replace('{x}',x).replace('{y}',y),{headers,signal:c.signal});if(!response.ok)throw Error('DEM '+response.status);return response.arrayBuffer()},terrainWorkerSource);
-        const instance = new L.Map({hash:true,container:root.current, transformRequest:(url)=>({url,headers:url.startsWith(api+'/')?headers:{}}), style:mapStyle, center:info.center,zoom:info.initialZoom??3,minZoom:info.minZoom,maxZoom:18,renderWorldCopies:true,attributionControl:false});
-        map.current = instance;
+        stamp('terrain-installed');
+        const diagnostics=import.meta.env.VITE_MAP_DIAGNOSTICS==='1'&&new URLSearchParams(location.search).has('diagnostics');
+        const graphics=diagnostics?profileMapGraphics():null;
+        const instance = new L.Map({collectResourceTiming:diagnostics,hash:true,container:root.current, transformRequest:(url)=>({url,headers:url.startsWith(api+'/')?headers:{}}), style:mapStyle, center:info.center,zoom:info.initialZoom??3,minZoom:info.minZoom,maxZoom:18,renderWorldCopies:true,attributionControl:false});
+        map.current = instance;stamp('map-constructor');
+        if(diagnostics)installMapDiagnostics(instance,diagnosticsStart,bootstrap,graphics);
         if(import.meta.env.DEV)(window as any).__topoMap=instance;
         if(terrain){terrain.attach(instance);(instance as any).__topoTerrainStats=terrain.stats;instance.on('remove',terrain.dispose);}
         // Handle stylesheet load order and container changes without relying on a window resize.
@@ -63,15 +71,15 @@ export default function Home() {
         resizeObserver.observe(root.current);
         instance.on('load',()=>{if(areas.current)updateAreas(areas.current);});
         if(!info.combined)fetch(`${api}/areas.geojson`,{headers,signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Areas unavailable');return r.json()}).then(data=>{if(!disposed){areas.current=parseAreaData(data);if(instance.isStyleLoaded())updateAreas(areas.current)}}).catch(()=>{});
-        installShieldImages(instance);
-        installPoiImages(instance);
-        installAmenityImages(instance);
+        installShieldImages(instance);stamp('shield-icons');
+        installPoiImages(instance);stamp('poi-icons');
+        installAmenityImages(instance);stamp('amenity-icons');
         const logical=info.combined?logicalMap(instance):instance;
-        installMapInfo(logical);
-        installMapNotes(instance,()=>info);
-        installTrailBadges(instance);
-        installPoiMatching(logical);
-        installFeatureInfo(logical,L.Popup);
+        installMapInfo(logical);stamp('legend');
+        installMapNotes(instance,()=>info);stamp('notes');
+        installTrailBadges(instance);stamp('route-badges');
+        installPoiMatching(logical);stamp('poi-matching');
+        installFeatureInfo(logical,L.Popup);stamp('feature-info');
         instance.addControl(new L.NavigationControl({showCompass:true,visualizePitch:true}), 'bottom-left');
         const geolocate = new L.GeolocateControl({
           positionOptions:{enableHighAccuracy:true,maximumAge:30000,timeout:15000},

@@ -5,7 +5,7 @@ export function installShieldImages(map: import('maplibre-gl').Map) {
     if (!identifiers.includes(id) || map.hasImage(id)) return;
     const canvas = document.createElement('canvas');
     canvas.width = 64; canvas.height = 64;
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext('2d',{willReadFrequently:true})!;
     if (!ctx) throw new Error('Canvas is required for highway shields');
     ctx.lineJoin = 'round'; ctx.lineCap = 'round';
     function shape() {

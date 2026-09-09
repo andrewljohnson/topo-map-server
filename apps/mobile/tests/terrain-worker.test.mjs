@@ -33,3 +33,22 @@ test('1024 pixel z12 DEM generates detailed contours without requesting z13 DEM'
  assert.ok(keys.length>0);assert.ok(keys.every(key=>key.startsWith('12/')),keys.join(','));
  }finally{await worker.terminate()}
 });
+test('worker PNG pixel decoding matches decoded DEM contours and closes bitmaps',async()=>{
+ const harness=`const {parentPort}=require('node:worker_threads');globalThis.self=globalThis;globalThis.postMessage=(m,t)=>parentPort.postMessage(m,t);parentPort.on('message',data=>globalThis.onmessage({data}));`;
+ // The canvas fixture isolates our Terrarium conversion/transport from browser PNG codecs.
+ const decoder=`let closed=0;globalThis.createImageBitmap=async blob=>({width:128,height:128,close(){closed++;parentPort.postMessage({type:'closed'})}});globalThis.OffscreenCanvas=class{getContext(kind,options){if(options&&!options.willReadFrequently)throw Error('CPU canvas required');return{drawImage(){},getImageData(){const data=new Uint8ClampedArray(128*128*4);for(let i=0;i<128*128;i++){const value=32768+1000+(i%128)*2;data[i*4]=Math.floor(value/256);data[i*4+1]=value%256;data[i*4+3]=255}return{data}}}}};`;
+ const run=async encoded=>{
+  const worker=new Worker(harness+(encoded?decoder:'')+source,{eval:true});let closed=0;
+  try{return await new Promise((resolve,reject)=>{
+   worker.on('error',reject);worker.on('message',m=>{
+    if(m.type==='closed'){closed++;return}
+    if(m.type==='dem'){
+     assert.equal(m.decodeInWorker,encoded);
+     if(encoded){const buffer=new Uint8Array([137,80,78,71]).buffer;worker.postMessage({type:'demResult',id:m.id,buffer},[buffer])}
+     else{const data=Float32Array.from({length:128*128},(_,i)=>1000+(i%128)*2);worker.postMessage({type:'demResult',id:m.id,tile:{width:128,height:128,data}},[data.buffer])}
+    }else if(m.type==='contourResult'){if(m.error)reject(Error(m.error));else resolve({buffer:Buffer.from(m.buffer),closed})}
+   });worker.postMessage({type:'configure',maxZoom:12,minZoom:12});worker.postMessage({type:'contour',id:1,z:12,x:681,y:1566});
+  })}finally{await worker.terminate()}
+ };
+ const decoded=await run(false),encoded=await run(true);assert.deepEqual(encoded.buffer,decoded.buffer);assert.ok(encoded.closed>0);assert.ok(new VectorTile(new Pbf(encoded.buffer)).layers.contour.length>0);
+});

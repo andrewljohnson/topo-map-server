@@ -13,9 +13,10 @@ export function installPoiImages(map: import('maplibre-gl').Map) {
   function add(id: string) {
     const match = /^poi-(square|circle)-(.+)$/.exec(id);
     if (!match || !POI_PATHS[match[2]] || map.hasImage(id)) return;
+    const started=Date.now();
     const canvas = document.createElement('canvas');
     canvas.width = 48; canvas.height = 48;
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext('2d', {willReadFrequently:true})!;
     if (!ctx) throw new Error('Canvas is required for POI icons');
     ctx.beginPath();
     if (match[1] === 'circle') ctx.arc(24,24,21,0,Math.PI*2);
@@ -30,9 +31,8 @@ export function installPoiImages(map: import('maplibre-gl').Map) {
     for (const path of POI_PATHS[match[2]]) ctx.fill(new Path2D(path));
     ctx.restore();
     map.addImage(id,ctx.getImageData(0,0,48,48),{pixelRatio:2});
+    const stats=(map as any).__topoIconStats||((map as any).__topoIconStats={count:0,totalMs:0,maxMs:0});const ms=Date.now()-started;stats.count++;stats.totalMs+=ms;stats.maxMs=Math.max(stats.maxMs,ms);
   }
-  function all() { for (const frame of ['square','circle']) for (const name of Object.keys(POI_PATHS)) add('poi-'+frame+'-'+name); }
+  (map as any).__topoEnsurePoiImage=add;
   map.on('styleimagemissing',event=>add(event.id));
-  map.on('style.load',all);
-  if (map.isStyleLoaded()) all();
 }

@@ -22,7 +22,7 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  }
  worker.onmessage=async(event:any)=>{const m=event.data;if(disposed)return;
   if(m.type==='cancelDem'){demRequests.get(m.id)?.abort();return}
-  if(m.type==='dem'){const controller=new AbortController();demRequests.set(m.id,controller);try{const tile=await decode(await raw(m.key,controller.signal));if(!controller.signal.aborted&&!disposed)worker.postMessage({type:'demResult',id:m.id,tile},[tile.data.buffer])}catch(e){if(!disposed)worker.postMessage({type:'demResult',id:m.id,error:String(e)})}finally{demRequests.delete(m.id)}return}
+  if(m.type==='dem'){const controller=new AbortController();demRequests.set(m.id,controller);try{const bytes=await raw(m.key,controller.signal);if(controller.signal.aborted||disposed)return;if(m.decodeInWorker){const buffer=bytes.slice(0);worker.postMessage({type:'demResult',id:m.id,buffer},[buffer])}else{const tile=await decode(bytes);if(!controller.signal.aborted&&!disposed)worker.postMessage({type:'demResult',id:m.id,tile},[tile.data.buffer])}}catch(e){if(!disposed)worker.postMessage({type:'demResult',id:m.id,error:String(e)})}finally{demRequests.delete(m.id)}return}
   const p=requests.get(m.id);if(!p)return;requests.delete(m.id);p.signal.removeEventListener('abort',p.cancel);if(m.error){stats.failed++;p.reject(Error(m.error))}else{stats.generated++;stats.totalMs+=m.ms;stats.maxMs=Math.max(stats.maxMs,m.ms);p.resolve({data:m.buffer})}
  };
  worker.onerror=()=>{for(const p of requests.values()){p.signal.removeEventListener('abort',p.cancel);p.reject(Error('Terrain worker failed'))}for(const c of demRequests.values())c.abort();requests.clear();stats.failed++};
@@ -50,9 +50,8 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  const textures:Record<string,{color:string;kind:string}>={'cover-wetland':{color:'#538c872d',kind:'wetland'},'cover-sand':{color:'#ab87452b',kind:'dots'},'cover-scrub':{color:'#79885822',kind:'dots'}};
  for(const layer of [...style.layers]){
   if(layer.type==='symbol'&&layer.paint?.['text-halo-width']){layer.paint['text-halo-width']=Math.min(Number(layer.paint['text-halo-width'])||1.3,1.3);layer.paint['text-halo-blur']=.35;}
-  if(layer.id.startsWith('nlcd-')&&layer.type==='fill')layer.paint['fill-opacity']=['interpolate',['linear'],['zoom'],6,.65,10,.9,14,.8,17,.4,18,.3];
+  if(layer.id.startsWith('nlcd-')&&layer.type==='fill')layer.paint['fill-opacity']=['interpolate',['linear'],['zoom'],6,.42,10,.58,14,.66,17,.4,18,.3];
   if(layer.id.startsWith('waterways-')&&layer.type==='line')layer.paint['line-width']=['interpolate',['linear'],['zoom'],6,.4,12,['match',['get','class'],'river',1.6,.9],16,['match',['get','class'],'river',3,1.6],18,['match',['get','class'],'river',4,2.2]];
-  if(layer.id==='buildings')layer.paint['fill-opacity']=['interpolate',['linear'],['zoom'],13,.55,16,.85];
   const texture=layer.id.includes('wetland')?'cover-wetland':layer.id==='landcover-sand'?'cover-sand':layer.id==='nlcd-scrub'?'cover-scrub':null;
   if(texture&&layer.type==='fill')style.layers.splice(style.layers.indexOf(layer)+1,0,{...layer,id:layer.id+'-texture',minzoom:12,paint:{'fill-pattern':texture,'fill-opacity':['interpolate',['linear'],['zoom'],12,0,14,.65,17,.8]}});
  }
@@ -67,7 +66,7 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  const symbolStart=style.layers.findIndex((l:any)=>l.type==='symbol'&&l.source!=='contours');style.layers.splice(symbolStart<0?style.layers.length:symbolStart,0,...bridges);
  function attach(map:any){
   const add=()=>{for(const [id,texture] of Object.entries(textures)){
-   const canvas=document.createElement('canvas');canvas.width=canvas.height=32;const c=canvas.getContext('2d')!;c.strokeStyle=c.fillStyle=texture.color;c.lineWidth=1;
+   const canvas=document.createElement('canvas');canvas.width=canvas.height=32;const c=canvas.getContext('2d',{willReadFrequently:true})!;c.strokeStyle=c.fillStyle=texture.color;c.lineWidth=1;
    if(texture.kind==='wetland'){for(const [x,y]of [[8,9],[24,25]]){c.beginPath();c.moveTo(x-4,y);c.lineTo(x+4,y);c.moveTo(x,y);c.lineTo(x,y-4);c.stroke();}}
    else{for(const [x,y]of [[5,7],[23,13],[13,26]]){c.beginPath();c.arc(x,y,.8,0,Math.PI*2);c.fill();}}
    if(!map.hasImage(id))map.addImage(id,c.getImageData(0,0,32,32),{pixelRatio:1});

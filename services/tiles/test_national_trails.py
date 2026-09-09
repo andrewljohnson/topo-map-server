@@ -2,7 +2,7 @@ import tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
 import mapbox_vector_tile
-from shapely.geometry import LineString, box
+from shapely.geometry import LineString, MultiLineString, box
 import national_trails as t
 
 class OfficialTrailsTest(unittest.TestCase):
@@ -50,6 +50,7 @@ class OfficialTrailsTest(unittest.TestCase):
  def test_prepared_basemap_preserves_network_without_archive_read(self):
   blob=mapbox_vector_tile.encode({'name':'road','features':[{'id':73,'geometry':LineString([(100,200),(3000,3500)]),'properties':{'name':'Test Trail','class':'path'}}]},default_options={'y_coord_down':True})
   with patch('national_basemap.archive') as archive,patch('national_basemap.normalize_tile',return_value=blob) as normalize:
+   archive.return_value.get.return_value=b'' # No surrounding streets in this isolated fixture.
    reference=t.osm_network(14,2724,6264)
    archive.reset_mock();normalize.reset_mock()
    actual=t.osm_network(14,2724,6264,blob)
@@ -68,6 +69,15 @@ class OfficialTrailsTest(unittest.TestCase):
   self.assertEqual(t.agency_road_class({'surface':'AC - ASPHALT'}),'unclassified')
   self.assertEqual(t.agency_road_class({'surface':'NAT - NATIVE MATERIAL','passengervehicle':'open'}),'track')
   self.assertEqual(t.agency_road_class({'surface':''}),'track')
+ def test_density_context_is_applied_after_full_reference_matching(self):
+  geometry=MultiLineString([[(100,200),(150,200)],[(100,400),(150,400)]])
+  blob=mapbox_vector_tile.encode({'name':'road','features':[{'id':73,'geometry':geometry,'properties':{'name':'Test Trail','class':'path'}}]},default_options={'y_coord_down':True})
+  with patch.object(t,'cell_features',return_value=[]),patch.object(t,'pct_features',return_value=[]),patch.object(t,'conflate',wraps=t.conflate) as matching,patch('path_context.urban_at',side_effect=[True,True,True,False]):
+   tile=mapbox_vector_tile.decode(t.render_tile(14,2724,6264,basemap_tile=blob))
+  reference=matching.call_args.args[0]
+  self.assertEqual(len(reference),1);self.assertEqual(reference[0]['geometry'].geom_type,'MultiLineString')
+  network=tile['network']['features'];self.assertEqual(len(network),2)
+  self.assertEqual(sum(f['properties'].get('path_context')=='urban' for f in network),1)
  def test_bad_tile_rejected(self):
   for args in [(4,0,0),(15,0,0),(8,-1,2),(8,0,256)]:
    with self.assertRaises(ValueError):t.render_tile(*args)

@@ -6,12 +6,13 @@ export function installAmenityImages(map: any) {
   if(!names.length||names.length>12)return;
   const columns=Math.min(3,names.length),rows=Math.ceil(names.length/columns);
   const canvas=document.createElement('canvas');canvas.width=columns*44;canvas.height=rows*44;
-  const ctx=canvas.getContext('2d');if(!ctx)return;
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;
   for(let i=0;i<names.length;i++){
    const frame=['campsite','swimming','viewpoint','lodging'].includes(names[i])?'circle':'square';
+   map.__topoEnsurePoiImage?.('poi-'+frame+'-'+names[i]);
    const source=map.getImage('poi-'+frame+'-'+names[i]);if(!source)return;
    const tile=document.createElement('canvas');tile.width=source.data.width;tile.height=source.data.height;
-   tile.getContext('2d')!.putImageData(new ImageData(new Uint8ClampedArray(source.data.data),source.data.width,source.data.height),0,0);
+   tile.getContext('2d',{willReadFrequently:true})!.putImageData(new ImageData(new Uint8ClampedArray(source.data.data),source.data.width,source.data.height),0,0);
    ctx.drawImage(tile,(i%columns)*44,Math.floor(i/columns)*44,44,44);
   }
   map.addImage(id,ctx.getImageData(0,0,canvas.width,canvas.height),{pixelRatio:2});

@@ -337,3 +337,11 @@ The combined base MVT includes an `osm__area` layer. Agency park/forest/wilderne
 Named water POIs supplement polygon label records. Equal names at identical anchors merge using the earliest source minimum zoom; distinct nearby lakes are retained. Shape-aware orientation uses a fixed reference geometry and a zoom-dependent horizontal text fit.
 
 Trail matching retains full reference geometry during pair matching, then partitions its metadata by the confirmed matching masks. Names, route designations, provenance and pavement classification cannot spread to unrelated parts of an aggregated OSM MultiLineString. Original geometry is retained, allowing only subpixel rounding where newly split endpoints enter the MVT grid. Original source gaps are not automatically bridged.
+
+### Context and rendering refinements (September 9)
+
+Walking paths retain their source geometry and normal backcountry appearance. A fixed z12 street reference marks urban paths using at least4km of through streets within500m, sampled on a stable z19 grid. Length accumulation and convolution reuse neighborhood work; all endpoint/midpoint samples must qualify. Context is applied after agency matching, never before it. Urban minor paths fade in from z12–14; long-distance route styles remain distinct. This is presentation metadata, not a claim about access rights or trail difficulty.
+
+Agency uppercase names receive a separate readable `display_name`; source names and route codes remain intact. Lake labels share one collision-priority queue, regardless of whether their polygon fit calls for angled or horizontal text. Rotation switches at tenth-zoom fit thresholds, preserving single-line names.
+
+POI images are created on demand (including all requested amenity-grid members). DEM PNG decoding for contours runs in the terrain worker where browser canvas capabilities support it, with a main-thread compatibility fallback. Raw DEM cache buffers are copied before transfer so shading and later offline consumers remain intact.

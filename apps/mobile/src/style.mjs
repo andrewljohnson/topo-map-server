@@ -6,6 +6,10 @@ export function createStyle(meta, tileUrl, contourUrl, amenityUrl, boundaryUrl, 
     }
     const src = { 'source': 'osm' };
     const waterSrc = { source: waterwayUrl ? 'waterways' : 'osm' };
+    // One collision queue keeps lake importance independent of label orientation.
+    const lakeRotation = ['step', ['zoom'], ['coalesce', ['get', 'label_angle'], 0]];
+    for (let tenth = 50; tenth <= 220; tenth++)
+        lakeRotation.push(tenth / 10, ['case', ['<=', ['coalesce', ['get', 'label_horizontal_zoom'], 24], tenth / 10], 0, ['coalesce', ['get', 'label_angle'], 0]]);
     const named = ['all', ['has', 'name'], ['!=', ['get', 'name'], '']];
     const sources = { ...(waterwayUrl ? { waterways: { type: 'vector', tiles: [waterwayUrl], bounds: meta.bounds, minzoom: 6, maxzoom: 14, attribution: 'Waterways: © OpenStreetMap contributors · Protomaps' } } : {}), countries: { type: 'geojson', data: COUNTRY_BOUNDARIES, attribution: 'Country boundaries: Natural Earth', tolerance: .4 }, states: { type: 'geojson', data: STATE_BOUNDARIES, attribution: 'State boundaries: Natural Earth' }, ...(boundaryUrl ? { boundaries: { type: 'vector', tiles: [boundaryUrl], bounds: meta.bounds, minzoom: 8, maxzoom: 14, attribution: 'Protected areas: NPS · USFS · Wilderness Connect' } } : {}), amenities: amenityUrl ? { type: 'vector', tiles: [amenityUrl], bounds: [-180, 18, 180, 72], minzoom: 10, maxzoom: 14, attribution: 'Amenities: © OpenStreetMap contributors' } : { type: 'geojson', data: AMENITY_DATA, attribution: 'Amenities: © OpenStreetMap contributors' }, areas: { type: 'geojson', data: { type: 'FeatureCollection', features: [] }, attribution: 'Protected areas: NPS · USFS · Wilderness Connect' }, osm: { type: 'vector', tiles: [tileUrl], bounds: meta.bounds, minzoom: meta.minZoom, maxzoom: meta.maxZoom, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors · <a href="https://protomaps.com">Protomaps</a> · Natural Earth' }, ...(contourUrl ? { contours: { type: 'vector', tiles: [contourUrl], bounds: meta.bounds, minzoom: 11, maxzoom: 14, attribution: 'Elevation: <a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a>' } } : {}) };
     return applyCombined(applyBaseDetails(applyDensity({ version: 8, sources, layers: [
@@ -67,8 +71,7 @@ export function createStyle(meta, tileUrl, contourUrl, amenityUrl, boundaryUrl, 
             { id: 'railway-ties', type: 'line', ...src, 'source-layer': 'rail', minzoom: 13, paint: { 'line-color': '#55564e', 'line-width': ['interpolate', ['linear'], ['zoom'], 13, 2.5, 18, 5], 'line-dasharray': [.25, 3] } },
             { id: 'area-labels', type: 'symbol', source: 'areas', filter: ['all', ['==', ['geometry-type'], 'Point'], ['>=', ['zoom'], ['get', 'min_zoom']]], layout: { 'symbol-sort-key': ['get', 'priority'], 'text-field': ['upcase', ['get', 'name']], 'text-font': ['Arial', 'sans-serif'], 'text-size': ['interpolate', ['linear'], ['zoom'], 3, 10, 8, 13, 12, 16], 'text-max-width': 15, 'text-letter-spacing': .07, 'text-padding': 12 }, paint: { 'text-color': ['match', ['get', 'kind'], 'park', '#27664a', 'forest', '#61714a', '#80658e'], 'text-halo-color': '#fffdf5', 'text-halo-width': 1.8 } },
             { id: 'water-labels', type: 'symbol', ...waterSrc, 'source-layer': 'waterline', minzoom: 12, filter: named, layout: { 'symbol-placement': 'line', 'symbol-spacing': 350, 'text-field': ['get', 'name'], 'text-font': ['Georgia', 'serif'], 'text-size': 12, 'text-letter-spacing': .06 }, paint: { 'text-color': '#397da9', 'text-halo-color': '#fffdf5', 'text-halo-width': 1.2 } },
-            { id: 'lake-labels', type: 'symbol', ...src, 'source-layer': 'water_label', minzoom: 5, filter: ['all', named, ['>=', ['zoom'], ['max', 5, ['-', ['coalesce', ['get', 'min_zoom'], 6], 1]]], ['<', ['zoom'], ['coalesce', ['get', 'label_horizontal_zoom'], 24]]], layout: { 'symbol-placement': 'point', 'symbol-sort-key': ['coalesce', ['get', 'min_zoom'], 6], 'text-field': ['get', 'name'], 'text-font': ['Georgia', 'serif'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5, 11, 12, 14, 18, 17], 'text-max-width': 1000, 'text-rotate': ['coalesce', ['get', 'label_angle'], 0], 'text-rotation-alignment': 'map', 'text-line-height': 1.2, 'text-letter-spacing': .04, 'text-anchor': 'center', 'text-padding': 6, 'text-allow-overlap': false, 'text-ignore-placement': false }, paint: { 'text-color': '#397da9', 'text-halo-color': '#e6f2f5', 'text-halo-width': 1.3 } },
-            { id: 'lake-labels-horizontal', type: 'symbol', ...src, 'source-layer': 'water_label', minzoom: 5, filter: ['all', named, ['>=', ['zoom'], ['max', 5, ['-', ['coalesce', ['get', 'min_zoom'], 6], 1]]], ['>=', ['zoom'], ['coalesce', ['get', 'label_horizontal_zoom'], 24]]], layout: { 'symbol-placement': 'point', 'symbol-sort-key': ['coalesce', ['get', 'min_zoom'], 6], 'text-field': ['get', 'name'], 'text-font': ['Georgia', 'serif'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5, 11, 12, 14, 18, 17], 'text-max-width': 1000, 'text-rotate': 0, 'text-rotation-alignment': 'map', 'text-line-height': 1.2, 'text-letter-spacing': .04, 'text-anchor': 'center', 'text-padding': 6, 'text-allow-overlap': false, 'text-ignore-placement': false }, paint: { 'text-color': '#397da9', 'text-halo-color': '#e6f2f5', 'text-halo-width': 1.3 } },
+            { id: 'lake-labels', type: 'symbol', ...src, 'source-layer': 'water_label', minzoom: 5, filter: ['all', named, ['>=', ['zoom'], ['max', 5, ['-', ['coalesce', ['get', 'min_zoom'], 6], 1]]]], layout: { 'symbol-placement': 'point', 'symbol-sort-key': ['coalesce', ['get', 'min_zoom'], 6], 'text-field': ['get', 'name'], 'text-font': ['Georgia', 'serif'], 'text-size': ['interpolate', ['linear'], ['zoom'], 5, 11, 12, 14, 18, 17], 'text-max-width': 1000, 'text-rotate': lakeRotation, 'text-rotation-alignment': 'map', 'text-line-height': 1.2, 'text-letter-spacing': .04, 'text-anchor': 'center', 'text-padding': 6, 'text-allow-overlap': false, 'text-ignore-placement': false }, paint: { 'text-color': '#397da9', 'text-halo-color': '#e6f2f5', 'text-halo-width': 1.3 } },
             { id: 'road-labels', type: 'symbol', ...src, 'source-layer': 'road', minzoom: 13, filter: ['all', named, ['!', ['in', ['get', 'class'], ['literal', ["path", "footway", "cycleway", "bridleway", "steps", "pedestrian", "sidewalk", "crossing", "track"]]]]], layout: { 'symbol-placement': 'line', 'text-field': ['get', 'name'], 'text-font': ['Arial', 'sans-serif'], 'text-size': 11, 'text-max-angle': 35 }, paint: { 'text-color': '#383b34', 'text-halo-color': '#fffdf5', 'text-halo-width': 1.5 } },
             { "id": "trail-labels", "type": "symbol", "source": "osm", "source-layer": "road", "minzoom": 13, "filter": ["all", ["in", ["get", "class"], ["literal", ["path", "footway", "cycleway", "bridleway", "steps", "pedestrian", "sidewalk", "crossing", "track"]]], ["any", ["all", ["has", "name"], ["!=", ["get", "name"], ""]], ["all", ["has", "ref"], ["!=", ["get", "ref"], ""]]]], "layout": { "symbol-placement": "line", "symbol-spacing": 300, "text-field": ["case", ["all", ["has", "name"], ["!=", ["get", "name"], ""]], ["get", "name"], ["get", "ref"]], "text-font": ["Arial", "sans-serif"], "text-size": ["interpolate", ["linear"], ["zoom"], 13, 10, 17, 12], "text-max-angle": 35, "text-letter-spacing": 0.03, "text-padding": 5 }, "paint": { "text-color": ["match", ["get", "class"], ["path", "footway"], "#873d34", "cycleway", "#326f7c", "bridleway", "#6c5474", "#5d5144"], "text-halo-color": "#fffdf5", "text-halo-width": 1.7 } },
             { id: 'poi-icons', type: 'symbol', ...src, 'source-layer': 'poi', minzoom: 11, filter: ['>=', ['zoom'], ['coalesce', ['get', 'min_zoom'], 14]], layout: { 'symbol-sort-key': ['coalesce', ['get', 'min_zoom'], 14], 'icon-image': ['concat', 'poi-', ['get', 'poi_frame'], '-', ['get', 'poi_icon']], 'icon-size': 1, 'icon-padding': 5, 'icon-allow-overlap': false, 'text-field': ['get', 'name'], 'text-font': ['Arial', 'sans-serif'], 'text-size': 11, 'text-max-width': 10, 'text-anchor': 'top', 'text-offset': [0, 1.5], 'text-padding': 4, 'text-optional': true, 'text-allow-overlap': false }, paint: { 'text-color': '#374d3d', 'text-halo-color': '#fffdf5', 'text-halo-width': 1.5 } },
@@ -123,6 +126,7 @@ function applyDensity(style) {
         road.paint['line-width'] = ['interpolate', ['linear'], ['zoom'], 5, ['case', access, casing ? .6 : .2, casing ? 1.1 : .4], 12, ['case', access, casing ? 1.3 : .7, casing ? 2.2 : 1.5], 16, ['case', access, casing ? 2.8 : 1.9, casing ? 4.5 : 3.4], 18, ['case', access, casing ? 4.6 : 3.5, casing ? 7.5 : 6.4]];
     }
     const roads = layer('road-labels');
+    roads.layout['text-field'] = ['coalesce', ['get', 'display_name'], ['get', 'name']];
     roads.layout['symbol-spacing'] = 450;
     roads.layout['text-padding'] = 8;
     roads.layout['text-size'] = ['interpolate', ['linear'], ['zoom'], 12, ['case', access, 9, 10], 16, ['case', access, 10, 11]];
@@ -194,6 +198,8 @@ function applyDensity(style) {
     areas.layout['text-padding'] = 14;
     // MapLibre places higher symbol layers first. Protect parks and summits from town/amenity clutter.
     const trails = layer('trail-labels');
+    if (trails)
+        trails.layout['text-field'] = ['case', ['!=', ['coalesce', ['get', 'name'], ''], ''], ['coalesce', ['get', 'display_name'], ['get', 'name']], ['get', 'ref']];
     style.layers = style.layers.filter((item) => item !== areas && item !== trails);
     style.layers.push(outdoor, areas);
     if (trails)
@@ -334,10 +340,24 @@ function applyBaseDetails(style, landcoverUrl, trailsUrl, recreationUrl) {
         if (layer.type === 'symbol' && (layer.source === 'recreation' || layer.source === 'osm' && layer['source-layer'] === 'poi'))
             layer.layout['icon-image'] = [...NATURAL_POI_MATCH, layer.layout['icon-image']];
     }
+    // The data marks dense street-grid contexts using a fixed geographic neighborhood.
+    // Fade local urban paths in by scale; isolated trails and designated routes retain prominence.
+    for (const layer of style.layers) {
+        if (layer.type !== 'line' || !layer.id.startsWith('trails-'))
+            continue;
+        const urban = ['==', ['get', 'path_context'], 'urban'], named = ['!=', ['coalesce', ['get', 'name'], ''], ''];
+        const opacity = layer.paint['line-opacity'] ?? 1;
+        layer.paint['line-opacity'] = ['interpolate', ['linear'], ['zoom'], 12, ['*', opacity, ['case', urban, ['case', named, .18, 0], 1]], 13, ['*', opacity, ['case', urban, ['case', named, .7, .3], 1]], 14, opacity];
+    }
     // Apply water-name priority after all agency and route layers have been composed.
     const waterNames = style.layers.filter((l) => l.id === 'lake-labels' || l.id === 'lake-labels-horizontal');
     style.layers = style.layers.filter((l) => !waterNames.includes(l));
     style.layers.push(...waterNames);
+    const areaName = style.layers.find((l) => l.id === 'area-labels');
+    if (areaName) {
+        style.layers = style.layers.filter((l) => l !== areaName);
+        style.layers.push(areaName);
+    }
     return style;
 }
 // BEGIN GENERATED NATURAL SYMBOLS
