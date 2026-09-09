@@ -104,6 +104,13 @@ def build(data):
         for icon in primary:
             services=site_services.get(item['id'],[]) if icon==primary[0] else []
             extra={'site_facilities':','.join(services),'grid_image':'amenity-grid:'+','.join([icon]+services),'facility_location':'site_only'} if services else {}
+            if icon=='information':
+                information={value.strip().lower() for value in item['tags'].get('information','').split(';') if value.strip()}
+                if information:extra['information_type']=';'.join(sorted(information))
+                # Direction signs belong at close scales; site clusters still
+                # retain every member at their existing z15 handoff.
+                if information & {'guidepost','route_marker'}:
+                    extra['detail_minzoom']=17 if 'route_marker' in information or (item['tags'].get('bicycle')=='yes' and not item['tags'].get('name')) else 16
             features.append(feature(item['point'],{'kind':'amenity','group_id':group_id,'poi_icon':icon,'poi_frame':'circle' if icon in {'campsite','lodging','swimming','museum','viewpoint'} else 'square','name':item['tags'].get('name',''),'osm_id':item['id'],'min_zoom':15 if group_id else 14,'location_method':'osm_node' if item['shape'].geom_type == 'Point' else 'point_on_surface',**extra}))
     return {'type':'FeatureCollection','attribution':'© OpenStreetMap contributors · ODbL 1.0','source':'OpenStreetMap via Overpass','bounds':[-119.69,37.70,-119.53,37.78],'features':features}
 

@@ -1,0 +1,139 @@
+{
+  "capturedAt": "2026-09-09T12:13:49.260Z",
+  "release": null,
+  "bounds": [
+    -122.48983921628533,
+    37.77074826759889,
+    -122.4856227837141,
+    37.777973555875306
+  ],
+  "center": [
+    -122.487731,
+    37.774361
+  ],
+  "zoom": 16,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "6323bc93c4c46f392bcace59ba3cb8fd80b5a31d8a6f90f6af0d661a2e4d3da4",
+  "candidatePeaks": [],
+  "renderedPeaks": [],
+  "renderedSymbols": [
+    {
+      "layer": "amenity-signposts",
+      "sourceLayer": "amenities__amenities",
+      "id": 4677452085844441,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48996257781982,
+        37.77519670731333
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 134250600442444,
+      "name": "Balboa Bi-rite Market",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48537063598633,
+        37.776133773358225
+      ]
+    },
+    {
+      "layer": "amenity-secondary-details",
+      "sourceLayer": "amenities__amenities",
+      "id": 6539465471605335,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48630940914154,
+        37.771092133289756
+      ]
+    },
+    {
+      "layer": "trail-labels",
+      "sourceLayer": "trails__network",
+      "id": 81,
+      "name": "Fulton Trail",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 29,
+      "name": "Fulton Street",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 38,
+      "name": "26th Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 35,
+      "name": "29th Avenue",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 32,
+      "name": "Anza Street",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 30,
+      "name": "28th Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 26,
+      "name": "27th Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 14,
+      "name": "John F Kennedy Drive",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 13,
+      "name": "30th Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 41,
+      "name": "Cabrillo Street",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 16,
+      "name": "Balboa Street",
+      "geometryType": "LineString"
+    }
+  ]
+}

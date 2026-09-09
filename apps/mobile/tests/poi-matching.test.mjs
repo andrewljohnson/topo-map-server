@@ -155,3 +155,12 @@ test('candidate index preserves summit-rock cross-kind matches and conflicting s
  const conflict=agency(3,'Granite Example','rock');conflict.properties.gnis_id='200';
  const a=setup([],[first,second,conflict]);assert.ok(a.hidden('recreation-pois').has(2));assert.ok(!a.hidden('recreation-pois').has(3));a.events.remove();
 });
+
+test('agency information stays visible until its standalone OSM replacement is eligible',()=>{
+ for(const minimum of [15,17]){
+  const sign=point(1,{kind:'amenity',poi_icon:'information',name:'Forest Kiosk',osm_id:'node/1',group_id:'',...(minimum===17?{detail_minzoom:17}:{})});
+  const a=setup([sign],[agency(2,'Forest Kiosk','information')]);
+  a.map.getZoom=()=>minimum-.01;a.events.idle();assert.equal(a.hidden('recreation-pois').size,0);
+  a.map.getZoom=()=>minimum;a.events.idle();assert.ok(a.hidden('recreation-pois').has(2));a.events.remove();
+ }
+});

@@ -6,8 +6,8 @@ from urllib.parse import urlencode
 import mapbox_vector_tile
 from shapely.geometry import Point
 from regions.build_amenities import build, geometry, AMENITIES, TOURISM
-DATASET_ID='osm-us-amenities-v2'
-BUILD_VERSION=2
+DATASET_ID='osm-us-amenities-v3'
+BUILD_VERSION=3
 ROOT=Path(__file__).resolve().parent
 CACHE=Path(os.environ.get('TILE_DATA_DIR',ROOT/'data'))/'national-amenities'/'osm-us-amenities-v1' # Raw extracts are reusable across processing revisions.
 URL=os.environ.get('AMENITY_OVERPASS_URL','https://overpass-api.de/api/interpreter')

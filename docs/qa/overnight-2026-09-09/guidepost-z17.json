@@ -1,0 +1,59 @@
+{
+  "capturedAt": "2026-09-09T12:15:38.258Z",
+  "release": null,
+  "bounds": [
+    -122.48878510814203,
+    37.772554655865676,
+    -122.48667689185622,
+    37.77616730000429
+  ],
+  "center": [
+    -122.48773099999948,
+    37.77436100000041
+  ],
+  "zoom": 17,
+  "bearing": 0,
+  "pitch": 0,
+  "viewport": {
+    "width": 393,
+    "height": 852
+  },
+  "styleSha256": "6323bc93c4c46f392bcace59ba3cb8fd80b5a31d8a6f90f6af0d661a2e4d3da4",
+  "candidatePeaks": [],
+  "renderedPeaks": [],
+  "renderedSymbols": [
+    {
+      "layer": "amenity-cycle-signposts",
+      "sourceLayer": "amenities__amenities",
+      "id": 5381225690370605,
+      "name": "",
+      "kind": "amenity",
+      "geometryType": "Point",
+      "coordinates": [
+        -122.48773097991943,
+        37.77436139408424
+      ]
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 35,
+      "name": "29th Avenue",
+      "geometryType": "MultiLineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 30,
+      "name": "28th Avenue",
+      "geometryType": "LineString"
+    },
+    {
+      "layer": "road-labels",
+      "sourceLayer": "trails__network",
+      "id": 16,
+      "name": "Balboa Street",
+      "geometryType": "LineString"
+    }
+  ]
+}

@@ -68,3 +68,16 @@ test('detail symbols retain site service grids and lakes compose glow beneath sh
  for(const id of ['amenity-details','amenity-group-members'])assert.deepEqual(style.layers.find(l=>l.id===id).layout['icon-image'].slice(0,2),['coalesce',['get','grid_image']]);
  const index=id=>style.layers.findIndex(l=>l.id===id);assert.ok(index('water')<index('lake-shore-glow'));assert.ok(index('lake-shore-glow')<index('shorelines'));
 });
+
+test('source-tagged sign priorities preserve ordinary information and cluster breakup',async()=>{
+ const {createRequire}=await import('node:module'),require=createRequire(import.meta.url);
+ const {featureFilter}=createRequire(require.resolve('maplibre-gl'))('@maplibre/maplibre-gl-style-spec');
+ const {createStyle}=await import('../src/style.mjs');
+ const style=createStyle({bounds:[-180,-85,180,85],minZoom:0,maxZoom:12,combined:true},'topo://osm/{z}/{x}/{y}.pbf');
+ const layers=style.layers.filter(l=>['amenity-details','amenity-secondary-details','amenity-signposts','amenity-cycle-signposts','amenity-group-members'].includes(l.id));
+ const visible=(zoom,extra={})=>layers.filter(l=>zoom>=(l.minzoom??0)&&zoom<(l.maxzoom??24)&&featureFilter(l.filter).filter({zoom},{type:1,properties:{kind:'amenity',poi_icon:'information',group_id:'',...extra}})).map(l=>l.id);
+ assert.deepEqual(visible(14),[]);assert.deepEqual(visible(15),['amenity-secondary-details']);
+ assert.deepEqual(visible(15,{detail_minzoom:16}),[]);assert.deepEqual(visible(16,{detail_minzoom:16}),['amenity-signposts']);
+ assert.deepEqual(visible(16,{detail_minzoom:17}),[]);assert.deepEqual(visible(17,{detail_minzoom:17}),['amenity-cycle-signposts']);
+ assert.deepEqual(visible(15,{detail_minzoom:17,group_id:'camp'}),['amenity-group-members']);
+});

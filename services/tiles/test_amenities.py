@@ -72,3 +72,19 @@ class AmenityGroupingTests(unittest.TestCase):
             else:self.assertEqual(p['min_zoom'],14)
 
 if __name__=='__main__':unittest.main()
+
+class InformationPriorityTests(unittest.TestCase):
+    def test_direction_sign_priority_keeps_coordinates_and_other_information(self):
+        raw={'elements':[node(101,1,1,tourism='information',information=' guidepost ',bicycle='yes'),node(102,1.01,1,tourism='information',information='guidepost',name='Trail junction'),node(103,1.02,1,tourism='information',information='board; map; notice')]}
+        points={f['properties']['osm_id']:f for f in module.build(raw)['features'] if f['properties']['kind']=='amenity'}
+        self.assertEqual(points['node/101']['properties']['detail_minzoom'],17)
+        self.assertEqual(points['node/102']['properties']['detail_minzoom'],16)
+        self.assertNotIn('detail_minzoom',points['node/103']['properties'])
+        self.assertEqual(points['node/103']['properties']['information_type'],'board;map;notice')
+        for item in raw['elements']:self.assertEqual(points['node/'+str(item['id'])]['geometry']['coordinates'],[item['lon'],item['lat']])
+    def test_clustered_direction_sign_keeps_its_member_and_handoff(self):
+        result=module.build({'elements':[site(),node(101,.0003,.0003,tourism='information',information='guidepost',bicycle='yes')]})['features']
+        member=next(f for f in result if f['properties'].get('osm_id')=='node/101')
+        self.assertTrue(member['properties']['group_id']);self.assertEqual(member['properties']['min_zoom'],15)
+        self.assertIn('information',next(f for f in result if f['properties']['kind']=='group')['properties']['icons'])
+

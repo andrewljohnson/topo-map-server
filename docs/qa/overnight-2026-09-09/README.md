@@ -41,3 +41,13 @@ These are desktop/local measurements and browser map renders. Physical Expo/back
 [Geometry review](sierra-junction-review.png):blue is the original subject,green its original source partner,thin black the retained pre-repair result,red the flagged point;10m grid. These are local ground-metre source plots, not map screenshots. Source data:OpenStreetMap contributors,USFS and MVUM. Squirrel Mine,Gibson and Chapman remain unchanged after review.
 
 The new local pilot passes [all1280 source-tile geometry checks](junction-v12-pilot-geometry.json):44,703 OSM feature occurrences exactly unchanged,27 designation polygons and22 nonforest outlines unchanged. [217 of220 physical files match](junction-v12-pilot-equivalence.json); the three base differences remove small collapsed terminal remnants on Cathedral Spur,Middle Meadow Loop and Campground Spur H. The public r12 data remains unchanged while publication approval is pending.43 matching and109 national-source tests pass.
+
+## Source-tagged sign priority
+
+[Before](golden-gate-park-z15.png) and [after](sign-priority-park-z15.png) use the same Golden Gate Parkz15 camera. Actual OSM guidepost tags defer small signs:general guidepostsz16,anonymous bicycle-guideposts and route markersz17. Ordinary maps and boards retain their previous priority. [z16](guidepost-z16.png) and [z17](guidepost-z17.png) show the selected bicycle guidepost returning at its original coordinate; exported rendered-symbol ID5381225690370605 is absent at16 and present at17. [Fallen Leafz15](sign-priority-campground-z15.png) verifies that grouped facilities still split normally.
+
+[All29,438 amenity occurrences](sign-priority-geometry-equivalence.json) preserve coordinates,IDs,group membership and all other properties across1280 fine tiles. Only information_type/detail_minzoom are added;228 sign occurrences receive priority metadata. Source amenity revision3 reuses retained raw extracts. Both clients pass125 tests;7 source grouping/bundling tests and both typechecks pass.
+
+`proof_server.py --tiles <local-combined-root> --metadata <compatible-public-metadata.json> --candidate-id <unique-id>` optionally serves a z12-only local candidate, including gzip MVTs and1024 DEMs, without uploading it. The server remains bound to127.0.0.1. Three candidate flags are required together; routes are restricted to the selected base/DEM XYZ paths. HTTP metadata/encoding/dimensions and invalid-path checks pass.
+
+To reproduce the earlier POI speed comparison after later intentional visibility changes, pass `--baseline-ref c84402e --candidate-ref 1e9e224` to `benchmark_poi_matching.mjs`. Both local Git revisions are pinned; matching source hashes are recorded.
