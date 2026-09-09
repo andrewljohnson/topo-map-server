@@ -1,0 +1,7 @@
+{
+  "seconds": 6.199350503040478,
+  "workers": 4,
+  "identicalTiles": 6400,
+  "reference": "400-parent first run boundary children; retained inputs",
+  "maxChildPeakRssKiB": 165044
+}

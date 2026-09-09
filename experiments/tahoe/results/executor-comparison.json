@@ -1,0 +1,85 @@
+{
+  "workers": 2,
+  "includes": "PCT preparation, process spawn/shutdown, normalized input reads and all trail generation",
+  "coverage": "64 Tahoe z14 reference children only",
+  "runs": [
+    {
+      "round": 1,
+      "executor": "threads",
+      "seconds": 7.167189414147288,
+      "identicalTiles": 64,
+      "workerPeakRssKiB": {
+        "2751028": 276872
+      },
+      "loadAverageStart": [
+        18.240234375,
+        17.31884765625,
+        16.841796875
+      ],
+      "loadAverageEnd": [
+        18.30126953125,
+        17.34716796875,
+        16.853515625
+      ]
+    },
+    {
+      "round": 1,
+      "executor": "processes",
+      "seconds": 5.927303144941106,
+      "identicalTiles": 64,
+      "workerPeakRssKiB": {
+        "2751158": 277480,
+        "2751161": 277456
+      },
+      "loadAverageStart": [
+        18.30126953125,
+        17.34716796875,
+        16.853515625
+      ],
+      "loadAverageEnd": [
+        18.32861328125,
+        17.3857421875,
+        16.87158203125
+      ]
+    },
+    {
+      "round": 2,
+      "executor": "processes",
+      "seconds": 3.7617026530206203,
+      "identicalTiles": 64,
+      "workerPeakRssKiB": {
+        "2751267": 277348,
+        "2751270": 276968
+      },
+      "loadAverageStart": [
+        18.32861328125,
+        17.3857421875,
+        16.87158203125
+      ],
+      "loadAverageEnd": [
+        18.32861328125,
+        17.3857421875,
+        16.87158203125
+      ]
+    },
+    {
+      "round": 2,
+      "executor": "threads",
+      "seconds": 7.365281132981181,
+      "identicalTiles": 64,
+      "workerPeakRssKiB": {
+        "2751028": 336796
+      },
+      "loadAverageStart": [
+        18.32861328125,
+        17.3857421875,
+        16.87158203125
+      ],
+      "loadAverageEnd": [
+        18.27783203125,
+        17.40625,
+        16.88427734375
+      ]
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 # Tahoe zoom-12 experiment
 
-Nationwide publication is paused. Do not restart the publisher, expand the sample,
-or provision paid compute until this experiment has been reviewed.
+Nationwide publication is paused. The user has authorized measured 10× and
+further representative scale tests to support a detailed-CONUS plan targeting
+three days or less. Do not restart the old publisher, launch nationwide
+generation, or provision paid compute without the next explicit go-ahead.
 
 The first fixture is four zoom-12 tiles around Fallen Leaf Lake and Tahoe's south
 shore: x=681–682, y=1566–1567. It is a small performance/correctness fixture, not
@@ -231,3 +233,93 @@ peaked at about **419 MiB RSS**. A nearby full-build control with independent OS
 normalization took 29.46 s. The isolated paired-stage comparison is stronger
 evidence for the 25% trail improvement than these noisy end-to-end differences.
 The final run again matched all 64 reference trail hashes and all 16 DEM hashes.
+
+
+## Iteration 5 — process workers and the first scale test
+
+Two processes beat two threads in a bounded trail benchmark including startup,
+PCT preparation and shutdown: 5.93/3.76 s for processes versus 7.17/7.37 s for
+threads, with all 64 reference tile hashes matching. Spawn is used, avoiding
+forking a GDAL runtime. A full four-parent build took 15.59 s with two processes
+and 12.34 s with four. Worker memory is reported separately from parent RSS;
+`maxChildPeakRssKiB` is the largest child's peak, **not aggregate worker memory**.
+
+The builder now supports `--executor threads|processes` and defaults to four
+processes based on the current machine's measured headroom. The source pipeline
+still reserves normalized OSM completion before trail jobs consume those files.
+
+The authorized 10× fixture is 40 z12 parents, x=680–684/y=1560–1567. It writes to
+`tahoe-10x-z12-v1`, preserving the four-parent phone sample. Its first build took
+91.44 s, including 31.87 s in land cover with retained inputs plus cache misses.
+It includes 70 DEM parents with halo: 10× vector area does **not** mean 10× DEM
+files, because neighboring parents share the halo. With parallel packing and retained inputs, its next full regeneration took
+35.79 s, with all 40 parent hashes unchanged. Packing used 8.28 s and DEM 8.08 s.
+The 91-to-36-second change also includes warmer input caches and must not be
+attributed entirely to packing.
+
+A further authorized `--region sierra-100x` fixture contains 400 z12 parents,
+x=672–691/y=1552–1571, and also writes to a separate namespace. These fixtures
+are explicit bounded regions; there is no arbitrary nationwide job option.
+US mask enumeration alone found 144,027 detailed vector parents and 146,681 DEM
+parents with its geographic halo. These are counts, not runtime estimates. The
+broad z0–7 world overview is 21,845 tiles; CONUS intermediate z8–11 adds 48,750.
+Intermediate-scale representation and cold-source acquisition still need to be
+included in any three-day proposal.
+
+
+## Iteration 6 — cold acquisition and geometry reuse at 100×
+
+The 400-parent first build exposed a real cold-input failure: an NLCD TLS
+handshake timeout. The job is resumable from completed child files; errors do
+not become empty tiles. NLCD now retries transient failures (four bounded
+attempts) and requests aligned 16×16 groups of fine rasters in one 1312-square
+export. This reduces the high-detail request count by up to **256×**. It retains
+2024 C1V1/raster ID 40, nearest interpolation, each child's original pixel grid,
+and the same polygonization. Existing fine-raster caches remain reusable.
+
+The acquisition change matched **17,583,260 pixels across 2,615 retained child
+rasters, with zero differences**. Source cells outside the batch proof are still
+covered by the same alignment arithmetic; no source edition was changed.
+The resumed 400-parent land-cover stage completed 6,400 children in 41.88 s,
+including 1,920 derived hits and fresh batched requests for remaining inputs.
+This is a mixed resume measurement, not a clean cold benchmark.
+
+Boundary preparation now retains its repaired polygon geometry alongside the
+already-prepared outline. Previously each fine child parsed/repaired the same
+polygon again. A full 6,400-child rerender took 6.20 s and matched every existing
+boundary tile byte-for-byte. The first stage took 110.1 s, but that also included
+cold acquisition, so those timings do not isolate the geometry speedup.
+
+Agency trail cells similarly retain projected geometry and immutable source
+properties, while tile-local clipping and OSM/agency conflation remain per tile.
+All **6,400 trail children remained byte-identical** in a 28.22 s verification
+run, versus 51.89 s for the prior full stage including cold source acquisition.
+These results establish correctness; use warm paired runs for isolated speedups.
+
+## Iteration 7 — lossless DEM compression tradeoff
+
+On 16 existing Tahoe DEMs, PNG compression level 6 used 5.15–5.31 CPU-seconds
+and 24,131,754 bytes. Level 3 used 1.16 CPU-seconds and 25,553,295 bytes:
+about **4.5× faster encoding for 5.9% more bytes**. Level 1 used 0.72 CPU-seconds
+and 25,837,111 bytes. All decoded elevations were exactly identical.
+The experiment defaults to level 3; `--dem-compression` permits comparisons.
+Ordinary production encoding keeps level 6 until the new format is adopted.
+This affects storage/compression, not elevation precision or contour detail.
+
+The completed 400-parent resume took **388.29 s**, including 217.83 s for 484
+DEMs and 58.95 s for packing. It produced 30,276,120 compressed vector bytes and
+791,206,387 DEM bytes. This run resumed the failed first attempt and reused its
+OSM/boundary children; it is not the total first-acquisition time.
+
+The next **full vector regeneration**, using all retained raw inputs and the
+new geometry/compression paths, took **173.11 s** with four workers. Further
+controlled spatial-order and worker-count comparisons are running. Separate
+`sf-10x`, `smokies-10x`, `desert-10x` (40 parents each) and `western-1000x`
+(4,000 parents) fixtures permit the authorized representative and next-scale
+checks without exposing arbitrary nationwide execution. A 60 GiB free-disk
+reserve prevents launching experiments when storage is already constrained.
+
+Validation: 93 national tile tests pass with `OSM_ENRICHMENT_DB` pointed at a
+nonexistent temporary path, isolating HTTP-fallback tests from the installed
+local OSM database. Seven experiment tests pass, and the original four-parent
+full feature reference still matches. No source index or raw input was deleted.

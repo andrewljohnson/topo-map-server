@@ -128,6 +128,24 @@ def osm_network(z,x,y,blob=None):
  return result
 
 
+
+@lru_cache(maxsize=32)
+def prepared_agency_features(source,z,x,y,overview=False):
+ """Parse/project a raw source cell once for its adjacent fine children."""
+ result=[]
+ for raw in cell_features(source,z,x,y,overview):
+  props=properties(source,raw)
+  if props is None or not raw.get('geometry'):continue
+  geometry=transform(project,make_valid(shape(raw['geometry'])))
+  ref=props['route_ref']
+  if ref in ROUTE_BOUNDS and not geometry.intersects(transform(project,box(*ROUTE_BOUNDS[ref]))):
+   props['route_ref']=''
+  if overview and not props['route_ref']:continue
+  props['class']='track' if source=='mvum_roads' else 'path'
+  result.append((geometry,props))
+ return tuple(result)
+
+
 def render_tile(z,x,y,*,basemap_tile=None):
  if not MIN_ZOOM<=z<=MAX_ZOOM or not 0<=x<2**z or not 0<=y<2**z:raise ValueError('Invalid official trails tile')
  n=2**z;pad=8/512/n;clip=box(x/n-pad,y/n-pad,(x+1)/n+pad,(y+1)/n+pad)
@@ -142,17 +160,11 @@ def render_tile(z,x,y,*,basemap_tile=None):
  overview=z<11;cellz=min(z,7 if overview else 11);factor=2**(z-cellz)
  sources=['usfs','nps'] if overview else ['nps','usfs','mvum_trails','mvum_roads']
  for source in sources:
-  for raw in cell_features(source,cellz,x//factor,y//factor,overview):
-   props=properties(source,raw)
-   if props is None or not raw.get('geometry'):continue
-   geometry=transform(project,make_valid(shape(raw['geometry'])))
+  for geometry,cached_props in prepared_agency_features(source,cellz,x//factor,y//factor,overview):
+   props=dict(cached_props)
    f=clipped_feature(geometry,props,workclip,n)
    if not f:continue
    ref=props['route_ref']
-   if ref in ROUTE_BOUNDS and not geometry.intersects(transform(project,box(*ROUTE_BOUNDS[ref]))):
-    ref='';props['route_ref']=''
-   if overview and not ref:continue
-   props['class']='track' if source=='mvum_roads' else 'path'
    if ref and ref!='PCT':
     layers['routes'].append({**f,'properties':{**props,'kind':'long_distance_trail','badge':'trail-'+ref}})
    if not overview:additions.append(f)

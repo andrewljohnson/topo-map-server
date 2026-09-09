@@ -1,0 +1,10 @@
+{
+  "seconds": 11.08931654295884,
+  "referenceChildren": 2615,
+  "comparedPixels": 17583260,
+  "differentPixels": 0,
+  "metatiles": 17,
+  "childrenPerRequest": 256,
+  "referenceSha256": "1018f4a6840fce7cc783dbb357d3c911a64745a4d3fdb59c3a84de006b788aa6",
+  "source": "Annual_NLCD_LndCov_2024_CU_C1V1; ArcGIS raster 40"
+}

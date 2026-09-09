@@ -23,12 +23,12 @@ def decode_png(blob):
         with mem.open() as src:rgb=src.read([1,2,3]).astype('float32')
     return rgb[0]*256+rgb[1]+rgb[2]/256-32768
 
-def encode_png(data):
+def encode_png(data, *, compression=6):
     if not np.isfinite(data).all():raise ValueError('DEM still has missing samples')
     encoded=np.rint(np.clip(data+32768,0,65535.99609375)*256).astype('uint32')
     rgb=np.stack([(encoded>>16)&255,(encoded>>8)&255,encoded&255]).astype('uint8')
     with MemoryFile() as mem:
-        with mem.open(driver='PNG',width=data.shape[1],height=data.shape[0],count=3,dtype='uint8') as dst:dst.write(rgb)
+        with mem.open(driver='PNG',width=data.shape[1],height=data.shape[0],count=3,dtype='uint8',ZLEVEL=compression) as dst:dst.write(rgb)
         return mem.read()
 
 def global_dem(z,x,y):

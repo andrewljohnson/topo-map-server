@@ -15,3 +15,12 @@ Properties: `class`, `subclass`, original numeric `nlcd`, `year=2024`, and `sour
 Raw categorical TIFFs persist under `data/national-landcover/<dataset>/rasters/z/x/y.tif`, protected by process locks and atomic writes. Server integration also caches resulting MVTs. Failed downloads and invalid rasters never become cached empty coverage. A dataset-version change is needed when changing source year or polygonization.
 
 Validation: live Yosemite tile 12/687/1583 fetched and vectorized in 1.25 seconds, 41,836 bytes, 339 polygons across developed, forest, grass, rock, scrub, and wetland. Tests verify water/nodata exclusion, coverage, coordinate validation, categorical properties, MVT geometry, and persistent raw-cache reuse.
+
+High-detail acquisition batches 16×16 zoom-14 child rasters into one aligned
+1312×1312 categorical export (82 pixels per child). The source object, nearest
+interpolation, pixel spacing and child polygonization stay the same. Batched
+rasters have a separate cache; legacy child rasters remain readable. Transient
+network failures retry four times and never produce a cached empty tile.
+[The staged benchmark](../../experiments/tahoe/README.md) records an exact match
+across 17,583,260 reference pixels. The experimental zoom-12 format puts these
+land-cover vectors inside the combined base tile; DEM remains separate.

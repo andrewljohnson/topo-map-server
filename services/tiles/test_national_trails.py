@@ -6,6 +6,8 @@ from shapely.geometry import LineString, box
 import national_trails as t
 
 class OfficialTrailsTest(unittest.TestCase):
+ def setUp(self):t.prepared_agency_features.cache_clear()
+ def tearDown(self):t.prepared_agency_features.cache_clear()
  def test_route_names_not_generic_designation(self):
   self.assertEqual(t.route_ref('PACIFIC CREST TRAIL'), 'PCT')
   self.assertEqual(t.route_ref('Appalachian Trail'), 'AT')
@@ -55,6 +57,13 @@ class OfficialTrailsTest(unittest.TestCase):
   self.assertEqual(len(actual),1)
   self.assertEqual(actual[0]['properties'],reference[0]['properties']);self.assertEqual(actual[0]['id'],reference[0]['id'])
   self.assertTrue(actual[0]['geometry'].equals_exact(reference[0]['geometry'],0))
+ def test_source_geometry_prepared_once_for_adjacent_children(self):
+  raw={'id':1,'properties':{'trail_name':'Test Trail','objectid':1},'geometry':{'type':'LineString','coordinates':[[-120.5,38.5],[-119.5,39.5]]}}
+  empty=mapbox_vector_tile.encode({'name':'road','features':[]})
+  with patch.object(t,'cell_features',return_value=[raw]) as fetch,patch.object(t,'pct_features',return_value=[]),patch.object(t,'properties',wraps=t.properties) as props:
+   for x in (2724,2725):t.render_tile(14,x,6264,basemap_tile=empty)
+   self.assertEqual(fetch.call_count,4)
+   self.assertEqual(props.call_count,4)
  def test_bad_tile_rejected(self):
   for args in [(4,0,0),(15,0,0),(8,-1,2),(8,0,256)]:
    with self.assertRaises(ValueError):t.render_tile(*args)

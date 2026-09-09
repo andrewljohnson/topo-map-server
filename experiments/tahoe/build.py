@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Tahoe-only correctness baseline: finest vector children -> combined z12; raw DEM mosaic."""
-import argparse,gzip,hashlib,importlib,json,os,sys,time,shutil,resource
+"""Bounded staged correctness/performance experiments: finest vector children -> combined z12; raw DEM mosaic."""
+import argparse,gzip,hashlib,importlib,json,os,sys,time,shutil,resource,multiprocessing
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
 ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'services/tiles'))
 os.environ.update(TILE_MODE='national',OSM_REQUIRE_BULK='1',TILE_DATA_DIR=str(ROOT/'services/tiles/data'))
 import mapbox_vector_tile as mvt
@@ -16,7 +16,19 @@ from national_dem import decode_png,encode_png
 SOURCES={'osm':'national_basemap','boundaries':'national_boundaries','landcover':'national_landcover','trails':'national_trails','amenities':'national_amenities','waterways':'national_waterways','recreation':'national_recreation'}
 OUT=ROOT/'services/tiles/data/experiments/tahoe-z12-v1'
 PARENTS=[(681,1566),(682,1566),(681,1567),(682,1567)]
+REGIONS={
+ 'tahoe':PARENTS,
+ 'tahoe-10x':[(x,y) for y in range(1560,1568) for x in range(680,685)],
+ 'sierra-100x':[(x,y) for y in range(1552,1572) for x in range(672,692)],
+ 'sf-10x':[(x,y) for y in range(1580,1588) for x in range(653,658)],
+ 'smokies-10x':[(x,y) for y in range(1610,1618) for x in range(1095,1100)],
+ 'desert-10x':[(x,y) for y in range(1601,1609) for x in range(733,738)],
+ 'western-1000x':[(x,y) for y in range(1536,1586) for x in range(675,755)],
+}
 EXTENT=16384
+
+def morton_key(xy):
+ return sum(((xy[0]>>bit)&1)<<(bit*2) | ((xy[1]>>bit)&1)<<(bit*2+1) for bit in range(14))
 
 def atomic(path,blob):
  path.parent.mkdir(parents=True,exist_ok=True);temp=path.with_suffix(path.suffix+'.tmp');temp.write_bytes(blob);temp.replace(path)
@@ -43,56 +55,70 @@ def merge_tiles(children):
    layers.setdefault(name,[]).append({'geometry':piece,'properties':json.loads(props),'id':ident})
  return mvt.encode([{'name':name,'features':features} for name,features in sorted(layers.items())],default_options={'extents':EXTENT,'y_coord_down':True}),counts
 
+def acquire(task):
+ source,z,x,y,regenerate,legacy_base,output=task
+ output=Path(output);path=output/'derived'/source/str(z)/str(x)/f'{y}.pbf';start=time.monotonic()
+ hit=path.exists() and not regenerate
+ if hit:blob=path.read_bytes()
+ else:
+  module=importlib.import_module(SOURCES[source])
+  options={'basemap_tile':(output/'derived/osm'/str(z)/str(x)/f'{y}.pbf').read_bytes()} if source=='trails' and not legacy_base else {}
+  blob=module.render_tile(z,x,y,**options);atomic(path,blob)
+ return x%4,y%4,blob,time.monotonic()-start,hit
+
+def dem_parent(task):
+ x,y,legacy,output,compression=task;canvas=np.empty((1024,1024),dtype='float32');module=importlib.import_module('national_dem')
+ for dy in range(2):
+  for dx in range(2):
+   canvas[dy*512:(dy+1)*512,dx*512:(dx+1)*512]=decode_png(module.render_tile(13,x*2+dx,y*2+dy)) if legacy else module.render_samples(13,x*2+dx,y*2+dy)
+ blob=encode_png(canvas,compression=compression);atomic(Path(output)/'dem/12'/str(x)/f'{y}.png',blob);return len(blob)
+
+def pack_parent(task):
+ x,y,children,output=task;start=time.monotonic();blob,counts=merge_tiles(children);compressed=gzip.compress(blob,mtime=0)
+ atomic(Path(output)/'base/12'/str(x)/f'{y}.pbf',compressed)
+ return {'key':f'12/{x}/{y}','bytes':len(blob),'gzipBytes':len(compressed),'packSeconds':time.monotonic()-start,'sourceFeatureCounts':counts,'sha256':hashlib.sha256(blob).hexdigest()}
+
 def main():
- p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=2);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');a=p.parse_args()
- if a.clean_derived and OUT.exists():shutil.rmtree(OUT)
- OUT.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(4,a.workers)),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time(),'loadAverageStart':os.getloadavg(),'pipeline':{'directRecreation':not a.legacy_recreation,'rawDemMosaic':not a.legacy_dem,'reuseTrailBasemap':not a.legacy_trail_basemap}}
- def acquire(task):
-  source,z,x,y=task;path=OUT/'derived'/source/str(z)/str(x)/f'{y}.pbf';t=time.monotonic()
-  hit=path.exists() and not a.regenerate_vectors
-  if hit:blob=path.read_bytes()
-  else:
-   module=importlib.import_module(SOURCES[source])
-   options={'basemap_tile':(OUT/'derived/osm'/str(z)/str(x)/f'{y}.pbf').read_bytes()} if source=='trails' and not a.legacy_trail_basemap else {}
-   blob=module.render_tile(z,x,y,**options);atomic(path,blob)
-  return (x%4,y%4,blob,time.monotonic()-t,hit)
- parent_children={xy:[] for xy in PARENTS}
- with ThreadPoolExecutor(max_workers=max(1,min(4,a.workers))) as pool:
+ p=argparse.ArgumentParser();p.add_argument('--clean-derived',action='store_true');p.add_argument('--workers',type=int,default=4);p.add_argument('--legacy-recreation',action='store_true');p.add_argument('--legacy-trail-basemap',action='store_true',help='Normalize the OSM input again inside the trail stage');p.add_argument('--legacy-dem',action='store_true',help='Encode/decode intermediate child PNGs for comparison');p.add_argument('--regenerate-vectors',action='store_true',help='Ignore derived vector files while preserving raw inputs and current served outputs');p.add_argument('--executor',choices=('threads','processes'),default='processes');p.add_argument('--region',choices=tuple(REGIONS),default='tahoe');p.add_argument('--serial-pack',action='store_true');p.add_argument('--spatial-order',choices=('row','morton'),default='row');p.add_argument('--task-chunksize',type=int,choices=(1,4,16,64),default=1);p.add_argument('--dem-compression',type=int,choices=range(1,10),default=3);a=p.parse_args()
+ out=OUT if a.region=='tahoe' else OUT.parent/(a.region+'-z12-v1')
+ parents=sorted(REGIONS[a.region],key=morton_key) if a.spatial_order=='morton' else REGIONS[a.region]
+ if shutil.disk_usage(out.parent).free<60*1024**3:raise RuntimeError('Experiment requires 60 GiB free disk reserve; release only expendable experiment outputs before continuing')
+ if a.clean_derived and out.exists():shutil.rmtree(out)
+ out.mkdir(parents=True,exist_ok=True);start=time.monotonic();report={'workers':max(1,min(8,a.workers)),'executor':a.executor,'region':a.region,'taskChunksize':a.task_chunksize,'spatialOrder':a.spatial_order,'vectorParents':len(parents),'sources':{},'parents':[],'mode':'legacy-fine-children correctness baseline' if a.legacy_recreation else 'direct full-detail recreation + fine-child vector baseline','sourceCache':'retained local inputs; cache misses fetched','startedAt':time.time(),'loadAverageStart':os.getloadavg(),'pipeline':{'directRecreation':not a.legacy_recreation,'rawDemMosaic':not a.legacy_dem,'reuseTrailBasemap':not a.legacy_trail_basemap,'parallelPacking':a.executor=='processes' and not a.serial_pack}}
+ parent_children={xy:[] for xy in parents}
+ executor=ThreadPoolExecutor if a.executor=='threads' else ProcessPoolExecutor
+ options={} if a.executor=='threads' else {'mp_context':multiprocessing.get_context('spawn')}
+ with executor(max_workers=max(1,min(8,a.workers)),**options) as pool:
   for source in SOURCES:
    if source=='recreation' and not a.legacy_recreation:
     t=time.monotonic();module=importlib.import_module(SOURCES[source]);cells={};prepare_seconds=0
-    for x,y in PARENTS:
+    for x,y in parents:
      key=(x//4,y//4)
      if key not in cells:
       prepared_start=time.monotonic();cells[key]=module.prepare_cell(14,*key);prepare_seconds+=time.monotonic()-prepared_start
      blob=module.render_tile(12,x,y,detail_zoom=14,extent=EXTENT,prepared=cells[key])
      parent_children[(x,y)].append((source,None,None,blob))
-    report['sources'][source]={'seconds':time.monotonic()-t,'preparedCells':len(cells),'prepareSeconds':prepare_seconds,'parentTiles':len(PARENTS),'childTiles':0,'derivedCacheHits':0}
-    atomic(OUT/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True);continue
+    report['sources'][source]={'seconds':time.monotonic()-t,'preparedCells':len(cells),'prepareSeconds':prepare_seconds,'parentTiles':len(parents),'childTiles':0,'derivedCacheHits':0}
+    atomic(out/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True);continue
    t=time.monotonic();hits=0;prepare_seconds=0
-   tasks=[(source,14,x*4+dx,y*4+dy) for x,y in PARENTS for dy in range(4) for dx in range(4)]
-   if source=='trails' and (a.regenerate_vectors or any(not (OUT/'derived'/source/str(z)/str(x)/f'{y}.pbf').exists() for _,z,x,y in tasks)):
+   tasks=[(source,14,x*4+dx,y*4+dy) for x,y in parents for dy in range(4) for dx in range(4)]
+   if source=='trails' and a.executor=='threads' and (a.regenerate_vectors or any(not (out/'derived'/source/str(z)/str(x)/f'{y}.pbf').exists() for _,z,x,y in tasks)):
     # Populate the immutable PCT cache before parallel workers can duplicate
     # its expensive first construction. Include preparation in source timing.
     importlib.import_module(SOURCES[source]).pct_features();prepare_seconds=time.monotonic()-t
-   for task,result in zip(tasks,pool.map(acquire,tasks)):
+   for task,result in zip(tasks,pool.map(acquire,[(source,z,x,y,a.regenerate_vectors,a.legacy_trail_basemap,str(out)) for source,z,x,y in tasks],chunksize=a.task_chunksize)):
     dx,dy,blob,seconds,hit=result;hits+=int(hit);parent_children[(task[2]//4,task[3]//4)].append((source,dx,dy,blob))
    report['sources'][source]={'seconds':time.monotonic()-t,'childTiles':len(tasks),'derivedCacheHits':hits,'prepareSeconds':prepare_seconds,'reusedBasemapTiles':len(tasks)-hits if source=='trails' and not a.legacy_trail_basemap else 0}
-   atomic(OUT/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True)
-  for (x,y),children in parent_children.items():
-   t=time.monotonic();blob,counts=merge_tiles(children);compressed=gzip.compress(blob,mtime=0)
-   atomic(OUT/'base/12'/str(x)/f'{y}.pbf',compressed)
-   report['parents'].append({'key':f'12/{x}/{y}','bytes':len(blob),'gzipBytes':len(compressed),'packSeconds':time.monotonic()-t,'sourceFeatureCounts':counts,'sha256':hashlib.sha256(blob).hexdigest()})
+   atomic(out/'progress.json',json.dumps(report).encode());print(source,report['sources'][source],flush=True)
+  packing_start=time.monotonic();packing_tasks=[(x,y,children,str(out)) for (x,y),children in parent_children.items()]
+  packed=pool.map(pack_parent,packing_tasks) if a.executor=='processes' and not a.serial_pack else map(pack_parent,packing_tasks)
+  report['parents']=list(packed);report['packingWallSeconds']=time.monotonic()-packing_start
   dem_start=time.monotonic()
-  def dem_parent(xy):
-   x,y=xy;canvas=np.empty((1024,1024),dtype='float32');module=importlib.import_module('national_dem')
-   for dy in range(2):
-    for dx in range(2):canvas[dy*512:(dy+1)*512,dx*512:(dx+1)*512]=decode_png(module.render_tile(13,x*2+dx,y*2+dy)) if a.legacy_dem else module.render_samples(13,x*2+dx,y*2+dy)
-   blob=encode_png(canvas);atomic(OUT/'dem/12'/str(x)/f'{y}.png',blob);return len(blob)
   # Halo supplies neighboring elevation samples for contour stitching.
-  dem_keys=[(x,y) for x in range(680,684) for y in range(1565,1569)]
-  report['dem']={'tiles':len(dem_keys),'bytes':sum(pool.map(dem_parent,dem_keys)),'seconds':time.monotonic()-dem_start,'tileSize':1024,'intermediateChildPngs':64 if a.legacy_dem else 0}
- w,s,_,_=bounds(12,681,1567);_,_,e,n=bounds(12,682,1566)
- metadata={'name':'Tahoe zoom-12 experiment','publicAccess':True,'bounds':[w,s,e,n],'center':[-120.035,38.905],'initialZoom':12.5,'minZoom':12,'maxZoom':12,'datasetId':'tahoe-combined-v1','tileUrl':'/base/{z}/{x}/{y}.pbf','combined':True,'tilesets':{'dem':{'datasetId':'tahoe-dem-v1','tileUrl':'/dem/{z}/{x}/{y}.png','bounds':[w,s,e,n],'minZoom':12,'maxZoom':12,'tileSize':1024,'attribution':'Elevation: USGS 3DEP · Mapzen terrain'}}}
- usage=resource.getrusage(resource.RUSAGE_SELF);report['resources']={'userCpuSeconds':usage.ru_utime,'systemCpuSeconds':usage.ru_stime,'peakRssKiB':usage.ru_maxrss,'loadAverageEnd':os.getloadavg()};report['totalSeconds']=time.monotonic()-start;report['finishedAt']=time.time();atomic(OUT/'metadata.json',json.dumps(metadata).encode());atomic(OUT/'report.json',json.dumps(report,indent=2).encode());atomic(OUT/'reports'/f'{time.time_ns()}.json',json.dumps(report,indent=2).encode());print(json.dumps(report),flush=True)
+  dem_keys=sorted({(x+dx,y+dy) for x,y in parents for dx in (-1,0,1) for dy in (-1,0,1)})
+  if a.spatial_order=='morton':dem_keys.sort(key=morton_key)
+  report['dem']={'tiles':len(dem_keys),'bytes':sum(pool.map(dem_parent,[(x,y,a.legacy_dem,str(out),a.dem_compression) for x,y in dem_keys])),'seconds':time.monotonic()-dem_start,'tileSize':1024,'compressionLevel':a.dem_compression,'intermediateChildPngs':len(dem_keys)*4 if a.legacy_dem else 0}
+ w,s,_,_=bounds(12,min(x for x,y in parents),max(y for x,y in parents));_,_,e,n=bounds(12,max(x for x,y in parents),min(y for x,y in parents))
+ metadata={'name':a.region+' zoom-12 experiment','publicAccess':True,'bounds':[w,s,e,n],'center':[-120.035,38.905] if a.region=='tahoe' else [(w+e)/2,(s+n)/2],'initialZoom':12.5,'minZoom':12,'maxZoom':12,'datasetId':a.region+'-combined-v1','tileUrl':'/base/{z}/{x}/{y}.pbf','combined':True,'tilesets':{'dem':{'datasetId':a.region+'-dem-v1','tileUrl':'/dem/{z}/{x}/{y}.png','bounds':[w,s,e,n],'minZoom':12,'maxZoom':12,'tileSize':1024,'attribution':'Elevation: USGS 3DEP · Mapzen terrain'}}}
+ usage=resource.getrusage(resource.RUSAGE_SELF);report['resources']={'userCpuSeconds':usage.ru_utime,'systemCpuSeconds':usage.ru_stime,'peakRssKiB':usage.ru_maxrss,'childUserCpuSeconds':resource.getrusage(resource.RUSAGE_CHILDREN).ru_utime,'childSystemCpuSeconds':resource.getrusage(resource.RUSAGE_CHILDREN).ru_stime,'maxChildPeakRssKiB':resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss,'loadAverageEnd':os.getloadavg()};report['totalSeconds']=time.monotonic()-start;report['finishedAt']=time.time();atomic(out/'metadata.json',json.dumps(metadata).encode());atomic(out/'report.json',json.dumps(report,indent=2).encode());atomic(out/'reports'/f'{time.time_ns()}.json',json.dumps(report,indent=2).encode());print(json.dumps(report),flush=True)
 if __name__=='__main__':main()

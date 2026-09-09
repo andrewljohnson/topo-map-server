@@ -93,9 +93,9 @@ def area_geometry(raw):
    for child in getattr(g,'geoms',[]):yield from polygons(child)
  return unary_union(list(polygons(geometry)))
 
-def outline_features(feature,kind,z,x,y,outline=None):
+def outline_features(feature,kind,z,x,y,outline=None,geometry=None):
  n=2**z;pad=8/512/n
- geometry=area_geometry(feature['geometry'])
+ geometry=area_geometry(feature['geometry']) if geometry is None else geometry
  if geometry.is_empty:return []
  # Boundary first prevents fabricated lines on tile edges.
  clip=box(x/n-pad,y/n-pad,(x+1)/n+pad,(y+1)/n+pad)
@@ -129,7 +129,7 @@ def prepared_cell(cx,cy):
    latitude=geometry.centroid.y
    units_per_metre=1/(40075016.686*math.cos(math.radians(latitude)))
    outline=dedupe_outline(line,previous,unary_union(parks),units_per_metre,kind)
-   prepared.append((feature,kind,outline))
+   prepared.append((feature,kind,outline,geometry))
    previous.append(line)
    if kind=='park':parks.append(line)
  return prepared
@@ -140,7 +140,7 @@ def render_tile(z,x,y):
  # Cache lookup must occur under the lock: lru_cache alone allows concurrent
  # misses to build duplicate copies of the same large agency polygons.
  with PREPARE_LOCK:prepared=prepared_cell(x//factor,y//factor)
- for feature,kind,outline in prepared:
-  features.extend(outline_features(feature,kind,z,x,y,outline))
+ for feature,kind,outline,geometry in prepared:
+  features.extend(outline_features(feature,kind,z,x,y,outline,geometry))
  n=2**z
  return mapbox_vector_tile.encode([{'name':'areas','features':features}],default_options={'extents':4096,'y_coord_down':True,'quantize_bounds':(x/n,y/n,(x+1)/n,(y+1)/n)})

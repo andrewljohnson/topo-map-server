@@ -8,6 +8,9 @@ import json
 import math
 import os
 import tempfile
+import time
+from functools import lru_cache
+from urllib.error import URLError, HTTPError
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -57,8 +60,17 @@ def fetch_raster(bbox, size):
       'renderingRule':json.dumps({'rasterFunction':'None'}),
       'mosaicRule':json.dumps({'mosaicMethod':'esriMosaicLockRaster','lockRasterIds':[40], 'mosaicOperation':'MT_FIRST'})}
     req = Request(SOURCE+'/exportImage?'+urlencode(params), headers={'User-Agent':'topo-map-server/1.0 (USGS NLCD basemap)'})
-    with urlopen(req, timeout=60) as response:
-        data=response.read(4*1024*1024+1)
+    for attempt in range(4):
+        try:
+            with urlopen(req, timeout=60) as response:
+                data=response.read(4*1024*1024+1)
+            break
+        except (URLError, TimeoutError, ConnectionError) as error:
+            if isinstance(error, HTTPError) and error.code not in (408,429,500,502,503,504):
+                raise
+            if attempt==3: raise
+            time.sleep(2**attempt)
+
     if len(data)>4*1024*1024: raise RuntimeError('Land cover raster exceeds bounded response size')
     with MemoryFile(data) as mem, mem.open() as ds:
         if ds.count!=1 or ds.width!=size or ds.height!=size:
@@ -69,8 +81,7 @@ def fetch_raster(bbox, size):
     return data
 
 
-def raster(z,x,y,bbox,size):
-    path=CACHE/'rasters'/str(z)/str(x)/(str(y)+'.tif')
+def cached_raster(path,bbox,size):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.with_suffix('.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
@@ -80,6 +91,32 @@ def raster(z,x,y,bbox,size):
             out.write(data); name=out.name
         Path(name).replace(path)
         return data
+
+
+@lru_cache(maxsize=8)
+def batch_values(cache,x,y,size):
+    # 256 high-detail children share one request with exactly the same pixel
+    # spacing/alignment. The pinned raster/year and nearest interpolation stay
+    # unchanged. Cache root is part of the key for isolated jobs and tests.
+    path=Path(cache)/'metatiles-z14'/str(size)/str(x)/(str(y)+'.tif')
+    data=cached_raster(path,tile_bounds(10,x,y),size*16)
+    with MemoryFile(data) as mem, mem.open() as ds: values=ds.read(1)
+    values.flags.writeable=False
+    return values
+
+
+def raster(z,x,y,bbox,size):
+    path=CACHE/'rasters'/str(z)/str(x)/(str(y)+'.tif')
+    if path.exists(): return path.read_bytes()
+    if z!=14: return cached_raster(path,bbox,size)
+    values=batch_values(str(CACHE),x//16,y//16,size)
+    dx,dy=x%16,y%16
+    child=values[dy*size:(dy+1)*size,dx*size:(dx+1)*size]
+    with MemoryFile() as mem:
+        with mem.open(driver='GTiff',width=size,height=size,count=1,dtype='uint8',
+                      crs='EPSG:3857',transform=from_bounds(*bbox,size,size)) as ds:
+            ds.write(child,1)
+        return mem.read()
 
 
 def vector_features(values,bbox):

@@ -50,6 +50,11 @@ class PackingTests(unittest.TestCase):
     region=np.s_[y*64:(y+1)*64,x*64:(x+1)*64]
     legacy[region]=decode_png(encode_png(values[region]))
   self.assertEqual(encode_png(values),encode_png(legacy))
+ def test_fast_dem_compression_preserves_every_elevation(self):
+  rng=np.random.default_rng(9)
+  values=(rng.integers(-100000,2200000,(128,128))/256).astype('float32')
+  for compression in (1,3,6):
+   np.testing.assert_array_equal(decode_png(encode_png(values,compression=compression)),values)
  def test_dem_mosaic_lossless(self):
   rows,cols=np.indices((1024,1024));values=(1000+rows/256+cols/128).astype('float32')
   np.testing.assert_array_equal(decode_png(encode_png(values)),values)

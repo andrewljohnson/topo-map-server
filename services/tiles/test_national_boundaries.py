@@ -76,6 +76,20 @@ class BoundaryTests(unittest.TestCase):
    self.assertEqual(ids.call_count,3)
   b.prepared_cell.cache_clear()
 
+class GeometryReuseTests(unittest.TestCase):
+ def test_adjacent_children_parse_and_repair_area_once(self):
+  z,x,y=12,640,1440;w,s,e,n=b.bounds(z,x,y)
+  feature={'geometry':mapping(box(w-1,s-1,e+1,n+1)),
+           'properties':{'UNIT_CODE':'reuse','UNIT_NAME':'Reuse Park'}}
+  b.prepared_cell.cache_clear()
+  try:
+   with patch.object(b,'cell_ids',side_effect=lambda kind,*args:[1] if kind=='park' else []),patch.object(b,'object_data',return_value=feature),patch.object(b,'area_geometry',wraps=b.area_geometry) as parse:
+    for tx in (x,x+1):
+     layer=mapbox_vector_tile.decode(b.render_tile(z,tx,y))['areas']
+     self.assertTrue(layer['features'])
+    self.assertEqual(parse.call_count,1)
+  finally:b.prepared_cell.cache_clear()
+
 class RepairedAreaTests(unittest.TestCase):
  def test_polygon_with_collapsed_spike_retains_area_without_crashing(self):
   from shapely.geometry import Polygon
