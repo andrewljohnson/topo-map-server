@@ -17,3 +17,11 @@ Check complete manifest/object ledger and candidate cloud metadata. Adapt `/tmp/
 Latest client fixes must be committed, pushed, deployed and included in a new internal iOS preview build for the two registered phones. Previous working build: https://expo.dev/accounts/andrewljohnson/projects/topo-map-server/builds/a87dcaeb-9864-4691-9f54-4d26c5af9a80 . Expo map development server is port 8081; leave the unrelated app on 8082 alone.
 
 Report progress hourly and immediately on required user action or completion. Continue through recoverable failures. Delete the release heartbeat once promotion and delivery are complete.
+
+## Client delivery status
+
+Coverage fix commit `dd65d93` is pushed and deployed to the existing public map; Cloudflare version `d70b768f-7987-4e75-a41e-0b93be05e26f`. Deployment tests and live smoke checks passed. Final mobile checks: 134 tests passing and clean typecheck.
+
+New internal iOS build submitted with both existing registered phones: `efe580bb-6b2e-47f3-9442-73ef902d52e3`, https://expo.dev/accounts/andrewljohnson/projects/topo-map-server/builds/efe580bb-6b2e-47f3-9442-73ef902d52e3 . Check this build rather than submitting another. Submission log `/tmp/map-r2-ios-submit.log`.
+
+Hourly follow-up is active as `california-r2-release-progress`. California r2 is still generating; r1 remains the public dataset.
