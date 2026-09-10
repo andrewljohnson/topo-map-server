@@ -1,3 +1,4 @@
+import {Buffer} from 'node:buffer';
 const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json'}});
 const routes={'tiles':'osm','dem':'dem','amenities':'amenities','boundaries':'boundaries','waterways':'waterways','landcover':'landcover','trails':'trails','recreation':'recreation'};
 const batches={'tile-batch':'osm','dem-batch':'dem','amenity-batch':'amenities','boundary-batch':'boundaries','waterway-batch':'waterways','landcover-batch':'landcover','trails-batch':'trails','recreation-batch':'recreation'};
@@ -108,8 +109,8 @@ export async function api(request,env,ctx){
    if(!batch){result=response;break}
    const stream=response.headers.get('Content-Encoding')==='gzip'?response.body.pipeThrough(new DecompressionStream('gzip')):response.body;
    const reader=stream.getReader(),chunks=[];let length=0;while(true){const {done,value}=await reader.read();if(done)break;length+=value.length;if(length>4000000||decodedTotal+length>16000000){await reader.cancel();return json({error:'Decoded batch exceeds delivery limit'},413)}chunks.push(value)}
-   decodedTotal+=length;const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length}let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));
-   tiles.push({key,data:btoa(binary)});
+   decodedTotal+=length;const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length}
+   tiles.push({key,data:Buffer.from(bytes.buffer,bytes.byteOffset,bytes.byteLength).toString('base64')});
   }
   if(batch)result=json({datasetId:spec.datasetId,tiles,errors});
   else if(!result)result=json({error:'Detail is not published yet; overview remains available'},404);

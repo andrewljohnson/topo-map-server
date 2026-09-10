@@ -53,3 +53,14 @@ test('combined publication status follows the served release rather than a retir
  s.objects.set('publication/metadata.json',JSON.stringify({tilesets:{}}));
  assert.equal((await(await s.run('/publication',null)).json()).status,'warming','legacy status remains supported');
 });
+
+test('large binary DEM batches preserve all byte values and remain quota-accounted',async()=>{
+ const s=setup();s.env.DOWNLOAD_BYTES='50000000';
+ const bytes=Uint8Array.from({length:1048576},(_,i)=>i%256);
+ for(let i=0;i<4;i++)s.objects.set(`tiles/v1/dem/3/${i}/0.png`,bytes);
+ const response=await s.run('/dem-batch?tiles=3/0/0,3/1/0,3/2/0,3/3/0');
+ assert.equal(response.status,200);const result=await response.json();assert.equal(result.tiles.length,4);
+ for(const tile of result.tiles)assert.deepEqual(new Uint8Array(Buffer.from(tile.data,'base64')),bytes);
+ const usage=await(await s.quota.fetch(new Request('https://quota/',{method:'POST',body:JSON.stringify({status:true})}))).json();
+ assert.ok(usage.bytes>4*bytes.length);
+});

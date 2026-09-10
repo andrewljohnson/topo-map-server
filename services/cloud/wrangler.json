@@ -52,9 +52,12 @@
     "PUBLIC_MAP": "1"
   },
   "limits": {
-    "cpu_ms": 100
+    "cpu_ms": 500
   },
   "observability": {
     "enabled": false
-  }
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
 }
