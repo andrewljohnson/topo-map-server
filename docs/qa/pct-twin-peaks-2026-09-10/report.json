@@ -1,0 +1,18 @@
+{
+  "note": "Seems like duplicate PCT lines here",
+  "bounds": [
+    -120.245027,
+    39.090677,
+    -120.229753,
+    39.115485
+  ],
+  "center": [
+    -120.23739,
+    39.10252
+  ],
+  "zoom": 14.209976,
+  "bearing": 0,
+  "pitch": 7.75,
+  "capturedAt": "2026-09-10T04:18:07.374Z",
+  "dataset": "topo-california-20260909-r1-base"
+}
