@@ -17,3 +17,13 @@ Complete representative QA at Tahoe, Yosemite, SF, Los Angeles, San Diego, north
 ## iOS build submitted
 
 EAS internal preview build `a87dcaeb-9864-4691-9f54-4d26c5af9a80` submitted successfully from main after 131 tests/typecheck. Existing signing profile verified both registered phones. Build URL: https://expo.dev/accounts/andrewljohnson/projects/topo-map-server/builds/a87dcaeb-9864-4691-9f54-4d26c5af9a80 . Log `/tmp/topo-california-eas-build.log`. Query this ID before starting another build. Full California data is not yet promoted; the build uses the current live manifest and will pick it up after promotion. First two publication overview batches uploaded successfully; disk free roughly 72 GiB.
+
+## First hourly follow-up — 2026-09-10 00:52 UTC
+
+iOS EAS build finished successfully at 23:57 UTC; existing build page is the install entry point for both registered phones. No replacement build submitted.
+
+California publisher paused after 970 seconds on a transient SSL handshake timeout fetching DEM source data in detail shard 4. All 19 overview shards and first 4 detail shards were verified; approximately 6,875 tile objects plus release documents had uploaded. Disk free ~71 GiB. No live promotion occurred.
+
+Confirmed publisher stopped, then resumed unchanged frozen release through `/tmp/topo-california-supervise.py`, execution session 42898, supervisor log `/tmp/topo-california-supervise.log`. Wrapper retries at most six attempts only for recognized transient network failures; other errors stop for review. It does not alter immutable code, inputs, or checkpoints. Resumed shard 4 generation completed in 6.4 seconds using saved work, began uploading, and shard 5 generation started. Status elapsed/startedAt reset per invocation; use original start 2026-09-09 23:52 UTC and completed checkpoint counts for total progress. Avoid duplicate supervisors: lock `/tmp/topo-california-supervise.lock`.
+
+Preflight QA remains documented in `california-demo-preflight-2026-09-09.md`; garden path density and uncertain spur geometry are nonblocking separate follow-ups. Keep full-state visual/offline checks as the promotion gate.
