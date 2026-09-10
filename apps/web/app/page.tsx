@@ -99,7 +99,12 @@ export default function Home() {
         });
         instance.addControl(new L.ScaleControl({unit:'metric'}), 'bottom-left');
         instance.on('sourcedata',(event)=>{if(!disposed && event.sourceId==='osm' && event.isSourceLoaded){setLoaded(true);}});
-        instance.on('error',()=>{if(!disposed)setError('Some map data could not load. Check the tile service and retry.');});
+        instance.on('error',(event)=>{
+          // Known publication holes are intentional outside the detailed region.
+          // The broad base remains browsable; this is not a failed map session.
+          if(String(event.error?.message||'').includes('DEM outside published coverage'))return;
+          if(!disposed)setError('Some map data could not load. Check the tile service and retry.');
+        });
       } catch(e) {if(!disposed)setError(e instanceof Error ? e.message : 'Unable to load the map.');}
     })();
     return () => {disposed=true;controller.abort();resizeObserver?.disconnect();map.current?.remove();map.current=null;};

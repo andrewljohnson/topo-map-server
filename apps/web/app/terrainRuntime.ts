@@ -6,6 +6,14 @@ export function installDeviceTerrain(gl:any,style:any,spec:any,load:(key:string,
  const stats={generated:0,cancelled:0,failed:0,demRequests:0,demBytes:0,totalMs:0,maxMs:0,worker:true,restarts:0};
  function raw(key:string,signal:AbortSignal):Promise<ArrayBuffer>{
   if(signal.aborted)return Promise.reject(Error('Cancelled'));
+  // Publication bounds enclose California but also contain unpublished Nevada
+  // tiles. Use the exact manifest coverage before network/cache work; a missing
+  // tile is not a transient download failure and must not occupy request slots.
+  if(spec.coverage){
+   const [z,x,y]=key.split('/').map(Number),n=2**z,wrapped=((x%n)+n)%n;
+   const covered=spec.coverage[String(z)]?.some(([west,south,east,north]:number[])=>wrapped>=west&&wrapped<=east&&y>=south&&y<=north);
+   if(!covered)return Promise.reject(Object.assign(Error('DEM outside published coverage'),{status:404}));
+  }
   let entry=cache.get(key);
   if(!entry){const controller=new AbortController();entry={controller,refs:0,done:false};const own=entry;entry.promise=load(key,controller).then(data=>{own.done=true;stats.demRequests++;stats.demBytes+=data.byteLength;return data},e=>{if(cache.get(key)===own)cache.delete(key);throw e});cache.set(key,entry)}
   cache.delete(key);cache.set(key,entry);for(const [k,e] of cache){if(cache.size<=24)break;if(e.done)cache.delete(k)}

@@ -93,3 +93,23 @@ test('a retired worker cannot deliver DEM bytes to the replacement reusing its r
   assert.equal(old.messages.filter(m=>m.type==='demResult').length,0);
  }finally{runtime.dispose()}
 });
+
+test('exact published DEM coverage prevents outside fetches without caching real failures',async()=>{
+ const protocols={},workers=[],calls=[];let fail=true;
+ const context=vm.createContext({exports:{},URL:{createObjectURL:()=> 'blob:test',revokeObjectURL(){}},Blob,AbortController,Worker:class{
+  constructor(){workers.push(this);this.messages=[]}postMessage(m){this.messages.push(m)}terminate(){}
+ }});vm.runInContext(source,context);vm.runInContext(context.exports.terrainRuntimeScript,context);
+ const runtime=context.installDeviceTerrain({addProtocol(k,f){protocols[k]=f},removeProtocol(){}},{sources:{},layers:[]},
+  {minZoom:12,maxZoom:12,bounds:[-126,32,-114,42],coverage:{12:[[681,1566,682,1566]]}},
+  async key=>{calls.push(key);if(fail)throw Error('temporary network failure');return new Uint8Array([7]).buffer},'');
+ const request=key=>protocols.topodem({url:'topodem://'+key},new AbortController());
+ try{
+  for(const key of ['12/683/1566','12/681/1567','11/340/783'])await assert.rejects(request(key),e=>e.status===404&&/coverage/.test(e.message));
+  await workers[0].onmessage({data:{type:'dem',id:1,key:'12/683/1566',decodeInWorker:true}});
+  assert.match(workers[0].messages.find(m=>m.type==='demResult').error,/coverage/);assert.equal(calls.length,0);
+  await assert.rejects(request('12/681/1566'),/temporary network failure/);
+  fail=false;assert.equal((await request('12/681/1566')).data.byteLength,1);assert.equal(calls.length,2);
+  await request('12/682/1566');assert.equal(calls.length,3,'inclusive eastern coverage edge must load');
+  await request('12/4777/1566');assert.equal(calls.length,4,'wrapped world copy remains covered');
+ }finally{runtime.dispose()}
+});
