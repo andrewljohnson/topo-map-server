@@ -46,6 +46,16 @@ class PathContextTests(unittest.TestCase):
 
 class DevelopedContextTests(unittest.TestCase):
  def tearDown(self):p.developed_at.cache_clear();p.building_index.cache_clear()
+ def test_invalid_building_rings_are_repaired_before_clipping(self):
+  geometry={'type':'Polygon','coordinates':[[[0,0],[200,200],[0,200],[200,0],[0,0]]]}
+  self.assertFalse(shape(geometry).is_valid)
+  layer={'buildings':{'extent':4096,'features':[{'geometry':geometry,'properties':{}}]}}
+  with patch('national_basemap.archive') as archive,patch.object(p.mapbox_vector_tile,'decode',return_value=layer):
+   archive.return_value.get.return_value=b'fixture'
+   geoms,tree=p.building_index(2631,6352)
+  self.assertEqual(len(geoms),2)
+  self.assertTrue(all(g.is_valid and g.area>0 for g in geoms))
+  self.assertAlmostEqual(sum(g.area for g in geoms)*(4096*16384)**2,20000,places=3)
  def test_isolated_hut_is_not_resort_but_building_group_is(self):
   metre=1/40075016.686
   buildings=[box(.5+(i*30-40)*metre,.5-10*metre,.5+(i*30-20)*metre,.5+10*metre) for i in range(3)]

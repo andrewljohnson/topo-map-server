@@ -25,3 +25,11 @@ Coverage fix commit `dd65d93` is pushed and deployed to the existing public map;
 New internal iOS build submitted with both existing registered phones: `efe580bb-6b2e-47f3-9442-73ef902d52e3`, https://expo.dev/accounts/andrewljohnson/projects/topo-map-server/builds/efe580bb-6b2e-47f3-9442-73ef902d52e3 . Check this build rather than submitting another. Submission log `/tmp/map-r2-ios-submit.log`.
 
 Hourly follow-up is active as `california-r2-release-progress`. California r2 is still generating; r1 remains the public dataset.
+
+## Superseded by r3 after source geometry failure
+
+At 46.7 minutes r2 stopped on detail-24 after 17,365 verified upload operations. A self-intersecting source building at z14/2631/6352 caused GEOS intersection to fail in developed-walkway context. No public pointer was changed. Do not resume r2 with changed code.
+
+The fix repairs invalid buildings with `make_valid` before clipping and retains polygon components, including nested collections. Eight path-context tests, 112 national-source tests, and real building indexes across the 3×3 failure neighborhood pass. Dataset versions advance to basemap v11/trails v15. A new immutable release `topo-california-20260910-r3` uses `/tmp/topo-california-release-r3`, with the same pinned gazetteer/ranking inputs copied from r2. Supervisor `/tmp/topo-california-r3-supervise.py`, log `/tmp/topo-california-r3-supervise.log`, publisher log `/tmp/topo-california-20260910-r3.log`. Apply all completion gates above to r3 instead. r2 remains unpromoted.
+
+The iOS build `efe580bb-6b2e-47f3-9442-73ef902d52e3` is FINISHED (2026-09-10 03:16 UTC) and ready to install on both registered phones. No new native build is needed for the server-only geometry repair.

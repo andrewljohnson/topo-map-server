@@ -9,6 +9,7 @@ from functools import lru_cache
 from shapely.geometry import shape,Point,box,LineString,MultiLineString,mapping
 from shapely.affinity import affine_transform
 from shapely.ops import unary_union
+from shapely import make_valid
 from shapely.strtree import STRtree
 import mapbox_vector_tile
 import numpy as np
@@ -38,9 +39,15 @@ def building_index(x,y):
  layer=mapbox_vector_tile.decode(blob,default_options={'y_coord_down':True}).get('buildings',{}) if blob else {}
  extent=layer.get('extent',4096);clip=box(x/16384,y/16384,(x+1)/16384,(y+1)/16384);geometries=[]
  for f in layer.get('features',[]):
-  g=affine_transform(shape(f['geometry']),[1/extent/16384,0,0,1/extent/16384,x/16384,y/16384]).intersection(clip)
-  parts=list(g.geoms) if hasattr(g,'geoms') else [g]
-  geometries.extend(part for part in parts if part.geom_type=='Polygon' and not part.is_empty)
+  g=affine_transform(shape(f['geometry']),[1/extent/16384,0,0,1/extent/16384,x/16384,y/16384])
+  # Quantized source rings can self-intersect. Repair before clipping so one
+  # invalid building cannot stop a regional release; retain polygon area only.
+  if not g.is_valid:g=make_valid(g)
+  parts=[g.intersection(clip)]
+  while parts:
+   part=parts.pop()
+   if hasattr(part,'geoms'):parts.extend(part.geoms)
+   elif part.geom_type=='Polygon' and not part.is_empty:geometries.append(part)
  return geometries,STRtree(geometries)
 
 @lru_cache(maxsize=32768)
