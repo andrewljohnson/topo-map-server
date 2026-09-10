@@ -82,6 +82,13 @@ class OfficialTrailsTest(unittest.TestCase):
   self.assertEqual(len(reference),1);self.assertEqual(reference[0]['geometry'].geom_type,'MultiLineString')
   network=tile['network']['features'];self.assertEqual(len(network),2)
   self.assertEqual(sum(f['properties'].get('path_context')=='urban' for f in network),1)
+ def test_canonical_route_availability_survives_tile_clipping(self):
+  empty=mapbox_vector_tile.encode({'name':'road','features':[]})
+  remote=LineString([(.1,.1),(.11,.11)])
+  for catalog,expected in [([(remote,{'id':'pcta-remote'})],{'PCT'}),([],set())]:
+   with patch.object(t,'prepared_agency_features',return_value=()),patch.object(t,'pct_features',return_value=catalog),patch.object(t,'conflate',return_value=[]) as matching:
+    t.render_tile(14,2719,6255,basemap_tile=empty)
+   self.assertEqual(matching.call_args.kwargs['canonical_routes'],expected)
  def test_bad_tile_rejected(self):
   for args in [(4,0,0),(15,0,0),(8,-1,2),(8,0,256)]:
    with self.assertRaises(ValueError):t.render_tile(*args)

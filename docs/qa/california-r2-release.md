@@ -33,3 +33,9 @@ At 46.7 minutes r2 stopped on detail-24 after 17,365 verified upload operations.
 The fix repairs invalid buildings with `make_valid` before clipping and retains polygon components, including nested collections. Eight path-context tests, 112 national-source tests, and real building indexes across the 3×3 failure neighborhood pass. Dataset versions advance to basemap v11/trails v15. A new immutable release `topo-california-20260910-r3` uses `/tmp/topo-california-release-r3`, with the same pinned gazetteer/ranking inputs copied from r2. Supervisor `/tmp/topo-california-r3-supervise.py`, log `/tmp/topo-california-r3-supervise.log`, publisher log `/tmp/topo-california-20260910-r3.log`. Apply all completion gates above to r3 instead. r2 remains unpromoted.
 
 The iOS build `efe580bb-6b2e-47f3-9442-73ef902d52e3` is FINISHED (2026-09-10 03:16 UTC) and ready to install on both registered phones. No new native build is needed for the server-only geometry repair.
+
+## Follow-up after the frozen r3 release
+
+New user report at Twin Peaks (-120.23739,39.10252) exposed a remaining USFS/PCT survey overlap in r1 and frozen r3. Follow-up source code on main (official trails v16) uses the complete PCTA catalogue plus OSM for main-PCT geometry; redundant USFS main-PCT remains metadata-only through strict matching. Tests preserve alternate/spur/other routes and OSM geometry. See `docs/qa/pct-twin-peaks-2026-09-10/source-policy.md`.
+
+Do not silently mutate or restart frozen r3 for this follow-up. Finish its verified publication, then freeze a subsequent immutable candidate from main with the v16 fix and run the same generation/QA/promotion gates. The report's PCT must be included in that candidate's visual checks. Keep hourly monitoring active until the follow-up fix is published; do not claim r3 fixes this location. No new iOS binary is required for this server tile-data change.

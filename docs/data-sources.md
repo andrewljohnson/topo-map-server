@@ -376,3 +376,7 @@ show bounded DEM memory without changing contour geometry; see the overnight QA.
 Official trails v13 refines proven survey matches against individual connected OSM lines, including unnamed paths, instead of using a whole batched MultiLineString as the coverage denominator. Tight interior alignment and substantial directional coverage remain required; conflicting explicit trail numbers prohibit widening. The [Cathedral regression](qa/cathedral-2026-09-09/README.md) retains unconfirmed spur geometry and verifies original OSM geometry is unchanged.
 
 Official trails v14 recognizes explicit signed-route acronym names and checks corresponding long-survey traces by ordered shape when tight local matching alone fragments them. It requires shared route identity and tight interior evidence, preserves OSM geometry and unmatched branches, and does not widen matching for unrelated paths. [PCT source regressions and safeguards](qa/pct-surveys-2026-09-10/README.md).
+
+### Main PCT source precedence
+
+With the checked-in complete PCTA centerline catalogue loaded, main-PCT geometry comes from OSM plus PCTA (including sections missing in OSM). Redundant USFS main-PCT surveys supply metadata only through existing strict matches. They no longer add parallel generalized route geometry. This availability decision happens before tile clipping. Other agency routes, PCT spurs, alternates, access paths and connectors remain eligible; no geometry matching radius was enlarged. See [Twin Peaks source policy](qa/pct-twin-peaks-2026-09-10/source-policy.md) for tests and limits.

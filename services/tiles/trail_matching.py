@@ -224,16 +224,30 @@ def preserve_source_junctions(result, additions, matches):
     return output
 
 
-def conflate(reference, additions):
+def main_pct(props):
+    """Only the main route; named alternate paths remain independent geometry."""
+    return (props.get('route_ref')=='PCT' and props.get('kind') in ('trail','long_distance_trail')
+            and not re.search(r'\b(?:alt|alternate|alternative|spur|bypass|connector|access|approach)\b',str(props.get('name','')),re.I))
+
+
+def conflate(reference, additions, *, canonical_routes=None):
     """Return one network, retaining unmatched tails/branches and source metadata.
 
     Feature geometries must already be in ground metres with a processing halo.
     Input dictionaries are local to this build and may be enriched in-place.
+    canonical_routes may advertise a complete loaded route catalogue independently
+    of clipping. None infers availability from local additions for isolated calls.
     """
     # Keep full tile-fragment context for geometric matching. Upstream may batch
     # unrelated paths into one feature, so apply metadata only to the matched
     # geometry in the final partition, never indiscriminately to that feature.
     result=[{**f,'properties':dict(f['properties'])} for f in reference]
+    # The checked-in PCTA centerline is the complete canonical main-route source.
+    # When the complete catalogue is loaded, OSM + PCTA supply the network. Older USFS
+    # main-route surveys contribute metadata only through ordinary strict matches;
+    # they must not create a second route or synthetic long survey connectors.
+    # An unavailable catalogue preserves the previous agency fallback behavior.
+    canonical_pct=('PCT' in canonical_routes) if canonical_routes is not None else any(f['properties'].get('agency')=='PCTA' and main_pct(f['properties']) and not f['geometry'].is_empty for f in additions)
     matched_metadata={}
     junction_matches=[]
     fixed=len(result)
@@ -274,6 +288,7 @@ def conflate(reference, additions):
             anchors.append(existing['geometry']);anchor_limits.append(snap_limit)
             remaining=remaining.difference(mask)
             if remaining.is_empty:break
+        if canonical_pct and feature['properties'].get('agency')=='USFS' and main_pct(feature['properties']):continue
         parts=[]
         for part in lines(remaining):
             if part.length < 1:continue

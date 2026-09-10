@@ -23,11 +23,13 @@ def initialize(path,matching_source=None):
   spec=importlib.util.spec_from_file_location('connectivity_baseline',matching_source);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);matcher=module.conflate
 def run(key):
  x,y=key;findings=[];counts=Counter();original=matcher
- def audited(reference,additions):
-  if not reference:return original(reference,additions)
+ def audited(reference,additions,**options):
+  import inspect
+  if "canonical_routes" not in inspect.signature(original).parameters:options={}
+  if not reference:return original(reference,additions,**options)
   incoming=reference+additions
   before=[(f,line) for f in incoming for line in lines(f['geometry'])]
-  result=original(reference,additions)
+  result=original(reference,additions,**options)
   after=[(f,line) for f in result for line in lines(f['geometry'])]
   beforetree=STRtree([g for f,g in before]);aftertree=STRtree([g for f,g in after])
   originals=defaultdict(list);original_lines=defaultdict(list);corridors={}

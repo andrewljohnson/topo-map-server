@@ -16,7 +16,7 @@ from trail_matching import conflate, lines, paved_surface
 from shapely import make_valid
 from national_boundaries import cached, bounds, project
 
-DATASET_ID = 'us-official-trails-v15'
+DATASET_ID = 'us-official-trails-v16'
 RAW_CACHE_VERSION = 'us-official-trails-v1'
 MIN_ZOOM, MAX_ZOOM = 5, 14
 BOUNDS = [-180, 18, -60, 72]
@@ -158,7 +158,8 @@ def render_tile(z,x,y,*,basemap_tile=None):
  # Match before final clipping so tile-edge fragments have enough context.
  workclip=box(x/n-64/512/n,y/n-64/512/n,(x+1)/n+64/512/n,(y+1)/n+64/512/n)
  layers={'trails':[],'roads':[],'routes':[],'network':[]};additions=[]
- for geometry,props in pct_features():
+ canonical_pct=pct_features()
+ for geometry,props in canonical_pct:
   f=clipped_feature(geometry,props,workclip,n)
   if f:
    layers['routes'].append(f)
@@ -185,7 +186,7 @@ def render_tile(z,x,y,*,basemap_tile=None):
  layers['routes']=[world(f) for group in route_groups.values() for f in conflate([],group)]
  if not overview:
   base=osm_network(z,x,y,basemap_tile)
-  network=[world(f) for f in conflate([metres(f) for f in base],[metres(f) for f in additions])]
+  network=[world(f) for f in conflate([metres(f) for f in base],[metres(f) for f in additions],canonical_routes={'PCT'} if canonical_pct else set())]
   layers['network']=network if z>=13 else []
   # Below z13 only overview routes and nonduplicated MVUM road additions draw.
   layers['roads']=[f for f in network if f['properties'].get('kind')=='forest_road'] if z<13 else []

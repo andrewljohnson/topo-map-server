@@ -365,3 +365,53 @@ class SignedRouteSurveyTests(unittest.TestCase):
    traces=[f for f in result if f['properties'].get('route_ref')=='PCT' and f['geometry'].intersects(point.buffer(radius))]
    self.assertTrue(traces)
    self.assertTrue(all(f['properties']['agency']=='OpenStreetMap' for f in traces),row['name'])
+
+class CanonicalPCTSourceTests(unittest.TestCase):
+ def inputs(self):
+  base=feature([(0,0),(1200,0)],'Pacific Crest Trail','OpenStreetMap','osm',ref='2000',route_ref='PCT')
+  survey=feature([(0,0),(150,0),(400,180),(800,180),(1050,0),(1200,0)],'PACIFIC CREST TRAIL','USFS','usfs',ref='PC2000',route_ref='PCT',kind='trail')
+  pcta=feature([(0,0),(1200,0)],'Pacific Crest Trail','PCTA','pcta',route_ref='PCT',kind='long_distance_trail')
+  return base,survey,pcta
+ def test_canonical_route_keeps_osm_and_strict_survey_metadata(self):
+  from shapely.ops import unary_union
+  base,survey,pcta=self.inputs();result=conflate([base],[pcta,survey])
+  self.assertTrue(unary_union([f['geometry'] for f in result]).equals(base['geometry']))
+  self.assertTrue(any('usfs' in f['properties'].get('source_records','') for f in result))
+ def test_pcta_supplies_main_route_without_osm(self):
+  from shapely.ops import unary_union
+  base,survey,pcta=self.inputs();result=conflate([],[pcta,survey])
+  self.assertTrue(unary_union([f['geometry'] for f in result]).equals(pcta['geometry']))
+  self.assertTrue(all(f['properties']['agency']=='PCTA' for f in result))
+ def test_absent_pcta_keeps_agency_fallback(self):
+  base,survey,pcta=self.inputs();result=conflate([],[survey])
+  self.assertEqual(len(result),1);self.assertTrue(result[0]['geometry'].equals(survey['geometry']))
+ def test_catalogue_availability_survives_clip_edges_but_empty_catalogue_does_not(self):
+  base,survey,pcta=self.inputs()
+  self.assertEqual(conflate([],[survey],canonical_routes={'PCT'}),[])
+  result=conflate([],[survey],canonical_routes=set())
+  self.assertEqual(len(result),1);self.assertTrue(result[0]['geometry'].equals(survey['geometry']))
+ def test_other_paths_and_branches_are_not_selected_out(self):
+  for name,route in [('Pacific Crest Spur','PCT'),('Pacific Crest Alternate','PCT'),('Pacific Crest Connector','PCT'),('PCT ALT','PCT'),('PCT Access','PCT'),('PCT Approach','PCT'),('Other Trail',''),('Pacific Crest Trail','OTHER')]:
+   base,survey,pcta=self.inputs();survey['properties'].update(name=name,route_ref=route)
+   result=conflate([],[pcta,survey])
+   self.assertTrue(any(f['properties']['agency']=='USFS' for f in result),(name,route))
+ def test_real_twin_peaks_viewport_has_no_second_usfs_main_route(self):
+  from pathlib import Path
+  from shapely.geometry import shape
+  from shapely.ops import unary_union
+  rows=json.loads((Path(__file__).parent/'fixtures/pct-twin-peaks-corroboration.json').read_text())
+  for row in rows:
+   reference=[{**f,'geometry':shape(f['geometry'])} for f in row['reference']]
+   additions=[{**f,'geometry':shape(f['geometry'])} for f in row['additions']]
+   result=conflate(reference,additions)
+   self.assertFalse(any(f['properties']['agency']=='USFS' and f['properties'].get('route_ref')=='PCT' for f in result),row['name'])
+   original=unary_union([f['geometry'] for f in reference]);kept=unary_union([f['geometry'] for f in result if f['properties']['agency']=='OpenStreetMap'])
+   self.assertLess(original.difference(kept.buffer(.000001)).length,.01)
+   self.assertLess(kept.difference(original.buffer(.000001)).length,.01)
+   # Source selection introduces no new PCT geometry or long connector: only
+   # the same OSM+PCTA network as if the generalized USFS main survey were absent.
+   canonical=conflate(reference,[f for f in additions if not (f['properties']['agency']=='USFS' and f['properties'].get('route_ref')=='PCT')])
+   a=unary_union([f['geometry'] for f in result if f['properties'].get('route_ref')=='PCT'])
+   b=unary_union([f['geometry'] for f in canonical if f['properties'].get('route_ref')=='PCT'])
+   self.assertLess(a.difference(b.buffer(.000001)).length,.01)
+   self.assertLess(b.difference(a.buffer(.000001)).length,.01)
