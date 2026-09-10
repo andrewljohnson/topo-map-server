@@ -1,0 +1,250 @@
+{
+  "release": "topo-california-20260910-r4",
+  "cells": [
+    "682/1566",
+    "687/1583",
+    "654/1583",
+    "702/1634",
+    "715/1653",
+    "657/1529",
+    "636/1530",
+    "726/1636"
+  ],
+  "tiles": 134,
+  "regions": {
+    "682/1566": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 15250917
+    },
+    "687/1583": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 19995978
+    },
+    "654/1583": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 11881835
+    },
+    "702/1634": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 20994063
+    },
+    "715/1653": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 16813077
+    },
+    "657/1529": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 18010480
+    },
+    "636/1530": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 11288366
+    },
+    "726/1636": {
+      "status": "complete",
+      "done": 22,
+      "total": 22,
+      "bytes": 18192673
+    }
+  },
+  "seconds": 11.577070187,
+  "offlineReload": true,
+  "demPixels": 1024,
+  "notesAndGpsPreserved": true,
+  "calls": [
+    {
+      "path": "/releases/topo-california-20260910-r4/metadata",
+      "status": 200,
+      "headersMs": 630.7791900000001
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 375.6862889999999
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 804.1180760000001
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 402.9235369999999
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 471.69439799999986
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 325.15225499999997
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 451.2786149999997
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 508.8692939999996
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 347.2221850000001
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 564.2706969999999
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 379.7299869999997
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 292.5575550000003
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 1080.7077509999995
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 488.27845200000047
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 346.71829700000035
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 422.0755159999999
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 407.68186700000024
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 837.981025
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 440.1196579999996
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 638.3020759999999
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 521.9657040000002
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 406.5746590000008
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 513.359782999999
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 380.89079299999867
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 820.2036970000008
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 268.5659059999998
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 245.36149300000034
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 240.61896100000013
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 364.32022399999914
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 610.2029600000005
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 216.02372900000046
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 411.19407599999977
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 347.12089299999934
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/tile-batch",
+      "status": 200,
+      "headersMs": 146.46568600000137
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/dem-batch",
+      "status": 200,
+      "headersMs": 746.1201560000009
+    },
+    {
+      "path": "/releases/topo-california-20260910-r4/metadata",
+      "status": 200,
+      "headersMs": 62.47203900000022
+    }
+  ]
+}

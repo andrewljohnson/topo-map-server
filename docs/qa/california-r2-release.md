@@ -45,3 +45,9 @@ Do not silently mutate or restart frozen r3 for this follow-up. Finish its verif
 R3 completed in101.9minutes with all31,572objects verified. Eight-region actual TileStore/offline test and cloud visual gates passed; see `docs/qa/california-r3/README.md`. Promoted successfully: default `/metadata` and `/publication` now confirm `topo-california-20260910-r3`, completeCalifornia,17,838base and13,734DEM. Previous manifest is retained in r3's `previous-metadata.json` for rollback.
 
 Follow-up `topo-california-20260910-r4` is being frozen at `/tmp/topo-california-release-r4` from current main with trailsv16. Pin gazetteer/ranking databases from r3, share source caches/publication spool, initialize snapshot Git provenance, then run `/tmp/topo-california-r4-supervise.py`. Supervisor log `/tmp/topo-california-r4-supervise.log`; publisher log `/tmp/topo-california-20260910-r4.log`. Do not run r3 again. R4 needs all standard completion gates plus the TwinPeaks PCT cloud view before promotion. Expected measured generation/publication time approximately100minutes beforeQA; preserve50GBdisk floor. Existing publicr3 stayslive while it runs.
+
+## Complete: r4 live
+
+`topo-california-20260910-r4` is now the default public map release. All 31,572 objects verified; generation/publication took 96.5 minutes. Eight-region TileStore/offline checks and cloud visual checks passed, including the Twin Peaks PCT switchbacks, both earlier PCT reports, Halfmoon and Three Brothers. Evidence is in `docs/qa/california-r4/`.
+
+No publication jobs remain for this release. The internal iOS build already delivered uses the public API and needs no rebuild for this tile correction. Release heartbeat can be deleted. Nearby TRT overlap remains an explicitly recorded independent cartographic QA issue.
