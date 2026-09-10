@@ -1,0 +1,2022 @@
+{
+  "release": "topo-california-20260910-r4",
+  "method": "34 deliberately selected regional z12 tiles; named cross-agency same-kind network groups with >=100m bilateral overlap within50m and >=50% shorter coverage; candidates NOT confirmed duplicates",
+  "regions": [
+    {
+      "region": "Angeles",
+      "tile": [
+        12,
+        704,
+        1631
+      ],
+      "networkFragments": 61,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Anza Borrego",
+      "tile": [
+        12,
+        723,
+        1646
+      ],
+      "networkFragments": 331,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Big Basin",
+      "tile": [
+        12,
+        657,
+        1591
+      ],
+      "networkFragments": 143,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Big Bear",
+      "tile": [
+        12,
+        717,
+        1632
+      ],
+      "networkFragments": 830,
+      "candidateGroups": 4
+    },
+    {
+      "region": "Big Sur",
+      "tile": [
+        12,
+        662,
+        1604
+      ],
+      "networkFragments": 96,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Bishop",
+      "tile": [
+        12,
+        699,
+        1590
+      ],
+      "networkFragments": 111,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Cuyamaca",
+      "tile": [
+        12,
+        721,
+        1650
+      ],
+      "networkFragments": 140,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Death Valley",
+      "tile": [
+        12,
+        715,
+        1605
+      ],
+      "networkFragments": 24,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Desolation",
+      "tile": [
+        12,
+        681,
+        1566
+      ],
+      "networkFragments": 229,
+      "candidateGroups": 4
+    },
+    {
+      "region": "Golden Gate Park",
+      "tile": [
+        12,
+        654,
+        1583
+      ],
+      "networkFragments": 2373,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Joshua Tree",
+      "tile": [
+        12,
+        726,
+        1635
+      ],
+      "networkFragments": 162,
+      "candidateGroups": 1
+    },
+    {
+      "region": "Kings Canyon",
+      "tile": [
+        12,
+        699,
+        1597
+      ],
+      "networkFragments": 18,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Lassen",
+      "tile": [
+        12,
+        665,
+        1543
+      ],
+      "networkFragments": 75,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Los Padres",
+      "tile": [
+        12,
+        693,
+        1627
+      ],
+      "networkFragments": 47,
+      "candidateGroups": 1
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "networkFragments": 572,
+      "candidateGroups": 6
+    },
+    {
+      "region": "Marble Mountains",
+      "tile": [
+        12,
+        647,
+        1527
+      ],
+      "networkFragments": 86,
+      "candidateGroups": 4
+    },
+    {
+      "region": "Marin",
+      "tile": [
+        12,
+        653,
+        1581
+      ],
+      "networkFragments": 1313,
+      "candidateGroups": 2
+    },
+    {
+      "region": "Mendocino",
+      "tile": [
+        12,
+        650,
+        1558
+      ],
+      "networkFragments": 100,
+      "candidateGroups": 1
+    },
+    {
+      "region": "Mount Diablo",
+      "tile": [
+        12,
+        660,
+        1581
+      ],
+      "networkFragments": 320,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Mount Rose",
+      "tile": [
+        12,
+        683,
+        1560
+      ],
+      "networkFragments": 150,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Pinnacles",
+      "tile": [
+        12,
+        669,
+        1601
+      ],
+      "networkFragments": 177,
+      "candidateGroups": 2
+    },
+    {
+      "region": "Point Reyes",
+      "tile": [
+        12,
+        650,
+        1579
+      ],
+      "networkFragments": 234,
+      "candidateGroups": 1
+    },
+    {
+      "region": "Redwood",
+      "tile": [
+        12,
+        637,
+        1529
+      ],
+      "networkFragments": 63,
+      "candidateGroups": 2
+    },
+    {
+      "region": "San Gabriel",
+      "tile": [
+        12,
+        709,
+        1632
+      ],
+      "networkFragments": 120,
+      "candidateGroups": 4
+    },
+    {
+      "region": "San Jacinto",
+      "tile": [
+        12,
+        720,
+        1638
+      ],
+      "networkFragments": 43,
+      "candidateGroups": 1
+    },
+    {
+      "region": "Santa Barbara",
+      "tile": [
+        12,
+        686,
+        1629
+      ],
+      "networkFragments": 171,
+      "candidateGroups": 2
+    },
+    {
+      "region": "Sequoia",
+      "tile": [
+        12,
+        696,
+        1600
+      ],
+      "networkFragments": 108,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Shasta",
+      "tile": [
+        12,
+        657,
+        1529
+      ],
+      "networkFragments": 21,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Trinity Alps",
+      "tile": [
+        12,
+        648,
+        1536
+      ],
+      "networkFragments": 38,
+      "candidateGroups": 3
+    },
+    {
+      "region": "Tuolumne",
+      "tile": [
+        12,
+        689,
+        1581
+      ],
+      "networkFragments": 155,
+      "candidateGroups": 0
+    },
+    {
+      "region": "Twin Peaks",
+      "tile": [
+        12,
+        679,
+        1563
+      ],
+      "networkFragments": 71,
+      "candidateGroups": 4
+    },
+    {
+      "region": "Ventana",
+      "tile": [
+        12,
+        663,
+        1604
+      ],
+      "networkFragments": 37,
+      "candidateGroups": 1
+    },
+    {
+      "region": "Whitney",
+      "tile": [
+        12,
+        702,
+        1600
+      ],
+      "networkFragments": 94,
+      "candidateGroups": 4
+    },
+    {
+      "region": "Yosemite Valley",
+      "tile": [
+        12,
+        687,
+        1583
+      ],
+      "networkFragments": 991,
+      "candidateGroups": 4
+    }
+  ],
+  "candidates": [
+    {
+      "region": "Whitney",
+      "tile": [
+        12,
+        702,
+        1600
+      ],
+      "kind": "trail",
+      "name": "Meysan Lakes Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 4694,
+      "shorterCoverage": 0.803,
+      "center": [
+        -118.234568,
+        36.573009
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.573009/-118.234568",
+      "sourceIds": [
+        [
+          "osm-14-2810-6401-2",
+          "osm-14-2810-6402-1",
+          "osm-14-2811-6400-10",
+          "osm-14-2811-6400-8",
+          "osm-14-2811-6401-1"
+        ],
+        [
+          "usfs-{114427C9-1BE0-4339-9D13-A789F7BBC7AC}",
+          "usfs-{179FA7A5-7502-4F4D-892F-536E31DEAEDE}",
+          "usfs-{61A5C213-1C4B-42C7-AFC8-55457D6B4685}",
+          "usfs-{671B7594-DAEF-4F58-B779-DA68BEA8EE71}",
+          "usfs-{79AEC456-F303-43E8-BD26-800159BA3E59}",
+          "usfs-{DF5F6F1E-E772-4837-A20E-C8519820603A}"
+        ]
+      ]
+    },
+    {
+      "region": "Whitney",
+      "tile": [
+        12,
+        702,
+        1600
+      ],
+      "kind": "trail",
+      "name": "Mount Whitney Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 3309,
+      "shorterCoverage": 0.991,
+      "center": [
+        -118.262115,
+        36.570407
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.570407/-118.262115",
+      "sourceIds": [
+        [
+          "osm-14-2808-6401-1",
+          "osm-14-2808-6402-1",
+          "osm-14-2808-6402-4",
+          "osm-14-2809-6401-1",
+          "osm-14-2810-6400-6",
+          "osm-14-2810-6401-1",
+          "osm-14-2810-6401-4"
+        ],
+        [
+          "usfs-{28A5F8BE-8BE5-42A5-8748-8B918A420BD9}",
+          "usfs-{75254061-B158-4A45-82BE-1D0DB629B58E}",
+          "usfs-{DDA387D5-53EF-47E9-B4DC-FBA723E5E724}",
+          "usfs-{E99FD980-6A93-4552-936E-554A53738239}",
+          "usfs-{F1ED6997-8F1F-4EB5-90CF-46A3A29F6A0A}"
+        ]
+      ]
+    },
+    {
+      "region": "Twin Peaks",
+      "tile": [
+        12,
+        679,
+        1563
+      ],
+      "kind": "trail",
+      "name": "Shanks Cove Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 2727,
+      "shorterCoverage": 0.581,
+      "center": [
+        -120.302761,
+        39.146104
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/39.146104/-120.302761",
+      "sourceIds": [
+        [
+          "osm-14-2716-6252-1",
+          "osm-14-2716-6253-3",
+          "osm-14-2717-6252-1",
+          "osm-14-2717-6253-1",
+          "osm-14-2718-6253-3"
+        ],
+        [
+          "usfs-{647C6B70-0F15-49AF-BE4B-0075D95C3F12}",
+          "usfs-{E5D68227-1D5F-407A-A6F0-4C6BECEFFCBF}"
+        ]
+      ]
+    },
+    {
+      "region": "Marble Mountains",
+      "tile": [
+        12,
+        647,
+        1527
+      ],
+      "kind": "trail",
+      "name": "Shackleford Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 2373,
+      "shorterCoverage": 0.805,
+      "center": [
+        -123.11812,
+        41.541229
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/41.541229/-123.118120",
+      "sourceIds": [
+        [
+          "osm-14-2588-6109-1",
+          "osm-14-2588-6110-1",
+          "osm-14-2589-6109-2",
+          "osm-14-2589-6110-5",
+          "osm-14-2590-6109-1",
+          "osm-14-2591-6108-3",
+          "osm-14-2591-6109-2"
+        ],
+        [
+          "usfs-{A226CF41-D37B-4D88-BF49-0D58487EDD2D}"
+        ]
+      ]
+    },
+    {
+      "region": "Whitney",
+      "tile": [
+        12,
+        702,
+        1600
+      ],
+      "kind": "trail",
+      "name": "North Fork Lone Pine Creek Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 2215,
+      "shorterCoverage": 0.723,
+      "center": [
+        -118.265398,
+        36.581306
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.581306/-118.265398",
+      "sourceIds": [
+        [
+          "osm-14-2808-6400-1",
+          "osm-14-2808-6401-3",
+          "osm-14-2809-6400-1",
+          "osm-14-2809-6401-2",
+          "osm-14-2810-6400-5"
+        ],
+        [
+          "usfs-{7A5E79CE-A632-49D8-ADE8-57DA4C5A9487}",
+          "usfs-{EF561938-544E-4BC6-A627-F75323B3F29C}",
+          "usfs-{F8198FCE-45A2-4662-8CFD-84071E13FADF}"
+        ]
+      ]
+    },
+    {
+      "region": "San Gabriel",
+      "tile": [
+        12,
+        709,
+        1632
+      ],
+      "kind": "trail",
+      "name": "Chapman Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 2140,
+      "shorterCoverage": 0.834,
+      "center": [
+        -117.61773,
+        34.252681
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.252681/-117.617730",
+      "sourceIds": [
+        [
+          "osm-14-2838-6530-9",
+          "osm-14-2838-6531-3",
+          "osm-14-2839-6530-4",
+          "osm-14-2839-6531-2"
+        ],
+        [
+          "usfs-{1E6E5EF3-923E-4FE2-AEE4-BFA9495F8576}",
+          "usfs-{790B7553-59FD-49EF-BBDB-16C93FBE4D32}",
+          "usfs-{C32EE5C5-E1FB-4805-8CCE-D808FBC964A3}"
+        ]
+      ]
+    },
+    {
+      "region": "Ventana",
+      "tile": [
+        12,
+        663,
+        1604
+      ],
+      "kind": "trail",
+      "name": "Carmel River Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1831,
+      "shorterCoverage": 0.828,
+      "center": [
+        -121.656182,
+        36.314931
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.314931/-121.656182",
+      "sourceIds": [
+        [
+          "osm-14-2654-6416-2",
+          "osm-14-2655-6416-2"
+        ],
+        [
+          "usfs-{918CBD2A-F68B-4E10-AFE8-5AAFC1AAF692}"
+        ]
+      ]
+    },
+    {
+      "region": "Trinity Alps",
+      "tile": [
+        12,
+        648,
+        1536
+      ],
+      "kind": "trail",
+      "name": "Canyon Creek Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1532,
+      "shorterCoverage": 0.674,
+      "center": [
+        -123.01942,
+        40.955246
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/40.955246/-123.019420",
+      "sourceIds": [
+        [
+          "osm-14-2592-6144-1",
+          "osm-14-2593-6144-1",
+          "osm-14-2593-6145-1",
+          "osm-14-2593-6146-1",
+          "osm-14-2593-6147-1"
+        ],
+        [
+          "usfs-{A1B8FF19-8619-44EF-9EA7-0FD3E42E2E21}"
+        ]
+      ]
+    },
+    {
+      "region": "Trinity Alps",
+      "tile": [
+        12,
+        648,
+        1536
+      ],
+      "kind": "trail",
+      "name": "Boulder Creek Lakes Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1262,
+      "shorterCoverage": 0.739,
+      "center": [
+        -123.030959,
+        40.951474
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/40.951474/-123.030959",
+      "sourceIds": [
+        [
+          "osm-14-2592-6145-1",
+          "osm-14-2592-6146-1",
+          "osm-14-2593-6145-2"
+        ],
+        [
+          "usfs-{24EFB92B-237E-4A01-9A01-D348233E8437}"
+        ]
+      ]
+    },
+    {
+      "region": "Marble Mountains",
+      "tile": [
+        12,
+        647,
+        1527
+      ],
+      "kind": "trail",
+      "name": "Cliff Lake Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1240,
+      "shorterCoverage": 0.993,
+      "center": [
+        -123.11157,
+        41.528198
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/41.528198/-123.111570",
+      "sourceIds": [
+        [
+          "osm-14-2588-6110-2",
+          "osm-14-2588-6111-2",
+          "osm-14-2589-6110-2"
+        ],
+        [
+          "usfs-{2BA6F914-54AF-426C-BF4A-4C389610575A}"
+        ]
+      ]
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "kind": "trail",
+      "name": "Mammoth Crest Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1199,
+      "shorterCoverage": 0.873,
+      "center": [
+        -119.018025,
+        37.599876
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.599876/-119.018025",
+      "sourceIds": [
+        [
+          "osm-14-2775-6342-19",
+          "osm-14-2775-6343-3"
+        ],
+        [
+          "usfs-{7BD4FE3A-05BE-4A76-A997-268229965668}",
+          "usfs-{C166A439-FC77-4850-9F8E-4572E396738C}"
+        ]
+      ]
+    },
+    {
+      "region": "Marble Mountains",
+      "tile": [
+        12,
+        647,
+        1527
+      ],
+      "kind": "trail",
+      "name": "Bull Meadows Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1189,
+      "shorterCoverage": 0.916,
+      "center": [
+        -123.121666,
+        41.532732
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/41.532732/-123.121666",
+      "sourceIds": [
+        [
+          "osm-14-2588-6110-3",
+          "osm-14-2589-6110-4"
+        ],
+        [
+          "usfs-{CEB1972F-0337-4C17-859C-CF4600911913}"
+        ]
+      ]
+    },
+    {
+      "region": "San Gabriel",
+      "tile": [
+        12,
+        709,
+        1632
+      ],
+      "kind": "trail",
+      "name": "Icehouse Canyon Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1160,
+      "shorterCoverage": 0.998,
+      "center": [
+        -117.604378,
+        34.24324
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.243240/-117.604378",
+      "sourceIds": [
+        [
+          "osm-14-2838-6531-5",
+          "osm-14-2838-6531-6",
+          "osm-14-2838-6531-7",
+          "osm-14-2839-6531-1"
+        ],
+        [
+          "usfs-{A206A194-2DC2-4137-9089-890754471D5C}",
+          "usfs-{E18C7300-B992-4985-ACF0-F3ED347EB275}"
+        ]
+      ]
+    },
+    {
+      "region": "Twin Peaks",
+      "tile": [
+        12,
+        679,
+        1563
+      ],
+      "kind": "trail",
+      "name": "Powderhorn Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1109,
+      "shorterCoverage": 0.636,
+      "center": [
+        -120.28332,
+        39.105971
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/39.105971/-120.283320",
+      "sourceIds": [
+        [
+          "osm-14-2717-6255-4",
+          "osm-14-2718-6255-1"
+        ],
+        [
+          "usfs-{13E1E542-CE25-4ABC-AE3B-DB955362DF43}"
+        ]
+      ]
+    },
+    {
+      "region": "Mendocino",
+      "tile": [
+        12,
+        650,
+        1558
+      ],
+      "kind": "trail",
+      "name": "Skeleton Glade Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 1004,
+      "shorterCoverage": 0.949,
+      "center": [
+        -122.855837,
+        39.444698
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/39.444698/-122.855837",
+      "sourceIds": [
+        [
+          "osm-14-2600-6235-1",
+          "osm-14-2601-6234-3",
+          "osm-14-2601-6235-4"
+        ],
+        [
+          "usfs-{70C73D0D-9964-4B39-97CE-0946E3BDD074}"
+        ]
+      ]
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "kind": "trail",
+      "name": "Fish Creek Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 862,
+      "shorterCoverage": 0.889,
+      "center": [
+        -119.081851,
+        37.588085
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.588085/-119.081851",
+      "sourceIds": [
+        [
+          "osm-14-2772-6342-10",
+          "osm-14-2772-6343-2"
+        ],
+        [
+          "usfs-{2B787260-0A66-4968-909E-FDDD11E1109A}"
+        ]
+      ]
+    },
+    {
+      "region": "San Gabriel",
+      "tile": [
+        12,
+        709,
+        1632
+      ],
+      "kind": "trail",
+      "name": "Three Ts Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 817,
+      "shorterCoverage": 0.725,
+      "center": [
+        -117.599078,
+        34.254778
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.254778/-117.599078",
+      "sourceIds": [
+        [
+          "osm-14-2839-6530-5",
+          "osm-14-2839-6531-4"
+        ],
+        [
+          "usfs-{B2C6BB65-D9B8-431D-B8FF-CB989FEBC276}"
+        ]
+      ]
+    },
+    {
+      "region": "Los Padres",
+      "tile": [
+        12,
+        693,
+        1627
+      ],
+      "kind": "trail",
+      "name": "Little Mutau Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 769,
+      "shorterCoverage": 0.987,
+      "center": [
+        -119.009855,
+        34.63786
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.637860/-119.009855",
+      "sourceIds": [
+        [
+          "osm-14-2774-6509-4",
+          "osm-14-2775-6509-1"
+        ],
+        [
+          "usfs-{68C9D1B5-7BEE-4022-872C-4488E73B70F4}"
+        ]
+      ]
+    },
+    {
+      "region": "Yosemite Valley",
+      "tile": [
+        12,
+        687,
+        1583
+      ],
+      "kind": "trail",
+      "name": "Valley Loop Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 723,
+      "shorterCoverage": 0.618,
+      "center": [
+        -119.565786,
+        37.735676
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.735676/-119.565786",
+      "sourceIds": [
+        [
+          "osm-14-2748-6334-10",
+          "osm-14-2748-6334-21",
+          "osm-14-2748-6335-6",
+          "osm-14-2749-6334-21",
+          "osm-14-2749-6334-27",
+          "osm-14-2749-6334-28",
+          "osm-14-2749-6334-42",
+          "osm-14-2750-6334-19",
+          "osm-14-2750-6334-21",
+          "osm-14-2750-6334-39",
+          "osm-14-2750-6335-17",
+          "osm-14-2750-6335-25",
+          "osm-14-2750-6335-5",
+          "osm-14-2751-6333-3",
+          "osm-14-2751-6334-2",
+          "osm-14-2751-6334-7"
+        ],
+        [
+          "nps-{11C3BD35-5058-447D-B868-FAFA356490D2}",
+          "nps-{316F327F-0FE0-448F-B761-2C661EABAAF8}",
+          "nps-{6094056D-17F2-4DBA-BCE1-C7782E1192A7}",
+          "nps-{7280ED3A-5B48-4DED-B84C-48A7D82D2779}",
+          "nps-{7FF3236C-A40C-40E9-B39A-7B1C1B2D510D}",
+          "nps-{87FBB9F9-CAEC-4DF7-804B-7ABAE2B85D0A}",
+          "nps-{97EE6286-BD5B-43EF-9D04-6EDD017CBF2A}",
+          "nps-{A66C793E-1F7C-42A8-ABC3-7481C3C77117}",
+          "nps-{AF4BB423-8F9F-4899-8DFA-9911A6BF4E8C}",
+          "nps-{BC279024-FDA0-4D73-85BB-312E22FB2A04}",
+          "nps-{BD8F9F7D-08DA-43FA-B388-46D852A81824}",
+          "nps-{DD878F4E-E6D5-47D6-A03C-766B2727220E}",
+          "nps-{E0DC875B-DBCE-4857-A605-EA3E1ECA336F}",
+          "nps-{E22B07D7-3D56-42CB-959E-E4377556D214}"
+        ]
+      ]
+    },
+    {
+      "region": "Desolation",
+      "tile": [
+        12,
+        681,
+        1566
+      ],
+      "kind": "trail",
+      "name": "Tahoe Yosemite Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 629,
+      "shorterCoverage": 0.742,
+      "center": [
+        -120.144719,
+        38.95598
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/38.955980/-120.144719",
+      "sourceIds": [
+        [
+          "osm-14-2724-6264-1"
+        ],
+        [
+          "usfs-{EEE25879-DF21-413E-AF1A-1C35B4AC2C10}"
+        ]
+      ]
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "kind": "trail",
+      "name": "Rim Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 599,
+      "shorterCoverage": 0.896,
+      "center": [
+        -119.033078,
+        37.601248
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.601248/-119.033078",
+      "sourceIds": [
+        [
+          "osm-14-2774-6342-6",
+          "osm-14-2774-6343-4"
+        ],
+        [
+          "usfs-{00054237-42CA-4967-8CF8-E6EDE150740B}",
+          "usfs-{0BCAF9D8-DB63-41E4-9EB1-FE03B849CF41}",
+          "usfs-{3781A40E-7663-4669-8BD7-6DD180EFBB46}",
+          "usfs-{3C793321-76C2-4337-8843-E3E260C3639D}",
+          "usfs-{4383D743-4ECA-4ACF-9090-AA0A3C2FD8CB}",
+          "usfs-{4C50D673-4E4C-41FA-8A4E-829220C32A3D}",
+          "usfs-{64632CDC-BF06-46EC-B759-91F4BB20B46A}",
+          "usfs-{A8DD2128-0227-445F-AC48-126D6566020C}",
+          "usfs-{B88D479F-5286-454B-9710-47A5019B5ECD}",
+          "usfs-{C648FD89-649F-416B-AB3B-1E0BCD53CE24}",
+          "usfs-{F68229BF-3E9B-4689-A1E7-6732043547CF}"
+        ]
+      ]
+    },
+    {
+      "region": "San Gabriel",
+      "tile": [
+        12,
+        709,
+        1632
+      ],
+      "kind": "trail",
+      "name": "Baldy Bowl Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 585,
+      "shorterCoverage": 0.998,
+      "center": [
+        -117.642884,
+        34.278483
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.278483/-117.642884",
+      "sourceIds": [
+        [
+          "osm-14-2837-6528-4",
+          "osm-14-2837-6529-2",
+          "osm-14-2837-6529-4",
+          "osm-14-2838-6529-5",
+          "osm-14-2838-6530-7"
+        ],
+        [
+          "usfs-{B6F40A89-F1E7-408E-97B4-4C01D17FA618}",
+          "usfs-{DE031496-3CE0-4A7B-B675-C3A822718213}"
+        ]
+      ]
+    },
+    {
+      "region": "Desolation",
+      "tile": [
+        12,
+        681,
+        1566
+      ],
+      "kind": "trail",
+      "name": "Bayview Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 557,
+      "shorterCoverage": 0.991,
+      "center": [
+        -120.103515,
+        38.943155
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/38.943155/-120.103515",
+      "sourceIds": [
+        [
+          "osm-14-2724-6265-3",
+          "osm-14-2725-6264-8",
+          "osm-14-2725-6265-1",
+          "osm-14-2726-6264-14",
+          "osm-14-2726-6265-18"
+        ],
+        [
+          "usfs-{64C72B10-1E2A-4023-AA6E-3E82B0A0D87E}"
+        ]
+      ]
+    },
+    {
+      "region": "Yosemite Valley",
+      "tile": [
+        12,
+        687,
+        1583
+      ],
+      "kind": "trail",
+      "name": "Lower Yosemite Fall Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 525,
+      "shorterCoverage": 0.973,
+      "center": [
+        -119.595124,
+        37.746311
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.746311/-119.595124",
+      "sourceIds": [
+        [
+          "osm-14-2749-6334-29",
+          "osm-14-2749-6334-31",
+          "osm-14-2749-6334-32"
+        ],
+        [
+          "nps-{00FDF050-0971-4847-9285-36E4BD76DE4E}",
+          "nps-{0294920D-72FE-4297-9027-5C82E057FE2F}",
+          "nps-{02A70C84-D61D-4D2C-873F-AEB46FDD680E}",
+          "nps-{0B123060-6FBD-479D-9C98-7DE69D0E741E}",
+          "nps-{1CE02377-54E3-4F37-9774-A7EAF4362CDB}",
+          "nps-{25C2CDC4-DE9B-4C9E-B369-2ED1A1DBF6F9}",
+          "nps-{28758B4A-2D89-4121-A7F4-3E32154CBC74}",
+          "nps-{3F6182D3-61F2-491C-AD53-2DE592FB3465}",
+          "nps-{451CA803-7F4E-494E-9449-F9CCF6EC29A6}",
+          "nps-{4685E420-5365-4C4C-832A-751FD107A8B7}",
+          "nps-{540779FD-2952-4F2D-BE8E-7AC1D7BCF341}",
+          "nps-{560A32A7-9FA8-4E11-9956-9151BC7D6145}",
+          "nps-{563D98F1-D814-420C-8A62-39290C515303}",
+          "nps-{724F0E87-8A65-4923-9D88-2A3271E7A725}",
+          "nps-{946B4901-CC58-4785-91DF-79159C1422A7}",
+          "nps-{9C3BBBCA-300B-41D5-B24B-2CFA315C14E5}",
+          "nps-{A561988E-EA1F-4821-B53A-E0E313DF993C}",
+          "nps-{B6A55AE7-40E9-4747-9C82-8B83EEADC78E}",
+          "nps-{B792E104-466A-4633-BCCB-F7AA77891C6E}",
+          "nps-{BA8F5527-614A-40CC-AB13-C6A6E2F3FF96}",
+          "nps-{C30FC31E-C407-437D-AB2B-6845AFE0A8C6}",
+          "nps-{DE00F7E5-A3A4-408F-ABC4-CC19CCBD476F}",
+          "nps-{E3CBA4FD-1149-4CAA-ACC4-C7945AAFFCFD}",
+          "nps-{EB8205D8-993C-4732-97A9-5E27B3E0C097}",
+          "nps-{F11614E8-7B02-4A9F-B5D0-984148EF0303}"
+        ]
+      ]
+    },
+    {
+      "region": "Redwood",
+      "tile": [
+        12,
+        637,
+        1529
+      ],
+      "kind": "trail",
+      "name": "C.R.E.A. Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 449,
+      "shorterCoverage": 1.0,
+      "center": [
+        -124.011853,
+        41.409748
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/41.409748/-124.011853",
+      "sourceIds": [
+        [
+          "osm-14-2548-6117-5",
+          "osm-14-2548-6118-5"
+        ],
+        [
+          "nps-{43C52C8B-4114-4C4E-9355-DE2220D49BB2}"
+        ]
+      ]
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "kind": "trail",
+      "name": "LOWER RAINBOW FALLS",
+      "agencies": [
+        "USFS",
+        "OpenStreetMap"
+      ],
+      "overlapM": 403,
+      "shorterCoverage": 0.708,
+      "center": [
+        -119.087677,
+        37.596101
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.596101/-119.087677",
+      "sourceIds": [
+        [
+          "usfs-{0E3B1019-A92E-45DB-86E7-CCB4A5401FA6}",
+          "usfs-{0EDD31A9-B594-4528-8503-563F21C2564A}",
+          "usfs-{5BD81C84-FD19-4957-B4B7-79FE0183CCB5}",
+          "usfs-{D05EF3EB-1E96-4D51-B27A-CE965A1D76A3}",
+          "usfs-{D5D01B14-7A4A-4893-8C1F-BA0E69FFC96D}"
+        ],
+        [
+          "osm-14-2772-6342-6",
+          "osm-14-2772-6343-1"
+        ]
+      ]
+    },
+    {
+      "region": "Trinity Alps",
+      "tile": [
+        12,
+        648,
+        1536
+      ],
+      "kind": "trail",
+      "name": "Bear Creek Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 365,
+      "shorterCoverage": 0.729,
+      "center": [
+        -123.003289,
+        40.913788
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/40.913788/-123.003289",
+      "sourceIds": [
+        [
+          "osm-14-2593-6147-2",
+          "osm-14-2594-6147-1",
+          "osm-14-2595-6146-2",
+          "osm-14-2595-6147-1"
+        ],
+        [
+          "usfs-{1018FB2F-850D-473B-9DF5-6E37E75DD6DF}",
+          "usfs-{DEB801DD-7F76-4234-9E68-8639A1235722}"
+        ]
+      ]
+    },
+    {
+      "region": "Redwood",
+      "tile": [
+        12,
+        637,
+        1529
+      ],
+      "kind": "trail",
+      "name": "Rhododendron Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 330,
+      "shorterCoverage": 0.713,
+      "center": [
+        -123.998517,
+        41.378346
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/41.378346/-123.998517",
+      "sourceIds": [
+        [
+          "osm-14-2548-6118-4",
+          "osm-14-2548-6119-5"
+        ],
+        [
+          "nps-{26C00DF8-9803-4BAB-8D54-F2C717A1B2B5}"
+        ]
+      ]
+    },
+    {
+      "region": "Pinnacles",
+      "tile": [
+        12,
+        669,
+        1601
+      ],
+      "kind": "trail",
+      "name": "Condor Gulch Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 328,
+      "shorterCoverage": 0.793,
+      "center": [
+        -121.182729,
+        36.482554
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.482554/-121.182729",
+      "sourceIds": [
+        [
+          "osm-14-2676-6406-7",
+          "osm-14-2676-6406-9"
+        ],
+        [
+          "nps-{16819A8A-6D15-4C69-84F0-18D16B5BF9E0}",
+          "nps-{4548BC3F-0766-4C8F-BE55-ABB889F235B2}"
+        ]
+      ]
+    },
+    {
+      "region": "Whitney",
+      "tile": [
+        12,
+        702,
+        1600
+      ],
+      "kind": "road",
+      "name": "Whitney Portal Road",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 319,
+      "shorterCoverage": 1.0,
+      "center": [
+        -118.240764,
+        36.586191
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.586191/-118.240764",
+      "sourceIds": [
+        [
+          "osm-14-2810-6400-1",
+          "osm-14-2810-6400-4",
+          "osm-14-2811-6400-1"
+        ],
+        [
+          "mvum_roads-{03A4CE55-699F-443D-B174-6A640C572FED}"
+        ]
+      ]
+    },
+    {
+      "region": "Desolation",
+      "tile": [
+        12,
+        681,
+        1566
+      ],
+      "kind": "road",
+      "name": "Cathedral Road",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 306,
+      "shorterCoverage": 0.847,
+      "center": [
+        -120.065482,
+        38.921494
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/38.921494/-120.065482",
+      "sourceIds": [
+        [
+          "osm-14-2727-6265-13",
+          "osm-14-2727-6266-7",
+          "osm-14-2727-6267-2"
+        ],
+        [
+          "mvum_roads-{9ECAB8B3-65E9-41DB-965C-547DB046B23E}"
+        ]
+      ]
+    },
+    {
+      "region": "Marin",
+      "tile": [
+        12,
+        653,
+        1581
+      ],
+      "kind": "trail",
+      "name": "Redwood Creek Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 276,
+      "shorterCoverage": 0.713,
+      "center": [
+        -122.571754,
+        37.892339
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.892339/-122.571754",
+      "sourceIds": [
+        [
+          "osm-14-2613-6325-29",
+          "osm-14-2613-6325-30",
+          "osm-14-2613-6325-36",
+          "osm-14-2613-6325-66",
+          "osm-14-2613-6325-70",
+          "osm-14-2613-6326-12",
+          "osm-14-2613-6326-17",
+          "osm-14-2613-6326-8",
+          "osm-14-2613-6327-34"
+        ],
+        [
+          "nps-{0411A31F-E6CF-4121-A2F4-BAB15CBB28E6}",
+          "nps-{134D59C3-25A2-4E99-B69E-92085D9CED92}",
+          "nps-{39BDDD6C-5DAE-4CD2-B808-C0603DD6ED93}",
+          "nps-{49B689B9-446D-4318-839C-812D2645DB6C}",
+          "nps-{5A19059F-B6E2-483A-99BB-DC0A86079ED3}",
+          "nps-{7370064F-9F9E-4BB9-B864-ED0AABEAF82D}",
+          "nps-{7477DDB9-8064-445A-AA57-1921D54C86C1}",
+          "nps-{967030AE-85A4-496A-8BB2-32393D085B21}",
+          "nps-{B7FFEF3F-F3B2-4EC8-87DA-F2933EF3FBC7}",
+          "nps-{BA5A8154-EAA1-4006-BAA4-19A55CB47DDB}",
+          "nps-{E36000B3-5D1A-4AD9-B697-73F02D2F84A8}",
+          "nps-{EDA85842-5563-4521-AEE6-5B1464FED764}"
+        ]
+      ]
+    },
+    {
+      "region": "Twin Peaks",
+      "tile": [
+        12,
+        679,
+        1563
+      ],
+      "kind": "trail",
+      "name": "Greyhorse Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 264,
+      "shorterCoverage": 0.51,
+      "center": [
+        -120.316654,
+        39.134022
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/39.134022/-120.316654",
+      "sourceIds": [
+        [
+          "osm-14-2716-6253-1"
+        ],
+        [
+          "usfs-{F08EE4CB-DB42-4695-A043-9B1D40238467}"
+        ]
+      ]
+    },
+    {
+      "region": "Twin Peaks",
+      "tile": [
+        12,
+        679,
+        1563
+      ],
+      "kind": "trail",
+      "name": "Tahoe Rim Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 257,
+      "shorterCoverage": 0.979,
+      "center": [
+        -120.235465,
+        39.10977
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/39.109770/-120.235465",
+      "sourceIds": [
+        [
+          "osm-14-2719-6255-3"
+        ],
+        [
+          "usfs-{1ACA922A-54A8-47EF-B6ED-C28B0E8205DC}"
+        ]
+      ]
+    },
+    {
+      "region": "San Jacinto",
+      "tile": [
+        12,
+        720,
+        1638
+      ],
+      "kind": "trail",
+      "name": "Pacific Crest Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "PCTA"
+      ],
+      "overlapM": 255,
+      "shorterCoverage": 0.985,
+      "center": [
+        -116.700259,
+        33.800324
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/33.800324/-116.700259",
+      "sourceIds": [
+        [
+          "osm-14-2880-6552-1",
+          "osm-14-2880-6553-1",
+          "osm-14-2880-6554-1",
+          "osm-14-2880-6555-4",
+          "osm-14-2881-6552-1"
+        ],
+        [
+          "pcta-70"
+        ]
+      ]
+    },
+    {
+      "region": "Big Bear",
+      "tile": [
+        12,
+        717,
+        1632
+      ],
+      "kind": "road",
+      "name": "Holcomb Valley Campground",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 231,
+      "shorterCoverage": 0.997,
+      "center": [
+        -116.896092,
+        34.302664
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.302664/-116.896092",
+      "sourceIds": [
+        [
+          "osm-14-2871-6528-10",
+          "osm-14-2871-6528-15"
+        ],
+        [
+          "mvum_roads-{8985EDCD-EEA2-45D0-9A66-4EA14B925891}"
+        ]
+      ]
+    },
+    {
+      "region": "Desolation",
+      "tile": [
+        12,
+        681,
+        1566
+      ],
+      "kind": "trail",
+      "name": "Eagle Meadows Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 221,
+      "shorterCoverage": 0.762,
+      "center": [
+        -120.139591,
+        38.959192
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/38.959192/-120.139591",
+      "sourceIds": [
+        [
+          "osm-14-2724-6264-2"
+        ],
+        [
+          "usfs-{C5027759-0ACE-4D3A-ADCD-37CEF73BD9B3}"
+        ]
+      ]
+    },
+    {
+      "region": "Joshua Tree",
+      "tile": [
+        12,
+        726,
+        1635
+      ],
+      "kind": "trail",
+      "name": "Barker Dam Nature",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 215,
+      "shorterCoverage": 1.0,
+      "center": [
+        -116.146876,
+        34.027299
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.027299/-116.146876",
+      "sourceIds": [
+        [
+          "osm-14-2905-6543-7",
+          "osm-14-2906-6543-10",
+          "osm-14-2906-6543-8"
+        ],
+        [
+          "nps-{E47F932D-C423-4EF2-B7ED-4426B15A54BC}"
+        ]
+      ]
+    },
+    {
+      "region": "Yosemite Valley",
+      "tile": [
+        12,
+        687,
+        1583
+      ],
+      "kind": "trail",
+      "name": "Camp 4 West",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 209,
+      "shorterCoverage": 0.7,
+      "center": [
+        -119.602774,
+        37.741734
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.741734/-119.602774",
+      "sourceIds": [
+        [
+          "osm-14-2748-6334-11"
+        ],
+        [
+          "nps-{F25D02A0-2D6D-4C7F-9F7F-20319A96B394}"
+        ]
+      ]
+    },
+    {
+      "region": "Marin",
+      "tile": [
+        12,
+        653,
+        1581
+      ],
+      "kind": "trail",
+      "name": "Canopy View Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 204,
+      "shorterCoverage": 0.885,
+      "center": [
+        -122.574283,
+        37.899149
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.899149/-122.574283",
+      "sourceIds": [
+        [
+          "osm-14-2613-6325-31"
+        ],
+        [
+          "nps-{41B6EFB4-F4A3-4560-AE40-8CCFFE687B65}"
+        ]
+      ]
+    },
+    {
+      "region": "Big Bear",
+      "tile": [
+        12,
+        717,
+        1632
+      ],
+      "kind": "road",
+      "name": "Gray's Peak Trailhead",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 192,
+      "shorterCoverage": 1.0,
+      "center": [
+        -116.947811,
+        34.262869
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.262869/-116.947811",
+      "sourceIds": [
+        [
+          "osm-14-2869-6530-29"
+        ],
+        [
+          "mvum_roads-{10F3762A-2E4C-481F-866B-8E970817DC35}"
+        ]
+      ]
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "kind": "trail",
+      "name": "Red Cones Cutoff",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 184,
+      "shorterCoverage": 0.542,
+      "center": [
+        -119.049611,
+        37.601635
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.601635/-119.049611",
+      "sourceIds": [
+        [
+          "osm-14-2773-6342-3",
+          "osm-14-2773-6343-3",
+          "osm-14-2773-6343-4"
+        ],
+        [
+          "usfs-{113D0B43-D408-48AD-A545-6782A1E367B9}",
+          "usfs-{B8CC4289-2306-496B-B260-13434F6D961D}"
+        ]
+      ]
+    },
+    {
+      "region": "Marble Mountains",
+      "tile": [
+        12,
+        647,
+        1527
+      ],
+      "kind": "trail",
+      "name": "Hayes Meadows Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 182,
+      "shorterCoverage": 0.556,
+      "center": [
+        -123.091448,
+        41.509288
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/41.509288/-123.091448",
+      "sourceIds": [
+        [
+          "osm-14-2589-6111-1",
+          "osm-14-2590-6111-1"
+        ],
+        [
+          "usfs-{EAF624BA-8F69-48CA-A7F5-CCC7DC1B75EA}"
+        ]
+      ]
+    },
+    {
+      "region": "Point Reyes",
+      "tile": [
+        12,
+        650,
+        1579
+      ],
+      "kind": "trail",
+      "name": "Sky Campground Loop",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 165,
+      "shorterCoverage": 0.663,
+      "center": [
+        -122.82945,
+        38.040326
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/38.040326/-122.829450",
+      "sourceIds": [
+        [
+          "osm-14-2601-6317-8"
+        ],
+        [
+          "nps-{9E619CD7-86F0-4B01-87E2-405CCEA4CFC3}"
+        ]
+      ]
+    },
+    {
+      "region": "Big Bear",
+      "tile": [
+        12,
+        717,
+        1632
+      ],
+      "kind": "road",
+      "name": "DISCOVERY CENTER PKG",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 145,
+      "shorterCoverage": 1.0,
+      "center": [
+        -116.905593,
+        34.26349
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.263490/-116.905593",
+      "sourceIds": [
+        [
+          "osm-14-2871-6530-10",
+          "osm-14-2871-6530-11"
+        ],
+        [
+          "mvum_roads-{560FAE39-CE54-4F3E-B139-0E5D653E654C}"
+        ]
+      ]
+    },
+    {
+      "region": "Big Bear",
+      "tile": [
+        12,
+        717,
+        1632
+      ],
+      "kind": "trail",
+      "name": "Alpine Pedal Path Spur",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 135,
+      "shorterCoverage": 0.846,
+      "center": [
+        -116.910705,
+        34.263525
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.263525/-116.910705",
+      "sourceIds": [
+        [
+          "osm-14-2871-6530-16",
+          "osm-14-2871-6530-19",
+          "osm-14-2871-6530-20"
+        ],
+        [
+          "usfs-{A9855293-B84D-4675-8D57-C8C98DE33675}"
+        ]
+      ]
+    },
+    {
+      "region": "Pinnacles",
+      "tile": [
+        12,
+        669,
+        1601
+      ],
+      "kind": "trail",
+      "name": "Balconies Caves Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 124,
+      "shorterCoverage": 0.938,
+      "center": [
+        -121.201177,
+        36.499904
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/36.499904/-121.201177",
+      "sourceIds": [
+        [
+          "osm-14-2676-6405-3",
+          "osm-14-2676-6405-4"
+        ],
+        [
+          "nps-{E0E26D76-C762-4C9E-8D4A-A8DC1D97612A}"
+        ]
+      ]
+    },
+    {
+      "region": "Mammoth",
+      "tile": [
+        12,
+        693,
+        1585
+      ],
+      "kind": "trail",
+      "name": "Rainbow Falls Wagon Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 114,
+      "shorterCoverage": 0.996,
+      "center": [
+        -119.075789,
+        37.611444
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.611444/-119.075789",
+      "sourceIds": [
+        [
+          "osm-14-2772-6342-7"
+        ],
+        [
+          "usfs-{8DBE6870-B655-47FC-B516-1882B07517DD}",
+          "usfs-{EFEA438A-B667-4A82-9006-E910A97E01DF}"
+        ]
+      ]
+    },
+    {
+      "region": "Santa Barbara",
+      "tile": [
+        12,
+        686,
+        1629
+      ],
+      "kind": "trail",
+      "name": "West Fork Cold Spring Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 109,
+      "shorterCoverage": 0.73,
+      "center": [
+        -119.663172,
+        34.466828
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.466828/-119.663172",
+      "sourceIds": [
+        [
+          "osm-14-2745-6519-8",
+          "osm-14-2746-6519-6"
+        ],
+        [
+          "usfs-{E3CA1F1C-2F3E-43AB-B8F0-5198790CE8BC}"
+        ]
+      ]
+    },
+    {
+      "region": "Santa Barbara",
+      "tile": [
+        12,
+        686,
+        1629
+      ],
+      "kind": "trail",
+      "name": "McMenemy Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "USFS"
+      ],
+      "overlapM": 106,
+      "shorterCoverage": 0.849,
+      "center": [
+        -119.622134,
+        34.452303
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/34.452303/-119.622134",
+      "sourceIds": [
+        [
+          "osm-14-2747-6519-10"
+        ],
+        [
+          "usfs-{8CE9D52F-BF6A-4A46-8C89-EA022BAA010F}"
+        ]
+      ]
+    },
+    {
+      "region": "Yosemite Valley",
+      "tile": [
+        12,
+        687,
+        1583
+      ],
+      "kind": "trail",
+      "name": "North Dome Trail",
+      "agencies": [
+        "OpenStreetMap",
+        "NPS"
+      ],
+      "overlapM": 105,
+      "shorterCoverage": 0.846,
+      "center": [
+        -119.557326,
+        37.768073
+      ],
+      "url": "https://topo-map.andrewljohnson.workers.dev/#16/37.768073/-119.557326",
+      "sourceIds": [
+        [
+          "osm-14-2750-6332-1",
+          "osm-14-2750-6333-1",
+          "osm-14-2750-6333-2",
+          "osm-14-2750-6333-3"
+        ],
+        [
+          "nps-{2D7BB99C-2974-45F2-A517-3334BF10FFD4}",
+          "nps-{8DD67746-6E7C-449A-A3BA-ACFF60FD8F0D}"
+        ]
+      ]
+    }
+  ],
+  "failures": []
+}
