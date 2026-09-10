@@ -1,0 +1,11 @@
+{
+  "release": "topo-california-20260909-r1",
+  "verifiedObjects": 31572,
+  "storedBytes": 12875356383,
+  "storedGB": 12.875,
+  "exactManifestCoverage": true,
+  "detailParents": 13182,
+  "overview": 4656,
+  "dem": 13734,
+  "completedAt": 1789005776.631413
+}
