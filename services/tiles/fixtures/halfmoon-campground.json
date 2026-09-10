@@ -1,0 +1,211 @@
+{
+  "agency": {
+    "type": "Feature",
+    "id": 2823961,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -119.0681085743344,
+        34.64981797272236
+      ]
+    },
+    "properties": {
+      "objectid": 2823961,
+      "site_cn": "5075.003871",
+      "root_cn": "5075.003871",
+      "parent_cn": null,
+      "region": "05",
+      "security_id": "0507",
+      "managing_org": "050757",
+      "site_id": "25459",
+      "site_name": "HALFMOON",
+      "site_type": "CAMPGROUND",
+      "activity_type_list": "No Data",
+      "service_type_list": "No Data",
+      "seasonal_operational_status": "OPEN",
+      "op_status_reason": null,
+      "development_status": "EXISTING",
+      "development_scale": "3",
+      "poss_id": null,
+      "nrrs_id": null,
+      "total_capacity": 50,
+      "fee_charged": "Y",
+      "fee_type": "EXPANDED AMENITY FEE",
+      "recarea_name": "Halfmoon",
+      "recarea_enable": "Y",
+      "recarea_description": "HALFMOON (Campground)",
+      "complex_name": null,
+      "information_center": null,
+      "official_designation": null,
+      "fee_description": "Overnight Use:\nSingle Site: $5 per night\nDay Use:\n$5 per vehicle per day\n$30 per annual\n$5 per secondary annual ",
+      "operational_hours": "Open 24 hours/day. Seasonal Gate closures",
+      "open_season": null,
+      "best_season": null,
+      "busiest_season": null,
+      "usage_level": null,
+      "pack_in_out": "Y",
+      "public_site_name": "Halfmoon Campground",
+      "alternative_name": null,
+      "rec1stop_id": null,
+      "usda_portal_id": "10985",
+      "rec1stop_url": null,
+      "usda_portal_url": "www.fs.usda.gov/recarea/lpnf/recarea/?recid=10985",
+      "site_time_zone": null,
+      "important_info": null,
+      "site_contact_notes": null,
+      "rentals_and_guides": null,
+      "passes": "Interagency Senior/Access Recreation Passes provide a 50% discount to Single Campsites ONLY. *The discount applies only to the fee for the campsite physically occupied by the pass holder, not to any additional fee or campsite(s) occupied by members of the pass holder's party.* https://store.usgs.gov/recreational-passes\nDay Use: $5/vehicle/day.\nAdventure Passes are Honored for Day Use: $30/annual; $5/secondary annual. https://www.fs.usda.gov/detailfull/r5/passes-permits/?cid=stelprdb5208699&width=full\nInteragency Recreation Passes are Honored for Day Use. store.usgs.gov/recreational-passes\nPlease be prepared to pay with CASH or CHECK. *Sites may be reservable and reservation fees apply.*",
+      "permit_information": null,
+      "restrictions": "Access to site may be closed between November 1st and April 30th each year due to Multiple Vehicle Use Management (MVUM) Seasonal Closure.",
+      "closest_towns": "Frazier Park, California",
+      "states_spanned": null,
+      "water_availability": "No water available",
+      "restroom_availability": "Vault toilet",
+      "operated_by": "US Forest Service",
+      "season_description": null,
+      "directions": "From Lockwood Valley Road take the Grade Valley- Mutua Road (FS 7N03) approximately 9 miles.",
+      "maximum_elevation": null,
+      "minimum_elevation": "4,720 feet",
+      "season_name": null,
+      "site_season_start_date": null,
+      "site_season_end_date": null,
+      "max_nbr_people": null,
+      "passes_accepted": null,
+      "lmtd_use_award_method": null,
+      "lmtd_use_award_type": null,
+      "latitude": 34.649813099999996,
+      "longitude": -119.0680962,
+      "infra_last_update": 1766409540000,
+      "edw_last_modify": 1766455534000,
+      "crc": "00000000556C1613",
+      "globalid": "{CD57C22E-22C2-4910-8109-E7A55D33977A}"
+    }
+  },
+  "elements": [
+    {
+      "type": "way",
+      "id": 1347238220,
+      "tags": {
+        "drinking_water": "no",
+        "fee": "yes",
+        "name": "Halfmoon Campground",
+        "operator": "Los Padres National Forest",
+        "reservation": "no",
+        "tents": "yes",
+        "tourism": "camp_site",
+        "website": "https://www.fs.usda.gov/recarea/lpnf/recarea/?recid=10985"
+      },
+      "_geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -119.0699101,
+                34.6504203
+              ],
+              [
+                -119.0697169,
+                34.649926
+              ],
+              [
+                -119.0682256,
+                34.6496701
+              ],
+              [
+                -119.0679145,
+                34.6502967
+              ],
+              [
+                -119.0673673,
+                34.6515323
+              ],
+              [
+                -119.0687728,
+                34.6517618
+              ],
+              [
+                -119.0695238,
+                34.6513029
+              ],
+              [
+                -119.0699101,
+                34.6504203
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.0686906,
+          34.6508616
+        ]
+      },
+      "properties": {
+        "kind": "group",
+        "name": "Halfmoon Campground",
+        "icons": [
+          "campsite",
+          "toilet"
+        ],
+        "group_id": "way/1347238220",
+        "osm_id": "way/1347238220",
+        "osm_ids": [
+          "way/1347238219",
+          "way/1347238220"
+        ],
+        "min_zoom": 10,
+        "max_zoom": 15,
+        "anchor_method": "point_on_surface",
+        "member_count": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.0688422,
+          34.6508886
+        ]
+      },
+      "properties": {
+        "kind": "amenity",
+        "group_id": "way/1347238220",
+        "poi_icon": "toilet",
+        "poi_frame": "square",
+        "name": "",
+        "osm_id": "way/1347238219",
+        "min_zoom": 15,
+        "location_method": "point_on_surface"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.0686906,
+          34.6508616
+        ]
+      },
+      "properties": {
+        "kind": "amenity",
+        "group_id": "way/1347238220",
+        "poi_icon": "campsite",
+        "poi_frame": "circle",
+        "name": "Halfmoon Campground",
+        "osm_id": "way/1347238220",
+        "min_zoom": 15,
+        "location_method": "point_on_surface"
+      }
+    }
+  ]
+}

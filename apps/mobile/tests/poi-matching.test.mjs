@@ -169,3 +169,14 @@ test('one coherent style snapshot serves the entire POI matching refresh',()=>{
  const a=setup([camp(1)],[agency(2)]),getStyle=a.map.getStyle;let reads=0;
  a.map.getStyle=()=>{reads++;return getStyle()};a.events.idle();assert.equal(reads,1);assert.ok(a.hidden('recreation-pois').has(2));a.events.remove();
 });
+
+test('confirmed Halfmoon site polygon identity hides duplicate but preserves toilet and load transitions',()=>{
+ const osm=point(1,{kind:'amenity',poi_icon:'campsite',name:'Halfmoon Campground',osm_id:'way/1347238220',group_id:'way/1347238220'},-119.0686906,34.6508616);
+ const f=agency(2,'Halfmoon Campground');f.geometry.coordinates=[-119.0681085743344,34.64981797272236];
+ Object.assign(f.properties,{matched_osm_id:'way/1347238220',osm_match_reason:'name_kind_site_polygon',restrooms:'Vault toilet'});
+ const toilet=point(3,{kind:'amenity',poi_icon:'toilet',name:'',osm_id:'way/1347238219',group_id:'way/1347238220'},-119.0686,34.6507);
+ const a=setup([osm,toilet],[f]);assert.ok(a.hidden('recreation-pois').has(2));assert.equal(a.hidden('amenity-group-members').size,0);
+ assert.equal(a.map.__topoPoiDetails.get('way/1347238220').properties.restrooms,'Vault toilet');
+ a.sources.amenities=[toilet];a.events.idle();assert.equal(a.hidden('recreation-pois').size,0);
+ a.sources.amenities=[osm,toilet];a.events.idle();assert.ok(a.hidden('recreation-pois').has(2));a.events.remove();
+});

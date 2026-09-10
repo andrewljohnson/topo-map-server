@@ -16,7 +16,7 @@ from trail_matching import conflate, lines, paved_surface
 from shapely import make_valid
 from national_boundaries import cached, bounds, project
 
-DATASET_ID = 'us-official-trails-v13'
+DATASET_ID = 'us-official-trails-v14'
 RAW_CACHE_VERSION = 'us-official-trails-v1'
 MIN_ZOOM, MAX_ZOOM = 5, 14
 BOUNDS = [-180, 18, -60, 72]
@@ -31,7 +31,7 @@ ROUTES = {'PCT':'Pacific Crest Trail','AT':'Appalachian Trail','CDT':'Continenta
  'JMT':'John Muir Trail','TRT':'Tahoe Rim Trail','PNT':'Pacific Northwest Trail',
  'AZT':'Arizona Trail','FT':'Florida Trail','IAT':'Ice Age Trail','NCT':'North Country Trail',
  'NET':'New England Trail','PHT':'Potomac Heritage Trail','NTT':'Natchez Trace Trail'}
-ROUTE_BOUNDS = {'JMT':(-120.0,36.4,-118.0,38.0),'TRT':(-120.4,38.5,-119.6,39.5),
+ROUTE_BOUNDS = {'PCT':(-125,32,-116,50),'JMT':(-120.0,36.4,-118.0,38.0),'TRT':(-120.4,38.5,-119.6,39.5),
  'AT':(-85,33,-66,47),'CDT':(-118,30,-104,50),'PNT':(-125,47,-112,50),
  'AZT':(-115,31,-108,38),'FT':(-88,24,-79,32),'IAT':(-94,42,-86,47),
  'NCT':(-105,38,-70,50),'NET':(-75,40,-69,44),'PHT':(-81,36,-75,42),'NTT':(-92,30,-86,37)}
@@ -43,7 +43,7 @@ def route_ref(name):
  if re.search(r'\b(SPUR|CONNECTOR|ACCESS|APPROACH)\b',name):return ''
  for ref,full in ROUTES.items():
   stem=full.removesuffix(' Trail').upper()
-  if stem in name: return ref
+  if stem in name or (len(ref)>=3 and re.match(r'^'+re.escape(ref)+r'(?:\s|$)',name)): return ref
  return ''
 
 def query(source, params):

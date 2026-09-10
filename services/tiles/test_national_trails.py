@@ -10,6 +10,10 @@ class OfficialTrailsTest(unittest.TestCase):
  def tearDown(self):t.prepared_agency_features.cache_clear()
  def test_route_names_not_generic_designation(self):
   self.assertEqual(t.route_ref('PACIFIC CREST TRAIL'), 'PCT')
+  self.assertEqual(t.route_ref('PCT SAN FRANCISQUITO CYN'), 'PCT')
+  self.assertEqual(t.route_ref('PCT CONNECTOR'), '')
+  self.assertEqual(t.route_ref('PCT SPUR'), '')
+  self.assertEqual(t.route_ref('PCTOWN ROAD'), '')
   self.assertEqual(t.route_ref('Appalachian Trail'), 'AT')
   self.assertEqual(t.route_ref('Trail to Lake'), '')
  def test_vehicle_restrictions_preserved(self):

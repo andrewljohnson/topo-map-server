@@ -16,3 +16,37 @@ Future surface/difficulty treatment should require explicit supporting attribute
 
 No tile regeneration or dataset change is required. All 101 mobile tests and both
 client typechecks pass, including consistency checks across the three style copies.
+
+## Resort and urban circulation (California follow-up, September 10)
+
+The Mountain Room/Yosemite Valley Lodge report exposed a hierarchy issue: short
+access paths between buildings used the same strong red dash and pale casing as
+backcountry trails. The street-density fade also stopped at zoom 14, so it did not
+help at the reported zoom 15.18.
+
+Unlabelled paths wholly within a group of buildings now receive `developed`
+context. The fixed z14 building source includes small lodge buildings missing at
+z12. Each ~50m sample must be within 70m of a building and a 150m neighborhood
+with at least three substantial buildings and 600 square metres of footprints.
+Checks use stable geographic cells across output tile edges; actual path
+coordinates stay unchanged. A name, reference, badge or route designation prevents
+this classification. Isolated huts and trails leaving the built area retain hiking
+presentation. `path` and `footway` continue to follow identical rules.
+
+Unnamed developed/urban circulation uses a thinner, quieter stroke and restrained
+casing through zoom 15–17, reaching full opacity at zoom 18. Named hiking routes and
+PCT/TRT styling remain prominent. Source checks cover Yosemite lodge, Yosemite
+Falls hiking paths, Golden Gate Park, Balboa Park and the Tahoe PCT; unit tests
+protect named/ref/signed hikes, isolated huts and exact geometry preservation.
+
+Visual proof compared the live California r1 map with the combined candidate on
+localhost:3004 at the exact Mountain Room center, zooms 15.18 and 17. The lodge
+network recedes at regional-detail scale and remains individually readable at 17;
+Yosemite Falls/Valley Loop hiking and bike routes retain emphasis. At Golden Gate
+Park (37.770,-122.470, zoom 15.18), Botanical Garden and Blue Heron Lake circulation
+no longer dominates POIs and lake labels; named perimeter trails remain strong.
+The conservative context leaves some central Music Concourse paths emphasized.
+For the Mountain Room source tile, 21 path components / 1,565m receive developed
+context; 25 components / 9,625m retain hiking presentation. Original road geometry
+unions compare exactly equal before/after annotation. Seven path-context tests and
+five style/legend tests passed.

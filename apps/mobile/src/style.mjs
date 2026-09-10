@@ -366,9 +366,14 @@ function applyBaseDetails(style, landcoverUrl, trailsUrl, recreationUrl) {
     for (const layer of style.layers) {
         if (layer.type !== 'line' || !layer.id.startsWith('trails-'))
             continue;
-        const urban = ['==', ['get', 'path_context'], 'urban'], named = ['!=', ['coalesce', ['get', 'name'], ''], ''];
+        const local = ['all', ['in', ['get', 'path_context'], ['literal', ['urban', 'developed']]], ['==', ['coalesce', ['get', 'name'], ''], ''], ['==', ['coalesce', ['get', 'ref'], ''], ''], ['==', ['coalesce', ['get', 'route_ref'], ''], '']], urban = ['==', ['get', 'path_context'], 'urban'], named = ['!=', ['coalesce', ['get', 'name'], ''], ''];
         const opacity = layer.paint['line-opacity'] ?? 1;
-        layer.paint['line-opacity'] = ['interpolate', ['linear'], ['zoom'], 12, ['*', opacity, ['case', urban, ['case', named, .18, 0], 1]], 13, ['*', opacity, ['case', urban, ['case', named, .7, .3], 1]], 14, opacity];
+        layer.paint['line-opacity'] = ['interpolate', ['linear'], ['zoom'], 12, ['*', opacity, ['case', local, 0, urban, ['case', named, .18, 0], 1]], 13, ['*', opacity, ['case', local, .12, urban, ['case', named, .7, .3], 1]], 14, ['*', opacity, ['case', local, .35, 1]], 16, ['*', opacity, ['case', local, .65, 1]], 18, opacity];
+        // Local circulation remains readable close up without competing with hikes.
+        if (layer.id === 'trails-path')
+            layer.paint['line-color'] = ['case', local, '#827d6b', layer.paint['line-color']];
+        const width = layer.paint['line-width'], factor = ['case', local, layer.id === 'trails-halo' ? .45 : .65, 1];
+        layer.paint['line-width'] = Array.isArray(width) && width[0] === 'interpolate' ? width.map((v, i) => i >= 4 && i % 2 === 0 ? ['*', v, factor] : v) : ['*', width, factor];
     }
     // Apply water-name priority after all agency and route layers have been composed.
     const waterNames = style.layers.filter((l) => l.id === 'lake-labels' || l.id === 'lake-labels-horizontal');

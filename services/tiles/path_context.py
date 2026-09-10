@@ -1,6 +1,6 @@
-"""Bounded street-density context for scale-dependent walking-path presentation.
+"""Bounded street/building context for scale-dependent walking-path presentation.
 
-Uses fixed z12 reference streets and a 500m neighborhood, independent of the
+Uses fixed z12 streets (500m) and z14 buildings (150m), independent of the
 output tile's clipping. It never removes or moves a path. Conservatively retain
 backcountry presentation when any sampled part leaves the dense street grid.
 """
@@ -29,6 +29,34 @@ def street_index(x,y):
    g=affine_transform(shape(f['geometry']),[1/extent/4096,0,0,1/extent/4096,x/4096,y/4096]).intersection(clip)
    if not g.is_empty:geometries.append(g)
  return geometries,STRtree(geometries)
+
+@lru_cache(maxsize=64)
+def building_index(x,y):
+ """Use the fixed z14 buildings (z12 omits small lodge buildings); never an output-tile neighbor."""
+ from national_basemap import archive
+ blob=archive().get(14,x,y)
+ layer=mapbox_vector_tile.decode(blob,default_options={'y_coord_down':True}).get('buildings',{}) if blob else {}
+ extent=layer.get('extent',4096);clip=box(x/16384,y/16384,(x+1)/16384,(y+1)/16384);geometries=[]
+ for f in layer.get('features',[]):
+  g=affine_transform(shape(f['geometry']),[1/extent/16384,0,0,1/extent/16384,x/16384,y/16384]).intersection(clip)
+  parts=list(g.geoms) if hasattr(g,'geoms') else [g]
+  geometries.extend(part for part in parts if part.geom_type=='Polygon' and not part.is_empty)
+ return geometries,STRtree(geometries)
+
+@lru_cache(maxsize=32768)
+def developed_at(wx,wy):
+ # Building groups distinguish lodge/campus circulation from an isolated hut.
+ # Quantized lookups are shared across paths; source geometry is never moved.
+ metres=40075016.686/math.cosh(math.pi*(1-2*wy));radius=150/metres
+ point=Point(wx,wy);clip=point.buffer(radius);near=[]
+ for px in range(max(0,int((wx-radius)*16384)),min(16383,int((wx+radius)*16384))+1):
+  for py in range(max(0,int((wy-radius)*16384)),min(16383,int((wy+radius)*16384))+1):
+   geoms,tree=building_index(px,py)
+   near.extend(geoms[int(i)].intersection(clip) for i in tree.query(clip) if geoms[int(i)].intersects(clip))
+ if not near:return False
+ buildings=unary_union(near);parts=list(buildings.geoms) if hasattr(buildings,'geoms') else [buildings]
+ substantial=[g for g in parts if g.area*metres*metres>=20]
+ return len(substantial)>=3 and buildings.area*metres*metres>=600 and point.distance(buildings)*metres<=70
 
 GRID=2**19
 @lru_cache(maxsize=64)
@@ -74,22 +102,34 @@ def annotate(features,z,x,y,*,world=False):
   if f['properties'].get('class') not in WALKING:
    result.append(f);continue
   g=shape(f['geometry']);parts=list(g.geoms) if g.geom_type=='MultiLineString' else [g]
-  groups={False:[],True:[]}
+  groups={None:[],'urban':[],'developed':[]}
   for part in parts:
-   if part.geom_type!='LineString':groups[False].append(part);continue
+   if part.geom_type!='LineString':groups[None].append(part);continue
    points=[part.interpolate(t,normalized=True) for t in (0,.5,1)]
    # A stable ~60m context grid shares neighborhood work across tiny paths.
    # Only the lookup moves; original feature coordinates remain unchanged.
    grid=2**19
    positions=[(point.x,point.y) if world else ((x+point.x/4096)/n,(y+point.y/4096)/n) for point in points]
    urban=all(urban_at((math.floor(wx*grid)+.5)/grid,(math.floor(wy*grid)+.5)/grid) for wx,wy in positions)
-   groups[urban].append(part)
-  if not groups[True]:result.append(f);continue
+   context='urban' if urban else None
+   props=f['properties']
+   # A name/ref/route is positive hiking-route evidence. Do not quiet it merely
+   # because the route passes a lodge. Footway and path remain equivalent.
+   signed=any(str(props.get(k,'')).strip() for k in ('name','ref','route_ref','badge'))
+   if not signed and not urban:
+    metres=40075016.686/math.cosh(math.pi*(1-2*positions[1][1]))
+    length=part.length*metres if world else part.length/4096/n*metres
+    samples=max(2,math.ceil(length/50))
+    points=[part.interpolate(i/samples,normalized=True) for i in range(samples+1)]
+    coords=[(v.x,v.y) if world else ((x+v.x/4096)/n,(y+v.y/4096)/n) for v in points]
+    if all(developed_at((math.floor(wx*grid)+.5)/grid,(math.floor(wy*grid)+.5)/grid) for wx,wy in coords):context='developed'
+   groups[context].append(part)
+  if not groups['urban'] and not groups['developed']:result.append(f);continue
   changed=True
-  for urban,group in groups.items():
+  for context,group in groups.items():
    if not group:continue
    geometry=group[0] if len(group)==1 else MultiLineString(group)
    props=dict(f['properties'])
-   if urban:props['path_context']='urban'
+   if context:props['path_context']=context
    result.append({**f,'geometry':mapping(geometry),'properties':props})
  return result,changed

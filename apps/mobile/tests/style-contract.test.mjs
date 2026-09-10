@@ -29,3 +29,19 @@ test('secondary amenity handoff works while overzooming the same native z12 tile
  }
  assert.equal(visible('amenity-details',14,{kind:'amenity',poi_icon:'toilet',group_id:''}),true);
 });
+
+test('local walkways recede at resort scale while named and signed hikes retain emphasis',()=>{
+ const layer=style.layers.find(l=>l.id==='trails-path');
+ const value=(key,properties,zoom=15.18)=>{
+  const parsed=spec.expression.createExpression(layer.paint[key]);
+  assert.equal(parsed.result,'success');return parsed.value.evaluate({zoom},{type:2,properties});
+ };
+ const rural={class:'path'},local={class:'footway',path_context:'developed'};
+ assert.ok(value('line-width',local)<value('line-width',rural));
+ assert.ok(value('line-opacity',local)<.6);
+ assert.equal(value('line-opacity',local,18),value('line-opacity',rural,18));
+ for(const protectedRoute of [{name:'Yosemite Falls Trail'},{route_ref:'PCT'},{ref:'17E05'}]){
+  assert.equal(value('line-width',{...local,...protectedRoute}),value('line-width',rural));
+  assert.equal(value('line-opacity',{...local,...protectedRoute}),value('line-opacity',rural));
+ }
+});

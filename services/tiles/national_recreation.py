@@ -5,14 +5,16 @@ not invented restroom/water locations. Cold queries are bounded z10 cells.
 """
 import csv, hashlib, html, io, json, math, os, re, sqlite3, zipfile
 from pathlib import Path
+from cache_paths import working_path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 import mapbox_vector_tile
 from shapely.geometry import Point
+from shapely.ops import nearest_points
 from national_boundaries import cached, bounds
-from feature_matching import match_reason, merge_into, osm_kind
+from feature_matching import match_reason, merge_into, osm_kind, name_key, GENERIC
 from poi_ranking import features as ranked_features
-DATASET_ID = 'us-agency-recreation-v8'
+DATASET_ID = 'us-agency-recreation-v9'
 # Processing revisions reuse the pinned agency responses and RIDB import.
 RAW_CACHE_VERSION = 'us-agency-recreation-v1'
 MIN_ZOOM, MAX_ZOOM, CELL_ZOOM = 6, 14, 10
@@ -97,21 +99,38 @@ def ridb_features(extent):
 def mark_osm_duplicates(features,x,y):
  # Read only already available OSM cells; no Overpass request blocks this source.
  from national_amenities import CACHE as OSM_CACHE
- osm={}
+ osm={};site_polygons={}
  # Neighbor cells cover matches straddling a cache boundary; never fetch upstream.
  for cx in range(max(0,x-1),min(1024,x+2)):
   for cy in range(max(0,y-1),min(1024,y+2)):
-   path=OSM_CACHE/'cells'/str(cx)/(str(cy)+'.json')
+   path=working_path(OSM_CACHE/'cells'/str(cx)/(str(cy)+'.json'))
    try:
     for g in json.loads(path.read_text()).get('features',[]):
      q=g.get('properties',{});coords=g.get('geometry',{}).get('coordinates',[])
      if q.get('osm_id') and len(coords)==2 and isinstance(coords[0],(int,float)):osm[q['osm_id']]=g
    except (OSError,ValueError):continue
+   # Retained raw outlines distinguish a facility's extent from its label anchor.
+   # Never fetch or infer an extent from the distance between representative points.
+   try:
+    from regions.build_amenities import geometry
+    for element in json.loads(path.with_suffix('.raw.json').read_text()).get('elements',[]):
+     if element.get('tags',{}).get('tourism') not in ('camp_site','caravan_site'):continue
+     polygon=geometry(element)
+     if polygon is not None and polygon.geom_type in ('Polygon','MultiPolygon') and polygon.is_valid:
+      site_polygons[element['type']+'/'+str(element['id'])]=polygon
+   except (OSError,ValueError,KeyError):pass
  for f in features:
   p=f['properties'];candidates=[]
   for g in osm.values():
    q=g['properties'];candidate={**g,'properties':{**q,'kind':osm_kind(q)}}
    why=match_reason(f,candidate)
+   # A campground's point-on-surface can be far from an agency entrance point.
+   # Matching names + site polygon (10m survey tolerance) is facility evidence;
+   # a wider radius alone is not. Do not apply to toilets, loops, or other kinds.
+   polygon=site_polygons.get(q['osm_id'])
+   name=name_key(p.get('name'),'campground')
+   if not why and p.get('kind')==candidate['properties']['kind']=='campground' and not p.get('match_ambiguous') and name not in GENERIC and name==name_key(q.get('name'),'campground') and polygon is not None and distance(f['geometry']['coordinates'],list(nearest_points(polygon,Point(f['geometry']['coordinates']))[0].coords)[0])<=10:
+    why='name_kind_site_polygon'
    if why:candidates.append((distance(f['geometry']['coordinates'],g['geometry']['coordinates']),q,why))
   candidates.sort(key=lambda c:c[0])
   if candidates and (len(candidates)==1 or candidates[1][0]-candidates[0][0]>=30):

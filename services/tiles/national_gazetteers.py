@@ -3,7 +3,7 @@ import csv, hashlib, io, json, math, os, sqlite3, zipfile
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
-from feature_matching import match_reason, merge_into, name_key, distance
+from feature_matching import match_reason, merge_into, name_key, distance, GENERIC
 ROOT=Path(os.environ.get('TILE_DATA_DIR',Path(__file__).parent/'data'))/'gazetteers'
 DB=ROOT/'landmarks-v1.sqlite'
 GNIS_TYPES={'Summit':('summit','mountain',13),'Gap':('pass','marker',13),'Spring':('spring','marker',14),'Falls':('waterfall','marker',13),'Arch':('arch','marker',14),'Pillar':('rock','marker',14),'Cave':('cave','marker',14)}
@@ -50,6 +50,20 @@ def features(extent,database=None):
  with sqlite3.connect('file:'+str(path)+'?mode=ro',uri=True) as db:
   return [json.loads(row[0]) for row in db.execute('SELECT f.feature FROM position p JOIN landmarks f ON f.rowid=p.id WHERE p.maxlon>=? AND p.minlon<=? AND p.maxlat>=? AND p.minlat<=? ORDER BY f.rowid',(w,e,s,n))]
 
+def survey_name_match(a,b):
+ """Offline-only candidates; the caller requires one unique catalog counterpart.
+
+Old gazetteer points can mark a formation's center rather than its summit.
+Never apply this relaxed survey tolerance to OSM, small amenities, or two GNIS IDs.
+ """
+ p,q=a['properties'],b['properties']
+ if p.get('agency')!='GeoNames' or q.get('agency')!='USGS GNIS':return None
+ if p.get('kind') not in ('summit','rock') or p.get('kind')!=q.get('kind'):return None
+ key=name_key(p.get('name'),p.get('kind'))
+ if key in GENERIC or key!=name_key(q.get('name'),q.get('kind')):return None
+ if p.get('match_ambiguous') or q.get('match_ambiguous'):return None
+ return 'unique_catalog_survey' if distance(a['geometry']['coordinates'],b['geometry']['coordinates'])<=750 else None
+
 def import_archives(gnis_zip,geonames_zip,destination=None):
  destination=Path(destination or DB);destination.parent.mkdir(parents=True,exist_ok=True)
  pending=destination.with_suffix('.pending.sqlite');pending.unlink(missing_ok=True)
@@ -76,12 +90,21 @@ def import_archives(gnis_zip,geonames_zip,destination=None):
        # matched against the official names and earlier imported GeoNames records.
        if source=='geonames':
         for ident,raw in db.execute('SELECT id,feature FROM landmarks WHERE kind IN (?,?) AND name_key=? AND lat BETWEEN ? AND ?',(p['kind'],'rock' if p['kind']=='summit' else 'summit' if p['kind']=='rock' else p['kind'],key,lat-.05,lat+.05)):
-         other=json.loads(raw);why=match_reason(f,other)
+         other=json.loads(raw);why=match_reason(f,other) or survey_name_match(f,other)
          if why:candidates.append((distance(f['geometry']['coordinates'],other['geometry']['coordinates']),ident,other,why))
        candidates.sort(key=lambda item:(item[0],item[1]))
-       if candidates and (len(candidates)==1 or candidates[1][0]-candidates[0][0]>=30):
-        _,ident,target,why=candidates[0];merge_into(target,f,why)
+       if candidates and (len(candidates)==1 or (all(c[3]!='unique_catalog_survey' for c in candidates) and candidates[1][0]-candidates[0][0]>=30)):
+        _,ident,target,why=candidates[0]
+        original_heights={k:target['properties'].get(k) for k in ('elevation_m','elevation_ft')}
+        merge_into(target,f,why)
+        if why=='unique_catalog_survey':
+         # Preserve the survey elevation in provenance; it is not a spot height
+         # measured at the retained, offset GNIS anchor.
+         for key,value in original_heights.items():
+          if value is None:target['properties'].pop(key,None)
+          else:target['properties'][key]=value
         db.execute('UPDATE landmarks SET feature=? WHERE id=?',(json.dumps(target,separators=(',',':')),ident));counts['merged']+=1
+        if why=='unique_catalog_survey':counts['survey_offset_merged']+=1
        else:
         if len(candidates)>1:counts['ambiguous_kept']+=1;p['match_ambiguous']=True
         db.execute('INSERT INTO landmarks VALUES(?,?,?,?,?,?)',(p['id'],lon,lat,p['kind'],key,json.dumps(f,separators=(',',':'))))

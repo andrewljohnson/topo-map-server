@@ -35,6 +35,34 @@ class RecreationTests(unittest.TestCase):
    with patch.object(national_amenities,'CACHE',Path(directory)):
     result=r.mark_osm_duplicates([f],1,2)[0]
    self.assertTrue(result['properties']['osm_duplicate']);self.assertEqual(result['properties']['matched_osm_id'],'way/1');self.assertEqual(result['geometry']['coordinates'],coords)
+ def test_halfmoon_matches_containing_site_not_anchor_radius(self):
+  import national_amenities
+  from copy import deepcopy
+  fixture=json.loads((Path(__file__).parent/'fixtures/halfmoon-campground.json').read_text())
+  for variant in ('actual','outside','other_name','other_kind','ambiguous'):
+   with tempfile.TemporaryDirectory() as directory:
+    path=Path(directory)/'cells/173/406.json';path.parent.mkdir(parents=True)
+    points=deepcopy(fixture['features'])
+    f=r.normalize(fixture['agency'],'usfs');original=deepcopy(f['geometry'])
+    if variant=='outside':f['geometry']['coordinates']=[-119.072,34.6502]
+    if variant=='other_name':f['properties']['name']='Halfmoon Loop B'
+    if variant=='other_kind':f['properties']['kind']='restroom'
+    if variant=='ambiguous':
+     extra=deepcopy(points[-1]);extra['properties']['osm_id']='way/other';points.append(extra)
+    path.write_text(json.dumps({'features':points}))
+    elements=deepcopy(fixture['elements'])
+    if variant=='ambiguous':
+     extra=deepcopy(elements[0]);extra['id']='other';elements.append(extra)
+    path.with_suffix('.raw.json').write_text(json.dumps({'elements':elements}))
+    with patch.object(national_amenities,'CACHE',Path(directory)):
+     result=r.mark_osm_duplicates([f],173,406)[0]
+    if variant=='actual':
+     self.assertEqual(result['properties']['osm_match_reason'],'name_kind_site_polygon')
+     self.assertEqual(result['properties']['matched_osm_id'],'way/1347238220')
+     self.assertGreater(result['properties']['osm_match_distance_m'],120)
+     self.assertEqual(result['geometry'],original)
+     self.assertEqual(result['properties']['restrooms'],'Vault toilet')
+    else:self.assertNotIn('matched_osm_id',result['properties'],variant)
  def test_encode_overzoom_details_not_dropped(self):
   f=nps('Restroom');lon,lat=f['geometry']['coordinates'];z=14;x=int((lon+180)/360*2**z);y=int((1-r.math.asinh(r.math.tan(r.math.radians(lat)))/r.math.pi)/2*2**z)
   with patch.object(r,'cell_data',return_value={'features':[f]}),patch.object(r,'ridb_features',return_value=[]),patch.object(r,'ranked_features',return_value=[]):

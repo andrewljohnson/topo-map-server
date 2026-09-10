@@ -131,6 +131,36 @@ def refine_trail_match(incoming, reference, a, b, seed):
 
 
 
+def refine_signed_route_match(incoming, reference, a, b, seed):
+    """Align the same signed route by ordered shape, not a broad proximity buffer.
+
+    Long agency surveys can be displaced/generalized enough that individual
+    corridor fragments fail length tests. Require a tight interior seed, an
+    explicit shared route identity, comparable length, and an ordered Frechet
+    match of the corresponding trace. Only that trace is removed; other
+    branches and original source endpoints remain.
+    """
+    if (b.get('agency')!='OpenStreetMap' or a.get('kind') not in ('trail','long_distance_trail')
+        or not a.get('route_ref') or a.get('route_ref')!=b.get('route_ref') or not compatible(a,b)):return seed
+    from shapely import frechet_distance, segmentize
+    masks=[]
+    for ref in lines(reference):
+        if ref.length<500 or ref.is_ring:continue
+        interior=substring(ref,25,ref.length-25).buffer(2.5)
+        for survey in lines(incoming):
+            if survey.length<500 or survey.is_ring:continue
+            trace=substring(survey,survey.project(Point(ref.coords[0])),survey.project(Point(ref.coords[-1])))
+            if trace.geom_type!='LineString' or not .8<=trace.length/ref.length<=1.25:continue
+            if trace.intersection(seed).intersection(interior).length<30:continue
+            if ref.hausdorff_distance(trace)>100:continue
+            left,right=segmentize(ref,25),segmentize(trace,25)
+            # Bound the quadratic ordered-shape comparison on pathological input.
+            if len(left.coords)*len(right.coords)>1000000:continue
+            if frechet_distance(left,right)>100:continue
+            masks.append(trace.buffer(.01).union(ref.buffer(.01)))
+    return seed.union(unary_union(masks)) if masks else seed
+
+
 def preserve_source_junctions(result, additions, matches):
     """Reconnect only an agency junction proven in the pre-conflation sources.
 
@@ -225,7 +255,9 @@ def conflate(reference, additions):
             if mask is None:continue
             refined=refine_trail_match(remaining,existing['geometry'],feature['properties'],reference_props,mask)
             snap_limit=50.01 if refined is not mask else 15.01
-            mask=refined
+            signed=refine_signed_route_match(remaining,existing['geometry'],feature['properties'],reference_props,refined)
+            if signed is not refined:snap_limit=100.01
+            mask=signed
             # Long, tightly aligned rural road overlap establishes a shared
             # segment even when agency/OSM names differ. Allow modest remaining
             # survey offsets only after that evidence; never widen service lanes

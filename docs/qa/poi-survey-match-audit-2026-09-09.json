@@ -1,0 +1,947 @@
+{
+  "added_offset_pairs": 3259,
+  "offset_m": {
+    "min": 300.03,
+    "median": 464.65,
+    "p95": 712.13,
+    "max": 749.36
+  },
+  "non_unique": 0,
+  "offset_with_elevation": 3148,
+  "with_two_elevations": 56,
+  "sample": [
+    {
+      "gnis": "gnis:493201",
+      "geonames": "geonames:4293272",
+      "name": "Gray Hill",
+      "kind": "summit",
+      "coordinates": [
+        -85.8697787,
+        37.8820419
+      ],
+      "other_coordinates": [
+        -85.86135,
+        37.88285
+      ],
+      "distance_m": 746.0,
+      "official_candidates": [
+        "gnis:493201"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 215.0
+    },
+    {
+      "gnis": "gnis:34193",
+      "geonames": "geonames:5313540",
+      "name": "Secret Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -111.8906855,
+        34.9739323
+      ],
+      "other_coordinates": [
+        -111.89016,
+        34.96724
+      ],
+      "distance_m": 746.53,
+      "official_candidates": [
+        "gnis:34193"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 2014.0
+    },
+    {
+      "gnis": "gnis:3108",
+      "geonames": "geonames:5290391",
+      "name": "Cold Spring Point",
+      "kind": "summit",
+      "coordinates": [
+        -113.2575415,
+        36.3127276
+      ],
+      "other_coordinates": [
+        -113.26021,
+        36.30637
+      ],
+      "distance_m": 747.11,
+      "official_candidates": [
+        "gnis:3108"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1536.0
+    },
+    {
+      "gnis": "gnis:1399174",
+      "geonames": "geonames:5857612",
+      "name": "Blackface Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -150.8607787,
+        68.0345874
+      ],
+      "other_coordinates": [
+        -150.87694,
+        68.03167
+      ],
+      "distance_m": 747.25,
+      "official_candidates": [
+        "gnis:1399174"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1523.0
+    },
+    {
+      "gnis": "gnis:73110",
+      "geonames": "geonames:4126464",
+      "name": "Piney Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -94.1081117,
+        34.8552408
+      ],
+      "other_coordinates": [
+        -94.09993,
+        34.85566
+      ],
+      "distance_m": 748.84,
+      "official_candidates": [
+        "gnis:73110"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 304.0
+    },
+    {
+      "gnis": "gnis:395639",
+      "geonames": "geonames:5599325",
+      "name": "Lone Jack Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -116.9659091,
+        47.0276551
+      ],
+      "other_coordinates": [
+        -116.96906,
+        47.02128
+      ],
+      "distance_m": 748.87,
+      "official_candidates": [
+        "gnis:395639"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1175.0
+    },
+    {
+      "gnis": "gnis:1511998",
+      "geonames": "geonames:5786842",
+      "name": "Beigle Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -122.7136116,
+        46.3471431
+      ],
+      "other_coordinates": [
+        -122.72261,
+        46.34456
+      ],
+      "distance_m": 748.88,
+      "official_candidates": [
+        "gnis:1511998"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 292.0
+    },
+    {
+      "gnis": "gnis:934323",
+      "geonames": "geonames:5497595",
+      "name": "West Turkey Cone",
+      "kind": "summit",
+      "coordinates": [
+        -105.7994038,
+        34.2479849
+      ],
+      "other_coordinates": [
+        -105.8075,
+        34.24868
+      ],
+      "distance_m": 749.0,
+      "official_candidates": [
+        "gnis:934323"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 2546.0
+    },
+    {
+      "gnis": "gnis:164715",
+      "geonames": "geonames:4070274",
+      "name": "Jones Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -86.4359672,
+        33.7646271
+      ],
+      "other_coordinates": [
+        -86.42943,
+        33.76066
+      ],
+      "distance_m": 749.02,
+      "official_candidates": [
+        "gnis:164715"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 313.0
+    },
+    {
+      "gnis": "gnis:1143881",
+      "geonames": "geonames:5732348",
+      "name": "Huckleberry Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -118.1714062,
+        44.6682626
+      ],
+      "other_coordinates": [
+        -118.18022,
+        44.67071
+      ],
+      "distance_m": 749.07,
+      "official_candidates": [
+        "gnis:1143881"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1710.0
+    },
+    {
+      "gnis": "gnis:249186",
+      "geonames": "geonames:5393702",
+      "name": "Sawtooth Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -118.5604278,
+        34.6596892
+      ],
+      "other_coordinates": [
+        -118.55231,
+        34.66054
+      ],
+      "distance_m": 749.32,
+      "official_candidates": [
+        "gnis:249186"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1577.0
+    },
+    {
+      "gnis": "gnis:867455",
+      "geonames": "geonames:5087361",
+      "name": "Hemlock Hill",
+      "kind": "summit",
+      "coordinates": [
+        -72.3720566,
+        43.207756
+      ],
+      "other_coordinates": [
+        -72.3762,
+        43.20174
+      ],
+      "distance_m": 749.36,
+      "official_candidates": [
+        "gnis:867455"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 409.0
+    },
+    {
+      "gnis": "gnis:899939",
+      "geonames": "geonames:5493627",
+      "name": "Table Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -107.9557354,
+        32.6049718
+      ],
+      "other_coordinates": [
+        -107.95698,
+        32.60203
+      ],
+      "distance_m": 347.66,
+      "official_candidates": [
+        "gnis:899939"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1753.0
+    },
+    {
+      "gnis": "gnis:965821",
+      "geonames": "geonames:5138932",
+      "name": "South Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -73.431907,
+        43.7901578
+      ],
+      "other_coordinates": [
+        -73.42734,
+        43.79395
+      ],
+      "distance_m": 559.37,
+      "official_candidates": [
+        "gnis:965821"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 348.0
+    },
+    {
+      "gnis": "gnis:1660341",
+      "geonames": "geonames:5329053",
+      "name": "Black Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -120.3520578,
+        35.3925534
+      ],
+      "other_coordinates": [
+        -120.35432,
+        35.39497
+      ],
+      "distance_m": 338.4,
+      "official_candidates": [
+        "gnis:1660341"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1089.0
+    },
+    {
+      "gnis": "gnis:845540",
+      "geonames": "geonames:5705848",
+      "name": "Lone Butte",
+      "kind": "summit",
+      "coordinates": [
+        -115.0119425,
+        40.5667236
+      ],
+      "other_coordinates": [
+        -115.00809,
+        40.5652
+      ],
+      "distance_m": 367.29,
+      "official_candidates": [
+        "gnis:845540"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 2068.0
+    },
+    {
+      "gnis": "gnis:58387",
+      "geonames": "geonames:4126478",
+      "name": "Piney Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -93.2481245,
+        36.2024983
+      ],
+      "other_coordinates": [
+        -93.2424,
+        36.20341
+      ],
+      "distance_m": 524.14,
+      "official_candidates": [
+        "gnis:58387"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 652.0
+    },
+    {
+      "gnis": "gnis:872775",
+      "geonames": "geonames:5093475",
+      "name": "Tasker Hill",
+      "kind": "summit",
+      "coordinates": [
+        -71.1226696,
+        43.9543528
+      ],
+      "other_coordinates": [
+        -71.12924,
+        43.95424
+      ],
+      "distance_m": 526.69,
+      "official_candidates": [
+        "gnis:872775"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 229.0
+    },
+    {
+      "gnis": "gnis:1404754",
+      "geonames": "geonames:5866344",
+      "name": "Kingaviksak Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -161.2853712,
+        68.4164731
+      ],
+      "other_coordinates": [
+        -161.28167,
+        68.41278
+      ],
+      "distance_m": 438.17,
+      "official_candidates": [
+        "gnis:1404754"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 718.0
+    },
+    {
+      "gnis": "gnis:590302",
+      "geonames": "geonames:4356131",
+      "name": "Ginseng Hill",
+      "kind": "summit",
+      "coordinates": [
+        -79.3908321,
+        39.561265
+      ],
+      "other_coordinates": [
+        -79.39476,
+        39.56175
+      ],
+      "distance_m": 341.39,
+      "official_candidates": [
+        "gnis:590302"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 872.0
+    },
+    {
+      "gnis": "gnis:73094",
+      "geonames": "geonames:4126332",
+      "name": "Pine Knob",
+      "kind": "summit",
+      "coordinates": [
+        -92.9019284,
+        35.857626
+      ],
+      "other_coordinates": [
+        -92.906,
+        35.85786
+      ],
+      "distance_m": 368.27,
+      "official_candidates": [
+        "gnis:73094"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 525.0
+    },
+    {
+      "gnis": "gnis:1429627",
+      "geonames": "geonames:5777297",
+      "name": "Limekiln Knoll",
+      "kind": "summit",
+      "coordinates": [
+        -112.3479849,
+        41.9650508
+      ],
+      "other_coordinates": [
+        -112.35385,
+        41.9652
+      ],
+      "distance_m": 485.75,
+      "official_candidates": [
+        "gnis:1429627"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1942.0
+    },
+    {
+      "gnis": "gnis:261783",
+      "geonames": "geonames:5359466",
+      "name": "Infant Buttes",
+      "kind": "summit",
+      "coordinates": [
+        -118.9391132,
+        37.3268934
+      ],
+      "other_coordinates": [
+        -118.94123,
+        37.32466
+      ],
+      "distance_m": 311.33,
+      "official_candidates": [
+        "gnis:261783"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 3032.0
+    },
+    {
+      "gnis": "gnis:1656271",
+      "geonames": "geonames:5570671",
+      "name": "Sage Hen Hill",
+      "kind": "summit",
+      "coordinates": [
+        -122.0391845,
+        40.7945984
+      ],
+      "other_coordinates": [
+        -122.03667,
+        40.79821
+      ],
+      "distance_m": 454.47,
+      "official_candidates": [
+        "gnis:1656271"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 746.0
+    },
+    {
+      "gnis": "gnis:612399",
+      "geonames": "geonames:4954351",
+      "name": "Walnut Hill",
+      "kind": "summit",
+      "coordinates": [
+        -71.1557578,
+        42.3050029
+      ],
+      "other_coordinates": [
+        -71.15366,
+        42.30232
+      ],
+      "distance_m": 345.0,
+      "official_candidates": [
+        "gnis:612399"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 59.0
+    },
+    {
+      "gnis": "gnis:571706",
+      "geonames": "geonames:4972651",
+      "name": "Morse Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -69.8257502,
+        43.7379676
+      ],
+      "other_coordinates": [
+        -69.82648,
+        43.74317
+      ],
+      "distance_m": 582.1,
+      "official_candidates": [
+        "gnis:571706"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 55.0
+    },
+    {
+      "gnis": "gnis:962164",
+      "geonames": "geonames:5133389",
+      "name": "Rand Hill",
+      "kind": "summit",
+      "coordinates": [
+        -73.6175187,
+        44.7745491
+      ],
+      "other_coordinates": [
+        -73.61264,
+        44.77143
+      ],
+      "distance_m": 518.85,
+      "official_candidates": [
+        "gnis:962164"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 459.0
+    },
+    {
+      "gnis": "gnis:835621",
+      "geonames": "geonames:5697575",
+      "name": "Mike Kern Hills",
+      "kind": "summit",
+      "coordinates": [
+        -103.4901253,
+        42.8534767
+      ],
+      "other_coordinates": [
+        -103.49576,
+        42.85858
+      ],
+      "distance_m": 730.87,
+      "official_candidates": [
+        "gnis:835621"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 1137.0
+    },
+    {
+      "gnis": "gnis:869674",
+      "geonames": "geonames:5092066",
+      "name": "Sagamore Hill",
+      "kind": "summit",
+      "coordinates": [
+        -70.7619917,
+        43.0556738
+      ],
+      "other_coordinates": [
+        -70.75811,
+        43.0562
+      ],
+      "distance_m": 321.13,
+      "official_candidates": [
+        "gnis:869674"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 12.0
+    },
+    {
+      "gnis": "gnis:191649",
+      "geonames": "geonames:5442313",
+      "name": "Twin Sisters",
+      "kind": "summit",
+      "coordinates": [
+        -105.9018959,
+        38.3524993
+      ],
+      "other_coordinates": [
+        -105.89834,
+        38.35
+      ],
+      "distance_m": 416.86,
+      "official_candidates": [
+        "gnis:191649"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 3867.0
+    },
+    {
+      "gnis": "gnis:611102",
+      "geonames": "geonames:4932979",
+      "name": "Chestnut Hills",
+      "kind": "summit",
+      "coordinates": [
+        -71.554355,
+        42.6213335
+      ],
+      "other_coordinates": [
+        -71.5509,
+        42.62231
+      ],
+      "distance_m": 303.17,
+      "official_candidates": [
+        "gnis:611102"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 110.0
+    },
+    {
+      "gnis": "gnis:181456",
+      "geonames": "geonames:5438152",
+      "name": "Seaton Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -105.5185205,
+        39.7607814
+      ],
+      "other_coordinates": [
+        -105.51277,
+        39.76027
+      ],
+      "distance_m": 495.38,
+      "official_candidates": [
+        "gnis:181456"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 2772.0
+    },
+    {
+      "gnis": "gnis:330560",
+      "geonames": "geonames:4488005",
+      "name": "Ridgepole Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -83.4863681,
+        34.9985559
+      ],
+      "other_coordinates": [
+        -83.48488,
+        35.00398
+      ],
+      "distance_m": 618.87,
+      "official_candidates": [
+        "gnis:330560"
+      ],
+      "retained_elevation_m": 1525.0,
+      "offset_elevation_m": 1515.0
+    },
+    {
+      "gnis": "gnis:1344971",
+      "geonames": "geonames:4722004",
+      "name": "Reddy Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -98.4383994,
+        32.4724701
+      ],
+      "other_coordinates": [
+        -98.44366,
+        32.46819
+      ],
+      "distance_m": 686.38,
+      "official_candidates": [
+        "gnis:1344971"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 362.0
+    },
+    {
+      "gnis": "gnis:908882",
+      "geonames": "geonames:5480085",
+      "name": "Moon Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -105.6529414,
+        33.3409934
+      ],
+      "other_coordinates": [
+        -105.64887,
+        33.33564
+      ],
+      "distance_m": 706.06,
+      "official_candidates": [
+        "gnis:908882"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 2189.0
+    },
+    {
+      "gnis": "gnis:1177556",
+      "geonames": "geonames:5194459",
+      "name": "Huff Hill",
+      "kind": "summit",
+      "coordinates": [
+        -76.1835006,
+        41.7158145
+      ],
+      "other_coordinates": [
+        -76.17799,
+        41.71924
+      ],
+      "distance_m": 595.88,
+      "official_candidates": [
+        "gnis:1177556"
+      ],
+      "retained_elevation_m": null,
+      "offset_elevation_m": 428.0
+    }
+  ],
+  "limitations": "Geometric/catalogue identity audit, not independent field verification. Offset source elevations remain provenance, not asserted at GNIS anchors.",
+  "altitude_conflict_sample": [
+    {
+      "gnis": "gnis:789528",
+      "geonames": "geonames:5836464",
+      "name": "Republic Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -109.9546978,
+        45.0009746
+      ],
+      "other_coordinates": [
+        -109.95074,
+        45.00411
+      ],
+      "distance_m": 467.84,
+      "official_candidates": [
+        "gnis:789528"
+      ],
+      "retained_elevation_m": 3044.0,
+      "offset_elevation_m": 2784.0,
+      "delta_m": 260.0
+    },
+    {
+      "gnis": "gnis:801573",
+      "geonames": "geonames:5681190",
+      "name": "Sunset Peak",
+      "kind": "summit",
+      "coordinates": [
+        -110.0003064,
+        45.0454087
+      ],
+      "other_coordinates": [
+        -110.00407,
+        45.04355
+      ],
+      "distance_m": 361.17,
+      "official_candidates": [
+        "gnis:801573"
+      ],
+      "retained_elevation_m": 3109.0,
+      "offset_elevation_m": 2897.0,
+      "delta_m": 212.0
+    },
+    {
+      "gnis": "gnis:911044",
+      "geonames": "geonames:5491424",
+      "name": "Sierras Mediano",
+      "kind": "summit",
+      "coordinates": [
+        -107.3397711,
+        33.3751842
+      ],
+      "other_coordinates": [
+        -107.33642,
+        33.37368
+      ],
+      "distance_m": 353.68,
+      "official_candidates": [
+        "gnis:911044"
+      ],
+      "retained_elevation_m": 1731.0,
+      "offset_elevation_m": 1626.0,
+      "delta_m": 105.0
+    },
+    {
+      "gnis": "gnis:42145",
+      "geonames": "geonames:5318582",
+      "name": "Turner Peak",
+      "kind": "summit",
+      "coordinates": [
+        -109.0444534,
+        33.8889757
+      ],
+      "other_coordinates": [
+        -109.0473,
+        33.89255
+      ],
+      "distance_m": 476.98,
+      "official_candidates": [
+        "gnis:42145"
+      ],
+      "retained_elevation_m": 2874.0,
+      "offset_elevation_m": 2795.0,
+      "delta_m": 79.0
+    },
+    {
+      "gnis": "gnis:1021202",
+      "geonames": "geonames:4476396",
+      "name": "Little Hump Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -82.0286914,
+        36.1247566
+      ],
+      "other_coordinates": [
+        -82.02679,
+        36.1279
+      ],
+      "distance_m": 389.46,
+      "official_candidates": [
+        "gnis:1021202"
+      ],
+      "retained_elevation_m": 1662.0,
+      "offset_elevation_m": 1587.0,
+      "delta_m": 75.0
+    },
+    {
+      "gnis": "gnis:396605",
+      "geonames": "geonames:5595043",
+      "name": "Hamilton Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -116.3419105,
+        47.8759841
+      ],
+      "other_coordinates": [
+        -116.33963,
+        47.87297
+      ],
+      "distance_m": 376.27,
+      "official_candidates": [
+        "gnis:396605"
+      ],
+      "retained_elevation_m": 1527.0,
+      "offset_elevation_m": 1460.0,
+      "delta_m": 67.0
+    },
+    {
+      "gnis": "gnis:770327",
+      "geonames": "geonames:5647145",
+      "name": "Cross Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -116.0057834,
+        48.7239468
+      ],
+      "other_coordinates": [
+        -115.99991,
+        48.72133
+      ],
+      "distance_m": 520.49,
+      "official_candidates": [
+        "gnis:770327"
+      ],
+      "retained_elevation_m": 2001.0,
+      "offset_elevation_m": 1943.0,
+      "delta_m": 58.0
+    },
+    {
+      "gnis": "gnis:1580593",
+      "geonames": "geonames:5275507",
+      "name": "Mount Telemark",
+      "kind": "summit",
+      "coordinates": [
+        -91.2526757,
+        46.1819197
+      ],
+      "other_coordinates": [
+        -91.25046,
+        46.18495
+      ],
+      "distance_m": 378.1,
+      "official_candidates": [
+        "gnis:1580593"
+      ],
+      "retained_elevation_m": 519.0,
+      "offset_elevation_m": 461.0,
+      "delta_m": 58.0
+    },
+    {
+      "gnis": "gnis:327940",
+      "geonames": "geonames:4468018",
+      "name": "Glade Mountain",
+      "kind": "summit",
+      "coordinates": [
+        -83.1341385,
+        34.9982811
+      ],
+      "other_coordinates": [
+        -83.13987,
+        35.00092
+      ],
+      "distance_m": 599.55,
+      "official_candidates": [
+        "gnis:327940"
+      ],
+      "retained_elevation_m": 1005.0,
+      "offset_elevation_m": 1058.0,
+      "delta_m": 53.0
+    },
+    {
+      "gnis": "gnis:363722",
+      "geonames": "geonames:5853147",
+      "name": "Pu\u02bbuhou",
+      "kind": "summit",
+      "coordinates": [
+        -155.7158375,
+        18.9614123
+      ],
+      "other_coordinates": [
+        -155.71833,
+        18.96472
+      ],
+      "distance_m": 452.15,
+      "official_candidates": [
+        "gnis:363722"
+      ],
+      "retained_elevation_m": 74.0,
+      "offset_elevation_m": 23.0,
+      "delta_m": 51.0
+    }
+  ]
+}

@@ -330,3 +330,38 @@ class UnnamedSurveyTests(unittest.TestCase):
    spur=unary_union([f['geometry'] for f in row['additions'] if f['properties'].get('name')=='CATHEDRAL SPUR'])
    kept=unary_union([f['geometry'] for f in result if f['properties'].get('name')=='CATHEDRAL SPUR'])
    self.assertLess(spur.difference(kept.buffer(.01)).length,1)
+
+class SignedRouteSurveyTests(unittest.TestCase):
+ def test_signed_survey_offset_requires_tight_seed_and_shared_identity(self):
+  from trail_matching import refine_signed_route_match,overlap_mask
+  base=feature([(0,0),(1000,0)],'Pacific Crest Trail',agency='OpenStreetMap',route_ref='PCT',ref='2000')
+  survey=feature([(0,0),(100,0),(250,70),(750,70),(900,0),(1000,0)],'PCT Section','USFS','survey',kind='trail',route_ref='PCT',ref='PC2000')
+  g,h=survey['geometry'],base['geometry'];seed=overlap_mask(g,h,survey['properties'],base['properties'])
+  matched=refine_signed_route_match(g,h,survey['properties'],base['properties'],seed)
+  self.assertLess(g.difference(matched).length,.01)
+  for ref in ['', 'TRT']:
+   props={**survey['properties'],'route_ref':ref}
+   self.assertIs(refine_signed_route_match(g,h,props,base['properties'],seed),seed)
+  parallel=LineString([(0,70),(1000,70)])
+  self.assertTrue(refine_signed_route_match(parallel,h,survey['properties'],base['properties'],seed).equals(seed))
+ def test_real_pct_reports_keep_only_reference_trace_near_report(self):
+  import math
+  from pathlib import Path
+  from shapely.geometry import shape,Point
+  from shapely.ops import unary_union
+  from national_trails import route_ref
+  rows=json.loads((Path(__file__).parent/'fixtures/pct-signed-route-alignment.json').read_text())
+  targets={'PCT 14/2724/6267':(2724,6267,-120.126022,38.897893,350),'PCT 14/2805/6511':(2805,6511,-118.348933,34.602795,130)}
+  for row in rows:
+   for f in row['reference']+row['additions']:f['geometry']=shape(f['geometry'])
+   for f in row['additions']:f['properties']['route_ref']=route_ref(f['properties'].get('name'))
+   result=conflate(row['reference'],row['additions'])
+   original=unary_union([f['geometry'] for f in row['reference']]);kept=unary_union([f['geometry'] for f in result if f['properties']['agency']=='OpenStreetMap'])
+   self.assertLess(original.difference(kept.buffer(.000001)).length,.001)
+   self.assertLess(kept.difference(original.buffer(.000001)).length,.001)
+   if row['name'] not in targets:continue
+   x,y,lon,lat,radius=targets[row['name']];n=16384;scale=40075016.68557849*math.cos(math.atan(math.sinh(math.pi*(1-2*(y+.5)/n))))
+   point=Point(((lon+180)/360-x/n)*scale,((1-math.asinh(math.tan(math.radians(lat)))/math.pi)/2-y/n)*scale)
+   traces=[f for f in result if f['properties'].get('route_ref')=='PCT' and f['geometry'].intersects(point.buffer(radius))]
+   self.assertTrue(traces)
+   self.assertTrue(all(f['properties']['agency']=='OpenStreetMap' for f in traces),row['name'])

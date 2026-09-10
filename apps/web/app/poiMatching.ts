@@ -19,6 +19,7 @@ export function installPoiMatching(map:any){
   const p=a.properties,q=b.properties,k=kind(a);if(k!==kind(b)&&!(['summit','rock'].includes(k)&&['summit','rock'].includes(kind(b))))return '';
   if(p.gnis_id&&q.gnis_id&&p.gnis_id!==q.gnis_id)return '';
   const d=meters(a,b);
+  if(d<5000&&((p.matched_osm_id&&p.matched_osm_id===q.osm_id)||(q.matched_osm_id&&q.matched_osm_id===p.osm_id)))return 'matched_osm_id';
   for(const id of ['ridb_id','gnis_id','geonames_id'])if(p[id]&&String(p[id])===String(q[id])&&d<5000)return id;
   if(p.match_ambiguous||q.match_ambiguous)return '';
   const name=key(p.name,k);if(generic.has(name)||name!==key(q.name,k))return '';
@@ -33,7 +34,7 @@ export function installPoiMatching(map:any){
  // tie order. Full reasons still decide every match, including conflicting IDs.
  const matchingKeys=(f:any)=>{
   const p=f.properties,k=kind(f),name=key(p.name,k),family=['summit','rock'].includes(k)?'summit-rock':k;
-  return [...['ridb_id','gnis_id','geonames_id'].filter(id=>p[id]).map(id=>id+':'+String(p[id])),...(!generic.has(name)?['name:'+family+':'+name]:[])];
+  return [...[p.osm_id,p.matched_osm_id].filter(Boolean).map(id=>'osm_id:'+String(id)),...['ridb_id','gnis_id','geonames_id'].filter(id=>p[id]).map(id=>id+':'+String(p[id])),...(!generic.has(name)?['name:'+family+':'+name]:[])];
  };
  const matchingIndex=(features:any[])=>{
   const buckets=new Map<string,Set<number>>();
@@ -104,7 +105,8 @@ export function installPoiMatching(map:any){
    const amenityCandidates=amenityIndex.candidates(f).map(c=>c.feature).filter(g=>reason(f,g));
    const candidates=(amenityCandidates.length?amenityCandidates:baseIndex.candidates(f).map(c=>c.feature).filter(g=>reason(f,g))).sort((a,b)=>meters(f,a)-meters(f,b));
    // Do not guess between distinct nearby sites with equally good names.
-   const same=candidates[0],ambiguous=candidates[1]&&meters(f,candidates[1])-meters(f,same)<30;
+   const confirmed=candidates.filter(g=>reason(f,g)==='matched_osm_id');
+   const same=confirmed.length===1?confirmed[0]:candidates[0],ambiguous=confirmed.length!==1&&candidates[1]&&meters(f,candidates[1])-meters(f,same)<30;
    if(same&&!ambiguous){
     const p=f.properties,q=same.properties;
     if(p.label_rank!=null){
