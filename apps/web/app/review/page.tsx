@@ -55,6 +55,8 @@ export default function Review() {
     [dirty, setDirty] = useState(false),
     [context, setContext] = useState(false),
     [visible, setVisible] = useState([true, true]);
+  const [imageryOpacity, setImageryOpacity] = useState(0.85);
+  const imageryOpacityRef = useRef(0.85);
   const [action, setAction] = useState(''),
     [preferred, setPreferred] = useState(''),
     [reason, setReason] = useState(''),
@@ -145,6 +147,32 @@ export default function Review() {
           },
         });
       });
+      m.addSource('naip', {
+        type: 'raster',
+        tiles: [
+          'https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer/exportImage?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=512,512&format=jpg&f=image',
+        ],
+        tileSize: 512,
+        minzoom: 11,
+        maxzoom: 18,
+        attribution:
+          '<a href="https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer">USGS / USDA NAIP · The National Map</a>',
+      });
+      m.addLayer(
+        {
+          id: 'naip',
+          type: 'raster',
+          source: 'naip',
+          layout: {
+            visibility: imageryOpacityRef.current > 0 ? 'visible' : 'none',
+          },
+          paint: {
+            'raster-opacity': imageryOpacityRef.current,
+            'raster-fade-duration': 150,
+          },
+        },
+        'source-0',
+      );
       m.addSource('focus', {
         type: 'geojson',
         data: {
@@ -477,7 +505,40 @@ export default function Review() {
                   Fit source fragments
                 </button>
               </div>
+              <label className="review-toggles" style={{ marginBottom: 12 }}>
+                Aerial imagery
+                <input
+                  aria-label="Aerial imagery opacity"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="5"
+                  value={Math.round(imageryOpacity * 100)}
+                  onChange={(e) => {
+                    const value = Number(e.target.value) / 100;
+                    setImageryOpacity(value);
+                    imageryOpacityRef.current = value;
+                    const m = map.current;
+                    if (m?.getLayer('naip')) {
+                      m.setPaintProperty('naip', 'raster-opacity', value);
+                      m.setLayoutProperty(
+                        'naip',
+                        'visibility',
+                        value > 0 ? 'visible' : 'none',
+                      );
+                    }
+                  }}
+                />
+                <span>
+                  {Math.round(imageryOpacity * 100)}% · 0% hides imagery
+                </span>
+              </label>
               <div ref={mapRoot} className="review-map" />
+              <p className="review-caption">
+                Free USGS / USDA NAIP aerial imagery. Dates and resolution vary;
+                tree cover can hide trails. Zoom in for imagery detail. Imagery
+                loads directly from USGS and may take a moment.
+              </p>
               <p className="review-caption">
                 Actual published source geometry, clipped to one z12 tile. Line
                 thickness and dashes identify sources; they are not trail

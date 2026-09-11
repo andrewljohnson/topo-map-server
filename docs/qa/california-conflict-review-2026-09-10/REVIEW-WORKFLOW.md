@@ -30,3 +30,11 @@ services/tiles/.venv/bin/python experiments/tahoe/build_review_cases.py \
 ```
 
 The tile cache must belong to the report's release. The review JSON includes the matched network features only; matching uses the same normalized-name/agency/class grouping as the audit. It intentionally preserves both sides for review.
+
+## Aerial imagery underlay
+
+The QA map optionally displays public-domain USGS/USDA NAIP natural-color aerial imagery beneath the frozen source lines. It uses the public USGS `USGSNAIPImagery/ImageServer/exportImage` endpoint with Web Mercator tile bounding boxes and 512-pixel responses (z11–18, overzoom thereafter). No API credential or billed commercial imagery account is required. Attribution links to the service. The opacity slider reaches zero to hide imagery and retains its setting while navigating cases.
+
+USGS describes the mosaic as primarily 0.6 m imagery; actual date and resolution vary. It is aerial photography, not live satellite imagery. Canopy and imagery age can obscure or misrepresent current trail conditions. Imagery is fetched directly by the browser, is not included in app offline downloads, and its availability does not gate loading the source comparison lines.
+
+Source: https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer
