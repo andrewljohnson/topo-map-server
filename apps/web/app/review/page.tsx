@@ -18,6 +18,16 @@ type Case = {
   shorterCoverage: number;
   url: string;
   sourceIds: string[][];
+  inputSourceIds: string[][];
+  evidenceVersion: string;
+  inputScope: [number, number, number, number];
+  inputCoverage: {
+    missingAgencyCells: string[];
+    osmSnapshot: string;
+    agencyScope: string;
+  };
+  processedGeometry: Case['geometry'];
+  contextGeometry: Case['geometry'];
   geometry: {
     type: 'FeatureCollection';
     features: {
@@ -36,8 +46,8 @@ type Decision = {
   confidence: string;
   updatedAt: string;
 };
-type Report = { release: string; candidates: Case[] };
-const KEY = 'topo-conflict-review-v1';
+type Report = { release: string; evidenceVersion: string; candidates: Case[] };
+const KEY = 'topo-conflict-review-pre-conflation-v2';
 const actions = [
   ['prefer', 'Same feature — prefer one source'],
   ['separate', 'Keep both — genuinely separate'],
@@ -47,6 +57,16 @@ const actions = [
 ];
 const colors = ['#007d8a', '#bf4275'];
 export default function Review() {
+  const [inspected, setInspected] = useState<Record<
+    string,
+    string | number | boolean | null
+  > | null>(null);
+  const [detail, setDetail] = useState<Case | null>(null);
+  const [prior, setPrior] = useState<Record<string, Decision>>({});
+  const [evidenceMode, setEvidenceMode] = useState('inputs');
+  const [nearby, setNearby] = useState(true);
+  const modeRef = useRef('inputs'),
+    nearbyRef = useRef(true);
   const [report, setReport] = useState<Report | null>(null),
     [index, setIndex] = useState(0),
     [decisions, setDecisions] = useState<Record<string, Decision>>({}),
@@ -77,7 +97,24 @@ export default function Review() {
   const mapRoot = useRef<HTMLDivElement>(null),
     map = useRef<maplibregl.Map | null>(null),
     file = useRef<HTMLInputElement>(null);
-  const c = report?.candidates[index];
+  const selected = report?.candidates[index];
+  const c = detail?.id === selected?.id ? detail : undefined;
+  useEffect(() => {
+    if (!selected) return;
+    const controller = new AbortController();
+    fetch(`/review/evidence-v2/${selected.id}.json`, {
+      signal: controller.signal,
+    })
+      .then((r) => {
+        if (!r.ok) throw Error('Could not load source evidence');
+        return r.json() as Promise<Case>;
+      })
+      .then(setDetail)
+      .catch((e) => {
+        if (!controller.signal.aborted) setError(e.message);
+      });
+    return () => controller.abort();
+  }, [selected]);
   useEffect(() => {
     fetch('/review/candidates.json')
       .then((r) => {
@@ -88,7 +125,15 @@ export default function Review() {
         let loaded: Record<string, Decision> = {};
         try {
           const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-          if (saved.schemaVersion === 1) loaded = saved.decisions || {};
+          if (
+            saved.schemaVersion === 2 &&
+            saved.evidenceVersion === r.evidenceVersion
+          )
+            loaded = saved.decisions || {};
+          const legacy = JSON.parse(
+            localStorage.getItem('topo-conflict-review-v1') || '{}',
+          );
+          setPrior(legacy.decisions || {});
         } catch {
           setError('Could not read saved reviews.');
         }
@@ -138,7 +183,58 @@ export default function Review() {
       }),
     );
     m.on('load', () => {
-      m.addSource('conflict', { type: 'geojson', data: c.geometry });
+      m.on('click', (event) => {
+        const features = m.queryRenderedFeatures(event.point, {
+          layers: ['source-0', 'source-1', 'nearby'],
+        });
+        const f = features[0];
+        setInspected(f ? f.properties : null);
+      });
+      m.addSource('input-window', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [c.inputScope[0], c.inputScope[1]],
+                [c.inputScope[2], c.inputScope[1]],
+                [c.inputScope[2], c.inputScope[3]],
+                [c.inputScope[0], c.inputScope[3]],
+                [c.inputScope[0], c.inputScope[1]],
+              ],
+            ],
+          },
+        },
+      });
+      m.addLayer({
+        id: 'input-window',
+        type: 'line',
+        source: 'input-window',
+        paint: {
+          'line-color': '#fff',
+          'line-width': 2,
+          'line-dasharray': [4, 3],
+        },
+      });
+      m.addSource('nearby', { type: 'geojson', data: c.contextGeometry });
+      m.addLayer({
+        id: 'nearby',
+        type: 'line',
+        source: 'nearby',
+        layout: { visibility: nearbyRef.current ? 'visible' : 'none' },
+        paint: {
+          'line-color': '#f9f5de',
+          'line-width': 2,
+          'line-opacity': 0.7,
+        },
+      });
+      m.addSource('conflict', {
+        type: 'geojson',
+        data: modeRef.current === 'inputs' ? c.geometry : c.processedGeometry,
+      });
       c.agencies.forEach((agency, i) => {
         m.addLayer({
           id: `source-${i}`,
@@ -175,7 +271,7 @@ export default function Review() {
             'raster-fade-duration': 150,
           },
         },
-        'source-0',
+        'input-window',
       );
       void addReviewContours(m, report!.release, controller.signal)
         .then((dispose) => {
@@ -232,7 +328,8 @@ export default function Review() {
       localStorage.setItem(
         KEY,
         JSON.stringify({
-          schemaVersion: 1,
+          schemaVersion: 2,
+          evidenceVersion: report?.evidenceVersion,
           release: report?.release,
           decisions: next,
         }),
@@ -258,6 +355,7 @@ export default function Review() {
     const item = report.candidates[i],
       d = decisions[item.id];
     setIndex(i);
+    setInspected(null);
     setDirty(false);
     setVisible([true, true]);
     setAction(d?.action || '');
@@ -299,7 +397,8 @@ export default function Review() {
   }
   function exportPayload() {
     return {
-      schemaVersion: 1,
+      schemaVersion: 2,
+      evidenceVersion: report?.evidenceVersion,
       reviewSet: report?.release,
       exportedAt: new Date().toISOString(),
       decisions: report?.candidates
@@ -310,7 +409,8 @@ export default function Review() {
           name: c.name,
           region: c.region,
           tile: c.tile,
-          sourceIds: c.sourceIds,
+          sourceIds: c.inputSourceIds,
+          publishedSourceIds: c.sourceIds,
           agencies: c.agencies,
           ...decisions[c.id],
         })),
@@ -343,7 +443,8 @@ export default function Review() {
     try {
       const payload = JSON.parse(await f.text());
       if (
-        payload.schemaVersion !== 1 ||
+        payload.schemaVersion !== 2 ||
+        payload.evidenceVersion !== report?.evidenceVersion ||
         payload.reviewSet !== report?.release ||
         !Array.isArray(payload.decisions)
       )
@@ -401,8 +502,8 @@ export default function Review() {
           <Link href="/">← Map</Link>
           <h1>Source conflict review</h1>
           <p>
-            Make your judgment first. We’ll compare it with an independent
-            automated review later.
+            Round 2: compare inputs before our merges. Your earlier reviews are
+            preserved separately.
           </p>
         </div>
         <div className="review-tools">
@@ -484,6 +585,49 @@ export default function Review() {
                 </span>
               </div>
               <div className="review-toggles">
+                <label>
+                  Evidence{' '}
+                  <select
+                    aria-label="Evidence view"
+                    value={evidenceMode}
+                    onChange={(e) => {
+                      const mode = e.target.value;
+                      modeRef.current = mode;
+                      setEvidenceMode(mode);
+                      (
+                        map.current?.getSource('conflict') as
+                          | maplibregl.GeoJSONSource
+                          | undefined
+                      )?.setData(
+                        mode === 'inputs' ? c.geometry : c.processedGeometry,
+                      );
+                    }}
+                  >
+                    <option value="inputs">Inputs before merging</option>
+                    <option value="published">
+                      Published output (after merging)
+                    </option>
+                  </select>
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={nearby}
+                    onChange={(e) => {
+                      setNearby(e.target.checked);
+                      nearbyRef.current = e.target.checked;
+                      if (map.current?.getLayer('nearby'))
+                        map.current.setLayoutProperty(
+                          'nearby',
+                          'visibility',
+                          e.target.checked ? 'visible' : 'none',
+                        );
+                    }}
+                  />
+                  Nearby paths (pale)
+                </label>
+              </div>
+              <div className="review-toggles">
                 {c.agencies.map((a, i) => (
                   <label key={a} style={{ color: colors[i] }}>
                     <input
@@ -530,7 +674,7 @@ export default function Review() {
                       });
                   }}
                 >
-                  Fit source fragments
+                  Fit selected sources
                 </button>
               </div>
               <label className="review-toggles" style={{ marginBottom: 12 }}>
@@ -585,16 +729,31 @@ export default function Review() {
                 Contours (feet)
               </label>
               <div ref={mapRoot} className="review-map" />
+              <p className="review-caption">
+                Click a line to identify it. The dashed white rectangle bounds
+                the OSM input window; individual OSM fragments can also end at
+                internal tile edges.
+              </p>
+              {inspected && (
+                <details open>
+                  <summary>
+                    Selected line: {String(inspected.name || 'Unnamed')} ·{' '}
+                    {String(inspected.agency || '')}
+                  </summary>
+                  <pre>{JSON.stringify(inspected, null, 2)}</pre>
+                </details>
+              )}
               <p className="review-caption">{contourStatus}</p>
               <p className="review-caption">
                 Google satellite imagery. Dates and resolution vary; tree cover
                 can hide trails.
               </p>
               <p className="review-caption">
-                Actual published source geometry, clipped to one z12 tile. Line
-                thickness and dashes identify sources; they are not trail
-                classifications. The circle marks the detected overlap.
-                Tile-edge endpoints are not necessarily trail ends.
+                {evidenceMode === 'inputs'
+                  ? 'Inputs before our matching: agency records retain their full cached geometry. OSM comes from a 6×6 window of z14 input tiles, so OSM endpoints may still be tile cuts.'
+                  : 'Published output: matching has already removed some agency geometry. Fragments here do not prove the original source was incomplete.'}{' '}
+                Pale paths include other names and nearby connections; they are
+                context, not automatically part of this trail.
               </p>
               <button onClick={() => setContext((v) => !v)}>
                 {context ? 'Hide topo context' : 'Show topo context'}
@@ -615,6 +774,21 @@ export default function Review() {
               >
                 Open this location on the live topo map ↗
               </a>
+              <details>
+                <summary>Coverage and limitations</summary>
+                <p>{c.inputCoverage.osmSnapshot}</p>
+                <p>{c.inputCoverage.agencyScope}</p>
+                <p>
+                  {c.inputCoverage.missingAgencyCells.length
+                    ? `Missing agency cache cells: ${c.inputCoverage.missingAgencyCells.join(', ')}`
+                    : 'All requested agency cache cells were available.'}
+                </p>
+                <p>
+                  This is a bounded source-input review, not a complete OSM-way
+                  or fresh agency inventory. Do not interpret pale-context or
+                  tile endpoints as physical trail ends.
+                </p>
+              </details>
               <details>
                 <summary>Evidence and source records</summary>
                 <p>
@@ -637,7 +811,24 @@ export default function Review() {
               </details>
             </section>
             <aside>
-              <h2>Your decision</h2>
+              <h2>Your decision · Round 2</h2>
+              {prior[c.id] && (
+                <details>
+                  <summary>Previous decision (processed evidence)</summary>
+                  <p>
+                    {prior[c.id].action}
+                    {prior[c.id].preferredSource
+                      ? ` · ${prior[c.id].preferredSource}`
+                      : ''}{' '}
+                    · {prior[c.id].confidence}
+                  </p>
+                  <p>{prior[c.id].reason || 'No reason recorded.'}</p>
+                  <p>
+                    Preserved for reference. It is not counted as a new
+                    input-based decision.
+                  </p>
+                </details>
+              )}
               <p>
                 Are these the same physical feature, distinct paths, or partly
                 overlapping?

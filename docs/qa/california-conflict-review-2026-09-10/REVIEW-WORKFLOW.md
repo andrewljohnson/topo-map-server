@@ -36,3 +36,23 @@ The tile cache must belong to the report's release. The review JSON includes the
 At the user's explicit request, the QA page uses Google satellite imagery through `https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}` (256-pixel XYZ tiles, zoom 0–20). This is an undocumented endpoint, not an integration with Google's supported authenticated Map Tiles API; availability and compatibility are not guaranteed. Do not describe it as public-domain or licensed for derivative mapping. The user was informed of Google's licensing restrictions before requesting this change.
 
 The browser fetches imagery directly; no server warming, R2 copies, or app offline downloads are added. The attribution names Google and imagery providers. Dates and resolution vary. The opacity slider and DEM-generated contours remain available; source comparisons and saved review decisions remain unchanged.
+
+## Round 2: input evidence correction
+
+The original review compared post-conflation survivors and could bias source preferences against agency fragments. Round 2 (`pre-conflation-v2`, export schema 2) defaults to inputs before our matching. `candidates-v1.json` retains the earlier geometry; every case's `processedGeometry` is copied unchanged from it. The `Inputs before merging` / `Published output` selector changes selected source lines; pale neighboring paths always represent input context.
+
+- OSM evidence is the pinned 2026-08-11 Protomaps z14 input, obtained via `osm_network` before our conflation. It is **not original OSM ways**. A 6×6 z14 window surrounds each audited z12 tile. A white dashed rectangle shows its bounds. Internal tile cuts remain and must not be treated as surveyed endpoints.
+- USFS/NPS/MVUM evidence consists of complete geometries of intersecting records in existing raw cache cells. No final tile clipping or conflation is applied. This is not a fresh agency census. Cache paths and SHA-256 hashes are retained in each case's coverage manifest. The PCTA case uses the checked-in centerline before our matching.
+- Selected inputs use published source IDs or normalized matching names and class family. Other intersecting input features appear as pale context, including unnamed and differently named connections. Click a line to inspect its identity and properties. Context outside the input window is clipped.
+- All 51 cases were checked for both selected agencies, no missing requested agency cache cells, exact preservation of old published geometry, and asset size limits. Longer input geometries reflect both removed portions and broader input coverage; raw length differences must not be reported as exact amounts removed by conflation.
+- No inferred endpoint labels or exact removal reasons are invented. Distinguishing all actual trail endpoints and attributing each removed segment still requires stable upstream OSM identities and the proposed decision ledger.
+
+Round 1 local storage remains untouched and appears in a collapsed previous-decision panel. Round 2 uses a separate storage key and exports `evidenceVersion`, original input IDs and published IDs. It does not count old decisions as new input-based judgments. New exports/imports require matching schema and evidence versions. No decisions modify production tiles.
+
+Rebuild all round-2 evidence with:
+
+```sh
+services/tiles/.venv/bin/python experiments/tahoe/build_review_inputs.py
+```
+
+Evidence is loaded one case at a time from `/review/evidence-v2/`, so the browser need not download the full statewide review collection to start.
