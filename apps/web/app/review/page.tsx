@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './review.css';
+import { addReviewContours } from './contours';
 
 type Case = {
   id: string;
@@ -55,6 +56,9 @@ export default function Review() {
     [dirty, setDirty] = useState(false),
     [context, setContext] = useState(false),
     [visible, setVisible] = useState([true, true]);
+  const [contoursVisible, setContoursVisible] = useState(true);
+  const contoursVisibleRef = useRef(true);
+  const [contourStatus, setContourStatus] = useState('');
   const [imageryOpacity, setImageryOpacity] = useState(0.85);
   const imageryOpacityRef = useRef(0.85);
   const [action, setAction] = useState(''),
@@ -105,6 +109,8 @@ export default function Review() {
   }, []);
   useEffect(() => {
     if (!c || !mapRoot.current) return;
+    const controller = new AbortController();
+    let disposeContours: (() => void) | undefined;
     history.replaceState(null, '', `?case=${c.id}`);
     const m = new maplibregl.Map({
       container: mapRoot.current,
@@ -173,6 +179,28 @@ export default function Review() {
         },
         'source-0',
       );
+      void addReviewContours(m, report!.release, controller.signal)
+        .then((dispose) => {
+          if (controller.signal.aborted) {
+            dispose?.();
+            return;
+          }
+          disposeContours = dispose;
+          for (const id of ['contours', 'contour-index', 'contour-labels'])
+            if (m.getLayer(id))
+              m.setLayoutProperty(
+                id,
+                'visibility',
+                contoursVisibleRef.current ? 'visible' : 'none',
+              );
+          setContourStatus(
+            'Contours in feet · generated from the review dataset’s DEM',
+          );
+        })
+        .catch(() => {
+          if (!controller.signal.aborted)
+            setContourStatus('Contours are unavailable here right now.');
+        });
       m.addSource('focus', {
         type: 'geojson',
         data: {
@@ -195,10 +223,12 @@ export default function Review() {
       });
     });
     return () => {
+      controller.abort();
       map.current = null;
       m.remove();
+      disposeContours?.();
     };
-  }, [c]);
+  }, [c, report]);
   function persist(next: Record<string, Decision>) {
     try {
       localStorage.setItem(
@@ -533,7 +563,31 @@ export default function Review() {
                   {Math.round(imageryOpacity * 100)}% · 0% hides imagery
                 </span>
               </label>
+              <label className="review-toggles" style={{ marginBottom: 12 }}>
+                <input
+                  type="checkbox"
+                  checked={contoursVisible}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setContoursVisible(checked);
+                    contoursVisibleRef.current = checked;
+                    for (const id of [
+                      'contours',
+                      'contour-index',
+                      'contour-labels',
+                    ])
+                      if (map.current?.getLayer(id))
+                        map.current.setLayoutProperty(
+                          id,
+                          'visibility',
+                          checked ? 'visible' : 'none',
+                        );
+                  }}
+                />
+                Contours (feet)
+              </label>
               <div ref={mapRoot} className="review-map" />
+              <p className="review-caption">{contourStatus}</p>
               <p className="review-caption">
                 Free USGS / USDA NAIP aerial imagery. Dates and resolution vary;
                 tree cover can hide trails. Zoom in for imagery detail. Imagery
