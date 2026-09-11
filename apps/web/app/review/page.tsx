@@ -6,7 +6,31 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import './review.css';
 import { addReviewContours } from './contours';
 
+type Recommendation = {
+  version: string;
+  action: string;
+  preferredSource: string | null;
+  confidence: string;
+  summary: string;
+  reasons: string[];
+  limitations: string;
+  terrainAvailable: boolean;
+  sources: {
+    source: string;
+    lengthM: number;
+    medianVertexSpacingM: number;
+    sharpReversalsPerKm: number;
+    outside50mM: number;
+    endpointCandidates: number;
+    endpointsBeyond75m: number;
+    demSamples: number;
+    demEligibleSamples: number;
+    terrainGradeP90Percent: number | null;
+    terrainGradeOver35Percent: number | null;
+  }[];
+};
 type Case = {
+  recommendation?: Recommendation;
   id: string;
   name: string;
   region: string;
@@ -45,6 +69,7 @@ type Decision = {
   reason: string;
   confidence: string;
   updatedAt: string;
+  guidanceVersion?: string;
 };
 type Report = { release: string; evidenceVersion: string; candidates: Case[] };
 const KEY = 'topo-conflict-review-pre-conflation-v2';
@@ -388,6 +413,7 @@ export default function Review() {
           reason,
           confidence,
           updatedAt: new Date().toISOString(),
+          guidanceVersion: c.recommendation?.version,
         },
       })
     )
@@ -474,6 +500,10 @@ export default function Review() {
             reason: d.reason,
             confidence: d.confidence,
             updatedAt: d.updatedAt,
+            guidanceVersion:
+              typeof d.guidanceVersion === 'string'
+                ? d.guidanceVersion
+                : undefined,
           };
           n++;
         }
@@ -502,8 +532,8 @@ export default function Review() {
           <Link href="/">← Map</Link>
           <h1>Source conflict review</h1>
           <p>
-            Round 2: compare inputs before our merges. Your earlier reviews are
-            preserved separately.
+            Round 2: compare inputs before our merges. Precomputed suggestions
+            guide your review; your decision stays separate.
           </p>
         </div>
         <div className="review-tools">
@@ -664,7 +694,10 @@ export default function Review() {
                         bounds.extend(v as [number, number]);
                       else (v as number[][] | number[][][]).forEach(add);
                     }
-                    c.geometry.features.forEach((f) => {
+                    (evidenceMode === 'inputs'
+                      ? c.geometry
+                      : c.processedGeometry
+                    ).features.forEach((f) => {
                       add(f.geometry.coordinates);
                     });
                     if (!bounds.isEmpty())
@@ -811,6 +844,62 @@ export default function Review() {
               </details>
             </section>
             <aside>
+              {c.recommendation && (
+                <section
+                  className="review-recommendation"
+                  aria-label="Analysis recommendation"
+                >
+                  <h2>Suggested decision</h2>
+                  <strong>
+                    {c.recommendation.action === 'prefer'
+                      ? `Prefer ${c.recommendation.preferredSource}`
+                      : c.recommendation.action === 'partial'
+                        ? 'Review a segment-level merge'
+                        : 'Needs human judgment'}
+                  </strong>
+                  <p className="review-caption">
+                    {c.recommendation.confidence} confidence · geometry +{' '}
+                    {c.recommendation.terrainAvailable
+                      ? 'DEM'
+                      : 'no DEM available'}
+                  </p>
+                  <p>{c.recommendation.summary}</p>
+                  <details>
+                    <summary>Why this suggestion?</summary>
+                    <ul>
+                      {c.recommendation.reasons.map((r, i) => (
+                        <li key={i}>{r}</li>
+                      ))}
+                    </ul>
+                  </details>
+                  <details>
+                    <summary>Measurements by source</summary>
+                    {c.recommendation.sources.map((v) => (
+                      <div key={v.source}>
+                        <h3>{v.source}</h3>
+                        <p>
+                          {v.lengthM.toLocaleString()} m in comparison window ·{' '}
+                          {v.medianVertexSpacingM} m median vertex spacing ·{' '}
+                          {v.sharpReversalsPerKm} sharp turns/km
+                        </p>
+                        <p>
+                          {v.outside50mM.toLocaleString()} m outside the other
+                          source’s 50 m corridor · {v.endpointsBeyond75m}{' '}
+                          endpoint candidates beyond 75 m
+                        </p>
+                        <p>
+                          {v.demSamples >= 10
+                            ? `Terrain grade p90: ${v.terrainGradeP90Percent}% · ${v.demSamples}/${v.demEligibleSamples} eligible sections sampled`
+                            : `Insufficient terrain samples (${v.demSamples}) for a useful comparison`}
+                        </p>
+                      </div>
+                    ))}
+                  </details>
+                  <p className="review-caption">
+                    {c.recommendation.limitations}
+                  </p>
+                </section>
+              )}
               <h2>Your decision · Round 2</h2>
               {prior[c.id] && (
                 <details>

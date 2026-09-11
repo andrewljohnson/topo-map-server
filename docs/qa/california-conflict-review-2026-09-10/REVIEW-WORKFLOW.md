@@ -56,3 +56,22 @@ services/tiles/.venv/bin/python experiments/tahoe/build_review_inputs.py
 ```
 
 Evidence is loaded one case at a time from `/review/evidence-v2/`, so the browser need not download the full statewide review collection to start.
+
+## Precomputed guidance
+
+`recommend_reviews.py` adds a `geometry-dem-v1` suggestion to every evidence case. It never reads human decisions or imagery pixels and never edits map geometry. The dashboard shows the suggestion separately from the user's controls; saved decisions record `guidanceVersion` so these guided reviews cannot later be presented as blind evaluation.
+
+Measurements compare source geometry clipped to the same input window: bilateral corridor coverage at 15/30/50 m, median and p90 nearest-line offset sampled every 25 m, line length, median vertex spacing, turns greater than 135 degrees at 25 m sampling, outlying geometry, and endpoint candidates away from the crop boundary and z14 seams. These are descriptive diagnostics, not accuracy scores or proof of GPS multipath. Overlapping tile fragments and upstream generalization can still influence shape metrics.
+
+The DEM check uses the frozen review release's Terrarium DEM for the central audited z12 tile. Bilinear samples estimate absolute grade over 50 m along mutually nearby sections; the card reports sample counts and p90 grade. No interpolation outside that DEM tile is made. Terrain grade is ground-surface evidence, not surveyed trail grade, route safety, accessibility, or an objective to minimize. Fewer than ten samples is explicitly insufficient. DEM does not decide source priority automatically.
+
+Rules abstain for weak overlap, request segment review for substantial outlying portions/endpoints, and provisionally prefer one representation for near-identical geometry or a strong detail difference without length inflation or reversal warning. Denser coordinates alone do not establish better ground accuracy. Suggestions are low/medium confidence and include their limitations. They are reproducible triage, not 51 independently ground-truthed expert verdicts.
+
+Recompute after rebuilding evidence:
+
+```sh
+services/tiles/.venv/bin/python experiments/tahoe/recommend_reviews.py
+services/tiles/.venv/bin/python experiments/tahoe/test_recommend_reviews.py
+```
+
+Synthetic regressions cover coincident paths, truly separated parallel paths, a unique extension, excessive length, and sharp-turn warnings. Follow-up evaluation must include reviewer disagreement and held-out geography; acceptance of a suggestion does not authorize automatic source removal.

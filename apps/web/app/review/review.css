@@ -186,3 +186,29 @@
     font-size: 24px;
   }
 }
+
+.review-recommendation {
+  border-left: 4px solid #368675;
+  background: #edf6f2;
+  padding: 14px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+}
+.review-recommendation h2 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.review-recommendation strong {
+  display: block;
+  font-size: 19px;
+}
+.review-recommendation li {
+  margin: 12px 0;
+}
+.review-recommendation ul {
+  padding-left: 20px;
+}
+.review-recommendation h3 {
+  font-weight: 650;
+  margin-top: 12px;
+}
