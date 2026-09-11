@@ -153,22 +153,20 @@ export default function Review() {
           },
         });
       });
-      m.addSource('naip', {
+      m.addSource('qa-imagery', {
         type: 'raster',
-        tiles: [
-          'https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer/exportImage?bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=512,512&format=jpg&f=image',
-        ],
-        tileSize: 512,
-        minzoom: 11,
-        maxzoom: 18,
+        tiles: ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
+        tileSize: 256,
+        minzoom: 0,
+        maxzoom: 20,
         attribution:
-          '<a href="https://imagery.nationalmap.gov/arcgis/rest/services/USGSNAIPImagery/ImageServer">USGS / USDA NAIP · The National Map</a>',
+          '<a href="https://maps.google.com/">Imagery © Google and imagery providers</a>',
       });
       m.addLayer(
         {
-          id: 'naip',
+          id: 'qa-imagery',
           type: 'raster',
-          source: 'naip',
+          source: 'qa-imagery',
           layout: {
             visibility: imageryOpacityRef.current > 0 ? 'visible' : 'none',
           },
@@ -549,10 +547,10 @@ export default function Review() {
                     setImageryOpacity(value);
                     imageryOpacityRef.current = value;
                     const m = map.current;
-                    if (m?.getLayer('naip')) {
-                      m.setPaintProperty('naip', 'raster-opacity', value);
+                    if (m?.getLayer('qa-imagery')) {
+                      m.setPaintProperty('qa-imagery', 'raster-opacity', value);
                       m.setLayoutProperty(
-                        'naip',
+                        'qa-imagery',
                         'visibility',
                         value > 0 ? 'visible' : 'none',
                       );
@@ -589,9 +587,8 @@ export default function Review() {
               <div ref={mapRoot} className="review-map" />
               <p className="review-caption">{contourStatus}</p>
               <p className="review-caption">
-                Free USGS / USDA NAIP aerial imagery. Dates and resolution vary;
-                tree cover can hide trails. Zoom in for imagery detail. Imagery
-                loads directly from USGS and may take a moment.
+                Google satellite imagery. Dates and resolution vary; tree cover
+                can hide trails.
               </p>
               <p className="review-caption">
                 Actual published source geometry, clipped to one z12 tile. Line
